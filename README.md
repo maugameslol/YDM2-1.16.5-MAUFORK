@@ -13,4 +13,4 @@ The original mod's Curseforge Page: [https://www.curseforge.com/minecraft/mc-mod
 
 CAS_ual_TY's patreon: [https://www.patreon.com/CAS_ual_TY](https://www.patreon.com/CAS_ual_TY)
 
-Big credit goes to [ygoprodeck.com](https://ygoprodeck.com/) & [TCGPlayer](https://www.tcgplayer.com/) for providing necessary data.  
+Big credit goes to [ygoprodeck.com](https://ygoprodeck.com/) & [TCGPlayer](https://www.tcgplayer.com/) & [Yugipedia](https://yugipedia.com/wiki/Yugipedia) for providing necessary data.  
