@@ -1,6 +1,11 @@
 # YDM (YgoDuelingMod) II - Mau's Fork
 The **Ygo Dueling Mod** for Minecraft aims to reflect the real life TCG experience in a 3D open world game by not only adding the cards but also the packs and their pull ratios to the game.
-This fork is mainly intended to improve the mod's experience in my friend group. But it is also intended to improve or add features for the ability to implement more cards from different TCG formats, along with trying to improve the experience with new animations and sound.
+
+This fork is mainly intended to improve the mod's experience in my friend group. 
+
+But it is also intended to improve or add features for the ability to implement more cards from different TCG formats, along with trying to improve the experience with new animations and sound.
+
+
 A wiki page will be uploaded soon to outline some of these new features.
 
 ## Credits
