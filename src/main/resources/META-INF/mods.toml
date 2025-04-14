@@ -1,16 +1,16 @@
 modLoader="javafml"
 loaderVersion="[36,)"
 license="GNU General Public License v3.0"
-issueTrackerURL="https://github.com/CAS-ual-TY/YgoDuelingMod/issues"
+issueTrackerURL="https://github.com/maugameslol/YDM2-1.16.5-MAUFORK/issues"
 
 [[mods]]
     modId="ydm"
     version="${file.jarVersion}"
     displayName="Ygo Dueling Mod"
-    displayURL="https://github.com/CAS-ual-TY/YgoDuelingMod"
+    displayURL="https://github.com/maugameslol/YDM2-1.16.5-MAUFORK"
     logoFile="logo.png"
     credits="Mojang and the Minecraft Forge Team"
-    authors="CAS_ual_TY"
+    authors="CAS_ual_TY, MauGamesLOL"
     description='''
 The Ygo Dueling Mod for Minecraft aims to reflect the real life TCG experience in a 3D open world game by not only adding the cards but also the packs and their pull ratios to the game.
 Work in progress features:
