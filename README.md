@@ -18,3 +18,5 @@ The original mod's database: [https://github.com/CAS-ual-TY/YDM2-DB](https://git
 CAS_ual_TY's patreon: [https://www.patreon.com/CAS_ual_TY](https://www.patreon.com/CAS_ual_TY)
 
 Big credit goes to [ygoprodeck.com](https://ygoprodeck.com/) & [TCGPlayer](https://www.tcgplayer.com/) & [Yugipedia](https://yugipedia.com/wiki/Yugipedia) for providing necessary data.  
+
+Credit to [game-icons.net](https://game-icons.net/) for some icons & graphics
