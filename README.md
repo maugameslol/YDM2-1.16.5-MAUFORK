@@ -11,6 +11,10 @@ A wiki page will be uploaded soon to outline some of these new features.
 ## Credits
 The original mod's Curseforge Page: [https://www.curseforge.com/minecraft/mc-mods/ydm-ygo-dueling-mod-ii](https://www.curseforge.com/minecraft/mc-mods/ydm-ygo-dueling-mod-ii)
 
+The original mod's github: [https://github.com/CAS-ual-TY/YgoDuelingMod](https://github.com/CAS-ual-TY/YgoDuelingMod)
+
+The original mod's database: [https://github.com/CAS-ual-TY/YDM2-DB](https://github.com/CAS-ual-TY/YDM2-DB)
+
 CAS_ual_TY's patreon: [https://www.patreon.com/CAS_ual_TY](https://www.patreon.com/CAS_ual_TY)
 
 Big credit goes to [ygoprodeck.com](https://ygoprodeck.com/) & [TCGPlayer](https://www.tcgplayer.com/) & [Yugipedia](https://yugipedia.com/wiki/Yugipedia) for providing necessary data.  
