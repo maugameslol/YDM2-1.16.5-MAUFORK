@@ -4,8 +4,10 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import de.cas_ual_ty.ydm.util.JsonKeys;
+import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextFormatting;
 
 import java.util.ArrayList;
@@ -77,9 +79,25 @@ public class LinkMonsterProperties extends MonsterProperties
     }
     
     @Override
-    public void addMonsterHeader2(List<ITextComponent> list)
+    public void addMonsterStats(List<ITextComponent> list)
     {
-        list.add(new StringTextComponent(getAtk() + " ATK / LINK-" + getLinkRating()));
+    	IFormattableTextComponent atkSymbol = new StringTextComponent("🗡").setStyle(Style.EMPTY.applyFormat(TextFormatting.RED));
+    	IFormattableTextComponent s = new StringTextComponent("");
+    	
+    	s.append(atkSymbol);
+    	if(getAtk() >= 0)
+        {
+    		s.append(getAtk() + " ATK");
+        }
+        else
+        {
+            s.append("? ATK");
+        }
+    	
+    	s.append(" / LINK-" + getLinkRating());
+    	
+    	list.add(s);
+        //list.add(new StringTextComponent(getAtk() + " ATK / LINK-" + getLinkRating()));
     }
     
     @Override
@@ -94,6 +112,26 @@ public class LinkMonsterProperties extends MonsterProperties
     {
         //        list.add(this.linkArrows.stream().map((arrow) -> arrow.name).collect(Collectors.joining(", ")));
         list.addAll(LinkArrow.buildSymbolsString(getLinkArrows(), TextFormatting.DARK_GRAY, TextFormatting.RED, "  "));
+    }
+    
+    // -- Tooltip Formatting --
+    
+    @Override
+    public void addTooltipMonsterStats(List<ITextComponent> list)
+    {
+    	IFormattableTextComponent atkSymbol = new StringTextComponent("🗡").setStyle(Style.EMPTY.applyFormat(TextFormatting.RED));
+    	IFormattableTextComponent s = new StringTextComponent("");
+    	s.append(atkSymbol);
+    	if(getAtk() >= 0)
+        {
+    		s.append(getAtk() + "ATK");
+        }
+        else
+        {
+            s.append("?ATK");
+        }
+    	s.append(" / LINK-" + getLinkRating());
+    	list.add(s);
     }
     
     // --- Getters ---

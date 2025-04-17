@@ -2,12 +2,13 @@ package de.cas_ual_ty.ydm.duel.screen.widget;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
-import de.cas_ual_ty.ydm.card.CardSleevesType;
+
 import de.cas_ual_ty.ydm.clientutil.CardRenderUtil;
 import de.cas_ual_ty.ydm.clientutil.ScreenUtil;
 import de.cas_ual_ty.ydm.duel.playfield.DuelCard;
 import de.cas_ual_ty.ydm.duel.screen.DuelScreenDueling;
 import de.cas_ual_ty.ydm.duel.screen.IDuelScreenContext;
+import de.cas_ual_ty.ydm.sleeve.CardSleevesType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.FontRenderer;

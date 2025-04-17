@@ -76,6 +76,7 @@ public class YDM
     public static ItemGroup ydmItemGroup;
     public static ItemGroup cardsItemGroup;
     public static ItemGroup setsItemGroup;
+    public static ItemGroup sleevesItemGroup;
     
     public static ForgeConfigSpec commonConfigSpec;
     public static CommonConfig commonConfig;
@@ -86,6 +87,8 @@ public class YDM
     public static File cardsFolder;
     public static File setsFolder;
     public static File distributionsFolder;
+    public static File raritiesFolder;
+    public static File sleevesFolder; //TODO: Make database sleeves
     public static File bindersFolder;
     
     public static SimpleChannel channel;
@@ -130,6 +133,14 @@ public class YDM
                 return true;
             }
         }.setBackgroundSuffix("item_search.png");
+        YDM.sleevesItemGroup = new YdmItemGroup(YDM.MOD_ID + ".sleeves", () -> YdmItems.BLANC_SLEEVE)
+        {
+            @Override
+            public boolean hasSearchBar()
+            {
+                return true;
+            }
+        }.setBackgroundSuffix("item_search.png");
         
         Pair<CommonConfig, ForgeConfigSpec> common = new ForgeConfigSpec.Builder().configure(CommonConfig::new);
         YDM.commonConfig = common.getLeft();
@@ -141,6 +152,8 @@ public class YDM
         bus.addListener(this::modConfig);
         bus.addListener(this::newRegistry);
         YDM.proxy.registerModEventListeners(bus);
+        
+        YdmSoundEvents.register(bus); // register sounds
         
         bus = MinecraftForge.EVENT_BUS;
         // see: https://github.com/MinecraftForge/MinecraftForge/pull/6954
@@ -209,6 +222,8 @@ public class YDM
         YDM.cardsFolder = new File(YDM.mainFolder, "cards");
         YDM.setsFolder = new File(YDM.mainFolder, "sets");
         YDM.distributionsFolder = new File(YDM.mainFolder, "distributions");
+        YDM.raritiesFolder = new File(YDM.mainFolder, "rarities");
+        YDM.sleevesFolder = new File(YDM.mainFolder, "sleeves");
         
         YDM.bindersFolder = new File("ydm_binders");
         YdmIOUtil.createDirIfNonExistant(YDM.bindersFolder);

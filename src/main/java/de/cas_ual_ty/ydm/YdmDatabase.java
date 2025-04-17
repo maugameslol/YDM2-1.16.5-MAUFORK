@@ -2,8 +2,9 @@ package de.cas_ual_ty.ydm;
 
 import com.google.common.io.Files;
 import com.google.gson.*;
-import de.cas_ual_ty.ydm.card.CustomCards;
+//import de.cas_ual_ty.ydm.card.CustomCards;
 import de.cas_ual_ty.ydm.card.properties.Properties;
+import de.cas_ual_ty.ydm.rarity.RarityEntry;
 import de.cas_ual_ty.ydm.set.CardSet;
 import de.cas_ual_ty.ydm.set.Distribution;
 import de.cas_ual_ty.ydm.util.DNCList;
@@ -14,16 +15,23 @@ import de.cas_ual_ty.ydm.util.YdmUtil;
 import java.io.*;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Objects;
 import java.util.function.BiConsumer;
+import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 public class YdmDatabase
 {
+	//TODO: Sleeves in Database
     public static final DNCList<Long, Properties> PROPERTIES_LIST = new DNCList<>((p) -> p.getId(), Long::compare);
     private static int cardsVariantsCount = -1;
     
+    public static final HashSet<String> FOUND_RARITIES = new HashSet<>();
+    
+    public static final DNCList<String, RarityEntry> RARITIES_LIST = new DNCList<>((r) -> r.rarity, (s1, s2) -> s1.compareTo(s2));
     public static final DNCList<String, Distribution> DISTRIBUTIONS_LIST = new DNCList<>((d) -> d.name, (s1, s2) -> s1.compareTo(s2));
     public static final DNCList<String, CardSet> SETS_LIST = new DNCList<>((s) -> s.code, (s1, s2) -> s1.compareTo(s2));
     
@@ -177,7 +185,7 @@ public class YdmDatabase
         YdmDatabase.PROPERTIES_LIST.add(Properties.DUMMY);
         YdmDatabase.SETS_LIST.add(CardSet.DUMMY);
         
-        CustomCards.createAndRegisterEverything();
+        //CustomCards.createAndRegisterEverything();
         
         if(!YDM.mainFolder.exists())
         {
@@ -193,14 +201,32 @@ public class YdmDatabase
         
         YdmDatabase.readCards(YDM.cardsFolder);
         
-        if(!YDM.setsFolder.exists())
+        if(YDM.distributionsFolder.exists())
         {
-            YDM.log(YDM.setsFolder.getAbsolutePath() + " (sets folder) does not exist! Aborting...");
-            return;
+            YdmDatabase.readDistributions(YDM.distributionsFolder);
+        }
+        else
+        {
+            YDM.log(YDM.distributionsFolder.getAbsolutePath() + " (distributions folder) does not exist! Skipping...");
         }
         
-        YdmDatabase.readDistributions(YDM.distributionsFolder);
-        YdmDatabase.readSets(YDM.setsFolder);
+        if(YDM.setsFolder.exists())
+        {
+            YdmDatabase.readSets(YDM.setsFolder);
+        }
+        else
+        {
+            YDM.log(YDM.setsFolder.getAbsolutePath() + " (sets folder) does not exist! Skipping...");
+        }
+        
+        if(YDM.raritiesFolder.exists())
+        {
+            YdmDatabase.readRarities(YDM.raritiesFolder);
+        }
+        else
+        {
+            YDM.log(YDM.raritiesFolder.getAbsolutePath() + " (rarities folder) does not exist! Skipping...");
+        }
         
         YdmDatabase.postDBInit();
     }
@@ -411,6 +437,56 @@ public class YdmDatabase
         YDM.log("Done reading distribution files!");
     }
     
+    private static void readRarities(File raritiesFolder)
+    {
+        YDM.log("Reading rarity files from: " + raritiesFolder.getAbsolutePath());
+        
+        File[] raritiesFiles = raritiesFolder.listFiles(YdmIOUtil.JSON_FILTER);
+        YdmDatabase.RARITIES_LIST.ensureExtraCapacity(raritiesFiles.length);
+        
+        JsonObject j;
+        RarityEntry r;
+        
+        for(File rarityFile : raritiesFiles)
+        {
+            try
+            {
+                j = YdmIOUtil.parseJsonFile(rarityFile).getAsJsonObject();
+                r = new RarityEntry(j);
+                YdmDatabase.RARITIES_LIST.add(r);
+            }
+            catch(NullPointerException | IllegalArgumentException | IllegalStateException e)
+            {
+                YDM.log("Failed reading rarity: " + rarityFile.getAbsolutePath());
+                e.printStackTrace();
+            }
+            catch(JsonSyntaxException e)
+            {
+                YDM.log("Failed reading rarity: " + rarityFile.getAbsolutePath());
+                e.printStackTrace();
+            }
+            catch(JsonIOException | FileNotFoundException e)
+            {
+                YDM.log("Failed reading rarity: " + rarityFile.getAbsolutePath());
+                e.printStackTrace();
+            }
+            catch(IOException e)
+            {
+                YDM.log("Failed reading rarity: " + rarityFile.getAbsolutePath());
+                e.printStackTrace();
+            }
+            catch(Exception e)
+            {
+                YDM.log("Failed reading rarity: " + rarityFile.getAbsolutePath());
+                throw e;
+            }
+        }
+        
+        YdmDatabase.RARITIES_LIST.sort();
+        
+        YDM.log("Done reading rarity files!");
+    }
+    
     private static void readSets(File setsFolder)
     {
         YDM.log("Reading set files from: " + setsFolder.getAbsolutePath());
@@ -479,6 +555,11 @@ public class YdmDatabase
         {
             x.postDBInit();
         }
+        
+        SETS_LIST.getList().stream().filter(Objects::nonNull).map(s -> s.rarityPool).filter(Objects::nonNull).forEach(FOUND_RARITIES::addAll);
+        
+        YDM.log("All rarities found:");
+        YDM.log(FOUND_RARITIES.stream().map(s -> "\"" + s + "\"").collect(Collectors.joining(", ")));
     }
     
     public static int getTotalCardsAndVariants()
@@ -506,5 +587,10 @@ public class YdmDatabase
                 cardImageConsumer.accept(c, i);
             }
         }
+    }
+    
+    public static RarityEntry getRarity(String rarity)
+    {
+        return rarity != null ? RARITIES_LIST.get(rarity) : null;
     }
 }

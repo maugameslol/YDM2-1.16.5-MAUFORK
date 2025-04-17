@@ -1,13 +1,18 @@
 package de.cas_ual_ty.ydm.clientutil;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
+
 import de.cas_ual_ty.ydm.YDM;
+import de.cas_ual_ty.ydm.YdmDatabase;
 import de.cas_ual_ty.ydm.YdmItems;
 import de.cas_ual_ty.ydm.card.CardHolder;
-import de.cas_ual_ty.ydm.card.CardSleevesType;
 import de.cas_ual_ty.ydm.card.properties.Properties;
 import de.cas_ual_ty.ydm.duel.playfield.CardPosition;
 import de.cas_ual_ty.ydm.duel.playfield.DuelCard;
+import de.cas_ual_ty.ydm.rarity.RarityEntry;
+import de.cas_ual_ty.ydm.rarity.RarityLayer;
+import de.cas_ual_ty.ydm.rarity.RarityLayerType;
+import de.cas_ual_ty.ydm.sleeve.CardSleevesType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
@@ -19,6 +24,8 @@ import java.util.List;
 
 public class CardRenderUtil
 {
+	public static final ResourceLocation MASK_RL = new ResourceLocation(YDM.MOD_ID, "textures/gui/rarity_mask.png");
+	
     private static LimitedTextureBinder infoTextureBinder;
     private static LimitedTextureBinder mainTextureBinder;
     
@@ -153,6 +160,46 @@ public class CardRenderUtil
         return new ResourceLocation(YDM.MOD_ID, "textures/item/" + ClientProxy.activeCardMainImageSize + "/" + "token_overlay" + ".png");
     }
     
+    public static ResourceLocation getRarityOverlay()
+    {
+        return new ResourceLocation(YDM.MOD_ID, "textures/item/" + ClientProxy.activeCardInfoImageSize + "/" + "token_overlay" + ".png");
+    }
+    
+    public static void renderInfoCardWithRarity(MatrixStack ms, int mouseX, int mouseY, float x, float y, float width, float height, CardHolder card)
+    {
+        Minecraft mc = ClientProxy.getMinecraft();
+        
+        // bind the texture depending on faceup or facedown
+        CardRenderUtil.bindInfoResourceLocation(card);
+        YdmBlitUtil.fullBlit(ms, x - width / 2, y - height / 2, width, height);
+        
+        RarityEntry rarity = YdmDatabase.getRarity(card.getRarity());
+        
+        if(rarity != null)
+        {
+            for(RarityLayer layer : rarity.layers)
+            {
+                if(layer.type == RarityLayerType.INVERTED)
+                {
+                }
+                
+                Runnable mask = () ->
+                {
+                	mc.getTextureManager().bind(MASK_RL); //RenderSystem.setShaderTexture(0, MASK_RL);
+                    YdmBlitUtil.fullBlit(ms, mouseX - width / 2, mouseY - height / 2, width, height);
+                };
+                
+                Runnable renderer = () ->
+                {
+                	mc.getTextureManager().bind(layer.getInfoImageResourceLocation()); //RenderSystem.setShaderTexture(0, layer.getInfoImageResourceLocation());
+                    YdmBlitUtil.fullBlit(ms, x - width / 2, y - height / 2, width, height);
+                };
+                
+                YdmBlitUtil.advancedMaskedBlit(ms, x, y, width, height, mask, renderer, layer.type.invertedRendering);
+            }
+        }
+    }
+    
     public static void renderDuelCardAdvanced(MatrixStack ms, CardSleevesType back, int mouseX, int mouseY, float x, float y, float width, float height, DuelCard card, YdmBlitUtil.FullBlitMethod blitMethod, boolean forceFaceUp)
     {
         CardPosition position = card.getCardPosition();
@@ -186,6 +233,31 @@ public class CardRenderUtil
         {
             mc.getTextureManager().bind(CardRenderUtil.getMainTokenOverlay());
             blitMethod.fullBlit(ms, x, y, width, height);
+        }
+        
+        if(position.isFaceUp && !card.getIsToken())
+        {
+            RarityEntry rarity = YdmDatabase.getRarity(card.getCardHolder().getRarity());
+            
+            if(rarity != null)
+            {
+                for(RarityLayer layer : rarity.layers)
+                {
+                    Runnable mask = () ->
+                    {
+                    	mc.getTextureManager().bind(MASK_RL); //RenderSystem.setShaderTexture(0, MASK_RL);
+                        blitMethod.fullBlit(ms, mouseX - width / 2, mouseY - height / 2, width, height);
+                    };
+                    
+                    Runnable renderer = () ->
+                    {
+                    	mc.getTextureManager().bind(layer.getMainImageResourceLocation()); //RenderSystem.setShaderTexture(0, layer.getMainImageResourceLocation());
+                        blitMethod.fullBlit(ms, x, y, width, height);
+                    };
+                    
+                    YdmBlitUtil.advancedMaskedBlit(ms, x, y, width, height, mask, renderer, layer.type.invertedRendering);
+                }
+            }
         }
     }
     

@@ -3,6 +3,7 @@ package de.cas_ual_ty.ydm.duel.screen;
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import de.cas_ual_ty.ydm.YDM;
+import de.cas_ual_ty.ydm.YdmSoundEvents;
 import de.cas_ual_ty.ydm.clientutil.CardRenderUtil;
 import de.cas_ual_ty.ydm.clientutil.ScreenUtil;
 import de.cas_ual_ty.ydm.clientutil.widget.*;
@@ -14,6 +15,7 @@ import de.cas_ual_ty.ydm.duel.playfield.*;
 import de.cas_ual_ty.ydm.duel.screen.animation.*;
 import de.cas_ual_ty.ydm.duel.screen.widget.*;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.audio.SimpleSound;
 import net.minecraft.client.gui.widget.Widget;
 import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.entity.player.PlayerEntity;
@@ -563,6 +565,7 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
         }
     }
     
+    //TODO: Probably should find a way better way of doing some of these animations and sounds.
     @Nullable
     public Animation getAnimationForAction(Action action0)
     {
@@ -584,6 +587,8 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
                 destinationPosition = destinationPosition.flip();
             }
             
+            ZoneWidget w = getZoneWidget(action.destinationZone);
+            int size = Math.max(w.getWidth(), w.getHeight());
             Animation moveAnimation = new MoveAnimation(
                     getView(),
                     action.card,
@@ -598,20 +603,131 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
                         action.finish();
                         repopulateInteractions();
                     });
+            Animation atkPosAnimation = new AttackPositionAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size / 2)
+            .setOnStart(() -> 
+            { 
+            	Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.CARD_ATK_POSITION.get(), 1.0F, 1.0F)); 
+            });
+            Animation defPosAnimation = new DefensePositionAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size / 2)
+            .setOnStart(() ->
+            {
+            	Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.CARD_DEF_POSITION.get(), 1.0F, 1.0F));
+            });
+            Animation setPosAnimation = new DummyAnimation().setOnStart(() -> 
+            { 
+            	Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.CARD_SET_POSITION.get(), 1.0F, 1.0F)); 
+            });;
+            Animation setCardAnimation = new DummyAnimation().setOnStart(() -> 
+            { 
+                Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.CARD_SET_BACKROW.get(), 1.0F, 1.0F)); 
+            });;
+            Animation enterGYAnimation = new DummyAnimation().setOnStart(() -> 
+            { 
+            	Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.GY_ENTER.get(), 1.0F, 1.0F)); 
+            });;		
+            Animation exitGYAnimation = new DummyAnimation().setOnStart(() -> 
+            { 
+                Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.GY_EXIT.get(), 1.0F, 1.0F)); 
+            });;
+            Animation enterBanishmentAnimation = new DummyAnimation().setOnStart(() -> 
+            { 
+                Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.BANISHMENT_ENTER.get(), 1.0F, 1.0F)); 
+            });;
+            Animation exitBanishmentAnimation = new DummyAnimation().setOnStart(() -> 
+            { 
+                Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.BANISHMENT_EXIT.get(), 1.0F, 1.0F)); 
+            });;
+            Animation drawAnimation = new DummyAnimation().setOnStart(() -> 
+            { 
+                Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.CARD_DRAW.get(), 1.0F, 1.0F)); 
+            });;
+            Queue<Animation> queue = new LinkedList<>();
             
             if(action.actionType == ActionTypes.SPECIAL_SUMMON)
             {
-                ZoneWidget w = getZoneWidget(action.destinationZone);
-                
-                int size = Math.max(w.getWidth(), w.getHeight());
                 Animation ringAnimation = new SpecialSummonAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size / 2);
-                
-                Queue<Animation> queue = new LinkedList<>();
+
+                if(action.sourceZone.type == ZoneTypes.GRAVEYARD) 
+                {
+                	queue.add(exitGYAnimation);
+                }
+                if(action.sourceZone.type == ZoneTypes.BANISHED) 
+                {
+                	queue.add(exitBanishmentAnimation);
+                }
                 queue.add(moveAnimation);
                 queue.add(ringAnimation);
-                
+                if(action.destinationCardPosition == CardPosition.ATK) 
+                {
+                	queue.add(atkPosAnimation);
+                }
+                if(action.destinationCardPosition == CardPosition.DEF) 
+                {
+                	queue.add(defPosAnimation);
+                }
+                if(action.destinationCardPosition == CardPosition.SET) 
+                {
+                	queue.add(setPosAnimation);
+                }
+
                 return new QueueAnimation(queue);
             }
+            //TODO: This is on Normal Summon ATK/DEF and Set. Should probably separate Normal Summon into its own action type.
+            if(action.sourceZone.type == ZoneTypes.HAND && action.actionType == ActionTypes.MOVE_ON_TOP && action.destinationZone.type == ZoneTypes.MONSTER && action.actionType != ActionTypes.SPECIAL_SUMMON_OVERLAY) 
+            {
+            	queue.add(moveAnimation);
+            	if(action.destinationCardPosition == CardPosition.ATK) 
+                {
+                	queue.add(atkPosAnimation);
+                }
+                if(action.destinationCardPosition == CardPosition.DEF) 
+                {
+                	queue.add(defPosAnimation);
+                }
+                if(action.destinationCardPosition == CardPosition.SET) 
+                {
+                	queue.add(setPosAnimation);
+                }
+            	return new QueueAnimation(queue);
+            }
+            if(action.destinationZone.type == ZoneTypes.GRAVEYARD) 
+            {
+            	if(action.sourceZone.type == ZoneTypes.BANISHED) 
+                {
+                	queue.add(exitBanishmentAnimation);
+                }
+            	queue.add(moveAnimation);
+            	queue.add(enterGYAnimation);
+            	return new QueueAnimation(queue);
+            }
+            if(action.destinationZone.type == ZoneTypes.BANISHED) 
+            {
+            	if(action.sourceZone.type == ZoneTypes.GRAVEYARD) 
+                {
+                	queue.add(exitGYAnimation);
+                }
+            	queue.add(moveAnimation);
+            	queue.add(enterBanishmentAnimation);
+            	return new QueueAnimation(queue);
+            }
+            //set spell/trap
+            if(action.destinationZone.type == ZoneTypes.SPELL_TRAP || action.destinationZone.type == ZoneTypes.FIELD_SPELL) 
+            {
+            	queue.add(moveAnimation);
+            	if(action.destinationCardPosition == CardPosition.FD) 
+                {
+                	queue.add(setCardAnimation);
+                }
+            	return new QueueAnimation(queue);
+            }
+            //draw card
+            if(action.destinationZone.type == ZoneTypes.HAND && action.sourceZone.type == ZoneTypes.DECK) 
+            {
+            	queue.add(drawAnimation);
+            	queue.add(moveAnimation);
+            	return new QueueAnimation(queue);
+            }
+            
             else
             {
                 return moveAnimation;
@@ -620,28 +736,68 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
         else if(action0 instanceof ChangePositionAction)
         {
             ChangePositionAction action = (ChangePositionAction) action0;
+            ZoneOwner owner = action.sourceZone.getOwner();
+            ZoneWidget w = getZoneWidget(action.sourceZone);
+            int size = Math.max(w.getWidth(), w.getHeight());
+            Animation moveAnimation = new MoveAnimation(
+                    getView(),
+                    action.card,
+                    getZoneWidget(action.sourceZone),
+                    getZoneWidget(action.sourceZone),
+                    action.sourceCardPosition,
+                    action.destinationCardPosition)
+                    .setOnStart(() ->
+                    {
+                        action.sourceZone.removeCardKeepCounters(action.sourceCardIndex);
+                    })
+                    .setOnEnd(() ->
+                    {
+                        action.sourceZone.addCard(owner, action.card, action.sourceCardIndex);
+                        action.sourceZone.getCard(action.sourceCardIndex).setPosition(action.destinationCardPosition);
+                        repopulateInteractions();
+                    });
+            Animation atkPosAnimation = new AttackPositionAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size / 2).setOnStart(() -> 
+            { 
+            	Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.CARD_ATK_POSITION.get(), 1.0F, 1.0F)); 
+            });
+            Animation defPosAnimation = new DefensePositionAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size / 2).setOnStart(() ->
+            {
+            	Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.CARD_DEF_POSITION.get(), 1.0F, 1.0F));
+            });
+            Queue<Animation> queue = new LinkedList<>();
             
             if(action.card == action.sourceZone.getTopCardSafely())
             {
-                ZoneOwner owner = action.sourceZone.getOwner();
-                
-                return new MoveAnimation(
-                        getView(),
-                        action.card,
-                        getZoneWidget(action.sourceZone),
-                        getZoneWidget(action.sourceZone),
-                        action.sourceCardPosition,
-                        action.destinationCardPosition)
-                        .setOnStart(() ->
-                        {
-                            action.sourceZone.removeCardKeepCounters(action.sourceCardIndex);
-                        })
-                        .setOnEnd(() ->
-                        {
-                            action.sourceZone.addCard(owner, action.card, action.sourceCardIndex);
-                            action.sourceZone.getCard(action.sourceCardIndex).setPosition(action.destinationCardPosition);
-                            repopulateInteractions();
-                        });
+            	if(action.sourceCardPosition == CardPosition.ATK && action.destinationCardPosition == CardPosition.DEF) 
+                {
+                    queue.add(moveAnimation);
+                	queue.add(defPosAnimation);
+                    return new QueueAnimation(queue);
+                    
+                }
+                if(action.sourceCardPosition == CardPosition.DEF && action.destinationCardPosition == CardPosition.ATK) 
+                {
+                	queue.add(moveAnimation);
+                	queue.add(atkPosAnimation);
+                	return new QueueAnimation(queue);
+                }
+                if(action.sourceCardPosition == CardPosition.SET) 
+                {
+                	queue.add(moveAnimation);
+                	if(action.destinationCardPosition == CardPosition.ATK) 
+                	{
+                		queue.add(atkPosAnimation);
+                	}
+                	if(action.destinationCardPosition == CardPosition.DEF) 
+                	{
+                		queue.add(defPosAnimation);
+                	}
+                	return new QueueAnimation(queue);
+                }
+                else 
+                {
+                	return moveAnimation;
+                }
             }
         }
         else if(action0 instanceof ListAction)
@@ -688,22 +844,81 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
         else if(action0 instanceof AttackAction)
         {
             AttackAction action = (AttackAction) action0;
+            Animation attackAnimation = new AttackAnimation(getView(), getZoneWidget(action.sourceZone), getZoneWidget(action.attackedZone));
+            ZoneWidget w = getZoneWidget(action.attackedZone);
+            int size = Math.max(w.getWidth(), w.getHeight());
+            Animation cardImpactAnimation = new ImpactCardAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size / 2);
+            Animation directImpactAnimation = new ImpactPlayerAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size / 2);
+            Queue<Animation> queue = new LinkedList<>();
             
-            return new AttackAnimation(getView(), getZoneWidget(action.sourceZone), getZoneWidget(action.attackedZone));
+            if(action.attackedZone.type == ZoneTypes.HAND) 
+            {
+            	attackAnimation.setOnStart(() ->
+                {
+                	Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.DIRECT_ATTACK_DECLARE.get(), 1.0F, 1.0F));
+                });;
+                
+                queue.add(attackAnimation);
+                
+            	if(action.attackedZone.getOwner() == getZoneOwner())
+                {
+            		directImpactAnimation.setOnStart(() ->
+                    {
+                    	Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.DIRECT_ATTACK_PLAYER1.get(), 1.0F, 1.0F));
+                    });;
+                }
+                else
+                {
+                	directImpactAnimation.setOnStart(() ->
+                    {
+                    	Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.DIRECT_ATTACK_PLAYER2.get(), 1.0F, 1.0F));
+                    });;
+                }
+            	queue.add(directImpactAnimation);
+            }
+            if(action.attackedZone.type == ZoneTypes.MONSTER || action.attackedZone.type == ZoneTypes.EXTRA_MONSTER_LEFT || action.attackedZone.type == ZoneTypes.EXTRA_MONSTER_RIGHT) 
+            {
+            	queue.add(attackAnimation);
+            	queue.add(cardImpactAnimation);
+            }
+            else 
+            {
+            	queue.add(attackAnimation);
+            }
+            return new QueueAnimation(queue);
+            //return attackAnimation;
         }
         else if(action0 instanceof CreateTokenAction)
         {
             CreateTokenAction action = (CreateTokenAction) action0;
-            
             ZoneWidget w = getZoneWidget(action.destinationZone);
-            
             int size = Math.max(w.getWidth(), w.getHeight());
-            return new SpecialSummonTokenAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size / 2)
-                    .setOnStart(() ->
-                    {
-                        action.doAction();
-                        repopulateInteractions();
-                    });
+            Animation atkPosAnimation = new AttackPositionAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size / 2).setOnStart(() -> 
+            { 
+            	Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.CARD_ATK_POSITION.get(), 1.0F, 1.0F)); 
+            });
+            Animation defPosAnimation = new DefensePositionAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size / 2).setOnStart(() ->
+            {
+            	Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.CARD_DEF_POSITION.get(), 1.0F, 1.0F));
+            });
+            Animation summonTokenAnimation = new SpecialSummonTokenAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size / 2).setOnStart(() ->
+            {
+                Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.TOKEN_SUMMON.get(), 1.0F, 1.0F)); 
+                action.doAction();
+                repopulateInteractions();
+            });
+            Queue<Animation> queue = new LinkedList<>();
+            
+            queue.add(summonTokenAnimation);
+            if(action.destinationCardPosition == CardPosition.ATK) 
+        	{
+        		queue.add(atkPosAnimation);
+        	}
+        	if(action.destinationCardPosition == CardPosition.DEF) 
+        	{
+        		queue.add(defPosAnimation);
+        	}
+            return new QueueAnimation(queue);
         }
         else if(action0 instanceof RemoveTokenAction)
         {
@@ -712,7 +927,12 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
             ZoneWidget w = getZoneWidget(action.destinationZone);
             
             int size = Math.max(w.getWidth(), w.getHeight());
+            
             return new RemoveTokenAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size / 2)
+            		.setOnStart(() ->
+                    {
+                    	Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.TOKEN_REMOVE.get(), 1.0F, 1.0F)); 
+                    })
                     .setOnEnd(() ->
                     {
                         action.doAction();
@@ -722,25 +942,170 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
         else if(action0 instanceof IAnnouncedAction)
         {
             IAnnouncedAction action = (IAnnouncedAction) action0;
+            Queue<Animation> queue = new LinkedList<>();
+            
             
             if(action.announceOnField())
             {
                 ZoneWidget w = getZoneWidget(action.getFieldAnnouncementZone());
-                
-                return new TextAnimation(action0.getActionType().getLocal(), w.getAnimationDestX(), w.getAnimationDestY())
+                Animation textAnimation = new TextAnimation(action0.getActionType().getLocal(), w.getAnimationDestX(), w.getAnimationDestY())
                         .setOnStart(() -> handleAnnouncedAction(action0));
+                if(action0.actionType == ActionTypes.SHUFFLE_ZONE) 
+                {
+                	//TODO: Make a more advanced shuffle Animation.
+                	Animation shuffleAnimation = new DummyAnimation().setOnStart(() -> 
+                    { 
+                    	Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.CARD_SHUFFLE.get(), 1.0F, 1.0F)); 
+                    });
+                	//if(action.getFieldAnnouncementZone().type == ZoneTypes.DECK || action.getFieldAnnouncementZone().type == ZoneTypes.EXTRA_DECK) {deck specific animation}
+                	queue.add(shuffleAnimation);
+                	queue.add(shuffleAnimation);
+                	queue.add(textAnimation);
+                	return new QueueAnimation(queue);
+                }
+                else 
+                {
+                	return textAnimation;
+                } 
+            }
+            if(action0.actionType == ActionTypes.CHANGE_LP) 
+            {
+            	Animation countLPAnimation = new DummyAnimation()
+            	.setOnStart(() -> 
+                { 
+                	Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.LP_COUNT.get(), 1.0F, 1.0F)); 
+                })
+            	.setOnEnd(() ->
+                {
+                	action0.doAction();
+                    repopulateInteractions();
+                });
+            	queue.add(countLPAnimation);
+            	return new QueueAnimation(queue);
+            }
+            if(action0.actionType == ActionTypes.COIN_FLIP) 
+            {
+            	//TODO: Make a proper coin toss, and separate animations for the result. Likely will include changing the coin toss action code.
+            	Animation coinThrowAnimation = new DummyAnimation()
+            	.setOnStart(() -> 
+                { 
+                	Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.COIN_THROW.get(), 1.0F, 1.0F)); 
+                })
+            	.setOnEnd(() ->
+                {
+                	action0.doAction();
+                    repopulateInteractions();
+                });
+            	queue.add(coinThrowAnimation);
+            	return new QueueAnimation(queue);
+            }
+            if(action0.actionType == ActionTypes.DICE_ROLL) 
+            {
+            	//TODO: Make a proper dice roll, and separate animations for the results. Likely will include changing the dice roll action code.
+            	Animation diceRollAnimation = new DummyAnimation()
+            	.setOnStart(() -> 
+                { 
+                	Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.DICE_ROLL.get(), 1.0F, 1.0F)); 
+                })
+            	.setOnEnd(() ->
+                {
+                	action0.doAction();
+                    repopulateInteractions();
+                });
+            	queue.add(diceRollAnimation);
+            	return new QueueAnimation(queue);
             }
         }
-        else if(action0.actionType == ActionTypes.CHANGE_PHASE || action0.actionType == ActionTypes.END_TURN)
+        else if(action0.actionType == ActionTypes.CHANGE_PHASE)
         {
-            Animation a = getDefaultAnimation(action0);
+            Animation defaultAnimation = getDefaultAnimation(action0);
+            Animation phaseChangeAnimation = new DummyAnimation();
+            boolean isTurn;
+            if(getZoneOwner() == ZoneOwner.NONE)
+            {
+                isTurn = getPlayField().isPlayerTurn(ZoneOwner.PLAYER1);
+            }
+            else
+            {
+                isTurn = getPlayField().isPlayerTurn(getZoneOwner());
+            }
+            isTurn = getZoneOwner() != ZoneOwner.NONE && getPlayField().isPlayerTurn(getZoneOwner());
+            Queue<Animation> queue = new LinkedList<>();
             
-            a.setOnEnd(() ->
+            if(isTurn) 
+            {
+            	phaseChangeAnimation.setOnStart(() ->
+                {
+                	Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.PHASE_CHANGE_PLAYER1.get(), 1.0F, 1.0F));
+                });
+            }
+            else 
+            {
+            	phaseChangeAnimation.setOnStart(() ->
+                {
+                	Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.PHASE_CHANGE_PLAYER2.get(), 1.0F, 1.0F));
+                });
+            }
+            defaultAnimation.setOnEnd(() ->
             {
                 updateRightButtonStatus();
             });
             
-            return a;
+            queue.add(phaseChangeAnimation);
+            queue.add(defaultAnimation);
+            return new QueueAnimation(queue);
+        }
+        else if(action0.actionType == ActionTypes.END_TURN)
+        {
+            Animation defaultAnimation = getDefaultAnimation(action0);
+            Animation endTurnAnimation = new DummyAnimation();
+            boolean isTurn;
+            if(getZoneOwner() == ZoneOwner.NONE)
+            {
+                isTurn = getPlayField().isPlayerTurn(ZoneOwner.PLAYER1);
+            }
+            else
+            {
+                isTurn = getPlayField().isPlayerTurn(getZoneOwner());
+            }
+            isTurn = getZoneOwner() != ZoneOwner.NONE && getPlayField().isPlayerTurn(getZoneOwner());
+            Queue<Animation> queue = new LinkedList<>();
+            
+            if(isTurn) 
+            {
+            	endTurnAnimation.setOnStart(() ->
+                {
+                	Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.TURN_SWITCH_PLAYER1.get(), 1.0F, 1.0F));
+                });
+            }
+            else 
+            {
+            	endTurnAnimation.setOnStart(() ->
+                {
+                	Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.TURN_SWITCH_PLAYER2.get(), 1.0F, 1.0F));
+                });
+            }
+            defaultAnimation.setOnEnd(() ->
+            {
+                updateRightButtonStatus();
+            });
+            
+            queue.add(endTurnAnimation);
+            queue.add(defaultAnimation);
+            return new QueueAnimation(queue);
+        }
+        else if(action0.actionType == ActionTypes.CHANGE_COUNTERS) 
+        {
+        	Animation defaultAnimation = getDefaultAnimation(action0);
+        	Animation changeCountersAnimation = new DummyAnimation().setOnStart(() -> 
+            { 
+            	Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.COUNTER_PLACE.get(), 1.0F, 1.0F)); 
+            });
+        	Queue<Animation> queue = new LinkedList<>();
+        	
+            queue.add(changeCountersAnimation);
+            queue.add(defaultAnimation);
+            return new QueueAnimation(queue);
         }
         
         return getDefaultAnimation(action0);
@@ -1006,7 +1371,7 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
     {
         if(button == coinFlipButton)
         {
-            requestDuelAction(new CoinFlipAction(ActionTypes.COIN_FLIP));
+        	requestDuelAction(new CoinFlipAction(ActionTypes.COIN_FLIP));
         }
         else if(button == diceRollButton)
         {

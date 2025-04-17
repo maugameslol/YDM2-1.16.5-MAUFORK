@@ -2,8 +2,11 @@ package de.cas_ual_ty.ydm.card.properties;
 
 import com.google.gson.JsonObject;
 import de.cas_ual_ty.ydm.util.JsonKeys;
+import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextFormatting;
 
 import java.util.List;
 
@@ -57,9 +60,63 @@ public class DefMonsterProperties extends MonsterProperties
     }
     
     @Override
-    public void addMonsterHeader2(List<ITextComponent> list)
+    public void addMonsterStats(List<ITextComponent> list)
     {
-        list.add(new StringTextComponent(getAtk() + " ATK / " + getDef() + " DEF"));
+    	IFormattableTextComponent atkSymbol = new StringTextComponent("🗡").setStyle(Style.EMPTY.applyFormat(TextFormatting.RED));
+    	IFormattableTextComponent defSymbol = new StringTextComponent("🛡").setStyle(Style.EMPTY.applyFormat(TextFormatting.BLUE));
+    	IFormattableTextComponent s = new StringTextComponent("");
+    	
+    	s.append(atkSymbol);
+    	if(getAtk() >= 0)
+        {
+    		s.append(getAtk() + " ATK / ");
+        }
+        else
+        {
+            s.append("? ATK / ");
+        }
+    	
+    	s.append(defSymbol);
+    	if(getDef() >= 0)
+        {
+    		s.append(getDef() + " DEF");
+        }
+        else
+        {
+            s.append("? DEF");
+        }
+    	
+    	list.add(s);
+        //list.add(new StringTextComponent(getAtk() + " ATK / " + getDef() + " DEF"));
+    }
+    
+    // -- Tooltip Formatting --
+    
+    @Override
+    public void addTooltipMonsterStats(List<ITextComponent> list)
+    {
+    	IFormattableTextComponent statLine = new StringTextComponent("");
+    	IFormattableTextComponent atkSymbol = new StringTextComponent("🗡").setStyle(Style.EMPTY.applyFormat(TextFormatting.RED));
+    	IFormattableTextComponent defSymbol = new StringTextComponent("🛡").setStyle(Style.EMPTY.applyFormat(TextFormatting.BLUE));
+    	statLine.append(atkSymbol);	
+    	if(getAtk() >= 0)
+            {
+    			statLine.append(getAtk() + "ATK / ");
+            }
+        else
+            {
+        		statLine.append("?ATK / ");
+            }
+    	statLine.append(defSymbol);
+    	if(getDef() >= 0)
+        {
+    		statLine.append(getDef() + "DEF");
+        }
+        else
+        {
+        	statLine.append("?DEF");
+        }
+    	list.add(statLine);
     }
     
     // --- Getters ---

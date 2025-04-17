@@ -3,8 +3,8 @@ package de.cas_ual_ty.ydm.deckbox;
 import de.cas_ual_ty.ydm.YDM;
 import de.cas_ual_ty.ydm.YdmDatabase;
 import de.cas_ual_ty.ydm.card.CardHolder;
-import de.cas_ual_ty.ydm.card.Rarity;
 import de.cas_ual_ty.ydm.card.properties.Properties;
+import de.cas_ual_ty.ydm.rarity.Rarities;
 
 import java.util.LinkedList;
 import java.util.function.Supplier;
@@ -212,7 +212,7 @@ public class DeckBuilder
                 return null;
             }
             
-            return new CardHolder(p, imageIndex, Rarity.CREATIVE.name);
+            return new CardHolder(p, imageIndex, Rarities.CREATIVE.name);
         }
         
         @Override
@@ -243,7 +243,7 @@ public class DeckBuilder
                 return null;
             }
             
-            return new CardHolder(p, imageIndex, Rarity.CREATIVE.name);
+            return new CardHolder(p, imageIndex, Rarities.CREATIVE.name);
         }
         
         @Override

@@ -1,7 +1,7 @@
 package de.cas_ual_ty.ydm.duel.playfield;
 
-import de.cas_ual_ty.ydm.card.CardSleevesType;
 import de.cas_ual_ty.ydm.duel.PlayerRole;
+import de.cas_ual_ty.ydm.sleeve.CardSleevesType;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;

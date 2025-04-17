@@ -92,7 +92,8 @@ public class YdmCardResourcePack extends ResourcePack
         // We remove that prefix part
         filename = filename.substring(YdmCardResourcePack.PATH_PREFIX.length());
         
-        // Get the file
+     // Get the file
+        // TODO: Add a section for Sleeves
         File image = ImageHandler.getCardFile(filename);
         
         if(image.exists())
@@ -109,7 +110,16 @@ public class YdmCardResourcePack extends ResourcePack
             }
             else
             {
-                return null;
+                image = ImageHandler.getRarityFile(filename);
+                
+                if(image.exists())
+                {
+                    return image;
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
     }

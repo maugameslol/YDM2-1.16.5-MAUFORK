@@ -1,7 +1,7 @@
 package de.cas_ual_ty.ydm.deckbox;
 
-import de.cas_ual_ty.ydm.card.CardSleevesItem;
 import de.cas_ual_ty.ydm.card.ItemStackCardHolder;
+import de.cas_ual_ty.ydm.sleeve.CardSleevesItem;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 

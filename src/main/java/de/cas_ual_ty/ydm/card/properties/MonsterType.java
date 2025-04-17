@@ -2,7 +2,11 @@ package de.cas_ual_ty.ydm.card.properties;
 
 public enum MonsterType
 {
-    FUSION("Fusion", true), LINK("Link", true), RITUAL("Ritual"), SYNCHRO("Synchro", true), XYZ("Xyz", true);
+	// TODO: Add custom MonsterTypes
+    FUSION("Fusion", true), LINK("Link", true), RITUAL("Ritual"), SYNCHRO("Synchro", true), XYZ("Xyz", true),
+    TOKEN("Token", true),
+    MAXIMUM("Maximum");
+    //EVOLUTION("Evolution");
     
     public final String name;
     public final boolean isExtraDeck;

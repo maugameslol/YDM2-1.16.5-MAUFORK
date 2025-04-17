@@ -4,7 +4,6 @@ import com.google.gson.JsonObject;
 import de.cas_ual_ty.ydm.util.JsonKeys;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
-
 import java.util.List;
 
 public class XyzMonsterProperties extends DefMonsterProperties
@@ -56,9 +55,17 @@ public class XyzMonsterProperties extends DefMonsterProperties
     }
     
     @Override
-    public void addMonsterHeader1(List<ITextComponent> list)
+    public void addCardAttribute(List<ITextComponent> list)
     {
-        list.add(new StringTextComponent(getAttribute() + " / Rank " + getRank()));
+        list.add(new StringTextComponent(getAttribute() + " / Rank ☆" + getRank()));
+    }
+    
+    // -- Tooltip Formatting --
+    
+    @Override
+    public void addTooltipAttribute(List<ITextComponent> list)
+    {
+    	list.add(new StringTextComponent(getAttribute() + " / R" + getRank() + "☆"));
     }
     
     // --- Getters ---

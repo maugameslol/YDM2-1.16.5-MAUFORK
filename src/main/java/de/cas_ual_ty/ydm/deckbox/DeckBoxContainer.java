@@ -1,8 +1,8 @@
 package de.cas_ual_ty.ydm.deckbox;
 
 import de.cas_ual_ty.ydm.YdmItems;
-import de.cas_ual_ty.ydm.card.CardSleevesItem;
 import de.cas_ual_ty.ydm.card.properties.Properties;
+import de.cas_ual_ty.ydm.sleeve.CardSleevesItem;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
@@ -31,30 +31,30 @@ public class DeckBoxContainer extends Container
         
         itemHandler = YdmItems.BLACK_DECK_BOX.getItemHandler(this.itemStack);
         
-        final int itemsPerRow = 15;
+        final int itemsPerRow = 20; //original is 15
         
         // main deck
         for(int y = 0; y < DeckHolder.MAIN_DECK_SIZE / itemsPerRow; ++y)
         {
             for(int x = 0; x < itemsPerRow && x + y * itemsPerRow < DeckHolder.MAIN_DECK_SIZE; ++x)
             {
-                addSlot(new DeckBoxSlot(itemHandler, x + y * itemsPerRow + DeckHolder.MAIN_DECK_INDEX_START, 8 + x * 18, 18 + y * 18));
+                addSlot(new DeckBoxSlot(itemHandler, x + y * itemsPerRow + DeckHolder.MAIN_DECK_INDEX_START, 8 + x * 18, 12 + y * 18)); //original is 8 + x * 18 ,18 + y * 18));
             }
         }
         
         // extra deck
         for(int x = 0; x < DeckHolder.EXTRA_DECK_SIZE; ++x)
         {
-            addSlot(new DeckBoxSlot(itemHandler, x + DeckHolder.EXTRA_DECK_INDEX_START, 8 + x * 18, 104));
+            addSlot(new DeckBoxSlot(itemHandler, x + DeckHolder.EXTRA_DECK_INDEX_START, 8 + x * 18, 110)); //original is 8 + x * 18, 104));
         }
         
         // side deck
         for(int x = 0; x < DeckHolder.SIDE_DECK_SIZE; ++x)
         {
-            addSlot(new DeckBoxSlot(itemHandler, x + DeckHolder.SIDE_DECK_INDEX_START, 8 + x * 18, 136));
+            addSlot(new DeckBoxSlot(itemHandler, x + DeckHolder.SIDE_DECK_INDEX_START, 8 + x * 18, 136)); //original is 8 + x * 18, 136));
         }
         
-        addSlot(cardSleevesSlot = new Slot(new Inventory(1), 0, 8 + 12 * 18, 168 + 0 * 18)
+		addSlot(cardSleevesSlot = new Slot(new Inventory(1), 0, 8 + 12 * 18, 168 + 0 * 18) //original is 8 + 12 * 18, 168 + 0 * 18)
         {
             @Override
             public boolean mayPlace(ItemStack stack)

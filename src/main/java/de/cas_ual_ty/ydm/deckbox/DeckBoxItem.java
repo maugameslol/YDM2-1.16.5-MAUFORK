@@ -4,7 +4,7 @@ import de.cas_ual_ty.ydm.YDM;
 import de.cas_ual_ty.ydm.YdmContainerTypes;
 import de.cas_ual_ty.ydm.YdmItems;
 import de.cas_ual_ty.ydm.card.CardHolder;
-import de.cas_ual_ty.ydm.card.CardSleevesItem;
+import de.cas_ual_ty.ydm.sleeve.CardSleevesItem;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;

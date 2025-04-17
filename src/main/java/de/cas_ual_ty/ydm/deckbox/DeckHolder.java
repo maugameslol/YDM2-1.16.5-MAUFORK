@@ -1,7 +1,7 @@
 package de.cas_ual_ty.ydm.deckbox;
 
 import de.cas_ual_ty.ydm.card.CardHolder;
-import de.cas_ual_ty.ydm.card.CardSleevesType;
+import de.cas_ual_ty.ydm.sleeve.CardSleevesType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,9 +9,9 @@ import java.util.stream.Stream;
 
 public class DeckHolder
 {
-    public static final int MAIN_DECK_SIZE = 60;
-    public static final int EXTRA_DECK_SIZE = 15;
-    public static final int SIDE_DECK_SIZE = 15;
+    public static final int MAIN_DECK_SIZE = 100;  //original is 60
+    public static final int EXTRA_DECK_SIZE = 20; //original is 15
+    public static final int SIDE_DECK_SIZE = 20; //original is 15
     public static final int TOTAL_DECK_SIZE = DeckHolder.MAIN_DECK_SIZE + DeckHolder.EXTRA_DECK_SIZE + DeckHolder.SIDE_DECK_SIZE;
     // _end index is excluded
     public static final int MAIN_DECK_INDEX_START = 0;

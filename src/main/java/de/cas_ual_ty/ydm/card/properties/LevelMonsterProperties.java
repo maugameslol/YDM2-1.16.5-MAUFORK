@@ -5,6 +5,8 @@ import de.cas_ual_ty.ydm.util.JsonKeys;
 import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextFormatting;
 
 import java.util.List;
 
@@ -62,15 +64,23 @@ public class LevelMonsterProperties extends DefMonsterProperties
     }
     
     @Override
-    public void addMonsterHeader1(List<ITextComponent> list)
+    public void addCardAttribute(List<ITextComponent> list)
     {
-        list.add(new StringTextComponent(getAttribute() + " / Level " + getLevel()));
+    	IFormattableTextComponent tunerSymbol = new StringTextComponent("Ⓣ").setStyle(Style.EMPTY.applyFormat(TextFormatting.GREEN));
+    	if(getIsTuner())
+        {
+    		list.add(new StringTextComponent(getAttribute() + " / Level ★" + getLevel() + " ").append(tunerSymbol));
+        }
+    	else 
+    	{
+    		list.add(new StringTextComponent(getAttribute() + " / Level ★" + getLevel()));
+    	}
     }
     
     @Override
-    public void addMonsterTextHeader(List<ITextComponent> list)
+    public void addTypeBox(List<ITextComponent> list)
     {
-        IFormattableTextComponent s = new StringTextComponent(getSpecies() + " / ");
+        IFormattableTextComponent s = new StringTextComponent("[" + getSpecies() + " / ");
         
         if(getMonsterType() != null)
         {
@@ -80,6 +90,11 @@ public class LevelMonsterProperties extends DefMonsterProperties
         if(getIsPendulum())
         {
             s.append("Pendulum" + " / ");
+        }
+        
+        if(getIsEvolution())
+        {
+            s.append("Evolution" + " / ");
         }
         
         if(!getAbility().isEmpty())
@@ -101,7 +116,62 @@ public class LevelMonsterProperties extends DefMonsterProperties
             s.append("Normal");
         }
         
+        s.append("]");
+        
         list.add(s);
+    }
+    
+    // -- Tooltip Formatting --
+    
+    @Override
+    public void addTooltipTypeBox(List<ITextComponent> list)
+    {
+    	IFormattableTextComponent s = new StringTextComponent("[" + getType().name + "/" + getSpecies() + "/");
+    	if(getMonsterType() != null)
+        {
+            s.append(getMonsterType().name + "/");
+        }
+        if(getIsPendulum())
+        {
+            s.append("Pendulum" + "/");
+        }
+        
+        if(getIsEvolution())
+        {
+            s.append("Evolution" + "/");
+        }
+        if(!getAbility().isEmpty())
+        {
+            s.append(getAbility() + "/");
+        }
+        if(getIsTuner())
+        {
+            s.append("Tuner/");
+        }
+        if(getHasEffect())
+        {
+            s.append("Effect");
+        }
+        else
+        {
+            s.append("Normal");
+        }
+    	s.append("]");
+    	list.add(s);
+    }
+    
+    @Override
+    public void addTooltipAttribute(List<ITextComponent> list)
+    {
+    	IFormattableTextComponent tunerSymbol = new StringTextComponent("Ⓣ").setStyle(Style.EMPTY.applyFormat(TextFormatting.GREEN));
+    	if(getIsTuner())
+        {
+    		list.add(new StringTextComponent(getAttribute() + " / L" + getLevel() + "★ ").append(tunerSymbol));
+        }
+    	else 
+    	{
+    		list.add(new StringTextComponent(getAttribute() + " / L" + getLevel() + "★"));
+    	}
     }
     
     // --- Getters ---

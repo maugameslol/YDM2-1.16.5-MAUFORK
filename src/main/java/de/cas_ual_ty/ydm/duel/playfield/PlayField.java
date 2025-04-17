@@ -1,8 +1,8 @@
 package de.cas_ual_ty.ydm.duel.playfield;
 
-import de.cas_ual_ty.ydm.card.CardSleevesType;
 import de.cas_ual_ty.ydm.duel.DuelManager;
 import de.cas_ual_ty.ydm.duel.DuelPhase;
+import de.cas_ual_ty.ydm.sleeve.CardSleevesType;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -11,7 +11,8 @@ import java.util.List;
 public class PlayField
 {
     public static final int MIN_LP = 0;
-    public static final int MAX_LP = 99999;
+    public static final int MAX_LP = 999999;
+    // Old Max 99999 -> 999999
     
     public final DuelManager duelManager;
     public final PlayFieldType playFieldType;

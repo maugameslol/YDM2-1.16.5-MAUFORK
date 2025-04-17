@@ -3,9 +3,11 @@ package de.cas_ual_ty.ydm.clientutil;
 import de.cas_ual_ty.ydm.YDM;
 import de.cas_ual_ty.ydm.YdmDatabase;
 import de.cas_ual_ty.ydm.card.CardHolder;
-import de.cas_ual_ty.ydm.card.CardSleevesType;
 import de.cas_ual_ty.ydm.card.properties.Properties;
+import de.cas_ual_ty.ydm.rarity.RarityEntry;
+import de.cas_ual_ty.ydm.rarity.RarityLayer;
 import de.cas_ual_ty.ydm.set.CardSet;
+import de.cas_ual_ty.ydm.sleeve.CardSleevesType;
 import de.cas_ual_ty.ydm.task.Task;
 import de.cas_ual_ty.ydm.task.TaskPriority;
 import de.cas_ual_ty.ydm.task.TaskQueue;
@@ -31,7 +33,8 @@ import java.util.concurrent.TimeUnit;
 
 public class ImageHandler
 {
-    private static final String CARD_IN_PROGRESS = "card_loading";
+    // TODO: Add Sleeve stuff for URL/Database Sleeves.
+	private static final String CARD_IN_PROGRESS = "card_loading";
     private static final String CARD_FAILED = "card_failed";
     private static final String SET_IN_PROGRESS = "set_loading";
     private static final String SET_FAILED = "set_failed";
@@ -39,6 +42,7 @@ public class ImageHandler
     
     public static ImageList RAW_IMAGE_LIST = new ImageList();
     public static ImageList ADJUSTED_IMAGE_LIST = new ImageList();
+    public static ImageList RARITY_IMAGE_LIST = new ImageList();
     
     // only for dev workspace!
     // put raw image in the raw images folder
@@ -85,6 +89,36 @@ public class ImageHandler
                     new File(parent, size + "/" + sleeve.getResourceName() + ".png"),
                     new File(parent, "raw/" + sleeve.getResourceName() + "." + rawType),
                     size);
+        }
+    }
+    
+    public static void prepareRarityImages(int imageSize)
+    {
+        for(RarityEntry entry : YdmDatabase.RARITIES_LIST.getList())
+        {
+            for(RarityLayer l : entry.layers)
+            {
+                File finished = getRarityFile(imageSize + "/" + l.texture + ".png");
+                File raw = getRawRarityImageFile(l.texture);
+                
+                if(finished.exists())
+                {
+                    finished.delete();
+                }
+                
+                if(raw.exists())
+                {
+                    try
+                    {
+                        ImageHandler.adjustRawImage(finished, raw, imageSize);
+                    }
+                    catch(IOException e)
+                    {
+                        YDM.log("Error adjusting image of rarity \"" + entry.rarity + "\" and layer image \"" + l.texture + "\"");
+                        e.printStackTrace();
+                    }
+                }
+            }
         }
     }
     
@@ -166,6 +200,16 @@ public class ImageHandler
     public static String getInfoReplacementImage(CardSet set)
     {
         return ImageHandler.getReplacementImage(set, ClientProxy.activeSetInfoImageSize);
+    }
+    
+    public static String getRarityMainImage(RarityLayer layer)
+    {
+        return ImageHandler.tagImage(layer.texture, ClientProxy.activeCardMainImageSize);
+    }
+    
+    public static String getRarityInfoImage(RarityLayer layer)
+    {
+        return ImageHandler.tagImage(layer.texture, ClientProxy.activeCardInfoImageSize);
     }
     
     @Nullable
@@ -406,6 +450,21 @@ public class ImageHandler
         }
     }
     
+    public static File getRawRarityImageFile(String imageName)
+    {
+        File f = new File(ClientProxy.rawRarityImagesFolder, imageName + ".png");
+        
+        // prefer png over jpg
+        if(f.exists())
+        {
+            return f;
+        }
+        else
+        {
+            return new File(ClientProxy.rawRarityImagesFolder, imageName + ".jpg");
+        }
+    }
+    
     public static File getAdjustedCardImageFile(String imageName, int size)
     {
         return ImageHandler.getCardImageFile(ImageHandler.tagImage(imageName, size));
@@ -439,6 +498,11 @@ public class ImageHandler
     public static File getSetFile(String imagePathName)
     {
         return new File(ClientProxy.setImagesFolder, imagePathName);
+    }
+    
+    public static File getRarityFile(String imagePathName)
+    {
+        return new File(ClientProxy.rarityImagesFolder, imagePathName);
     }
     
     public static List<CardHolder> getMissingItemImages()

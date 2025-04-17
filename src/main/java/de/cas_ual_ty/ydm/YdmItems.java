@@ -1,15 +1,14 @@
 package de.cas_ual_ty.ydm;
 
 import de.cas_ual_ty.ydm.card.CardItem;
-import de.cas_ual_ty.ydm.card.CardSleevesItem;
-import de.cas_ual_ty.ydm.card.CardSleevesType;
 import de.cas_ual_ty.ydm.cardbinder.CardBinderItem;
 import de.cas_ual_ty.ydm.deckbox.DeckBoxItem;
-import de.cas_ual_ty.ydm.deckbox.PatreonDeckBoxItem;
 import de.cas_ual_ty.ydm.duel.dueldisk.DuelDiskItem;
 import de.cas_ual_ty.ydm.set.CardSetItem;
 import de.cas_ual_ty.ydm.set.OpenedCardSetItem;
 import de.cas_ual_ty.ydm.simplebinder.SimpleBinderItem;
+import de.cas_ual_ty.ydm.sleeve.CardSleevesItem;
+import de.cas_ual_ty.ydm.sleeve.CardSleevesType;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.Properties;
@@ -27,6 +26,7 @@ public class YdmItems
     public static final Item BLANC_CARD = null;
     public static final Item CARD_BACK = null;
     public static final Item BLANC_SET = null;
+    public static final Item BLANC_SLEEVE = null;
     public static final CardItem CARD = null;
     public static final CardSetItem SET = null;
     public static final OpenedCardSetItem OPENED_SET = null;
@@ -69,6 +69,13 @@ public class YdmItems
     public static final DeckBoxItem DIAMOND_DECK_BOX = null;
     public static final DeckBoxItem EMERALD_DECK_BOX = null;
     public static final DeckBoxItem PATREON_DECK_BOX = null;
+    public static final DeckBoxItem PLATINUM_DECK_BOX = null;
+    public static final DeckBoxItem RUBY_DECK_BOX = null;
+    public static final DeckBoxItem BRONZE_DECK_BOX = null;
+    public static final DeckBoxItem COPPER_DECK_BOX = null;
+    public static final DeckBoxItem AMETHYST_DECK_BOX = null;
+    public static final DeckBoxItem SAPPHIRE_DECK_BOX = null;
+    public static final DeckBoxItem NETHERITE_DECK_BOX = null;
     
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event)
@@ -77,6 +84,7 @@ public class YdmItems
         registry.register(new CosmeticItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "blanc_card"));
         registry.register(new CosmeticItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "card_back"));
         registry.register(new CosmeticItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "blanc_set"));
+        registry.register(new CosmeticItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "blanc_sleeve"));
         registry.register(new CardItem(new Properties().tab(YDM.cardsItemGroup).stacksTo(1)).setRegistryName(YDM.MOD_ID, "card"));
         registry.register(new CardSetItem(new Properties().tab(YDM.setsItemGroup).stacksTo(1)).setRegistryName(YDM.MOD_ID, "set"));
         registry.register(new OpenedCardSetItem(new Properties().stacksTo(1)).setRegistryName(YDM.MOD_ID, "opened_set"));
@@ -129,13 +137,20 @@ public class YdmItems
         registry.register(new DeckBoxItem(new Properties().tab(YDM.ydmItemGroup).stacksTo(1)).setRegistryName(YDM.MOD_ID, "gold_deck_box"));
         registry.register(new DeckBoxItem(new Properties().tab(YDM.ydmItemGroup).stacksTo(1)).setRegistryName(YDM.MOD_ID, "diamond_deck_box"));
         registry.register(new DeckBoxItem(new Properties().tab(YDM.ydmItemGroup).stacksTo(1)).setRegistryName(YDM.MOD_ID, "emerald_deck_box"));
-        registry.register(new PatreonDeckBoxItem(new Properties().tab(YDM.ydmItemGroup).stacksTo(1)).setRegistryName(YDM.MOD_ID, "patreon_deck_box"));
+        registry.register(new DeckBoxItem(new Properties().tab(YDM.ydmItemGroup).stacksTo(1)).setRegistryName(YDM.MOD_ID, "patreon_deck_box"));
+        registry.register(new DeckBoxItem(new Properties().tab(YDM.ydmItemGroup).stacksTo(1)).setRegistryName(YDM.MOD_ID, "platinum_deck_box"));
+        registry.register(new DeckBoxItem(new Properties().tab(YDM.ydmItemGroup).stacksTo(1)).setRegistryName(YDM.MOD_ID, "ruby_deck_box"));
+        registry.register(new DeckBoxItem(new Properties().tab(YDM.ydmItemGroup).stacksTo(1)).setRegistryName(YDM.MOD_ID, "bronze_deck_box"));
+        registry.register(new DeckBoxItem(new Properties().tab(YDM.ydmItemGroup).stacksTo(1)).setRegistryName(YDM.MOD_ID, "copper_deck_box"));
+        registry.register(new DeckBoxItem(new Properties().tab(YDM.ydmItemGroup).stacksTo(1)).setRegistryName(YDM.MOD_ID, "amethyst_deck_box"));
+        registry.register(new DeckBoxItem(new Properties().tab(YDM.ydmItemGroup).stacksTo(1)).setRegistryName(YDM.MOD_ID, "sapphire_deck_box"));
+        registry.register(new DeckBoxItem(new Properties().tab(YDM.ydmItemGroup).stacksTo(1)).setRegistryName(YDM.MOD_ID, "netherite_deck_box"));
         
         for(CardSleevesType sleeve : CardSleevesType.VALUES)
         {
             if(!sleeve.isCardBack())
             {
-                registry.register(new CardSleevesItem(new Properties().tab(YDM.ydmItemGroup).stacksTo(1), sleeve).setRegistryName(YDM.MOD_ID, sleeve.getResourceName()));
+                registry.register(new CardSleevesItem(new Properties().tab(YDM.sleevesItemGroup).stacksTo(1), sleeve).setRegistryName(YDM.MOD_ID, sleeve.getResourceName()));
             }
         }
     }

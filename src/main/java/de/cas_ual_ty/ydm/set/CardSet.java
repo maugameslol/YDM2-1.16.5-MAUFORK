@@ -70,6 +70,8 @@ public class CardSet
     public boolean isSubSet;
     public String shownCode;
     
+    //public boolean isCustom; TODO: Put a new thing for Custom Sets
+    
     public CardSet(String name, String code, String type, Date date, CardPuller pull, List<CardHolder> cards)
     {
         this.name = name;
@@ -207,6 +209,7 @@ public class CardSet
     {
         tooltip.add(new StringTextComponent(name));
         tooltip.add(new StringTextComponent(type));
+        tooltip.add(new StringTextComponent(YdmDatabase.SET_DATE_PARSER.format(date)));
         tooltip.add(new StringTextComponent(shownCode));
     }
     

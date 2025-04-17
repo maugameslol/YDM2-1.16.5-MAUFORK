@@ -3,6 +3,7 @@ package de.cas_ual_ty.ydm.card;
 import com.google.gson.JsonObject;
 import de.cas_ual_ty.ydm.YdmDatabase;
 import de.cas_ual_ty.ydm.card.properties.Properties;
+import de.cas_ual_ty.ydm.rarity.Rarities;
 import de.cas_ual_ty.ydm.util.JsonKeys;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
@@ -13,7 +14,7 @@ import java.util.List;
 
 public class CardHolder implements Comparable<CardHolder>
 {
-    public static final CardHolder DUMMY = new CardHolder(Properties.DUMMY, (byte) 0, Rarity.CREATIVE.name, "DUM-MY");
+    public static final CardHolder DUMMY = new CardHolder(Properties.DUMMY, (byte) 0, Rarities.CREATIVE.name, "DUM-MY");
     public Properties card;
     public byte imageIndex;
     public String rarity;
@@ -51,10 +52,17 @@ public class CardHolder implements Comparable<CardHolder>
     
     public void addInformation(List<ITextComponent> tooltip)
     {
-        tooltip.add(new StringTextComponent(getCard().getName()));
+        //tooltip.add(new StringTextComponent(getCard().getName()));
+    	getCard().addName(tooltip);
         tooltip.add(new StringTextComponent(getCode()));
         tooltip.add(new StringTextComponent(getRarity()));
         tooltip.add(new StringTextComponent("Image Variant " + (1 + getImageIndex())));
+        //getCard().addTooltipInformation(tooltip);
+    }
+    
+    public void addShiftInfo(List<ITextComponent> tooltip)
+    {
+    	getCard().addTooltipInformation(tooltip);
     }
     
     public String getImageName()

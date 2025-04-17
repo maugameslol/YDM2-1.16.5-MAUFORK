@@ -2,7 +2,8 @@ package de.cas_ual_ty.ydm.card.properties;
 
 public enum SpellType
 {
-    NORMAL("Normal"), FIELD("Field"), EQUIP("Equip"), CONTINUOUS("Continuous"), QUICK_PLAY("Quick-Play"), RITUAL("Ritual");
+    NORMAL("Normal"), FIELD("Field"), EQUIP("Equip"), CONTINUOUS("Continuous"), QUICK_PLAY("Quick-Play"), RITUAL("Ritual"),
+    LINK("Link");
     
     public final String name;
     

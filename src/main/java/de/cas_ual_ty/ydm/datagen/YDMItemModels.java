@@ -1,6 +1,6 @@
 package de.cas_ual_ty.ydm.datagen;
 
-import de.cas_ual_ty.ydm.card.CardSleevesType;
+import de.cas_ual_ty.ydm.sleeve.CardSleevesType;
 import de.cas_ual_ty.ydm.util.YdmUtil;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.item.Item;

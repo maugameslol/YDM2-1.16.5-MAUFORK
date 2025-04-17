@@ -4,11 +4,11 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import de.cas_ual_ty.ydm.YDM;
 import de.cas_ual_ty.ydm.YdmDatabase;
 import de.cas_ual_ty.ydm.card.CardHolder;
-import de.cas_ual_ty.ydm.card.Rarity;
 import de.cas_ual_ty.ydm.cardbinder.CardButton;
 import de.cas_ual_ty.ydm.cardinventory.CardInventory;
 import de.cas_ual_ty.ydm.clientutil.CardRenderUtil;
 import de.cas_ual_ty.ydm.clientutil.widget.ImprovedButton;
+import de.cas_ual_ty.ydm.rarity.Rarities;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
@@ -181,7 +181,7 @@ public class CardSupplyScreen extends ContainerScreen<CardSupplyContainer>
         {
             if(card.getName().toLowerCase().contains(name))
             {
-                cardsList.add(new CardHolder(card, imageIndex, Rarity.SUPPLY.name));
+                cardsList.add(new CardHolder(card, imageIndex, Rarities.SUPPLY.name));
             }
         });
     }
@@ -193,7 +193,7 @@ public class CardSupplyScreen extends ContainerScreen<CardSupplyContainer>
         
         YdmDatabase.forAllCardVariants((card, imageIndex) ->
         {
-            cardsList.add(new CardHolder(card, imageIndex, Rarity.SUPPLY.name));
+            cardsList.add(new CardHolder(card, imageIndex, Rarities.SUPPLY.name));
         });
     }
     

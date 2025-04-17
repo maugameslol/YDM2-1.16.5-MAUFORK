@@ -2,8 +2,9 @@ package de.cas_ual_ty.ydm.card.properties;
 
 public enum Type
 {
-    MONSTER("Monster"), SPELL("Spell"), TRAP("Trap");
-    
+    MONSTER("Monster"), SPELL("Spell"), TRAP("Trap"), SKILL("Skill"),
+    INFO("Info"), MATERIAL("Material");
+	
     public final String name;
     
     Type(String name)

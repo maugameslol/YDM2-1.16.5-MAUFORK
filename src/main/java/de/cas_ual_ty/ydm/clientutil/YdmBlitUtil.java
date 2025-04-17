@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldVertexBufferUploader;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.math.vector.Matrix4f;
-import org.lwjgl.opengl.GL11;
+//import org.lwjgl.opengl.GL11;
 
 public class YdmBlitUtil
 {
@@ -88,7 +88,7 @@ public class YdmBlitUtil
     
     // see https://github.com/CAS-ual-TY/UsefulCodeBitsForTheBlocksGame/blob/main/src/main/java/com/example/examplemod/client/screen/BlitUtil.java
     // use full mask (64x64) for 16x16 texture
-    public static void advancedMaskedBlit(MatrixStack ms, float renderX, float renderY, float renderWidth, float renderHeight, Runnable maskBinderAndDrawer, Runnable textureBinderAndDrawer)
+    public static void advancedMaskedBlit(MatrixStack ms, float renderX, float renderY, float renderWidth, float renderHeight, Runnable maskBinderAndDrawer, Runnable textureBinderAndDrawer, boolean inverted)
     {
         //        RenderSystem.pushMatrix();
         ScreenUtil.white();
@@ -101,8 +101,8 @@ public class YdmBlitUtil
         RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.ZERO, GlStateManager.DestFactor.ONE, GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ZERO);
         
         // Addendum to previous comment: Making sure that we write ALL pixels with ANY alpha.
-        RenderSystem.enableAlphaTest();
-        RenderSystem.alphaFunc(GL11.GL_ALWAYS, 0);
+        //RenderSystem.enableAlphaTest();
+        //RenderSystem.alphaFunc(GL11.GL_ALWAYS, 0);
         
         // Now "draw" the mask (again, this doesn't produce a visible result, it just
         // changes the alpha values in the framebuffer)
@@ -110,7 +110,14 @@ public class YdmBlitUtil
         
         // Finally, we want a blendfunc that makes the foreground visible only in
         // areas with high alpha.
-        RenderSystem.blendFunc(SourceFactor.DST_ALPHA, DestFactor.ONE_MINUS_DST_ALPHA);
+        if(!inverted)
+        {
+            RenderSystem.blendFuncSeparate(SourceFactor.ONE_MINUS_DST_ALPHA, DestFactor.DST_COLOR, SourceFactor.DST_ALPHA, DestFactor.ONE_MINUS_DST_ALPHA);
+        }
+        else
+        {
+            RenderSystem.blendFuncSeparate(SourceFactor.DST_ALPHA, DestFactor.DST_COLOR, SourceFactor.ONE_MINUS_DST_ALPHA, DestFactor.DST_ALPHA);
+        }
         textureBinderAndDrawer.run();
         
         RenderSystem.disableBlend();

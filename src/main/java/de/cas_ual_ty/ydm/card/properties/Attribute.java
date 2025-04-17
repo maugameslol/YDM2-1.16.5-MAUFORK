@@ -2,7 +2,10 @@ package de.cas_ual_ty.ydm.card.properties;
 
 public enum Attribute
 {
-    DARK("DARK"), DIVINE("DIVINE"), EARTH("EARTH"), FIRE("FIRE"), LIGHT("LIGHT"), WATER("WATER"), WIND("WIND");
+    DARK("DARK"), DIVINE("DIVINE"), EARTH("EARTH"), FIRE("FIRE"), LIGHT("LIGHT"), WATER("WATER"), WIND("WIND"),
+    SPELL("SPELL"), TRAP("TRAP"), SKILL("SKILL"),
+    METAL("METAL"), THUNDER("THUNDER"), WOOD("WOOD"),
+    INFO("INFO"), MATERIAL("MATERIAL");
     
     public final String name;
     

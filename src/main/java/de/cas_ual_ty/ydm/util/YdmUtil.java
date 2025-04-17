@@ -28,6 +28,14 @@ public class YdmUtil
         
         if(p0.getIsSpell())
         {
+        	//SpellProperties p1 = new SpellProperties(p0, j);
+        	/*
+        	if(p1.getIsLink())
+            {
+                return new LinkSpellProperties(p1, j);
+            }
+        	else 
+        	*/
             return new SpellProperties(p0, j);
         }
         else if(p0.getIsTrap())
@@ -55,6 +63,18 @@ public class YdmUtil
             {
                 return new LinkMonsterProperties(p1, j);
             }
+        }
+        else if(p0.getIsSkill())
+        {
+            return new SkillProperties(p0, j);
+        }
+        else if(p0.getIsInfo())
+        {
+            return new InfoProperties(p0, j);
+        }
+        else if(p0.getIsMaterial())
+        {
+            return new MaterialProperties(p0, j);
         }
         
         return p0;
