@@ -844,22 +844,20 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
         else if(action0 instanceof AttackAction)
         {
             AttackAction action = (AttackAction) action0;
-            Animation attackAnimation = new AttackAnimation(getView(), getZoneWidget(action.sourceZone), getZoneWidget(action.attackedZone));
+            Animation attackAnimation = new AttackAnimation(getView(), getZoneWidget(action.sourceZone), getZoneWidget(action.attackedZone)).setOnStart(() ->
+            {
+            	Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.DIRECT_ATTACK_DECLARE.get(), 1.0F, 1.0F));
+            });
             ZoneWidget w = getZoneWidget(action.attackedZone);
             int size = Math.max(w.getWidth(), w.getHeight());
             Animation cardImpactAnimation = new ImpactCardAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size / 2);
             Animation directImpactAnimation = new ImpactPlayerAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size / 2);
             Queue<Animation> queue = new LinkedList<>();
             
+            queue.add(attackAnimation);
+            
             if(action.attackedZone.type == ZoneTypes.HAND) 
             {
-            	attackAnimation.setOnStart(() ->
-                {
-                	Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.DIRECT_ATTACK_DECLARE.get(), 1.0F, 1.0F));
-                });;
-                
-                queue.add(attackAnimation);
-                
             	if(action.attackedZone.getOwner() == getZoneOwner())
                 {
             		directImpactAnimation.setOnStart(() ->
@@ -880,10 +878,6 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
             {
             	queue.add(attackAnimation);
             	queue.add(cardImpactAnimation);
-            }
-            else 
-            {
-            	queue.add(attackAnimation);
             }
             return new QueueAnimation(queue);
             //return attackAnimation;
