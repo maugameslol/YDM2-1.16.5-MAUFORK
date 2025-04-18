@@ -7,14 +7,18 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public enum DefaultSleevesType
 {
-	// TODO: Put sleeves in the database, make them dynamically generated like sets and cards, so that we don't have this mess anymore.
     // Default Card Back
 	CARD_BACK("card_back"), 
-	// Metals and Minerals
-    BRONZE("bronze"), SILVER("silver"), GOLD("gold"), PLATINUM("platinum"), RUBY("ruby"), DIAMOND("diamond"), EMERALD("emerald"), COPPER("copper"), AMETHYST("amethyst"), SAPPHIRE("sapphire"), NETHERITE("netherite"),
     // Dye Colors
-    BLACK("black"), BLUE("blue"), BROWN("brown"), CYAN("cyan"), GRAY("gray"), GREEN("green"), LIGHT_BLUE("light_blue"), LIGHT_GRAY("light_gray"), LIME("lime"), MAGENTA("magenta"), ORANGE("orange"), PINK("pink"), PURPLE("purple"), RED("red"), WHITE("white"), YELLOW("yellow");
-    
+    BLACK("black"), BLUE("blue"), BROWN("brown"), CYAN("cyan"), GRAY("gray"), GREEN("green"), LIGHT_BLUE("light_blue"), LIGHT_GRAY("light_gray"), LIME("lime"), MAGENTA("magenta"), ORANGE("orange"), PINK("pink"), PURPLE("purple"), RED("red"), WHITE("white"), YELLOW("yellow"),
+    // Vanilla Materials
+    COPPER("copper"), IRON("iron"), GOLD("gold"), NETHERITE("netherite"),
+    QUARTZ("quartz"), AMETHYST("amethyst"), DIAMOND("diamond"), EMERALD("emerald"),
+    // Modded Materials
+    TIN("tin"), SILVER("silver"), LEAD("lead"), PLATINUM("platinum"),
+    BRASS("brass"), BRONZE("bronze"), STEEL("steel"),
+    RUBY("ruby"), SAPPHIRE("sapphire");
+	
     public static final DefaultSleevesType[] VALUES = DefaultSleevesType.values();
     
     public static DefaultSleevesType getFromIndex(int index)
@@ -22,6 +26,7 @@ public enum DefaultSleevesType
         return DefaultSleevesType.VALUES[index];
     }
     
+    //TODO: Make it so that both these sleeves and the new ones can be used in Duels
     static
     {
         int index = 0;

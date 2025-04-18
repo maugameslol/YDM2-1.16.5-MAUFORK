@@ -59,7 +59,6 @@ public class ClientProxy implements ISidedProxy
     public static int activeCardMainImageSize;
     public static int activeSetInfoImageSize;
     public static volatile int activeSetItemImageSize;
-    public static volatile int activeSleeveItemImageSize;
     public static boolean keepCachedImages;
     public static boolean itemsUseCardImages;
     public static boolean itemsUseSetImages;
@@ -254,6 +253,7 @@ public class ClientProxy implements ISidedProxy
         YdmIOUtil.createDirIfNonExistant(ClientProxy.cardImagesFolder);
         YdmIOUtil.createDirIfNonExistant(ClientProxy.setImagesFolder);
         YdmIOUtil.createDirIfNonExistant(ClientProxy.rarityImagesFolder);
+        YdmIOUtil.createDirIfNonExistant(ClientProxy.sleeveImagesFolder);
         YdmIOUtil.createDirIfNonExistant(ClientProxy.rawCardImagesFolder);
         YdmIOUtil.createDirIfNonExistant(ClientProxy.rawSetImagesFolder);
         YdmIOUtil.createDirIfNonExistant(ClientProxy.rawRarityImagesFolder);
@@ -328,6 +328,24 @@ public class ClientProxy implements ISidedProxy
     }
     
     @Override
+    public String addSleeveInfoTag(String imageName)
+    {
+        return ClientProxy.activeCardInfoImageSize + "/" + imageName;
+    }
+    
+    @Override
+    public String addSleeveItemTag(String imageName)
+    {
+        return ClientProxy.activeCardItemImageSize + "/" + imageName;
+    }
+    
+    @Override
+    public String addSleeveMainTag(String imageName)
+    {
+        return ClientProxy.activeCardMainImageSize + "/" + imageName;
+    }
+    
+    @Override
     public String getCardInfoReplacementImage(Properties properties, byte imageIndex)
     {
         return ImageHandler.getInfoReplacementImage(properties, imageIndex);
@@ -355,6 +373,18 @@ public class ClientProxy implements ISidedProxy
     public String getRarityInfoImage(RarityLayer layer)
     {
         return ImageHandler.getRarityInfoImage(layer);
+    }
+    
+    @Override
+    public String getSleeveInfoReplacementImage(SleeveProperties sleeve)
+    {
+        return ImageHandler.getInfoReplacementImage(sleeve);
+    }
+    
+    @Override
+    public String getSleeveMainReplacementImage(SleeveProperties sleeve)
+    {
+        return ImageHandler.getMainReplacementImage(sleeve);
     }
     
     @Override
@@ -539,6 +569,9 @@ public class ClientProxy implements ISidedProxy
         ModelResourceLocation key = new ModelResourceLocation(YdmItems.CARD.getRegistryName(), "inventory");
         event.getModelRegistry().put(key, new CardBakedModel(event.getModelRegistry().get(key)));
         
+        key = new ModelResourceLocation(YdmItems.SLEEVE.getRegistryName(), "inventory");
+        event.getModelRegistry().put(key, new SleeveBakedModel(event.getModelRegistry().get(key)));
+        
         key = new ModelResourceLocation(YdmItems.SET.getRegistryName(), "inventory");
         event.getModelRegistry().put(key, new CardSetBakedModel(event.getModelRegistry().get(key)));
         key = new ModelResourceLocation(YdmItems.OPENED_SET.getRegistryName(), "inventory");
@@ -627,6 +660,10 @@ public class ClientProxy implements ISidedProxy
             {
                 renderDefaultSleevesInfo(event.getMatrixStack(), ((DefaultSleevesItem) player.getMainHandItem().getItem()).sleeves);
             }
+            else if(player.getMainHandItem().getItem() == YdmItems.SLEEVE)
+            {
+                renderSleeveInfo(event.getMatrixStack(), YdmItems.SLEEVE.getSleeveProperties(player.getMainHandItem()));
+            }
             else if(player.getOffhandItem().getItem() == YdmItems.CARD)
             {
                 CardRenderUtil.renderCardInfo(event.getMatrixStack(), YdmItems.CARD.getCardHolder(player.getOffhandItem()));
@@ -642,6 +679,10 @@ public class ClientProxy implements ISidedProxy
             else if(player.getOffhandItem().getItem() instanceof DefaultSleevesItem)
             {
                 renderDefaultSleevesInfo(event.getMatrixStack(), ((DefaultSleevesItem) player.getMainHandItem().getItem()).sleeves);
+            }
+            else if(player.getOffhandItem().getItem() == YdmItems.SLEEVE)
+            {
+                renderSleeveInfo(event.getMatrixStack(), YdmItems.SLEEVE.getSleeveProperties(player.getOffhandItem()));
             }
         }
     }
@@ -745,6 +786,60 @@ public class ClientProxy implements ISidedProxy
         FontRenderer fontRenderer = ClientProxy.getMinecraft().font;
         
         ScreenUtil.drawSplitString(ms, fontRenderer, ImmutableList.of(new TranslationTextComponent("item.ydm." + sleeves.getResourceName())), margin, imageSize * 2 + margin * 2, maxWidth, 0xFFFFFF);
+        
+        ms.popPose();
+    }
+    
+    private void renderSleeveInfo(MatrixStack ms, SleeveProperties sleeve)
+    {
+        renderSleeveInfo(ms, sleeve, 150);
+    }
+    
+    private void renderSleeveInfo(MatrixStack ms, SleeveProperties sleeve, int width)
+    {
+        if(sleeve == null)
+        {
+            return;
+        }
+        
+        final float f = 0.5f;
+        final int imageSize = 64;
+        int margin = 2;
+        
+        int maxWidth = width - margin * 2;
+        
+        ms.pushPose();
+        ScreenUtil.white();
+        
+        int x = margin;
+        
+        if(maxWidth < imageSize)
+        {
+            // draw it centered if the space we got is limited
+            // to make sure the image is NOT rendered more to the right of the center
+            x = (maxWidth - imageSize) / 2 + margin;
+        }
+        
+        // card texture
+        
+        Minecraft.getInstance().textureManager.bind(sleeve.getInfoImageResourceLocation());
+        YdmBlitUtil.fullBlit(ms, x, margin, imageSize, imageSize);
+        
+        // need to multiply x2 because we are scaling the text to x0.5
+        maxWidth *= 2;
+        margin *= 2;
+        ms.scale(f, f, f);
+        
+        // card description text
+        
+        @SuppressWarnings("resource")
+        FontRenderer fontRenderer = ClientProxy.getMinecraft().font;
+        
+        List<ITextComponent> list = new LinkedList<>();
+        
+        sleeve.addInformation(list);
+        
+        ScreenUtil.drawSplitString(ms, fontRenderer, list, margin, imageSize * 2 + margin * 2, maxWidth, 0xFFFFFF);
         
         ms.popPose();
     }

@@ -1,7 +1,6 @@
 package de.cas_ual_ty.ydm.sleeve;
 
 import java.util.List;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import de.cas_ual_ty.ydm.YDM;
@@ -11,7 +10,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 
 public class SleeveProperties {
-	public static final SleeveProperties DUMMY = new SleeveProperties("Dummy Sleeves", "DUMMY") {
+	public static final SleeveProperties DUMMY = new SleeveProperties("Dummy", "DUMMY", "This is a replacement sleeve!") {
         @Override
         public String getImageName()
         {
@@ -28,12 +27,14 @@ public class SleeveProperties {
 	public String name;
 	public String code;
 	public String image;
-	public String[] designers;
+	public String text;
+	//public String[] designers;
 	
-	public SleeveProperties(String name, String code)
+	public SleeveProperties(String name, String code, String text)
     {
         this.name = name;
         this.code = code;
+        this.text = text;
     }
 	
 	public void postDBInit()
@@ -45,6 +46,7 @@ public class SleeveProperties {
     {
 		name = j.get(JsonKeys.NAME).getAsString();
 		code = j.get(JsonKeys.CODE).getAsString();
+		
 		if(!j.has(JsonKeys.IMAGE))
         {
             image = null;
@@ -53,6 +55,16 @@ public class SleeveProperties {
         {
             image = j.get(JsonKeys.IMAGE).getAsString();
         }
+		
+		if(!j.has(JsonKeys.TEXT))
+        {
+            text = null;
+        }
+        else
+        {
+            text = j.get(JsonKeys.TEXT).getAsString();
+        }
+		/*
 		if(j.has(JsonKeys.DESIGNERS))
         {
         	JsonArray designers = j.get(JsonKeys.DESIGNERS).getAsJsonArray();
@@ -66,16 +78,23 @@ public class SleeveProperties {
         {
         	designers = null;
         }
+        */
     }
 	
 	public void addItemInformation(List<ITextComponent> tooltip)
     {
         tooltip.add(new StringTextComponent(name + " Sleeves"));
+        if(text != null && !text.isEmpty()) {
+        	tooltip.add(new StringTextComponent(text));
+        }
     }
     
     public void addInformation(List<ITextComponent> tooltip)
     {
         tooltip.add(new StringTextComponent(name + " Sleeves"));
+        if(text != null && !text.isEmpty()) {
+        	tooltip.add(new StringTextComponent(text));
+        }
     }
 	
 	// -- Getters --
@@ -99,6 +118,11 @@ public class SleeveProperties {
         return YDM.proxy.addSleeveItemTag(getImageName());
     }
     
+    public String getMainImageName()
+    {
+        return YDM.proxy.addSleeveMainTag(getImageName());
+    }
+    
     public ResourceLocation getInfoImageResourceLocation()
     {
         return new ResourceLocation(YDM.MOD_ID, "textures/item/" + YDM.proxy.getSleeveInfoReplacementImage(this) + ".png");
@@ -107,6 +131,11 @@ public class SleeveProperties {
 	public ResourceLocation getItemImageResourceLocation()
     {
         return new ResourceLocation(YDM.MOD_ID, "item/" + getItemImageName());
+    }
+	
+	public ResourceLocation getMainImageResourceLocation()
+    {
+        return new ResourceLocation(YDM.MOD_ID, "textures/item/" + YDM.proxy.getSleeveMainReplacementImage(this) + ".png");
     }
 	
 	public boolean getIsHardcoded()

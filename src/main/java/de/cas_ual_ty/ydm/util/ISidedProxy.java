@@ -82,6 +82,11 @@ public interface ISidedProxy
         return null;
     }
     
+    default String addSleeveMainTag(String imageName)
+    {
+        return null;
+    }
+    
     default String getCardInfoReplacementImage(Properties properties, byte imageIndex)
     {
         return null;
@@ -108,6 +113,11 @@ public interface ISidedProxy
     }
     
     default String getSleeveInfoReplacementImage(SleeveProperties sleeve)
+    {
+        return null;
+    }
+    
+    default String getSleeveMainReplacementImage(SleeveProperties sleeve)
     {
         return null;
     }

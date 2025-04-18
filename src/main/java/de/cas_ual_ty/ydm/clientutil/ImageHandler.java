@@ -228,6 +228,16 @@ public class ImageHandler
         return ImageHandler.tagImage(layer.texture, ClientProxy.activeCardInfoImageSize);
     }
     
+    public static String getInfoReplacementImage(SleeveProperties sleeve)
+    {
+        return ImageHandler.getReplacementImage(sleeve, ClientProxy.activeCardInfoImageSize);
+    }
+    
+    public static String getMainReplacementImage(SleeveProperties sleeve)
+    {
+        return ImageHandler.getReplacementImage(sleeve, ClientProxy.activeCardMainImageSize);
+    }
+    
     @Nullable
     public static Task makeMissingRawTask(String imageName, String imageURL, File raw)
     {
@@ -616,7 +626,7 @@ public class ImageHandler
     {
         for(SleeveProperties sleeve : missingList)
         {
-            ImageHandler.makeImageReady(sleeve.getImageName(), sleeve.getImageURL(), ClientProxy.activeSleeveItemImageSize, ImageHandler.getSleeveImageFile(sleeve.getItemImageName()), ImageHandler.getRawSleeveImageFile(sleeve.getImageName()));
+            ImageHandler.makeImageReady(sleeve.getImageName(), sleeve.getImageURL(), ClientProxy.activeCardItemImageSize, ImageHandler.getSleeveImageFile(sleeve.getItemImageName()), ImageHandler.getRawSleeveImageFile(sleeve.getImageName()));
         }
     }
     

@@ -185,6 +185,7 @@ public class YdmDatabase
         
         YdmDatabase.PROPERTIES_LIST.add(Properties.DUMMY);
         YdmDatabase.SETS_LIST.add(CardSet.DUMMY);
+        YdmDatabase.SLEEVES_LIST.add(SleeveProperties.DUMMY);
         
         //CustomCards.createAndRegisterEverything();
         
@@ -551,7 +552,7 @@ public class YdmDatabase
     //TODO: Sleeves
     private static void readSleeves(File sleevesFolder)
     {
-        YDM.log("Reading set files from: " + sleevesFolder.getAbsolutePath());
+        YDM.log("Reading sleeve files from: " + sleevesFolder.getAbsolutePath());
         
         File[] sleevesFiles = sleevesFolder.listFiles(YdmIOUtil.JSON_FILTER);
         YdmDatabase.SLEEVES_LIST.ensureExtraCapacity(sleevesFiles.length);

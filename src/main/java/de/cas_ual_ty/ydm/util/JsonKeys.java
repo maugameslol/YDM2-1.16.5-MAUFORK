@@ -38,6 +38,7 @@ public class JsonKeys
     //public static final String DURATION = "duration";
     //public static final String LP = "lp";
     //public static final String MANA = "mana";
+    //public static final String THEME = "theme";
 
     // type = "Spell"
     public static final String SPELL_TYPE = "spell_type";
@@ -138,9 +139,7 @@ public class JsonKeys
     // Use NAME String from cards
     // Use CODE String from sets
     // Use IMAGE String from sets
-    // Use TYPE String from cards
     // Use DESIGNER String from cards
-    public static final String THEME = "theme";
     // Use TEXT String from cards
     
     // other
