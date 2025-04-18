@@ -35,7 +35,7 @@ public class SleeveItem extends Item
     public ITextComponent getName(ItemStack itemStack)
     {
     	SleeveProperties sleeve = getSleeveProperties(itemStack);
-        return new StringTextComponent(sleeve.name);
+        return new StringTextComponent(sleeve.name + " Sleeves");
     }
     
     public SleeveProperties getSleeveProperties(ItemStack itemStack)

@@ -3,6 +3,7 @@ package de.cas_ual_ty.ydm.deckbox;
 import de.cas_ual_ty.ydm.YdmItems;
 import de.cas_ual_ty.ydm.card.properties.Properties;
 import de.cas_ual_ty.ydm.sleeve.DefaultSleevesItem;
+import de.cas_ual_ty.ydm.sleeve.SleeveItem;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
@@ -156,7 +157,7 @@ public class DeckBoxContainer extends Container
             
             slot.set(original);
         }
-        else if(original.getItem() instanceof DefaultSleevesItem && !cardSleevesSlot.hasItem())
+        else if((original.getItem() instanceof DefaultSleevesItem && !cardSleevesSlot.hasItem()) || (original.getItem() instanceof SleeveItem && !cardSleevesSlot.hasItem()))
         {
             cardSleevesSlot.set(slot.getItem().split(1));
             return slot.getItem();

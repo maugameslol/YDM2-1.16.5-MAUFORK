@@ -1,16 +1,21 @@
 package de.cas_ual_ty.ydm.sleeve;
 
 import java.util.List;
+
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import de.cas_ual_ty.ydm.YDM;
 import de.cas_ual_ty.ydm.util.JsonKeys;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextFormatting;
 
 public class SleeveProperties {
-	public static final SleeveProperties DUMMY = new SleeveProperties("Dummy", "DUMMY", "This is a replacement sleeve!") {
+	public static final SleeveProperties DUMMY = new SleeveProperties("Dummy", "DUMMY", "This is a replacement sleeve!", null) {
         @Override
         public String getImageName()
         {
@@ -28,13 +33,14 @@ public class SleeveProperties {
 	public String code;
 	public String image;
 	public String text;
-	//public String[] designers;
+	public String[] designers;
 	
-	public SleeveProperties(String name, String code, String text)
+	public SleeveProperties(String name, String code, String text, String[] designers)
     {
         this.name = name;
         this.code = code;
         this.text = text;
+        this.designers = designers;
     }
 	
 	public void postDBInit()
@@ -64,7 +70,7 @@ public class SleeveProperties {
         {
             text = j.get(JsonKeys.TEXT).getAsString();
         }
-		/*
+		
 		if(j.has(JsonKeys.DESIGNERS))
         {
         	JsonArray designers = j.get(JsonKeys.DESIGNERS).getAsJsonArray();
@@ -78,23 +84,65 @@ public class SleeveProperties {
         {
         	designers = null;
         }
-        */
     }
 	
 	public void addItemInformation(List<ITextComponent> tooltip)
     {
         tooltip.add(new StringTextComponent(name + " Sleeves"));
-        if(text != null && !text.isEmpty()) {
-        	tooltip.add(new StringTextComponent(text));
-        }
+        if(designers != null)  
+    	{
+    		IFormattableTextComponent s = new StringTextComponent("Designed by: ").setStyle(Style.EMPTY.applyFormat(TextFormatting.LIGHT_PURPLE));
+    		if(designers.length > 1) 
+    		{
+    			for(int i = 0; i < designers.length; ++i) 
+    			{
+    				if (i == 0) {
+    					s.append(new StringTextComponent(designers[i]));
+    				}
+    				if(i > 0) {
+    					s.append(new StringTextComponent(", " + designers[i]));
+    				}
+    			}
+    		}
+    		else 
+    		{
+    			for(String designer : designers)
+    			s.append(designer);
+    		}
+    		tooltip.add(s);
+    	}
     }
     
     public void addInformation(List<ITextComponent> tooltip)
     {
         tooltip.add(new StringTextComponent(name + " Sleeves"));
         if(text != null && !text.isEmpty()) {
+        	tooltip.add(StringTextComponent.EMPTY);
         	tooltip.add(new StringTextComponent(text));
         }
+        if(designers != null)  
+    	{
+        	tooltip.add(StringTextComponent.EMPTY);
+    		IFormattableTextComponent s = new StringTextComponent("Designed by: ").setStyle(Style.EMPTY.applyFormat(TextFormatting.LIGHT_PURPLE));
+    		if(designers.length > 1) 
+    		{
+    			for(int i = 0; i < designers.length; ++i) 
+    			{
+    				if (i == 0) {
+    					s.append(new StringTextComponent(designers[i]));
+    				}
+    				if(i > 0) {
+    					s.append(new StringTextComponent(", " + designers[i]));
+    				}
+    			}
+    		}
+    		else 
+    		{
+    			for(String designer : designers)
+    			s.append(designer);
+    		}
+    		tooltip.add(s);
+    	}
     }
 	
 	// -- Getters --

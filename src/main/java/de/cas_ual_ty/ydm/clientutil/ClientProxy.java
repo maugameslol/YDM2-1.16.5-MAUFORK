@@ -629,6 +629,10 @@ public class ClientProxy implements ISidedProxy
                 {
                     renderDefaultSleevesInfo(event.getMatrixStack(), ((DefaultSleevesItem) itemStack.getItem()).sleeves, containerScreen.getGuiLeft());
                 }
+                else if(itemStack.getItem() == YdmItems.SLEEVE)
+                {
+                    renderSleeveInfo(event.getMatrixStack(), YdmItems.SLEEVE.getSleeveProperties(itemStack), containerScreen.getGuiLeft());
+                }
             }
         }
     }
