@@ -8,7 +8,7 @@ import de.cas_ual_ty.ydm.clientutil.ScreenUtil;
 import de.cas_ual_ty.ydm.duel.playfield.DuelCard;
 import de.cas_ual_ty.ydm.duel.screen.DuelScreenDueling;
 import de.cas_ual_ty.ydm.duel.screen.IDuelScreenContext;
-import de.cas_ual_ty.ydm.sleeve.CardSleevesType;
+import de.cas_ual_ty.ydm.sleeve.DefaultSleevesType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.FontRenderer;
@@ -205,7 +205,7 @@ public class ViewCardStackWidget extends Button
             }
         }
         
-        CardRenderUtil.renderDuelCardCentered(ms, context.getClickedZone() != null ? context.getClickedZone().getSleeves() : CardSleevesType.CARD_BACK, mouseX, mouseY, renderX, renderY, renderWidth, renderHeight, duelCard, forceFaceUp);
+        CardRenderUtil.renderDuelCardCentered(ms, context.getClickedZone() != null ? context.getClickedZone().getSleeves() : DefaultSleevesType.CARD_BACK, mouseX, mouseY, renderX, renderY, renderWidth, renderHeight, duelCard, forceFaceUp);
         
         return isHovered() && mouseX >= renderX && mouseX < renderX + renderWidth && mouseY >= renderY && mouseY < renderY + renderHeight;
     }

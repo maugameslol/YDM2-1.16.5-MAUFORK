@@ -1,7 +1,7 @@
 package de.cas_ual_ty.ydm.duel.playfield;
 
 import de.cas_ual_ty.ydm.duel.PlayerRole;
-import de.cas_ual_ty.ydm.sleeve.CardSleevesType;
+import de.cas_ual_ty.ydm.sleeve.DefaultSleevesType;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -47,7 +47,7 @@ public class Zone
         counters = 0;
     }
     
-    public CardSleevesType getSleeves()
+    public DefaultSleevesType getSleeves()
     {
         return playField.getSleeves(getOwner());
     }

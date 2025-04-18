@@ -2,7 +2,7 @@ package de.cas_ual_ty.ydm.duel.playfield;
 
 import de.cas_ual_ty.ydm.duel.DuelManager;
 import de.cas_ual_ty.ydm.duel.DuelPhase;
-import de.cas_ual_ty.ydm.sleeve.CardSleevesType;
+import de.cas_ual_ty.ydm.sleeve.DefaultSleevesType;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -38,8 +38,8 @@ public class PlayField
     public boolean player1Turn;
     public DuelPhase phase;
     
-    public CardSleevesType player1Sleeves;
-    public CardSleevesType player2Sleeves;
+    public DefaultSleevesType player1Sleeves;
+    public DefaultSleevesType player2Sleeves;
     
     public PlayField(DuelManager duelManager, PlayFieldType type)
     {
@@ -145,17 +145,17 @@ public class PlayField
         player1Turn = true;
         phase = DuelPhase.DP;
         
-        player1Sleeves = CardSleevesType.CARD_BACK;
-        player2Sleeves = CardSleevesType.CARD_BACK;
+        player1Sleeves = DefaultSleevesType.CARD_BACK;
+        player2Sleeves = DefaultSleevesType.CARD_BACK;
     }
     
-    public void initSleeves(CardSleevesType player1Sleeves, CardSleevesType player2Sleeves)
+    public void initSleeves(DefaultSleevesType player1Sleeves, DefaultSleevesType player2Sleeves)
     {
         this.player1Sleeves = player1Sleeves;
         this.player2Sleeves = player2Sleeves;
     }
     
-    public CardSleevesType getSleeves(ZoneOwner owner)
+    public DefaultSleevesType getSleeves(ZoneOwner owner)
     {
         if(owner == ZoneOwner.PLAYER1)
         {
@@ -167,7 +167,7 @@ public class PlayField
         }
         else
         {
-            return CardSleevesType.CARD_BACK;
+            return DefaultSleevesType.CARD_BACK;
         }
     }
     

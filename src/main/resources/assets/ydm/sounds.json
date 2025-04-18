@@ -1,0 +1,218 @@
+{
+    "banishment_enter": {
+        "category": "block",
+        "sounds": [
+            "ydm:banishment_enter"
+        ],
+        "subtitle": "ydm.sound.subtitle.banishment_enter"
+    },
+    "banishment_exit": {
+        "category": "block",
+        "sounds": [
+            "ydm:banishment_exit"
+        ],
+        "subtitle": "ydm.sound.subtitle.banishment_exit"
+    },
+    "card_atk_position": {
+        "category": "block",
+        "sounds": [
+            "ydm:card_atk_position"
+        ],
+        "subtitle": "ydm.sound.subtitle.card_atk_position"
+    },
+    "card_attach": {
+        "category": "block",
+        "sounds": [
+            "ydm:card_attach"
+        ],
+        "subtitle": "ydm.sound.subtitle.card_attach"
+    },
+    "card_def_position": {
+        "category": "block",
+        "sounds": [
+            "ydm:card_def_position"
+        ],
+        "subtitle": "ydm.sound.subtitle.card_def_position"
+    },
+    "card_destroy": {
+        "category": "block",
+        "sounds": [
+            "ydm:card_destroy"
+        ],
+        "subtitle": "ydm.sound.subtitle.card_destroy"
+    },
+    "card_detach": {
+        "category": "block",
+        "sounds": [
+            "ydm:card_detach"
+        ],
+        "subtitle": "ydm.sound.subtitle.card_detach"
+    },
+    "card_set_backrow": {
+        "category": "block",
+        "sounds": [
+            "ydm:card_set_backrow"
+        ],
+        "subtitle": "ydm.sound.subtitle.card_set_backrow"
+    },
+    "card_set_position": {
+        "category": "block",
+        "sounds": [
+            "ydm:card_set_position"
+        ],
+        "subtitle": "ydm.sound.subtitle.card_set_position"
+    },
+    "card_draw": {
+        "category": "block",
+        "sounds": [
+            "ydm:card_draw",
+            "ydm:card_draw_2",
+            "ydm:card_draw_3",
+            "ydm:card_draw_4"
+        ],
+        "subtitle": "ydm.sound.subtitle.card_draw"
+    },
+    "card_shuffle": {
+        "category": "block",
+        "sounds": [
+            "ydm:card_draw",
+            "ydm:card_draw_2",
+            "ydm:card_draw_3",
+            "ydm:card_draw_4"
+        ],
+        "subtitle": "ydm.sound.subtitle.card_shuffle"
+    },
+    "coin_throw": {
+        "category": "block",
+        "sounds": [
+            "ydm:coin_throw"
+        ],
+        "subtitle": "ydm.sound.subtitle.coin_throw"
+    },
+    "counter_place": {
+        "category": "block",
+        "sounds": [
+            "ydm:counter_place"
+        ],
+        "subtitle": "ydm.sound.subtitle.counter_place"
+    },
+    "duel_draw": {
+        "category": "block",
+        "sounds": [
+            "ydm:duel_draw"
+        ],
+        "subtitle": "ydm.sound.subtitle.duel_draw"
+    },
+    "duel_lose": {
+        "category": "block",
+        "sounds": [
+            "ydm:duel_lose"
+        ],
+        "subtitle": "ydm.sound.subtitle.duel_lose"
+    },
+    "duel_start": {
+        "category": "block",
+        "sounds": [
+            "ydm:duel_start"
+        ],
+        "subtitle": "ydm.sound.subtitle.duel_start"
+    },
+    "duel_win": {
+        "category": "block",
+        "sounds": [
+            "ydm:duel_win"
+        ],
+        "subtitle": "ydm.sound.subtitle.duel_win"
+    },
+    "dice_roll": {
+        "category": "block",
+        "sounds": [
+            "ydm:dice_roll"
+        ],
+        "subtitle": "ydm.sound.subtitle.dice_roll"
+    },
+    "direct_attack_declare": {
+        "category": "block",
+        "sounds": [
+            "ydm:direct_attack_declare"
+        ],
+        "subtitle": "ydm.sound.subtitle.direct_attack_declare"
+    },
+    "direct_attack_player1": {
+        "category": "block",
+        "sounds": [
+            "ydm:direct_attack_player1"
+        ],
+        "subtitle": "ydm.sound.subtitle.direct_attack_player1"
+    },
+    "direct_attack_player2": {
+        "category": "block",
+        "sounds": [
+            "ydm:direct_attack_player2"
+        ],
+        "subtitle": "ydm.sound.subtitle.direct_attack_player2"
+    },
+    "gy_enter": {
+        "category": "block",
+        "sounds": [
+            "ydm:gy_enter"
+        ],
+        "subtitle": "ydm.sound.subtitle.gy_enter"
+    },
+    "gy_exit": {
+        "category": "block",
+        "sounds": [
+            "ydm:gy_exit"
+        ],
+        "subtitle": "ydm.sound.subtitle.gy_exit"
+    },
+    "lp_count": {
+        "category": "block",
+        "sounds": [
+            "ydm:lp_count"
+        ],
+        "subtitle": "ydm.sound.subtitle.lp_count"
+    },
+    "phase_change_player1": {
+        "category": "block",
+        "sounds": [
+            "ydm:phase_change_player1"
+        ],
+        "subtitle": "ydm.sound.subtitle.phase_change_player1"
+    },
+    "phase_change_player2": {
+        "category": "block",
+        "sounds": [
+            "ydm:phase_change_player2"
+        ],
+        "subtitle": "ydm.sound.subtitle.phase_change_player2"
+    },
+    "token_summon": {
+    "category": "block",
+    "sounds": [
+        "ydm:token_summon"
+    ],
+    "subtitle": "ydm.sound.subtitle.token_summon"
+    },
+    "token_remove": {
+    "category": "block",
+    "sounds": [
+        "ydm:token_remove"
+    ],
+    "subtitle": "ydm.sound.subtitle.token_remove"
+    },
+    "turn_switch_player1": {
+        "category": "block",
+        "sounds": [
+            "ydm:turn_switch_player1"
+        ],
+        "subtitle": "ydm.sound.subtitle.turn_switch_player1"
+    },
+    "turn_switch_player2": {
+        "category": "block",
+        "sounds": [
+            "ydm:turn_switch_player2"
+        ],
+        "subtitle": "ydm.sound.subtitle.turn_switch_player2"
+    }
+}

@@ -9,7 +9,7 @@ import de.cas_ual_ty.ydm.duel.playfield.CardPosition;
 import de.cas_ual_ty.ydm.duel.playfield.DuelCard;
 import de.cas_ual_ty.ydm.duel.playfield.ZoneOwner;
 import de.cas_ual_ty.ydm.duel.screen.widget.ZoneWidget;
-import de.cas_ual_ty.ydm.sleeve.CardSleevesType;
+import de.cas_ual_ty.ydm.sleeve.DefaultSleevesType;
 import net.minecraft.util.math.vector.Quaternion;
 
 public class MoveAnimation extends Animation
@@ -81,7 +81,7 @@ public class MoveAnimation extends Animation
         posY += (destY - sourceY) * relativePositionRotation;
         
         CardPosition cardPosition;
-        CardSleevesType sleeves;
+        DefaultSleevesType sleeves;
         
         if(tickTime >= maxTickTime / 2)
         {

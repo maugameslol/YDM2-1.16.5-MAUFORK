@@ -2,7 +2,7 @@ package de.cas_ual_ty.ydm.deckbox;
 
 import de.cas_ual_ty.ydm.YdmItems;
 import de.cas_ual_ty.ydm.card.properties.Properties;
-import de.cas_ual_ty.ydm.sleeve.CardSleevesItem;
+import de.cas_ual_ty.ydm.sleeve.DefaultSleevesItem;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
@@ -59,7 +59,7 @@ public class DeckBoxContainer extends Container
             @Override
             public boolean mayPlace(ItemStack stack)
             {
-                return stack.getItem() instanceof CardSleevesItem;
+                return stack.getItem() instanceof DefaultSleevesItem;
             }
             
             @Override
@@ -156,7 +156,7 @@ public class DeckBoxContainer extends Container
             
             slot.set(original);
         }
-        else if(original.getItem() instanceof CardSleevesItem && !cardSleevesSlot.hasItem())
+        else if(original.getItem() instanceof DefaultSleevesItem && !cardSleevesSlot.hasItem())
         {
             cardSleevesSlot.set(slot.getItem().split(1));
             return slot.getItem();

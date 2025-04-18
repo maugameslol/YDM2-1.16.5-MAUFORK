@@ -12,7 +12,7 @@ import de.cas_ual_ty.ydm.duel.playfield.DuelCard;
 import de.cas_ual_ty.ydm.rarity.RarityEntry;
 import de.cas_ual_ty.ydm.rarity.RarityLayer;
 import de.cas_ual_ty.ydm.rarity.RarityLayerType;
-import de.cas_ual_ty.ydm.sleeve.CardSleevesType;
+import de.cas_ual_ty.ydm.sleeve.DefaultSleevesType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
@@ -135,7 +135,7 @@ public class CardRenderUtil
         CardRenderUtil.mainTextureBinder.bind(r);
     }
     
-    public static void bindSleeves(CardSleevesType s)
+    public static void bindSleeves(DefaultSleevesType s)
     {
         ClientProxy.getMinecraft().textureManager.bind(s.getMainRL(ClientProxy.activeCardMainImageSize));
     }
@@ -200,7 +200,7 @@ public class CardRenderUtil
         }
     }
     
-    public static void renderDuelCardAdvanced(MatrixStack ms, CardSleevesType back, int mouseX, int mouseY, float x, float y, float width, float height, DuelCard card, YdmBlitUtil.FullBlitMethod blitMethod, boolean forceFaceUp)
+    public static void renderDuelCardAdvanced(MatrixStack ms, DefaultSleevesType back, int mouseX, int mouseY, float x, float y, float width, float height, DuelCard card, YdmBlitUtil.FullBlitMethod blitMethod, boolean forceFaceUp)
     {
         CardPosition position = card.getCardPosition();
         
@@ -213,7 +213,7 @@ public class CardRenderUtil
         CardRenderUtil.renderDuelCardAdvanced(ms, back, mouseX, mouseY, x, y, width, height, card, position, blitMethod);
     }
     
-    public static void renderDuelCardAdvanced(MatrixStack ms, CardSleevesType back, int mouseX, int mouseY, float x, float y, float width, float height, DuelCard card, CardPosition position, YdmBlitUtil.FullBlitMethod blitMethod)
+    public static void renderDuelCardAdvanced(MatrixStack ms, DefaultSleevesType back, int mouseX, int mouseY, float x, float y, float width, float height, DuelCard card, CardPosition position, YdmBlitUtil.FullBlitMethod blitMethod)
     {
         Minecraft mc = ClientProxy.getMinecraft();
         
@@ -261,7 +261,7 @@ public class CardRenderUtil
         }
     }
     
-    public static void renderDuelCard(MatrixStack ms, CardSleevesType back, int mouseX, int mouseY, float x, float y, float width, float height, DuelCard card, boolean forceFaceUp)
+    public static void renderDuelCard(MatrixStack ms, DefaultSleevesType back, int mouseX, int mouseY, float x, float y, float width, float height, DuelCard card, boolean forceFaceUp)
     {
         CardRenderUtil.renderDuelCardAdvanced(ms, back, mouseX, mouseY, x, y, width, height, card,
                 card.getCardPosition().isStraight
@@ -269,7 +269,7 @@ public class CardRenderUtil
                         : YdmBlitUtil::fullBlit90Degree, forceFaceUp);
     }
     
-    public static void renderDuelCardReversed(MatrixStack ms, CardSleevesType back, int mouseX, int mouseY, float x, float y, float width, float height, DuelCard card, boolean forceFaceUp)
+    public static void renderDuelCardReversed(MatrixStack ms, DefaultSleevesType back, int mouseX, int mouseY, float x, float y, float width, float height, DuelCard card, boolean forceFaceUp)
     {
         CardRenderUtil.renderDuelCardAdvanced(ms, back, mouseX, mouseY, x, y, width, height, card,
                 card.getCardPosition().isStraight
@@ -277,7 +277,7 @@ public class CardRenderUtil
                         : YdmBlitUtil::fullBlit270Degree, forceFaceUp);
     }
     
-    public static void renderDuelCardCentered(MatrixStack ms, CardSleevesType back, int mouseX, int mouseY, float x, float y, float width, float height, DuelCard card, boolean forceFaceUp)
+    public static void renderDuelCardCentered(MatrixStack ms, DefaultSleevesType back, int mouseX, int mouseY, float x, float y, float width, float height, DuelCard card, boolean forceFaceUp)
     {
         // if width and height are more of a rectangle, this centers the texture horizontally
         x -= (height - width) / 2;
@@ -286,7 +286,7 @@ public class CardRenderUtil
         CardRenderUtil.renderDuelCard(ms, back, mouseX, mouseY, x, y, width, height, card, forceFaceUp);
     }
     
-    public static void renderDuelCardReversedCentered(MatrixStack ms, CardSleevesType back, int mouseX, int mouseY, float x, float y, float width, float height, DuelCard card, boolean forceFaceUp)
+    public static void renderDuelCardReversedCentered(MatrixStack ms, DefaultSleevesType back, int mouseX, int mouseY, float x, float y, float width, float height, DuelCard card, boolean forceFaceUp)
     {
         // if width and height are more of a rectangle, this centers the texture horizontally
         x -= (height - width) / 2;

@@ -1,0 +1,6 @@
+{
+  "parent": "ydm:item/sleeves_netherite",
+  "textures": {
+    "layer0": "ydm:item/16/sleeves_netherite"
+  }
+}

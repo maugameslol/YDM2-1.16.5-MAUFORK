@@ -118,7 +118,16 @@ public class YdmCardResourcePack extends ResourcePack
                 }
                 else
                 {
-                    return null;
+                	image = ImageHandler.getSleeveFile(filename);
+                    
+                    if(image.exists())
+                    {
+                        return image;
+                    }
+                    else 
+                    {
+                    	return null;
+                    }
                 }
             }
         }

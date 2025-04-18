@@ -16,8 +16,9 @@ import de.cas_ual_ty.ydm.duel.screen.DuelContainerScreen;
 import de.cas_ual_ty.ydm.duel.screen.DuelScreenBase;
 import de.cas_ual_ty.ydm.rarity.RarityLayer;
 import de.cas_ual_ty.ydm.set.CardSet;
-import de.cas_ual_ty.ydm.sleeve.CardSleevesItem;
-import de.cas_ual_ty.ydm.sleeve.CardSleevesType;
+import de.cas_ual_ty.ydm.sleeve.DefaultSleevesItem;
+import de.cas_ual_ty.ydm.sleeve.DefaultSleevesType;
+import de.cas_ual_ty.ydm.sleeve.SleeveProperties;
 import de.cas_ual_ty.ydm.util.ISidedProxy;
 import de.cas_ual_ty.ydm.util.YdmIOUtil;
 import de.cas_ual_ty.ydm.util.YdmUtil;
@@ -58,9 +59,11 @@ public class ClientProxy implements ISidedProxy
     public static int activeCardMainImageSize;
     public static int activeSetInfoImageSize;
     public static volatile int activeSetItemImageSize;
+    public static volatile int activeSleeveItemImageSize;
     public static boolean keepCachedImages;
     public static boolean itemsUseCardImages;
     public static boolean itemsUseSetImages;
+    public static boolean itemsUseSleeveImages;
     public static boolean showBinderId;
     public static int maxInfoImages;
     public static int maxMainImages;
@@ -74,21 +77,28 @@ public class ClientProxy implements ISidedProxy
     public static volatile boolean itemsUseCardImagesFailed;
     public static volatile boolean itemsUseSetImagesActive;
     public static volatile boolean itemsUseSetImagesFailed;
+    public static volatile boolean itemsUseSleeveImagesActive;
+    public static volatile boolean itemsUseSleeveImagesFailed;
     
     public static File imagesParentFolder;
     public static File cardImagesFolder;
     public static File setImagesFolder;
     public static File rarityImagesFolder;
+    public static File sleeveImagesFolder;
     public static File rarityMainImagesFolder;
     public static File rarityInfoImagesFolder;
     public static File rawCardImagesFolder;
     public static File rawSetImagesFolder;
     public static File rawRarityImagesFolder;
+    public static File rawSleeveImagesFolder;
     private static File cardInfoImagesFolder;
     private static File cardItemImagesFolder;
     private static File cardMainImagesFolder;
     private static File setInfoImagesFolder;
     private static File setItemImagesFolder;
+    private static File sleeveMainImagesFolder;
+    private static File sleeveInfoImagesFolder;
+    private static File sleeveItemImagesFolder;
     
     @Override
     public void registerModEventListeners(IEventBus bus)
@@ -114,6 +124,8 @@ public class ClientProxy implements ISidedProxy
         ClientProxy.itemsUseCardImagesFailed = false;
         ClientProxy.itemsUseSetImagesActive = false;
         ClientProxy.itemsUseSetImagesFailed = false;
+        ClientProxy.itemsUseSleeveImagesActive = false;
+        ClientProxy.itemsUseSleeveImagesFailed = false;
         
         Pair<ClientConfig, ForgeConfigSpec> client = new ForgeConfigSpec.Builder().configure(ClientConfig::new);
         ClientProxy.clientConfig = client.getLeft();
@@ -181,6 +193,32 @@ public class ClientProxy implements ISidedProxy
                 e.printStackTrace();
                 ClientProxy.itemsUseSetImagesFailed = true;
             }
+            
+            if(ClientProxy.itemsUseSleeveImages)
+            {
+                try
+                {
+                    List<SleeveProperties> list = ImageHandler.getMissingSleeveImages();
+                    
+                    if(list.size() == 0)
+                    {
+                        YDM.log("Items will use sleeve images!");
+                        ClientProxy.itemsUseSleeveImagesActive = true;
+                    }
+                    else
+                    {
+                        YDM.log("Items will not use sleeve images, still missing " + list.size() + " images. Fetching...");
+                        ImageHandler.downloadSleeveImages(list);
+                        ClientProxy.itemsUseSleeveImagesFailed = true;
+                    }
+                }
+                catch(Exception e)
+                {
+                    YDM.log("Failed checking missing sleeve images!");
+                    e.printStackTrace();
+                    ClientProxy.itemsUseSleeveImagesFailed = true;
+                }
+            }
         }
         
         ScreenManager.register(YdmContainerTypes.CARD_BINDER, CardBinderScreen::new);
@@ -206,9 +244,11 @@ public class ClientProxy implements ISidedProxy
         ClientProxy.cardImagesFolder = new File(ClientProxy.imagesParentFolder, "cards");
         ClientProxy.setImagesFolder = new File(ClientProxy.imagesParentFolder, "sets");
         ClientProxy.rarityImagesFolder = new File(ClientProxy.imagesParentFolder, "rarities");
+        ClientProxy.sleeveImagesFolder = new File(ClientProxy.imagesParentFolder, "sleeves");
         ClientProxy.rawCardImagesFolder = new File(ClientProxy.cardImagesFolder, "raw");
         ClientProxy.rawSetImagesFolder = new File(ClientProxy.setImagesFolder, "raw");
         ClientProxy.rawRarityImagesFolder = new File(YDM.mainFolder, "rarity_images");
+        ClientProxy.rawSleeveImagesFolder = new File(ClientProxy.sleeveImagesFolder, "raw");
         
         YdmIOUtil.createDirIfNonExistant(ClientProxy.imagesParentFolder);
         YdmIOUtil.createDirIfNonExistant(ClientProxy.cardImagesFolder);
@@ -217,6 +257,7 @@ public class ClientProxy implements ISidedProxy
         YdmIOUtil.createDirIfNonExistant(ClientProxy.rawCardImagesFolder);
         YdmIOUtil.createDirIfNonExistant(ClientProxy.rawSetImagesFolder);
         YdmIOUtil.createDirIfNonExistant(ClientProxy.rawRarityImagesFolder);
+        YdmIOUtil.createDirIfNonExistant(ClientProxy.rawSleeveImagesFolder);
     }
     
     @Override
@@ -230,6 +271,10 @@ public class ClientProxy implements ISidedProxy
         ClientProxy.rarityMainImagesFolder = new File(rarityImagesFolder, "" + ClientProxy.activeCardMainImageSize);
         ClientProxy.rarityInfoImagesFolder = new File(rarityImagesFolder, "" + ClientProxy.activeCardInfoImageSize);
         
+        ClientProxy.sleeveInfoImagesFolder = new File(ClientProxy.sleeveImagesFolder, "" + ClientProxy.activeCardInfoImageSize);
+        ClientProxy.sleeveItemImagesFolder = new File(ClientProxy.sleeveImagesFolder, "" + ClientProxy.activeCardItemImageSize);
+        ClientProxy.sleeveMainImagesFolder = new File(ClientProxy.sleeveImagesFolder, "" + ClientProxy.activeCardMainImageSize);
+        
         // change this depending on resolution (64/128/256)
         ClientProxy.setInfoImagesFolder = new File(ClientProxy.setImagesFolder, "" + ClientProxy.activeSetInfoImageSize);
         ClientProxy.setItemImagesFolder = new File(ClientProxy.setImagesFolder, "" + ClientProxy.activeSetItemImageSize);
@@ -241,6 +286,9 @@ public class ClientProxy implements ISidedProxy
         YdmIOUtil.createDirIfNonExistant(ClientProxy.setItemImagesFolder);
         YdmIOUtil.createDirIfNonExistant(ClientProxy.rarityMainImagesFolder);
         YdmIOUtil.createDirIfNonExistant(ClientProxy.rarityInfoImagesFolder);
+        YdmIOUtil.createDirIfNonExistant(ClientProxy.sleeveInfoImagesFolder);
+        YdmIOUtil.createDirIfNonExistant(ClientProxy.sleeveItemImagesFolder);
+        YdmIOUtil.createDirIfNonExistant(ClientProxy.sleeveMainImagesFolder);
     }
     
     @Override
@@ -379,6 +427,16 @@ public class ClientProxy implements ISidedProxy
                 }
             }
         }
+        
+        if(ClientProxy.itemsUseSleeveImagesActive)
+        {
+            YDM.log("Stitching " + YdmDatabase.SLEEVES_LIST.size() + " sleeve item textures!");
+            
+            for(SleeveProperties sleeve : YdmDatabase.SLEEVES_LIST)
+            {
+            	event.addSprite(sleeve.getItemImageResourceLocation());
+            }
+        }
     }
     
     private void modelRegistry(ModelRegistryEvent event)
@@ -419,7 +477,7 @@ public class ClientProxy implements ISidedProxy
             ModelLoader.addSpecialModel(new ModelResourceLocation(new ResourceLocation(YdmItems.CARD_BACK.getRegistryName().toString() + "_" + ClientProxy.activeCardItemImageSize), "inventory"));
             ModelLoader.addSpecialModel(new ModelResourceLocation(new ResourceLocation(YdmItems.BLANC_SLEEVE.getRegistryName().toString() + "_" + ClientProxy.activeCardItemImageSize), "inventory"));
             
-            for(CardSleevesType sleeves : CardSleevesType.VALUES)
+            for(DefaultSleevesType sleeves : DefaultSleevesType.VALUES)
             {
                 if(!sleeves.isCardBack())
                 {
@@ -458,7 +516,7 @@ public class ClientProxy implements ISidedProxy
                             new ModelResourceLocation(
                                     new ResourceLocation(YdmItems.BLANC_SLEEVE.getRegistryName().toString() + "_" + ClientProxy.activeCardItemImageSize), "inventory")));
             
-            for(CardSleevesType sleeves : CardSleevesType.VALUES)
+            for(DefaultSleevesType sleeves : DefaultSleevesType.VALUES)
             {
                 if(!sleeves.isCardBack())
                 {
@@ -500,6 +558,7 @@ public class ClientProxy implements ISidedProxy
             ClientProxy.keepCachedImages = ClientProxy.clientConfig.keepCachedImages.get();
             ClientProxy.itemsUseCardImages = ClientProxy.clientConfig.itemsUseCardImages.get();
             ClientProxy.itemsUseSetImages = ClientProxy.clientConfig.itemsUseSetImages.get();
+            ClientProxy.itemsUseSleeveImages = ClientProxy.clientConfig.itemsUseCardImages.get();
             ClientProxy.showBinderId = ClientProxy.clientConfig.showBinderId.get();
             ClientProxy.maxInfoImages = ClientProxy.clientConfig.maxInfoImages.get();
             ClientProxy.maxMainImages = ClientProxy.clientConfig.maxMainImages.get();
@@ -533,9 +592,9 @@ public class ClientProxy implements ISidedProxy
                 {
                     renderSetInfo(event.getMatrixStack(), YdmItems.OPENED_SET.getCardSet(itemStack), containerScreen.getGuiLeft());
                 }
-                else if(itemStack.getItem() instanceof CardSleevesItem)
+                else if(itemStack.getItem() instanceof DefaultSleevesItem)
                 {
-                    renderSleevesInfo(event.getMatrixStack(), ((CardSleevesItem) itemStack.getItem()).sleeves, containerScreen.getGuiLeft());
+                    renderDefaultSleevesInfo(event.getMatrixStack(), ((DefaultSleevesItem) itemStack.getItem()).sleeves, containerScreen.getGuiLeft());
                 }
             }
         }
@@ -564,9 +623,9 @@ public class ClientProxy implements ISidedProxy
             {
                 renderSetInfo(event.getMatrixStack(), YdmItems.OPENED_SET.getCardSet(player.getMainHandItem()));
             }
-            else if(player.getMainHandItem().getItem() instanceof CardSleevesItem)
+            else if(player.getMainHandItem().getItem() instanceof DefaultSleevesItem)
             {
-                renderSleevesInfo(event.getMatrixStack(), ((CardSleevesItem) player.getMainHandItem().getItem()).sleeves);
+                renderDefaultSleevesInfo(event.getMatrixStack(), ((DefaultSleevesItem) player.getMainHandItem().getItem()).sleeves);
             }
             else if(player.getOffhandItem().getItem() == YdmItems.CARD)
             {
@@ -580,9 +639,9 @@ public class ClientProxy implements ISidedProxy
             {
                 renderSetInfo(event.getMatrixStack(), YdmItems.OPENED_SET.getCardSet(player.getOffhandItem()));
             }
-            else if(player.getOffhandItem().getItem() instanceof CardSleevesItem)
+            else if(player.getOffhandItem().getItem() instanceof DefaultSleevesItem)
             {
-                renderSleevesInfo(event.getMatrixStack(), ((CardSleevesItem) player.getMainHandItem().getItem()).sleeves);
+                renderDefaultSleevesInfo(event.getMatrixStack(), ((DefaultSleevesItem) player.getMainHandItem().getItem()).sleeves);
             }
         }
     }
@@ -640,12 +699,12 @@ public class ClientProxy implements ISidedProxy
         ms.popPose();
     }
     
-    private void renderSleevesInfo(MatrixStack ms, CardSleevesType sleeves)
+    private void renderDefaultSleevesInfo(MatrixStack ms, DefaultSleevesType sleeves)
     {
-        renderSleevesInfo(ms, sleeves, 150);
+        renderDefaultSleevesInfo(ms, sleeves, 150);
     }
     
-    private void renderSleevesInfo(MatrixStack ms, CardSleevesType sleeves, int width)
+    private void renderDefaultSleevesInfo(MatrixStack ms, DefaultSleevesType sleeves, int width)
     {
         if(sleeves == null)
         {

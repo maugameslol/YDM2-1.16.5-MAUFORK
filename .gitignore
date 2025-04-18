@@ -26,4 +26,4 @@ forge*changelog.txt
 
 # runData
 src/generated
-/src/main/resources/assets/ydm
+/src/main/resources/assets/ydm/sounds

@@ -4,7 +4,7 @@ import de.cas_ual_ty.ydm.YDM;
 import de.cas_ual_ty.ydm.YdmContainerTypes;
 import de.cas_ual_ty.ydm.YdmItems;
 import de.cas_ual_ty.ydm.card.CardHolder;
-import de.cas_ual_ty.ydm.sleeve.CardSleevesItem;
+import de.cas_ual_ty.ydm.sleeve.DefaultSleevesItem;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
@@ -61,7 +61,7 @@ public class DeckBoxItem extends Item implements INamedContainerProvider
     
     public void saveCardSleevesToNBT(ItemStack itemStack, ItemStack sleevesStack)
     {
-        if(sleevesStack.getItem() instanceof CardSleevesItem && !((CardSleevesItem) sleevesStack.getItem()).sleeves.isCardBack())
+        if(sleevesStack.getItem() instanceof DefaultSleevesItem && !((DefaultSleevesItem) sleevesStack.getItem()).sleeves.isCardBack())
         {
             itemStack.getOrCreateTag().put(DeckBoxItem.CARD_SLEEVES_KEY, sleevesStack.save(new CompoundNBT()));
         }

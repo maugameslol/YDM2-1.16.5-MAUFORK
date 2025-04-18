@@ -5,6 +5,7 @@ import de.cas_ual_ty.ydm.card.CardHolder;
 import de.cas_ual_ty.ydm.card.properties.Properties;
 import de.cas_ual_ty.ydm.rarity.RarityLayer;
 import de.cas_ual_ty.ydm.set.CardSet;
+import de.cas_ual_ty.ydm.sleeve.SleeveProperties;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.eventbus.api.IEventBus;
 
@@ -71,12 +72,15 @@ public interface ISidedProxy
         return null;
     }
     
-    /*
+    default String addSleeveInfoTag(String imageName)
+    {
+        return null;
+    }
+    
     default String addSleeveItemTag(String imageName)
     {
         return null;
     }
-    */
     
     default String getCardInfoReplacementImage(Properties properties, byte imageIndex)
     {
@@ -103,12 +107,10 @@ public interface ISidedProxy
         return null;
     }
     
-    /*
-    default String getSleeveInfoReplacementImage(UrlSleeve sleeve)
+    default String getSleeveInfoReplacementImage(SleeveProperties sleeve)
     {
         return null;
     }
-    */
     
     default boolean continueTasks()
     {

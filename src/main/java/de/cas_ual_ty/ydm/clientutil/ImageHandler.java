@@ -7,7 +7,8 @@ import de.cas_ual_ty.ydm.card.properties.Properties;
 import de.cas_ual_ty.ydm.rarity.RarityEntry;
 import de.cas_ual_ty.ydm.rarity.RarityLayer;
 import de.cas_ual_ty.ydm.set.CardSet;
-import de.cas_ual_ty.ydm.sleeve.CardSleevesType;
+import de.cas_ual_ty.ydm.sleeve.DefaultSleevesType;
+import de.cas_ual_ty.ydm.sleeve.SleeveProperties;
 import de.cas_ual_ty.ydm.task.Task;
 import de.cas_ual_ty.ydm.task.TaskPriority;
 import de.cas_ual_ty.ydm.task.TaskQueue;
@@ -39,6 +40,8 @@ public class ImageHandler
     private static final String SET_IN_PROGRESS = "set_loading";
     private static final String SET_FAILED = "set_failed";
     //    private static final String FAILED_IMAGE = "blanc_card";
+    private static final String SLEEVE_IN_PROGRESS = "sleeve_loading";
+    private static final String SLEEVE_FAILED = "sleeve_failed";
     
     public static ImageList RAW_IMAGE_LIST = new ImageList();
     public static ImageList ADJUSTED_IMAGE_LIST = new ImageList();
@@ -72,7 +75,7 @@ public class ImageHandler
     // put raw image in the raw images folder
     // make sure all size folders (16, 32, 64... exist)
     @Deprecated // so I get a warning
-    public static void createCustomSleevesImages(CardSleevesType sleeve, String rawType) throws IOException
+    public static void createCustomSleevesImages(DefaultSleevesType sleeve, String rawType) throws IOException
     {
         YDM.log("creating sleeves card images!");
         
@@ -146,6 +149,19 @@ public class ImageHandler
         }
         
         return ImageHandler.getReplacementImage(imageName, imagePathName, s.getImageURL(), ImageHandler.SET_IN_PROGRESS, ImageHandler.SET_FAILED, imageSize, ImageHandler.getSetImageFile(imagePathName), ImageHandler.getRawSetImageFile(imageName));
+    }
+    
+    public static String getReplacementImage(SleeveProperties sl, int imageSize)
+    {
+        String imageName = sl.getImageName();
+        String imagePathName = ImageHandler.tagImage(imageName, imageSize);
+        
+        if(sl.getIsHardcoded())
+        {
+            return imagePathName;
+        }
+        
+        return ImageHandler.getReplacementImage(imageName, imagePathName, sl.getImageURL(), ImageHandler.SLEEVE_IN_PROGRESS, ImageHandler.SLEEVE_FAILED, imageSize, ImageHandler.getSleeveImageFile(imagePathName), ImageHandler.getRawSleeveImageFile(imageName));
     }
     
     public static String getReplacementImage(String imageName, String imagePathName, String imageURL, String inProgress, String failed, int imageSize, File adjusted, File raw)
@@ -465,6 +481,21 @@ public class ImageHandler
         }
     }
     
+    public static File getRawSleeveImageFile(String imageName)
+    {
+        File f = new File(ClientProxy.rawSleeveImagesFolder, imageName + ".png");
+        
+        // prefer png over jpg
+        if(f.exists())
+        {
+            return f;
+        }
+        else
+        {
+            return new File(ClientProxy.rawSleeveImagesFolder, imageName + ".jpg");
+        }
+    }
+    
     public static File getAdjustedCardImageFile(String imageName, int size)
     {
         return ImageHandler.getCardImageFile(ImageHandler.tagImage(imageName, size));
@@ -473,6 +504,11 @@ public class ImageHandler
     public static File getAdjustedSetImageFile(String imageName, int size)
     {
         return ImageHandler.getSetImageFile(ImageHandler.tagImage(imageName, size));
+    }
+    
+    public static File getAdjustedSleeveImageFile(String imageName, int size)
+    {
+        return ImageHandler.getSleeveImageFile(ImageHandler.tagImage(imageName, size));
     }
     
     public static String tagImage(String imageName, int size)
@@ -490,6 +526,11 @@ public class ImageHandler
         return ImageHandler.getSetFile(imagePathName + ".png");
     }
     
+    public static File getSleeveImageFile(String imagePathName)
+    {
+        return ImageHandler.getSleeveFile(imagePathName + ".png");
+    }
+    
     public static File getCardFile(String imagePathName)
     {
         return new File(ClientProxy.cardImagesFolder, imagePathName);
@@ -503,6 +544,11 @@ public class ImageHandler
     public static File getRarityFile(String imagePathName)
     {
         return new File(ClientProxy.rarityImagesFolder, imagePathName);
+    }
+    
+    public static File getSleeveFile(String imagePathName)
+    {
+        return new File(ClientProxy.sleeveImagesFolder, imagePathName);
     }
     
     public static List<CardHolder> getMissingItemImages()
@@ -535,6 +581,21 @@ public class ImageHandler
         return list;
     }
     
+    public static List<SleeveProperties> getMissingSleeveImages()
+    {
+        List<SleeveProperties> list = new LinkedList<>();
+        
+        for(SleeveProperties sleeve : YdmDatabase.SLEEVES_LIST)
+        {
+            if(!sleeve.getIsHardcoded() && !ImageHandler.getSetImageFile(sleeve.getItemImageName()).exists())
+            {
+                list.add(sleeve);
+            }
+        }
+        
+        return list;
+    }
+    
     public static void downloadCardImages(List<CardHolder> missingList)
     {
         for(CardHolder card : missingList)
@@ -548,6 +609,14 @@ public class ImageHandler
         for(CardSet set : missingList)
         {
             ImageHandler.makeImageReady(set.getImageName(), set.getImageURL(), ClientProxy.activeSetItemImageSize, ImageHandler.getSetImageFile(set.getItemImageName()), ImageHandler.getRawSetImageFile(set.getImageName()));
+        }
+    }
+    
+    public static void downloadSleeveImages(List<SleeveProperties> missingList)
+    {
+        for(SleeveProperties sleeve : missingList)
+        {
+            ImageHandler.makeImageReady(sleeve.getImageName(), sleeve.getImageURL(), ClientProxy.activeSleeveItemImageSize, ImageHandler.getSleeveImageFile(sleeve.getItemImageName()), ImageHandler.getRawSleeveImageFile(sleeve.getImageName()));
         }
     }
     

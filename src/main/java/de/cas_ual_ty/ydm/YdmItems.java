@@ -7,8 +7,9 @@ import de.cas_ual_ty.ydm.duel.dueldisk.DuelDiskItem;
 import de.cas_ual_ty.ydm.set.CardSetItem;
 import de.cas_ual_ty.ydm.set.OpenedCardSetItem;
 import de.cas_ual_ty.ydm.simplebinder.SimpleBinderItem;
-import de.cas_ual_ty.ydm.sleeve.CardSleevesItem;
-import de.cas_ual_ty.ydm.sleeve.CardSleevesType;
+import de.cas_ual_ty.ydm.sleeve.DefaultSleevesItem;
+import de.cas_ual_ty.ydm.sleeve.DefaultSleevesType;
+import de.cas_ual_ty.ydm.sleeve.SleeveItem;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.Properties;
@@ -146,12 +147,13 @@ public class YdmItems
         registry.register(new DeckBoxItem(new Properties().tab(YDM.ydmItemGroup).stacksTo(1)).setRegistryName(YDM.MOD_ID, "sapphire_deck_box"));
         registry.register(new DeckBoxItem(new Properties().tab(YDM.ydmItemGroup).stacksTo(1)).setRegistryName(YDM.MOD_ID, "netherite_deck_box"));
         
-        for(CardSleevesType sleeve : CardSleevesType.VALUES)
+        for(DefaultSleevesType sleeve : DefaultSleevesType.VALUES)
         {
             if(!sleeve.isCardBack())
             {
-                registry.register(new CardSleevesItem(new Properties().tab(YDM.sleevesItemGroup).stacksTo(1), sleeve).setRegistryName(YDM.MOD_ID, sleeve.getResourceName()));
+                registry.register(new DefaultSleevesItem(new Properties().tab(YDM.sleevesItemGroup).stacksTo(1), sleeve).setRegistryName(YDM.MOD_ID, sleeve.getResourceName()));
             }
         }
+        registry.register(new SleeveItem(new Properties().tab(YDM.sleevesItemGroup).stacksTo(1)).setRegistryName(YDM.MOD_ID, "custom_sleeve"));
     }
 }

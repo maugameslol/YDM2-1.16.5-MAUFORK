@@ -2,11 +2,11 @@ package de.cas_ual_ty.ydm;
 
 import com.google.common.io.Files;
 import com.google.gson.*;
-//import de.cas_ual_ty.ydm.card.CustomCards;
 import de.cas_ual_ty.ydm.card.properties.Properties;
 import de.cas_ual_ty.ydm.rarity.RarityEntry;
 import de.cas_ual_ty.ydm.set.CardSet;
 import de.cas_ual_ty.ydm.set.Distribution;
+import de.cas_ual_ty.ydm.sleeve.SleeveProperties;
 import de.cas_ual_ty.ydm.util.DNCList;
 import de.cas_ual_ty.ydm.util.JsonKeys;
 import de.cas_ual_ty.ydm.util.YdmIOUtil;
@@ -34,6 +34,7 @@ public class YdmDatabase
     public static final DNCList<String, RarityEntry> RARITIES_LIST = new DNCList<>((r) -> r.rarity, (s1, s2) -> s1.compareTo(s2));
     public static final DNCList<String, Distribution> DISTRIBUTIONS_LIST = new DNCList<>((d) -> d.name, (s1, s2) -> s1.compareTo(s2));
     public static final DNCList<String, CardSet> SETS_LIST = new DNCList<>((s) -> s.code, (s1, s2) -> s1.compareTo(s2));
+    public static final DNCList<String, SleeveProperties> SLEEVES_LIST = new DNCList<>((sl) -> sl.code, (sl1, sl2) -> sl1.compareTo(sl2));
     
     public static final JsonParser JSON_PARSER = new JsonParser();
     public static final SimpleDateFormat SET_DATE_PARSER = new SimpleDateFormat("dd-MM-yyyy");
@@ -226,6 +227,16 @@ public class YdmDatabase
         else
         {
             YDM.log(YDM.raritiesFolder.getAbsolutePath() + " (rarities folder) does not exist! Skipping...");
+        }
+        
+        //TODO: Sleeves
+        if(YDM.sleevesFolder.exists())
+        {
+            YdmDatabase.readSleeves(YDM.sleevesFolder);
+        }
+        else
+        {
+            YDM.log(YDM.sleevesFolder.getAbsolutePath() + " (sleeves folder) does not exist! Skipping...");
         }
         
         YdmDatabase.postDBInit();
@@ -537,6 +548,57 @@ public class YdmDatabase
         YDM.log("Done reading set files!");
     }
     
+    //TODO: Sleeves
+    private static void readSleeves(File sleevesFolder)
+    {
+        YDM.log("Reading set files from: " + sleevesFolder.getAbsolutePath());
+        
+        File[] sleevesFiles = sleevesFolder.listFiles(YdmIOUtil.JSON_FILTER);
+        YdmDatabase.SLEEVES_LIST.ensureExtraCapacity(sleevesFiles.length);
+        
+        JsonObject j;
+        SleeveProperties sl;
+        
+        for(File sleeveFile : sleevesFiles)
+        {
+            try
+            {
+                j = YdmIOUtil.parseJsonFile(sleeveFile).getAsJsonObject();
+                sl = new SleeveProperties(j);
+                YdmDatabase.SLEEVES_LIST.add(sl);
+            }
+            catch(NullPointerException | IllegalArgumentException | IllegalStateException e)
+            {
+                YDM.log("Failed reading sleeve: " + sleeveFile.getAbsolutePath());
+                e.printStackTrace();
+            }
+            catch(JsonSyntaxException e)
+            {
+                YDM.log("Failed reading sleeve: " + sleeveFile.getAbsolutePath());
+                e.printStackTrace();
+            }
+            catch(JsonIOException | FileNotFoundException e)
+            {
+                YDM.log("Failed reading sleeve: " + sleeveFile.getAbsolutePath());
+                e.printStackTrace();
+            }
+            catch(IOException e)
+            {
+                YDM.log("Failed reading sleeve: " + sleeveFile.getAbsolutePath());
+                e.printStackTrace();
+            }
+            catch(Exception e)
+            {
+                YDM.log("Failed reading sleeve: " + sleeveFile.getAbsolutePath());
+                throw e;
+            }
+        }
+        
+        YdmDatabase.SLEEVES_LIST.sort();
+        
+        YDM.log("Done reading sleeve files!");
+    }
+    
     private static void postDBInit()
     {
         YDM.log("Finalizing database!");
@@ -552,6 +614,12 @@ public class YdmDatabase
         }
         
         for(CardSet x : YdmDatabase.SETS_LIST)
+        {
+            x.postDBInit();
+        }
+        
+        //TODO: Sleeves
+        for(SleeveProperties x : YdmDatabase.SLEEVES_LIST)
         {
             x.postDBInit();
         }
