@@ -1,6 +1,6 @@
 package de.cas_ual_ty.ydm.datagen;
 
-import de.cas_ual_ty.ydm.sleeve.DefaultSleevesType;
+import de.cas_ual_ty.ydm.sleeve.CardBackType;
 import de.cas_ual_ty.ydm.util.YdmUtil;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.item.Item;
@@ -18,7 +18,7 @@ public class YDMItemModels extends ItemModelProvider
     @Override
     protected void registerModels()
     {
-        for(DefaultSleevesType sleeves : DefaultSleevesType.VALUES)
+        for(CardBackType sleeves : CardBackType.VALUES)
         {
             if(!sleeves.isCardBack())
             {

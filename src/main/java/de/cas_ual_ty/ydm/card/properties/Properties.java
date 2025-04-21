@@ -832,7 +832,6 @@ public class Properties
     
     public void addTooltipInformation(List<ITextComponent> list)
     {
-    	
     	addTooltipTypeBox(list);
     	addTooltipHeader(list);
     	addTooltipArchetype(list);
@@ -1029,6 +1028,31 @@ public class Properties
     		}
     		list.add(s);
     	}
+    }
+    
+    // -- In-Duel Tooltip --
+    //TODO: Somehow get this information to appear inside Duels.
+    
+    public void addSimpleDuelInformation(List<ITextComponent> list)
+    {
+    	addSimpleDuelLine1(list);
+    	addSimpleDuelLine2(list);
+    	addSimpleDuelLine3(list);
+    }
+    
+    public void addSimpleDuelLine1(List<ITextComponent> list)
+    {
+    	list.add(new StringTextComponent(getName()));
+    }
+    
+    public void addSimpleDuelLine2(List<ITextComponent> list)
+    {
+    	
+    }
+    
+    public void addSimpleDuelLine3(List<ITextComponent> list)
+    {
+    	
     }
     
     // --- Getters ---

@@ -56,6 +56,8 @@ public class ActionIcons
     public static final ActionIcon SPECIAL_SUMMON_TOKEN_ATK = null;
     public static final ActionIcon SPECIAL_SUMMON_TOKEN_DEF = null;
     
+    public static final ActionIcon ACTIVATE_EFFECT = null;
+    
     @SubscribeEvent
     public static void registerActionIcons(RegistryEvent.Register<ActionIcon> event)
     {
@@ -103,6 +105,8 @@ public class ActionIcons
         registry.register(ActionIcons.create("banish_all_fd"));
         registry.register(ActionIcons.create("special_summon_token_atk"));
         registry.register(ActionIcons.create("special_summon_token_def"));
+        
+        registry.register(ActionIcons.create("activate_effect"));
     }
     
     public static ActionIcon create(String name)

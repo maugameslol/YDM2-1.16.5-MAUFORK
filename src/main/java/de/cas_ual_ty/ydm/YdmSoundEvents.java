@@ -33,6 +33,33 @@ public class YdmSoundEvents {
 	public static final RegistryObject<SoundEvent> TOKEN_SUMMON = registerSoundEvent("token_summon");
 	public static final RegistryObject<SoundEvent> TOKEN_REMOVE = registerSoundEvent("token_remove");
 	
+	// summons
+	public static final RegistryObject<SoundEvent> SUMMON_NORMAL = registerSoundEvent("summon_normal");
+	public static final RegistryObject<SoundEvent> SUMMON_NORMAL_MIDDLE = registerSoundEvent("summon_normal_middle");
+	public static final RegistryObject<SoundEvent> SUMMON_NORMAL_HIGH = registerSoundEvent("summon_normal_high");
+	public static final RegistryObject<SoundEvent> SUMMON_TRIBUTE = registerSoundEvent("summon_tribute");
+	public static final RegistryObject<SoundEvent> SUMMON_TRIBUTE_MIDDLE = registerSoundEvent("summon_tribute_middle");
+	public static final RegistryObject<SoundEvent> SUMMON_TRIBUTE_HIGH = registerSoundEvent("summon_tribute_high");
+	public static final RegistryObject<SoundEvent> SUMMON_FUSION = registerSoundEvent("summon_fusion");
+	public static final RegistryObject<SoundEvent> SUMMON_FUSION_MIDDLE = registerSoundEvent("summon_fusion_middle");
+	public static final RegistryObject<SoundEvent> SUMMON_FUSION_HIGH = registerSoundEvent("summon_fusion_high");
+	public static final RegistryObject<SoundEvent> SUMMON_RITUAL = registerSoundEvent("summon_ritual");
+	public static final RegistryObject<SoundEvent> SUMMON_RITUAL_MIDDLE = registerSoundEvent("summon_ritual_middle");
+	public static final RegistryObject<SoundEvent> SUMMON_RITUAL_HIGH = registerSoundEvent("summon_ritual_high");
+	public static final RegistryObject<SoundEvent> SUMMON_SYNCHRO = registerSoundEvent("summon_synchro");
+	public static final RegistryObject<SoundEvent> SUMMON_SYNCHRO_MIDDLE = registerSoundEvent("summon_synchro_middle");
+	public static final RegistryObject<SoundEvent> SUMMON_SYNCHRO_HIGH = registerSoundEvent("summon_synchro_high");
+	public static final RegistryObject<SoundEvent> SUMMON_XYZ = registerSoundEvent("summon_xyz");
+	public static final RegistryObject<SoundEvent> SUMMON_XYZ_MIDDLE = registerSoundEvent("summon_xyz_middle");
+	public static final RegistryObject<SoundEvent> SUMMON_XYZ_HIGH = registerSoundEvent("summon_xyz_high");
+	public static final RegistryObject<SoundEvent> SUMMON_PENDULUM = registerSoundEvent("summon_pendulum");
+	public static final RegistryObject<SoundEvent> SUMMON_PENDULUM_MIDDLE = registerSoundEvent("summon_pendulum_middle");
+	public static final RegistryObject<SoundEvent> SUMMON_PENDULUM_HIGH = registerSoundEvent("summon_pendulum_high");
+	public static final RegistryObject<SoundEvent> SUMMON_LINK = registerSoundEvent("summon_link");
+	public static final RegistryObject<SoundEvent> SUMMON_LINK_MIDDLE = registerSoundEvent("summon_link_middle");
+	public static final RegistryObject<SoundEvent> SUMMON_LINK_HIGH = registerSoundEvent("summon_link_high");
+	// TODO: Custom Summoning Types, Maximum Summons, etc.
+	
 	// counters
 	public static final RegistryObject<SoundEvent> COUNTER_PLACE = registerSoundEvent("counter_place");
 	

@@ -187,6 +187,48 @@
         ],
         "subtitle": "ydm.sound.subtitle.phase_change_player2"
     },
+	"summon_normal": {
+    "category": "block",
+    "sounds": [
+        "ydm:summon_normal"
+    ],
+    "subtitle": "ydm.sound.subtitle.summon_normal"
+    },
+	"summon_normal_middle": {
+    "category": "block",
+    "sounds": [
+        "ydm:summon_normal_middle"
+    ],
+    "subtitle": "ydm.sound.subtitle.summon_normal_middle"
+    },
+	"summon_normal_high": {
+    "category": "block",
+    "sounds": [
+        "ydm:summon_normal_high"
+    ],
+    "subtitle": "ydm.sound.subtitle.summon_normal_high"
+    },
+	"summon_tribute": {
+    "category": "block",
+    "sounds": [
+        "ydm:summon_normal"
+    ],
+    "subtitle": "ydm.sound.subtitle.summon_tribute"
+    },
+	"summon_tribute_middle": {
+    "category": "block",
+    "sounds": [
+        "ydm:summon_tribute_middle"
+    ],
+    "subtitle": "ydm.sound.subtitle.summon_tribute_middle"
+    },
+	"summon_tribute_high": {
+    "category": "block",
+    "sounds": [
+        "ydm:summon_tribute_high"
+    ],
+    "subtitle": "ydm.sound.subtitle.summon_tribute_high"
+    },
     "token_summon": {
     "category": "block",
     "sounds": [

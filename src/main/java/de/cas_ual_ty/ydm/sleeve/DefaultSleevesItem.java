@@ -4,9 +4,9 @@ import net.minecraft.item.Item;
 
 public class DefaultSleevesItem extends Item
 {
-    public final DefaultSleevesType sleeves;
+    public final CardBackType sleeves;
     
-    public DefaultSleevesItem(Properties properties, DefaultSleevesType sleeves)
+    public DefaultSleevesItem(Properties properties, CardBackType sleeves)
     {
         super(properties);
         this.sleeves = sleeves;

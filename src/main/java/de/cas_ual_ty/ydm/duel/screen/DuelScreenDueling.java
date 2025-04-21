@@ -4,6 +4,8 @@ import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import de.cas_ual_ty.ydm.YDM;
 import de.cas_ual_ty.ydm.YdmSoundEvents;
+import de.cas_ual_ty.ydm.card.properties.LevelMonsterProperties;
+import de.cas_ual_ty.ydm.card.properties.MonsterProperties;
 import de.cas_ual_ty.ydm.clientutil.CardRenderUtil;
 import de.cas_ual_ty.ydm.clientutil.ScreenUtil;
 import de.cas_ual_ty.ydm.clientutil.widget.*;
@@ -565,7 +567,7 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
         }
     }
     
-    //TODO: Probably should find a way better way of doing some of these animations and sounds.
+    //TODO: Probably should find a way better way of doing some of these animations and sounds. There is a lot of what I assume is really bad code from me lol
     @Nullable
     public Animation getAnimationForAction(Action action0)
     {
@@ -587,8 +589,9 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
                 destinationPosition = destinationPosition.flip();
             }
             
-            ZoneWidget w = getZoneWidget(action.destinationZone);
-            int size = Math.max(w.getWidth(), w.getHeight());
+            ZoneWidget dZ = getZoneWidget(action.destinationZone);
+            ZoneWidget sZ = getZoneWidget(action.sourceZone);
+            int size = Math.max(dZ.getWidth(), dZ.getHeight());
             Animation moveAnimation = new MoveAnimation(
                     getView(),
                     action.card,
@@ -603,32 +606,33 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
                         action.finish();
                         repopulateInteractions();
                     });
-            Animation atkPosAnimation = new AttackPositionAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size / 2)
-            .setOnStart(() -> 
+            Animation atkPosAnimation = new AttackPositionAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), size, size + size / 2).setOnStart(() -> 
             { 
             	Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.CARD_ATK_POSITION.get(), 1.0F, 1.0F)); 
             });
-            Animation defPosAnimation = new DefensePositionAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size / 2)
-            .setOnStart(() ->
+            Animation defPosAnimation = new DefensePositionAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), size, size + size / 2).setOnStart(() ->
             {
             	Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.CARD_DEF_POSITION.get(), 1.0F, 1.0F));
             });
             Animation setPosAnimation = new DummyAnimation().setOnStart(() -> 
             { 
             	Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.CARD_SET_POSITION.get(), 1.0F, 1.0F)); 
-            });;
+            });
             Animation setCardAnimation = new DummyAnimation().setOnStart(() -> 
             { 
                 Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.CARD_SET_BACKROW.get(), 1.0F, 1.0F)); 
-            });;
+            });
             Animation enterGYAnimation = new DummyAnimation().setOnStart(() -> 
             { 
             	Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.GY_ENTER.get(), 1.0F, 1.0F)); 
-            });;		
-            Animation exitGYAnimation = new DummyAnimation().setOnStart(() -> 
+            });	
+            
+            Animation exitGYAnimation = new GraveyardOutAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), size, size + size / 2)
+            .setOnStart(() -> 
             { 
                 Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.GY_EXIT.get(), 1.0F, 1.0F)); 
             });;
+            
             Animation enterBanishmentAnimation = new DummyAnimation().setOnStart(() -> 
             { 
                 Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.BANISHMENT_ENTER.get(), 1.0F, 1.0F)); 
@@ -641,12 +645,26 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
             { 
                 Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.CARD_DRAW.get(), 1.0F, 1.0F)); 
             });;
+            Animation lowNormalSummonSFX = new DummyAnimation().setOnStart(() -> 
+            { 
+                Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.SUMMON_NORMAL.get(), 1.0F, 1.0F)); 
+            });;
+            Animation midNormalSummonSFX = new DummyAnimation().setOnStart(() -> 
+            { 
+                Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.SUMMON_NORMAL_MIDDLE.get(), 1.0F, 1.0F)); 
+            });;
+            Animation highNormalSummonSFX = new DummyAnimation().setOnStart(() -> 
+            { 
+                Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.SUMMON_NORMAL_HIGH.get(), 1.0F, 1.0F)); 
+            });;
+            
             Queue<Animation> queue = new LinkedList<>();
             
             if(action.actionType == ActionTypes.SPECIAL_SUMMON)
             {
-                Animation ringAnimation = new SpecialSummonAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size / 2);
-
+                Animation defaultSpecialSummonAnimation = new SpecialSummonAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), size, size + size / 2);
+                //Animation synchroSummonAnimation = new SynchroSummonAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), size, size + size / 2);
+                
                 if(action.sourceZone.type == ZoneTypes.GRAVEYARD) 
                 {
                 	queue.add(exitGYAnimation);
@@ -656,7 +674,47 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
                 	queue.add(exitBanishmentAnimation);
                 }
                 queue.add(moveAnimation);
-                queue.add(ringAnimation);
+                //Special Summon outside of Extra Deck
+                if(action.card.getCardHolder().getCard().getIsMonster() && action.destinationCardPosition.isFaceUp && !(action.sourceZone.type == ZoneTypes.EXTRA_DECK)) 
+                {
+                	if(action.card.getCardHolder().getCard() instanceof LevelMonsterProperties) 
+                    {
+                		boolean isMidLevel;
+                    	isMidLevel = ((LevelMonsterProperties) action.card.getCardHolder().getCard()).getLevel() >= 5;
+                    	boolean isHighLevel;
+                    	isHighLevel = ((LevelMonsterProperties) action.card.getCardHolder().getCard()).getLevel() >= 7;
+                    	if(isMidLevel && !isHighLevel) 
+                        {
+                    		queue.add(midNormalSummonSFX);
+                        }
+                    	if(isHighLevel) 
+                        {
+                			queue.add(highNormalSummonSFX);
+                        }
+                    	else 
+                    	{
+                    		queue.add(lowNormalSummonSFX);
+                    	}
+                    }
+                }
+                //Special Summon from Extra Deck
+                /*
+                if(action.card.getCardHolder().getCard().getIsMonster()) 
+                {
+                	if(action.card.getCardHolder().getCard() instanceof MonsterProperties) 
+                	{
+                		if(((MonsterProperties) action.card.getCardHolder().getCard()).getIsSynchro()) 
+                		{
+                			queue.add(synchroSummonAnimation);
+                		}
+                	}
+                }
+                */
+                else 
+                {
+                	queue.add(lowNormalSummonSFX);
+                	queue.add(defaultSpecialSummonAnimation);
+                }
                 if(action.destinationCardPosition == CardPosition.ATK) 
                 {
                 	queue.add(atkPosAnimation);
@@ -675,7 +733,40 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
             //TODO: This is on Normal Summon ATK/DEF and Set. Should probably separate Normal Summon into its own action type.
             if(action.sourceZone.type == ZoneTypes.HAND && action.actionType == ActionTypes.MOVE_ON_TOP && action.destinationZone.type == ZoneTypes.MONSTER && action.actionType != ActionTypes.SPECIAL_SUMMON_OVERLAY) 
             {
+            	Animation midTributeSummonSFX = new DummyAnimation().setOnStart(() -> 
+                { 
+                    Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.SUMMON_TRIBUTE_MIDDLE.get(), 1.0F, 1.0F)); 
+                });;
+                Animation highTributeSummonSFX = new DummyAnimation().setOnStart(() -> 
+                { 
+                    Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.SUMMON_TRIBUTE_HIGH.get(), 1.0F, 1.0F)); 
+                });;
+                
             	queue.add(moveAnimation);
+            	
+            	if(action.card.getCardHolder().getCard() instanceof LevelMonsterProperties && action.destinationCardPosition.isFaceUp) 
+                {
+                	if(((LevelMonsterProperties) action.card.getCardHolder().getCard()).getLevel() >= 5) 
+                    {
+                		if(((LevelMonsterProperties) action.card.getCardHolder().getCard()).getLevel() >= 7) 
+                        {
+                			queue.add(highTributeSummonSFX);
+                        }
+                		else 
+                		{
+                			queue.add(midTributeSummonSFX);
+                		}
+                    }
+                	else 
+                	{
+                		queue.add(lowNormalSummonSFX);
+                	}
+                }
+            	else 
+            	{
+            		queue.add(lowNormalSummonSFX);
+            	}
+            	
             	if(action.destinationCardPosition == CardPosition.ATK) 
                 {
                 	queue.add(atkPosAnimation);
@@ -880,7 +971,6 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
             	queue.add(cardImpactAnimation);
             }
             return new QueueAnimation(queue);
-            //return attackAnimation;
         }
         else if(action0 instanceof CreateTokenAction)
         {
@@ -1419,6 +1509,9 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
         ZoneWidget w = (ZoneWidget) w0;
         
         IFormattableTextComponent t = new StringTextComponent("").append(w.getMessage());
+        
+        
+        //TODO: Simple tooltips for card info
         
         if(w.zone.getCardsAmount() > 0)
         {

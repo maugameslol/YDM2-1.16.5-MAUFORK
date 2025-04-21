@@ -1,7 +1,7 @@
 package de.cas_ual_ty.ydm.deckbox;
 
 import de.cas_ual_ty.ydm.card.CardHolder;
-import de.cas_ual_ty.ydm.sleeve.DefaultSleevesType;
+import de.cas_ual_ty.ydm.sleeve.CardBackType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,9 +29,9 @@ public class DeckHolder
     protected List<CardHolder> extraDeck;
     protected List<CardHolder> sideDeck;
     
-    protected DefaultSleevesType sleeves;
+    protected CardBackType sleeves;
     
-    public DeckHolder(List<CardHolder> mainDeck, List<CardHolder> extraDeck, List<CardHolder> sideDeck, DefaultSleevesType sleeves)
+    public DeckHolder(List<CardHolder> mainDeck, List<CardHolder> extraDeck, List<CardHolder> sideDeck, CardBackType sleeves)
     {
         this.mainDeck = mainDeck;
         this.extraDeck = extraDeck;
@@ -41,12 +41,12 @@ public class DeckHolder
     
     public DeckHolder(List<CardHolder> mainDeck, List<CardHolder> extraDeck, List<CardHolder> sideDeck)
     {
-        this(mainDeck, extraDeck, sideDeck, DefaultSleevesType.CARD_BACK);
+        this(mainDeck, extraDeck, sideDeck, CardBackType.CARD_BACK);
     }
     
     public DeckHolder()
     {
-        this(new ArrayList<>(DeckHolder.MAIN_DECK_SIZE), new ArrayList<>(DeckHolder.EXTRA_DECK_SIZE), new ArrayList<>(DeckHolder.SIDE_DECK_SIZE), DefaultSleevesType.CARD_BACK);
+        this(new ArrayList<>(DeckHolder.MAIN_DECK_SIZE), new ArrayList<>(DeckHolder.EXTRA_DECK_SIZE), new ArrayList<>(DeckHolder.SIDE_DECK_SIZE), CardBackType.CARD_BACK);
     }
     
     public List<CardHolder> getMainDeck()
@@ -64,7 +64,7 @@ public class DeckHolder
         return sideDeck;
     }
     
-    public DefaultSleevesType getSleeves()
+    public CardBackType getSleeves()
     {
         return sleeves;
     }

@@ -84,7 +84,10 @@ public class SleeveItem extends Item
         
         for(SleeveProperties sleeve : YdmDatabase.SLEEVES_LIST)
         {
-                items.add(createItemForSleeve(sleeve));
+        	if(!sleeve.getIsHardcoded()) 
+        	{
+        		items.add(createItemForSleeve(sleeve));
+        	}
         }
 	}
     

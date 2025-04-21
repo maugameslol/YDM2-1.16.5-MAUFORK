@@ -7,7 +7,7 @@ import de.cas_ual_ty.ydm.card.properties.Properties;
 import de.cas_ual_ty.ydm.rarity.RarityEntry;
 import de.cas_ual_ty.ydm.rarity.RarityLayer;
 import de.cas_ual_ty.ydm.set.CardSet;
-import de.cas_ual_ty.ydm.sleeve.DefaultSleevesType;
+import de.cas_ual_ty.ydm.sleeve.CardBackType;
 import de.cas_ual_ty.ydm.sleeve.SleeveProperties;
 import de.cas_ual_ty.ydm.task.Task;
 import de.cas_ual_ty.ydm.task.TaskPriority;
@@ -75,7 +75,7 @@ public class ImageHandler
     // put raw image in the raw images folder
     // make sure all size folders (16, 32, 64... exist)
     @Deprecated // so I get a warning
-    public static void createCustomSleevesImages(DefaultSleevesType sleeve, String rawType) throws IOException
+    public static void createCustomSleevesImages(CardBackType sleeve, String rawType) throws IOException
     {
         YDM.log("creating sleeves card images!");
         

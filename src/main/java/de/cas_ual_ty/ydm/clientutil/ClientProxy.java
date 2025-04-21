@@ -17,7 +17,7 @@ import de.cas_ual_ty.ydm.duel.screen.DuelScreenBase;
 import de.cas_ual_ty.ydm.rarity.RarityLayer;
 import de.cas_ual_ty.ydm.set.CardSet;
 import de.cas_ual_ty.ydm.sleeve.DefaultSleevesItem;
-import de.cas_ual_ty.ydm.sleeve.DefaultSleevesType;
+import de.cas_ual_ty.ydm.sleeve.CardBackType;
 import de.cas_ual_ty.ydm.sleeve.SleeveProperties;
 import de.cas_ual_ty.ydm.util.ISidedProxy;
 import de.cas_ual_ty.ydm.util.YdmIOUtil;
@@ -507,7 +507,7 @@ public class ClientProxy implements ISidedProxy
             ModelLoader.addSpecialModel(new ModelResourceLocation(new ResourceLocation(YdmItems.CARD_BACK.getRegistryName().toString() + "_" + ClientProxy.activeCardItemImageSize), "inventory"));
             ModelLoader.addSpecialModel(new ModelResourceLocation(new ResourceLocation(YdmItems.BLANC_SLEEVE.getRegistryName().toString() + "_" + ClientProxy.activeCardItemImageSize), "inventory"));
             
-            for(DefaultSleevesType sleeves : DefaultSleevesType.VALUES)
+            for(CardBackType sleeves : CardBackType.VALUES)
             {
                 if(!sleeves.isCardBack())
                 {
@@ -546,7 +546,7 @@ public class ClientProxy implements ISidedProxy
                             new ModelResourceLocation(
                                     new ResourceLocation(YdmItems.BLANC_SLEEVE.getRegistryName().toString() + "_" + ClientProxy.activeCardItemImageSize), "inventory")));
             
-            for(DefaultSleevesType sleeves : DefaultSleevesType.VALUES)
+            for(CardBackType sleeves : CardBackType.VALUES)
             {
                 if(!sleeves.isCardBack())
                 {
@@ -744,12 +744,12 @@ public class ClientProxy implements ISidedProxy
         ms.popPose();
     }
     
-    private void renderDefaultSleevesInfo(MatrixStack ms, DefaultSleevesType sleeves)
+    private void renderDefaultSleevesInfo(MatrixStack ms, CardBackType sleeves)
     {
         renderDefaultSleevesInfo(ms, sleeves, 150);
     }
     
-    private void renderDefaultSleevesInfo(MatrixStack ms, DefaultSleevesType sleeves, int width)
+    private void renderDefaultSleevesInfo(MatrixStack ms, CardBackType sleeves, int width)
     {
         if(sleeves == null)
         {

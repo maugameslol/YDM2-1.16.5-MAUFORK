@@ -69,6 +69,10 @@ public class PlayFieldTypes
             .newInteraction().icon(ActionIcons.REMOVE_TOKEN_ATK).interactorIncluded(PlayFieldTypes.getAllFieldZones()).interactorCardToken().interacteeIncluded(PlayFieldTypes.getAllFieldZones()).interaction((player, interactor, card, interactee) -> new RemoveTokenAction(ActionTypes.REMOVE_TOKEN, interactor, card, interactee, player)).playerAndInteractorSameOwner().interactorEqualsInteractee().cardInPosition(CardPosition.ATK).addInteraction()
             .newInteraction().icon(ActionIcons.REMOVE_TOKEN_DEF).interactorIncluded(PlayFieldTypes.getAllFieldZones()).interactorCardToken().interacteeIncluded(PlayFieldTypes.getAllFieldZones()).interaction((player, interactor, card, interactee) -> new RemoveTokenAction(ActionTypes.REMOVE_TOKEN, interactor, card, interactee, player)).playerAndInteractorSameOwner().interactorEqualsInteractee().cardInPosition(CardPosition.DEF).addInteraction();
     //TODO advanced interaction: moved all to GY/banished
+    //TODO: Make Activate Effect action/interaction for both Monsters and Spell/Traps
+    //TODO: Face-down ATK position, probably will be put as an Advanced Interaction
+    //TODO: Skill Zone, Skill Zone interactions should be similar to a Spell/Trap
+    //TODO: Side Deck access, this would be for homebrew reasons
     
     public static Action doForAllCardsInZone(ActionType listActionType, Zone sourceZone, Function<DuelCard, Action> consumer)
     {

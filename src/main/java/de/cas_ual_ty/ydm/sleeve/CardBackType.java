@@ -5,7 +5,7 @@ import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistries;
 
-public enum DefaultSleevesType
+public enum CardBackType
 {
     // Default Card Back
 	CARD_BACK("card_back"), 
@@ -19,18 +19,18 @@ public enum DefaultSleevesType
     BRASS("brass"), BRONZE("bronze"), STEEL("steel"),
     RUBY("ruby"), SAPPHIRE("sapphire");
 	
-    public static final DefaultSleevesType[] VALUES = DefaultSleevesType.values();
+    public static final CardBackType[] VALUES = CardBackType.values();
     
-    public static DefaultSleevesType getFromIndex(int index)
+    public static CardBackType getFromIndex(int index)
     {
-        return DefaultSleevesType.VALUES[index];
+        return CardBackType.VALUES[index];
     }
     
     //TODO: Make it so that both these sleeves and the new ones can be used in Duels
     static
     {
         int index = 0;
-        for(DefaultSleevesType duelPhase : DefaultSleevesType.VALUES)
+        for(CardBackType duelPhase : CardBackType.VALUES)
         {
             duelPhase.index = index++;
         }
@@ -39,7 +39,7 @@ public enum DefaultSleevesType
     public final String name;
     private int index;
     
-    DefaultSleevesType(String name)
+    CardBackType(String name)
     {
         this.name = name;
     }

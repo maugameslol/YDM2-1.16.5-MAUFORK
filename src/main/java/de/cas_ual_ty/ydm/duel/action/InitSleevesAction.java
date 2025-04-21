@@ -1,15 +1,15 @@
 package de.cas_ual_ty.ydm.duel.action;
 
 import de.cas_ual_ty.ydm.duel.playfield.PlayField;
-import de.cas_ual_ty.ydm.sleeve.DefaultSleevesType;
+import de.cas_ual_ty.ydm.sleeve.CardBackType;
 import net.minecraft.network.PacketBuffer;
 
 public class InitSleevesAction extends Action
 {
-    public DefaultSleevesType player1Sleeves;
-    public DefaultSleevesType player2Sleeves;
+    public CardBackType player1Sleeves;
+    public CardBackType player2Sleeves;
     
-    public InitSleevesAction(ActionType actionType, DefaultSleevesType player1Sleeves, DefaultSleevesType player2Sleeves)
+    public InitSleevesAction(ActionType actionType, CardBackType player1Sleeves, CardBackType player2Sleeves)
     {
         super(actionType);
         this.player1Sleeves = player1Sleeves;
@@ -18,7 +18,7 @@ public class InitSleevesAction extends Action
     
     public InitSleevesAction(ActionType actionType, PacketBuffer buf)
     {
-        this(actionType, DefaultSleevesType.getFromIndex(buf.readInt()), DefaultSleevesType.getFromIndex(buf.readInt()));
+        this(actionType, CardBackType.getFromIndex(buf.readInt()), CardBackType.getFromIndex(buf.readInt()));
     }
     
     @Override

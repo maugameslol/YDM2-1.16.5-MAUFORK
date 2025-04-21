@@ -60,7 +60,7 @@ public class DeckBoxContainer extends Container
             @Override
             public boolean mayPlace(ItemStack stack)
             {
-                return stack.getItem() instanceof DefaultSleevesItem;
+                return (stack.getItem() instanceof DefaultSleevesItem) || (stack.getItem() instanceof SleeveItem);
             }
             
             @Override

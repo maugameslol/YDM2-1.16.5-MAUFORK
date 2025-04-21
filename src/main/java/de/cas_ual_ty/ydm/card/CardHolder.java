@@ -65,6 +65,12 @@ public class CardHolder implements Comparable<CardHolder>
     	getCard().addTooltipInformation(tooltip);
     }
     
+    //TODO: Show simple info in Duels. I'm not sure if this should be here or in DuelCard
+    public void addDuelInfo(List<ITextComponent> tooltip)
+    {
+    	getCard().addSimpleDuelInformation(tooltip);
+    }
+    
     public String getImageName()
     {
         return getCard().getImageName(getImageIndex());

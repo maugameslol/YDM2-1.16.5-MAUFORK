@@ -590,13 +590,6 @@ public class MonsterProperties extends Properties
     
     // --- Getters ---
     
-    /*
-    public String getAttribute()
-    {
-        return attribute;
-    }
-    */
-    
     public int getAtk()
     {
         return atk;

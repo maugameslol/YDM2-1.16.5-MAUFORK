@@ -8,7 +8,7 @@ import de.cas_ual_ty.ydm.set.CardSetItem;
 import de.cas_ual_ty.ydm.set.OpenedCardSetItem;
 import de.cas_ual_ty.ydm.simplebinder.SimpleBinderItem;
 import de.cas_ual_ty.ydm.sleeve.DefaultSleevesItem;
-import de.cas_ual_ty.ydm.sleeve.DefaultSleevesType;
+import de.cas_ual_ty.ydm.sleeve.CardBackType;
 import de.cas_ual_ty.ydm.sleeve.SleeveItem;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -161,7 +161,7 @@ public class YdmItems
         registry.register(new DeckBoxItem(new Properties().tab(YDM.ydmItemGroup).stacksTo(1)).setRegistryName(YDM.MOD_ID, "patreon_deck_box"));
         
         
-        for(DefaultSleevesType sleeve : DefaultSleevesType.VALUES)
+        for(CardBackType sleeve : CardBackType.VALUES)
         {
             if(!sleeve.isCardBack())
             {
