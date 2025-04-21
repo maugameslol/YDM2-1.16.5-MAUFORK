@@ -60,7 +60,7 @@ public class YdmSoundEvents {
 	public static final RegistryObject<SoundEvent> SUMMON_LINK_HIGH = registerSoundEvent("summon_link_high");
 	// TODO: Custom Summoning Types, Maximum Summons, etc.
 	
-	// counters
+	// Counters
 	public static final RegistryObject<SoundEvent> COUNTER_PLACE = registerSoundEvent("counter_place");
 	
 	// LP
@@ -79,13 +79,43 @@ public class YdmSoundEvents {
 	public static final RegistryObject<SoundEvent> DUEL_WIN = registerSoundEvent("duel_win");
 	public static final RegistryObject<SoundEvent> DUEL_LOSE = registerSoundEvent("duel_lose");
 	public static final RegistryObject<SoundEvent> DUEL_DRAW = registerSoundEvent("duel_draw");
-	public static final RegistryObject<SoundEvent> DIRECT_ATTACK_DECLARE = registerSoundEvent("direct_attack_declare");
-	public static final RegistryObject<SoundEvent> DIRECT_ATTACK_PLAYER1 = registerSoundEvent("direct_attack_player1");
-	public static final RegistryObject<SoundEvent> DIRECT_ATTACK_PLAYER2 = registerSoundEvent("direct_attack_player2");
 	public static final RegistryObject<SoundEvent> PHASE_CHANGE_PLAYER1 = registerSoundEvent("phase_change_player1");
 	public static final RegistryObject<SoundEvent> PHASE_CHANGE_PLAYER2 = registerSoundEvent("phase_change_player2");
 	public static final RegistryObject<SoundEvent> TURN_SWITCH_PLAYER1 = registerSoundEvent("turn_switch_player1");
 	public static final RegistryObject<SoundEvent> TURN_SWITCH_PLAYER2 = registerSoundEvent("turn_switch_player2");
+	
+	// Attack
+	public static final RegistryObject<SoundEvent> DIRECT_ATTACK_DECLARE = registerSoundEvent("direct_attack_declare");
+	public static final RegistryObject<SoundEvent> DIRECT_ATTACK_PLAYER1 = registerSoundEvent("direct_attack_player1");
+	public static final RegistryObject<SoundEvent> DIRECT_ATTACK_PLAYER2 = registerSoundEvent("direct_attack_player2");
+	public static final RegistryObject<SoundEvent> ATTACK_DARK = registerSoundEvent("attack_dark");
+	public static final RegistryObject<SoundEvent> ATTACK_DARK_HIGH = registerSoundEvent("attack_dark_high");
+	public static final RegistryObject<SoundEvent> IMPACT_DARK = registerSoundEvent("impact_dark");
+	public static final RegistryObject<SoundEvent> IMPACT_DARK_HIGH = registerSoundEvent("impact_dark_high");
+	public static final RegistryObject<SoundEvent> ATTACK_DIVINE = registerSoundEvent("attack_divine");
+	public static final RegistryObject<SoundEvent> ATTACK_DIVINE_HIGH = registerSoundEvent("attack_divine_high");
+	public static final RegistryObject<SoundEvent> IMPACT_DIVINE = registerSoundEvent("impact_divine");
+	public static final RegistryObject<SoundEvent> IMPACT_DIVINE_HIGH = registerSoundEvent("impact_divine_high");
+	public static final RegistryObject<SoundEvent> ATTACK_EARTH = registerSoundEvent("attack_earth");
+	public static final RegistryObject<SoundEvent> ATTACK_EARTH_HIGH = registerSoundEvent("attack_earth_high");
+	public static final RegistryObject<SoundEvent> IMPACT_EARTH = registerSoundEvent("impact_earth");
+	public static final RegistryObject<SoundEvent> IMPACT_EARTH_HIGH = registerSoundEvent("impact_earth_high");
+	public static final RegistryObject<SoundEvent> ATTACK_FIRE = registerSoundEvent("attack_fire");
+	public static final RegistryObject<SoundEvent> ATTACK_FIRE_HIGH = registerSoundEvent("attack_fire_high");
+	public static final RegistryObject<SoundEvent> IMPACT_FIRE = registerSoundEvent("impact_fire");
+	public static final RegistryObject<SoundEvent> IMPACT_FIRE_HIGH = registerSoundEvent("impact_fire_high");
+	public static final RegistryObject<SoundEvent> ATTACK_LIGHT = registerSoundEvent("attack_light");
+	public static final RegistryObject<SoundEvent> ATTACK_LIGHT_HIGH = registerSoundEvent("attack_light_high");
+	public static final RegistryObject<SoundEvent> IMPACT_LIGHT = registerSoundEvent("impact_light");
+	public static final RegistryObject<SoundEvent> IMPACT_LIGHT_HIGH = registerSoundEvent("impact_light_high");
+	public static final RegistryObject<SoundEvent> ATTACK_WATER = registerSoundEvent("attack_water");
+	public static final RegistryObject<SoundEvent> ATTACK_WATER_HIGH = registerSoundEvent("attack_water_high");
+	public static final RegistryObject<SoundEvent> IMPACT_WATER = registerSoundEvent("impact_water");
+	public static final RegistryObject<SoundEvent> IMPACT_WATER_HIGH = registerSoundEvent("impact_water_high");
+	public static final RegistryObject<SoundEvent> ATTACK_WIND = registerSoundEvent("attack_wind");
+	public static final RegistryObject<SoundEvent> ATTACK_WIND_HIGH = registerSoundEvent("attack_wind_high");
+	public static final RegistryObject<SoundEvent> IMPACT_WIND = registerSoundEvent("impact_wind");
+	public static final RegistryObject<SoundEvent> IMPACT_WIND_HIGH = registerSoundEvent("impact_wind_high");
 	
 	private static RegistryObject<SoundEvent> registerSoundEvent(String name) {
 		return SOUND_EVENTS.register(name, () -> new SoundEvent(new ResourceLocation(YDM.MOD_ID, name)));

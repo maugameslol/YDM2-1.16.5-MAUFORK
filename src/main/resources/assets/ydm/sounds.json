@@ -1,5 +1,103 @@
 {
-    "banishment_enter": {
+	"attack_dark": {
+        "category": "block",
+        "sounds": [
+            "ydm:attack_dark"
+        ],
+        "subtitle": "ydm.sound.subtitle.attack_dark"
+    },
+	"attack_dark_high": {
+        "category": "block",
+        "sounds": [
+            "ydm:attack_dark_high"
+        ],
+        "subtitle": "ydm.sound.subtitle.attack_dark_high"
+    },
+	"attack_divine": {
+        "category": "block",
+        "sounds": [
+            "ydm:attack_divine"
+        ],
+        "subtitle": "ydm.sound.subtitle.attack_divine"
+    },
+	"attack_divine_high": {
+        "category": "block",
+        "sounds": [
+            "ydm:attack_divine_high"
+        ],
+        "subtitle": "ydm.sound.subtitle.attack_divine_high"
+    },
+	"attack_earth": {
+        "category": "block",
+        "sounds": [
+            "ydm:attack_earth"
+        ],
+        "subtitle": "ydm.sound.subtitle.attack_earth"
+    },
+	"attack_earth_high": {
+        "category": "block",
+        "sounds": [
+            "ydm:attack_earth_high"
+        ],
+        "subtitle": "ydm.sound.subtitle.attack_earth_high"
+    },
+	"attack_fire": {
+        "category": "block",
+        "sounds": [
+            "ydm:attack_fire"
+        ],
+        "subtitle": "ydm.sound.subtitle.attack_fire"
+    },
+	"attack_fire_high": {
+        "category": "block",
+        "sounds": [
+            "ydm:attack_fire_high"
+        ],
+        "subtitle": "ydm.sound.subtitle.attack_fire_high"
+    },
+	"attack_light": {
+        "category": "block",
+        "sounds": [
+            "ydm:attack_light"
+        ],
+        "subtitle": "ydm.sound.subtitle.attack_light"
+    },
+	"attack_light_high": {
+        "category": "block",
+        "sounds": [
+            "ydm:attack_light_high"
+        ],
+        "subtitle": "ydm.sound.subtitle.attack_light_high"
+    },
+	"attack_water": {
+        "category": "block",
+        "sounds": [
+            "ydm:attack_water"
+        ],
+        "subtitle": "ydm.sound.subtitle.attack_water"
+    },
+	"attack_water_high": {
+        "category": "block",
+        "sounds": [
+            "ydm:attack_water_high"
+        ],
+        "subtitle": "ydm.sound.subtitle.attack_water_high"
+    },
+	"attack_wind": {
+        "category": "block",
+        "sounds": [
+            "ydm:attack_wind"
+        ],
+        "subtitle": "ydm.sound.subtitle.attack_wind"
+    },
+	"attack_wind_high": {
+        "category": "block",
+        "sounds": [
+            "ydm:attack_wind_high"
+        ],
+        "subtitle": "ydm.sound.subtitle.attack_wind_high"
+    },
+	"banishment_enter": {
         "category": "block",
         "sounds": [
             "ydm:banishment_enter"
@@ -165,6 +263,104 @@
             "ydm:gy_exit"
         ],
         "subtitle": "ydm.sound.subtitle.gy_exit"
+    },
+	"impact_dark": {
+        "category": "block",
+        "sounds": [
+            "ydm:impact_dark"
+        ],
+        "subtitle": "ydm.sound.subtitle.impact_dark"
+    },
+	"impact_dark_high": {
+        "category": "block",
+        "sounds": [
+            "ydm:impact_dark_high"
+        ],
+        "subtitle": "ydm.sound.subtitle.impact_dark_high"
+    },
+	"impact_divine": {
+        "category": "block",
+        "sounds": [
+            "ydm:impact_divine"
+        ],
+        "subtitle": "ydm.sound.subtitle.impact_divine"
+    },
+	"impact_divine_high": {
+        "category": "block",
+        "sounds": [
+            "ydm:impact_divine_high"
+        ],
+        "subtitle": "ydm.sound.subtitle.impact_divine_high"
+    },
+	"impact_earth": {
+        "category": "block",
+        "sounds": [
+            "ydm:impact_earth"
+        ],
+        "subtitle": "ydm.sound.subtitle.impact_earth"
+    },
+	"impact_earth_high": {
+        "category": "block",
+        "sounds": [
+            "ydm:impact_earth_high"
+        ],
+        "subtitle": "ydm.sound.subtitle.impact_earth_high"
+    },
+	"impact_fire": {
+        "category": "block",
+        "sounds": [
+            "ydm:impact_fire"
+        ],
+        "subtitle": "ydm.sound.subtitle.impact_fire"
+    },
+	"impact_fire_high": {
+        "category": "block",
+        "sounds": [
+            "ydm:impact_fire_high"
+        ],
+        "subtitle": "ydm.sound.subtitle.impact_fire_high"
+    },
+	"impact_light": {
+        "category": "block",
+        "sounds": [
+            "ydm:impact_light"
+        ],
+        "subtitle": "ydm.sound.subtitle.impact_light"
+    },
+	"impact_light_high": {
+        "category": "block",
+        "sounds": [
+            "ydm:impact_light_high"
+        ],
+        "subtitle": "ydm.sound.subtitle.impact_light_high"
+    },
+	"impact_water": {
+        "category": "block",
+        "sounds": [
+            "ydm:impact_water"
+        ],
+        "subtitle": "ydm.sound.subtitle.impact_water"
+    },
+	"impact_water_high": {
+        "category": "block",
+        "sounds": [
+            "ydm:impact_water_high"
+        ],
+        "subtitle": "ydm.sound.subtitle.impact_water_high"
+    },
+	"impact_wind": {
+        "category": "block",
+        "sounds": [
+            "ydm:impact_wind"
+        ],
+        "subtitle": "ydm.sound.subtitle.impact_wind"
+    },
+	"impact_wind_high": {
+        "category": "block",
+        "sounds": [
+            "ydm:impact_wind_high"
+        ],
+        "subtitle": "ydm.sound.subtitle.impact_wind_high"
     },
     "lp_count": {
         "category": "block",
