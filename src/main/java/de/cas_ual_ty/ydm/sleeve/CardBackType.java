@@ -49,6 +49,11 @@ public enum CardBackType
         return this == CARD_BACK;
     }
     
+    public boolean isFireProof()
+    {
+        return this == NETHERITE;
+    }
+    
     public ResourceLocation getMainRL(int size)
     {
         return new ResourceLocation(YDM.MOD_ID, "textures/item/" + size + "/" + getResourceName() + ".png");

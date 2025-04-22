@@ -4,6 +4,8 @@ import de.cas_ual_ty.ydm.card.CardItem;
 import de.cas_ual_ty.ydm.cardbinder.CardBinderItem;
 import de.cas_ual_ty.ydm.deckbox.DeckBoxItem;
 import de.cas_ual_ty.ydm.duel.dueldisk.DuelDiskItem;
+import de.cas_ual_ty.ydm.item.CardCraftMaterialItem;
+import de.cas_ual_ty.ydm.item.CosmeticItem;
 import de.cas_ual_ty.ydm.set.CardSetItem;
 import de.cas_ual_ty.ydm.set.OpenedCardSetItem;
 import de.cas_ual_ty.ydm.simplebinder.SimpleBinderItem;
@@ -65,18 +67,24 @@ public class YdmItems
     public static final DeckBoxItem MAGENTA_DECK_BOX = null;
     public static final DeckBoxItem ORANGE_DECK_BOX = null;
     public static final DeckBoxItem WHITE_DECK_BOX = null;
+    
+    public static final DeckBoxItem COPPER_DECK_BOX = null;
     public static final DeckBoxItem IRON_DECK_BOX = null;
     public static final DeckBoxItem GOLD_DECK_BOX = null;
+    public static final DeckBoxItem NETHERITE_DECK_BOX = null;
+    
+    public static final DeckBoxItem AMETHYST_DECK_BOX = null;
     public static final DeckBoxItem DIAMOND_DECK_BOX = null;
     public static final DeckBoxItem EMERALD_DECK_BOX = null;
-    public static final DeckBoxItem PATREON_DECK_BOX = null;
+    
     public static final DeckBoxItem PLATINUM_DECK_BOX = null;
-    public static final DeckBoxItem RUBY_DECK_BOX = null;
+    
     public static final DeckBoxItem BRONZE_DECK_BOX = null;
-    public static final DeckBoxItem COPPER_DECK_BOX = null;
-    public static final DeckBoxItem AMETHYST_DECK_BOX = null;
+    
+    public static final DeckBoxItem RUBY_DECK_BOX = null;
     public static final DeckBoxItem SAPPHIRE_DECK_BOX = null;
-    public static final DeckBoxItem NETHERITE_DECK_BOX = null;
+    
+    public static final DeckBoxItem PATREON_DECK_BOX = null;
     
     public static final SleeveItem SLEEVE = null;
     
@@ -140,16 +148,20 @@ public class YdmItems
         registry.register(new DeckBoxItem(new Properties().tab(YDM.ydmItemGroup).stacksTo(1)).setRegistryName(YDM.MOD_ID, "copper_deck_box"));
         registry.register(new DeckBoxItem(new Properties().tab(YDM.ydmItemGroup).stacksTo(1)).setRegistryName(YDM.MOD_ID, "iron_deck_box"));
         registry.register(new DeckBoxItem(new Properties().tab(YDM.ydmItemGroup).stacksTo(1)).setRegistryName(YDM.MOD_ID, "gold_deck_box"));
-        registry.register(new DeckBoxItem(new Properties().tab(YDM.ydmItemGroup).stacksTo(1)).setRegistryName(YDM.MOD_ID, "netherite_deck_box"));
+        registry.register(new DeckBoxItem(new Properties().fireResistant().tab(YDM.ydmItemGroup).stacksTo(1)).setRegistryName(YDM.MOD_ID, "netherite_deck_box"));
         
         registry.register(new DeckBoxItem(new Properties().tab(YDM.ydmItemGroup).stacksTo(1)).setRegistryName(YDM.MOD_ID, "amethyst_deck_box"));
+        registry.register(new DeckBoxItem(new Properties().tab(YDM.ydmItemGroup).stacksTo(1)).setRegistryName(YDM.MOD_ID, "quartz_deck_box"));
+        registry.register(new DeckBoxItem(new Properties().tab(YDM.ydmItemGroup).stacksTo(1)).setRegistryName(YDM.MOD_ID, "redstone_deck_box"));
         registry.register(new DeckBoxItem(new Properties().tab(YDM.ydmItemGroup).stacksTo(1)).setRegistryName(YDM.MOD_ID, "diamond_deck_box"));
         registry.register(new DeckBoxItem(new Properties().tab(YDM.ydmItemGroup).stacksTo(1)).setRegistryName(YDM.MOD_ID, "emerald_deck_box"));
+        registry.register(new DeckBoxItem(new Properties().tab(YDM.ydmItemGroup).stacksTo(1)).setRegistryName(YDM.MOD_ID, "resin_deck_box"));
         
         registry.register(new DeckBoxItem(new Properties().tab(YDM.ydmItemGroup).stacksTo(1)).setRegistryName(YDM.MOD_ID, "tin_deck_box"));
         registry.register(new DeckBoxItem(new Properties().tab(YDM.ydmItemGroup).stacksTo(1)).setRegistryName(YDM.MOD_ID, "silver_deck_box"));
         registry.register(new DeckBoxItem(new Properties().tab(YDM.ydmItemGroup).stacksTo(1)).setRegistryName(YDM.MOD_ID, "lead_deck_box"));
         registry.register(new DeckBoxItem(new Properties().tab(YDM.ydmItemGroup).stacksTo(1)).setRegistryName(YDM.MOD_ID, "platinum_deck_box"));
+        registry.register(new DeckBoxItem(new Properties().tab(YDM.ydmItemGroup).stacksTo(1)).setRegistryName(YDM.MOD_ID, "uranium_deck_box"));
         
         registry.register(new DeckBoxItem(new Properties().tab(YDM.ydmItemGroup).stacksTo(1)).setRegistryName(YDM.MOD_ID, "bronze_deck_box"));
         registry.register(new DeckBoxItem(new Properties().tab(YDM.ydmItemGroup).stacksTo(1)).setRegistryName(YDM.MOD_ID, "electrum_deck_box"));
@@ -165,9 +177,113 @@ public class YdmItems
         {
             if(!sleeve.isCardBack())
             {
-                registry.register(new DefaultSleevesItem(new Properties().tab(YDM.sleevesItemGroup).stacksTo(1), sleeve).setRegistryName(YDM.MOD_ID, sleeve.getResourceName()));
+            	if(sleeve.isFireProof())
+                {
+                    registry.register(new DefaultSleevesItem(new Properties().fireResistant().tab(YDM.sleevesItemGroup).stacksTo(1), sleeve).setRegistryName(YDM.MOD_ID, sleeve.getResourceName()));
+                }
+            	else 
+            	{
+            		registry.register(new DefaultSleevesItem(new Properties().tab(YDM.sleevesItemGroup).stacksTo(1), sleeve).setRegistryName(YDM.MOD_ID, sleeve.getResourceName()));
+            	}
             }
         }
         registry.register(new SleeveItem(new Properties().tab(YDM.sleevesItemGroup).stacksTo(1)).setRegistryName(YDM.MOD_ID, "sleeve"));
+        
+        // TODO: Card Materials for Crafting Cards
+        // Card Borders
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "card_border_effect_monster"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "card_border_fusion_monster"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "card_border_link_monster"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "card_border_maximum_monster"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "card_border_normal_monster"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "card_border_pendulum_monster"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "card_border_ritual_monster"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "card_border_token"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "card_border_trap"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "card_border_skill"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "card_border_spell"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "card_border_synchro_monster"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "card_border_xyz_monster"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "card_border_evolution_monster"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "card_border_info"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "card_border_material"));
+        
+        // Attribute Orbs
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "attribute_orb_dark"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "attribute_orb_divine"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "attribute_orb_earth"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "attribute_orb_fire"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "attribute_orb_light"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "attribute_orb_skill"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "attribute_orb_spell"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "attribute_orb_trap"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "attribute_orb_water"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "attribute_orb_wind"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "attribute_orb_info"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "attribute_orb_material"));
+        
+        // Level Stars
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "level_star_0"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "level_star_1"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "level_star_2"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "level_star_3"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "level_star_4"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "level_star_5"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "level_star_6"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "level_star_7"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "level_star_8"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "level_star_9"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "level_star_10"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "level_star_11"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "level_star_12"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "level_star_13"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "level_star_custom"));
+        
+        // Rank Stars
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "rank_star_0"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "rank_star_1"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "rank_star_2"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "rank_star_3"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "rank_star_4"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "rank_star_5"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "rank_star_6"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "rank_star_7"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "rank_star_8"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "rank_star_9"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "rank_star_10"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "rank_star_11"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "rank_star_12"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "rank_star_13"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "rank_star_custom"));
+        
+        // Link Arrows
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "link_arrow_top_left"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "link_arrow_top"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "link_arrow_top_right"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "link_arrow_right"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "link_arrow_left"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "link_arrow_bottom_left"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "link_arrow_bottom"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "link_arrow_bottom_right"));
+        
+        // Trait Orbs
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "trait_orb_tuner"));
+        
+        // Ability Orbs
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "ability_orb_flip"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "ability_orb_toon"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "ability_orb_spirit"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "ability_orb_union"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "ability_orb_gemini"));
+        
+        // Spell/Trap Icons
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "spelltrap_icon_continuous"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "spelltrap_icon_counter"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "spelltrap_icon_equip"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "spelltrap_icon_field"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "spelltrap_icon_normal"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "spelltrap_icon_quickplay"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "spelltrap_icon_ritual"));
+        registry.register(new CardCraftMaterialItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "spelltrap_icon_link"));
     }
 }

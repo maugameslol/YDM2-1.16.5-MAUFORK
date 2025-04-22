@@ -59,7 +59,7 @@ public class Properties
     public boolean isCustom;
     public String text;
     public String flavorText;
-    public Type type;
+    public PrimaryCardType type;
     public String attribute;
     public String[] archetypes;
     public String[] images;
@@ -156,8 +156,6 @@ public class Properties
         {
         	isCustom = false;
         }
-        //text = j.get(JsonKeys.TEXT).getAsString();
-        
         if(j.has(JsonKeys.TEXT))
         {
         	text = j.get(JsonKeys.TEXT).getAsString();
@@ -176,7 +174,7 @@ public class Properties
         	flavorText = null;
         }
         
-        type = Type.fromString(j.get(JsonKeys.TYPE).getAsString());
+        type = PrimaryCardType.fromString(j.get(JsonKeys.TYPE).getAsString());
         if(j.has(JsonKeys.ATTRIBUTE))
         {
     		attribute = j.get(JsonKeys.ATTRIBUTE).getAsString();
@@ -395,32 +393,32 @@ public class Properties
     
     public boolean getIsSpell()
     {
-        return getType() == Type.SPELL;
+        return getType() == PrimaryCardType.SPELL;
     }
     
     public boolean getIsTrap()
     {
-        return getType() == Type.TRAP;
+        return getType() == PrimaryCardType.TRAP;
     }
     
     public boolean getIsMonster()
     {
-        return getType() == Type.MONSTER;
+        return getType() == PrimaryCardType.MONSTER;
     }
     
     public boolean getIsSkill()
     {
-        return getType() == Type.SKILL;
+        return getType() == PrimaryCardType.SKILL;
     }
     
     public boolean getIsInfo()
     {
-        return getType() == Type.INFO;
+        return getType() == PrimaryCardType.INFO;
     }
     
     public boolean getIsMaterial()
     {
-        return getType() == Type.MATERIAL;
+        return getType() == PrimaryCardType.MATERIAL;
     }
     
     public boolean getIsInExtraDeck()
@@ -1087,7 +1085,7 @@ public class Properties
         return flavorText;
     }
     
-    public Type getType()
+    public PrimaryCardType getType()
     {
         return type;
     }

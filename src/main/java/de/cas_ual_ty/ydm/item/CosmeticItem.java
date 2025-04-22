@@ -1,4 +1,4 @@
-package de.cas_ual_ty.ydm;
+package de.cas_ual_ty.ydm.item;
 
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;

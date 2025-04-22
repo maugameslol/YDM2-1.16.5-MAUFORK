@@ -116,6 +116,7 @@ public class YdmSoundEvents {
 	public static final RegistryObject<SoundEvent> ATTACK_WIND_HIGH = registerSoundEvent("attack_wind_high");
 	public static final RegistryObject<SoundEvent> IMPACT_WIND = registerSoundEvent("impact_wind");
 	public static final RegistryObject<SoundEvent> IMPACT_WIND_HIGH = registerSoundEvent("impact_wind_high");
+	//TODO: Add the other Attributes
 	
 	private static RegistryObject<SoundEvent> registerSoundEvent(String name) {
 		return SOUND_EVENTS.register(name, () -> new SoundEvent(new ResourceLocation(YDM.MOD_ID, name)));

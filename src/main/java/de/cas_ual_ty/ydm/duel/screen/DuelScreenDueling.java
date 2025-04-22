@@ -1070,27 +1070,27 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
             	{
             		queue.add(darkImpactAnimation);
             	}
-            	if(card.getAttribute().equals("DIVINE")) 
+            	else if(card.getAttribute().equals("DIVINE")) 
             	{
             		queue.add(divineImpactAnimation);
             	}
-            	if(card.getAttribute().equals("EARTH")) 
+            	else if(card.getAttribute().equals("EARTH")) 
             	{
             		queue.add(earthImpactAnimation);
             	}
-            	if(card.getAttribute().equals("FIRE")) 
+            	else if(card.getAttribute().equals("FIRE")) 
             	{
             		queue.add(fireImpactAnimation);
             	}
-            	if(card.getAttribute().equals("LIGHT")) 
+            	else if(card.getAttribute().equals("LIGHT")) 
             	{
             		queue.add(lightImpactAnimation);
             	}
-            	if(card.getAttribute().equals("WATER")) 
+            	else if(card.getAttribute().equals("WATER")) 
             	{
             		queue.add(waterImpactAnimation);
             	}
-            	if(card.getAttribute().equals("WIND")) 
+            	else if(card.getAttribute().equals("WIND")) 
             	{
             		queue.add(windImpactAnimation);
             	}

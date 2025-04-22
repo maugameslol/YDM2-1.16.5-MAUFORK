@@ -1,22 +1,22 @@
 package de.cas_ual_ty.ydm.card.properties;
 
-public enum Type
+public enum PrimaryCardType
 {
     MONSTER("Monster"), SPELL("Spell"), TRAP("Trap"), SKILL("Skill"),
     INFO("Info"), MATERIAL("Material");
 	
     public final String name;
     
-    Type(String name)
+    PrimaryCardType(String name)
     {
         this.name = name;
     }
     
-    public static final Type[] VALUES = Type.values();
+    public static final PrimaryCardType[] VALUES = PrimaryCardType.values();
     
-    public static Type fromString(String s)
+    public static PrimaryCardType fromString(String s)
     {
-        for(Type type : Type.VALUES)
+        for(PrimaryCardType type : PrimaryCardType.VALUES)
         {
             if(type.name.equals(s))
             {
