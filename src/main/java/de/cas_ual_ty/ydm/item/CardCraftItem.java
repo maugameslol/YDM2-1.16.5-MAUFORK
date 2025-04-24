@@ -2,9 +2,9 @@ package de.cas_ual_ty.ydm.item;
 
 import net.minecraft.item.Item;
 
-public class CardCraftMaterialItem extends Item
+public class CardCraftItem extends Item
 {
-	public CardCraftMaterialItem(Properties properties)
+	public CardCraftItem(Properties properties)
     {
         super(properties);
     }

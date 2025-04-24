@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "ydm:item/card_border_trap"
+        "layer0": "ydm:item/xyz_card_border"
     }
 }
