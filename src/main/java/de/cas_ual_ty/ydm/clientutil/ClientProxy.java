@@ -405,7 +405,8 @@ public class ClientProxy implements ISidedProxy
         int i = 0;
         
         while((ClientProxy.itemsUseCardImages && !ClientProxy.itemsUseCardImagesFailed && !ClientProxy.itemsUseCardImagesActive)
-                || (ClientProxy.itemsUseSetImages && !ClientProxy.itemsUseSetImagesFailed && !ClientProxy.itemsUseSetImagesActive))
+                || (ClientProxy.itemsUseSetImages && !ClientProxy.itemsUseSetImagesFailed && !ClientProxy.itemsUseSetImagesActive)
+                || (ClientProxy.itemsUseSleeveImages && !ClientProxy.itemsUseSleeveImagesFailed && !ClientProxy.itemsUseSleeveImagesActive))
         {
             if(!flag)
             {
@@ -464,7 +465,10 @@ public class ClientProxy implements ISidedProxy
             
             for(SleeveProperties sleeve : YdmDatabase.SLEEVES_LIST)
             {
-            	event.addSprite(sleeve.getItemImageResourceLocation());
+            	if(sleeve.isIndependentAndItem()) 
+            	{
+            		event.addSprite(sleeve.getItemImageResourceLocation());
+            	}
             }
         }
     }

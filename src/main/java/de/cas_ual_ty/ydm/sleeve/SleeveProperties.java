@@ -144,6 +144,11 @@ public class SleeveProperties {
     		tooltip.add(s);
     	}
     }
+    
+    public boolean isIndependentAndItem()
+    {
+        return this != SleeveProperties.DUMMY && name != null;
+    }
 	
 	// -- Getters --
 	

@@ -597,7 +597,7 @@ public class ImageHandler
         
         for(SleeveProperties sleeve : YdmDatabase.SLEEVES_LIST)
         {
-            if(!sleeve.getIsHardcoded() && !ImageHandler.getSetImageFile(sleeve.getItemImageName()).exists())
+            if(sleeve.isIndependentAndItem() && !sleeve.getIsHardcoded() && !ImageHandler.getSleeveImageFile(sleeve.getItemImageName()).exists())
             {
                 list.add(sleeve);
             }
