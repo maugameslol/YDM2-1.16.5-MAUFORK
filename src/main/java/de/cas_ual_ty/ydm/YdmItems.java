@@ -228,8 +228,17 @@ public class YdmItems
         registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "trap_attribute_orb"));
         registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "water_attribute_orb"));
         registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "wind_attribute_orb"));
+        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "laugh_attribute_orb"));
+        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "dreams_attribute_orb"));
+        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "fiend_attribute_orb"));
+        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "thunder_attribute_orb"));
+        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "wood_attribute_orb"));
+        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "chaos_attribute_orb"));
         registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "info_attribute_orb"));
         registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "material_attribute_orb"));
+        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "metal_attribute_orb"));
+        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "neutral_attribute_orb"));
+        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "rainbow_attribute_orb"));
         
         // Level Stars
         registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "level_star"));
@@ -237,6 +246,13 @@ public class YdmItems
         
         // Rank Stars
         registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "rank_star"));
+        
+        // Pendulum Scale
+        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "blue_pendulum_scale"));
+        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "red_pendulum_scale"));
+        
+        // Link Rating
+        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "link_rating"));
         
         // Link Arrows
         registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "top_left_link_arrow"));
@@ -249,11 +265,11 @@ public class YdmItems
         registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "bottom_right_link_arrow"));
         
         // Ability Orbs
-        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "ability_orb_flip"));
-        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "ability_orb_toon"));
-        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "ability_orb_spirit"));
-        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "ability_orb_union"));
-        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "ability_orb_gemini"));
+        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "flip_orb"));
+        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "toon_orb"));
+        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "spirit_orb"));
+        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "union_orb"));
+        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "gemini_orb"));
         registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "tuner_orb"));
         registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "dark_tuner_orb"));
         
