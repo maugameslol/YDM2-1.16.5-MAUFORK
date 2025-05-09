@@ -11,7 +11,7 @@ public enum Attribute
     // Printed, but unused
     LAUGH("LAUGH"),
     // Custom Attributes
-    METAL("METAL"), NEUTRAL("NEUTRAL"), CHAOS("CHAOS"), RAINBOW("RAINBOW"), 
+    METAL("METAL"), NEUTRAL("NEUTRAL"), CHAOS("CHAOS"), RAINBOW("RAINBOW"), VOID("VOID"),
     // Custom Non-Monster, Card Attributes
     INFO("INFO"), MATERIAL("MATERIAL");
     

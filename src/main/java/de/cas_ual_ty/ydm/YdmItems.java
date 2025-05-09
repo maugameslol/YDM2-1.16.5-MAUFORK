@@ -239,6 +239,7 @@ public class YdmItems
         registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "metal_attribute_orb"));
         registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "neutral_attribute_orb"));
         registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "rainbow_attribute_orb"));
+        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "void_attribute_orb"));
         
         // Level Stars
         registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "level_star"));
@@ -283,5 +284,40 @@ public class YdmItems
         registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "ritual_spelltrap_icon"));
         registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "link_spelltrap_icon"));
         registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "speed_spelltrap_icon"));
+        
+        // Species Essence
+        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "aqua_esscence"));
+        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "beast_esscence"));
+        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "beast_warrior_esscence"));
+        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "creator_god_esscence"));
+        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "cyberse_esscence"));
+        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "dinosaur_esscence"));
+        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "divine_beast_esscence"));
+        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "dragon_esscence"));
+        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "fairy_esscence"));
+        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "fiend_esscence"));
+        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "fish_esscence"));
+        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "illusion_esscence"));
+        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "insect_esscence"));
+        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "machine_esscence"));
+        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "plant_esscence"));
+        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "psychic_esscence"));
+        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "pyro_esscence"));
+        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "reptile_esscence"));
+        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "rock_esscence"));
+        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "sea_serpent_esscence"));
+        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "spellcaster_esscence"));
+        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "thunder_esscence"));
+        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "warrior_esscence"));
+        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "winged_beast_esscence"));
+        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "wyrm_esscence"));
+        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "zombie_esscence"));
+        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "celestial_warrior_esscence"));
+        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "cyborg_esscence"));
+        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "galaxy_esscence"));
+        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "high_dragon_esscence"));
+        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "magical_knight_esscence"));
+        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "omega_psychic_esscence"));
+        registry.register(new CardCraftItem(new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "immortal_esscence"));
     }
 }
