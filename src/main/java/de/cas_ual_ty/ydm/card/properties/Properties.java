@@ -175,13 +175,37 @@ public class Properties
         }
         
         type = PrimaryCardType.fromString(j.get(JsonKeys.TYPE).getAsString());
+        
         if(j.has(JsonKeys.ATTRIBUTE))
         {
     		attribute = j.get(JsonKeys.ATTRIBUTE).getAsString();
         }
         else
         {
-        	attribute = null;
+        	if(getIsSpell()) 
+        	{
+        		attribute = Attribute.SPELL.name;
+        	}
+        	else if(getIsTrap()) 
+        	{
+        		attribute = Attribute.TRAP.name;
+        	}
+        	else if(getIsSkill()) 
+        	{
+        		attribute = Attribute.SKILL.name;
+        	}
+        	else if(getIsInfo()) 
+        	{
+        		attribute = Attribute.INFO.name;
+        	}
+        	else if(getIsMaterial()) 
+        	{
+        		attribute = Attribute.MATERIAL.name;
+        	}
+        	else 
+        	{
+        		attribute = null;
+        	}
         }
         
         if(j.has(JsonKeys.DESIGNERS))
@@ -631,7 +655,7 @@ public class Properties
         }
     	else
     	{
-    		s.append(getType().name());
+    		s.append("NULL");
     	}
     	list.add(s);
     }

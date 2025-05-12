@@ -21,6 +21,7 @@ public class JsonKeys
     public static final String TAGS = "tags";
     public static final String KEYWORDS = "keywords";
     public static final String DESIGNERS = "designers";
+    public static final String CARD_COLOR = "card_color";
     
     // card limitations/legality
     public static final String IS_ILLEGAL = "is_illegal";

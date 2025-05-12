@@ -2,7 +2,6 @@ package de.cas_ual_ty.ydm.card.properties;
 
 public enum TrapType
 {
-	// TODO: Make "Link" Traps... it sounds ridiculous, but I like the idea
     NORMAL("Normal"), CONTINUOUS("Continuous"), COUNTER("Counter"),
     LINK("Link");
     

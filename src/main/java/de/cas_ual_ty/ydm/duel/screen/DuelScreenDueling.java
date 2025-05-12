@@ -5,7 +5,6 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import de.cas_ual_ty.ydm.YDM;
 import de.cas_ual_ty.ydm.YdmSoundEvents;
 import de.cas_ual_ty.ydm.card.properties.LevelMonsterProperties;
-import de.cas_ual_ty.ydm.card.properties.MonsterProperties;
 import de.cas_ual_ty.ydm.card.properties.Properties;
 import de.cas_ual_ty.ydm.clientutil.CardRenderUtil;
 import de.cas_ual_ty.ydm.clientutil.ScreenUtil;
@@ -935,8 +934,9 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
         }
         else if(action0 instanceof AttackAction)
         {
+        	//TODO: Clean this mess up somehow
             AttackAction action = (AttackAction) action0;
-            Animation defaultWindupSFX = new DummyAnimation().setOnStart(() ->
+            Animation declareDirectSFX = new DummyAnimation().setOnStart(() ->
             {
             	Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.DIRECT_ATTACK_DECLARE.get(), 1.0F, 1.0F));
             });
@@ -971,50 +971,87 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
             Animation attackAnimation = new AttackAnimation(getView(), getZoneWidget(action.sourceZone), getZoneWidget(action.attackedZone));
             ZoneWidget w = getZoneWidget(action.attackedZone);
             int size = Math.max(w.getWidth(), w.getHeight());
-            
             Animation directImpactAnimation = new ImpactPlayerAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size / 2);
+            Animation darkImpactAnimation = new ImpactDarkAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size / 2).setOnStart(() ->
+            {
+            	Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.IMPACT_DARK.get(), 1.0F, 1.0F));
+            });
+            Animation divineImpactAnimation = new ImpactDivineAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size / 2).setOnStart(() ->
+            {
+            	Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.IMPACT_DIVINE.get(), 1.0F, 1.0F));
+            });
+            Animation earthImpactAnimation = new ImpactEarthAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size / 2).setOnStart(() ->
+            {
+            	Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.IMPACT_EARTH.get(), 1.0F, 1.0F));
+            });
+            Animation fireImpactAnimation = new ImpactFireAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size / 2).setOnStart(() ->
+            {
+            	Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.IMPACT_FIRE.get(), 1.0F, 1.0F));
+            });
+            Animation lightImpactAnimation = new ImpactLightAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size / 2).setOnStart(() ->
+            {
+            	Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.IMPACT_LIGHT.get(), 1.0F, 1.0F));
+            });
+            Animation waterImpactAnimation = new ImpactWaterAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size / 2).setOnStart(() ->
+            {
+            	Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.IMPACT_WATER.get(), 1.0F, 1.0F));
+            });
+            Animation windImpactAnimation = new ImpactWindAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size / 2).setOnStart(() ->
+            {
+            	Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.IMPACT_WIND.get(), 1.0F, 1.0F));
+            });
+            Animation defaultImpactAnimation = new ImpactCardAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size / 2);
             Queue<Animation> queue = new LinkedList<>();
             boolean isMonsterZone = (action.attackedZone.type == ZoneTypes.MONSTER || action.attackedZone.type == ZoneTypes.EXTRA_MONSTER_LEFT || action.attackedZone.type == ZoneTypes.EXTRA_MONSTER_RIGHT);
             
             Properties card = action.sourceZone.getTopCardSafely().cardHolder.card;
             
             //Wind-up animation
-            if(card.getAttribute().equals("DARK")) 
+            if(!card.getAttribute().isEmpty() && card.getAttribute() != null) 
         	{
-        		queue.add(darkWindupSFX);
+            	if(card.getAttribute().equals("DARK")) 
+            	{
+            		queue.add(darkWindupSFX);
+            	}
+            	else if(card.getAttribute().equals("DIVINE")) 
+            	{
+            		queue.add(divineWindupSFX);
+            	}
+                else if(card.getAttribute().equals("EARTH")) 
+            	{
+            		queue.add(earthWindupSFX);
+            	}
+                else if(card.getAttribute().equals("FIRE")) 
+            	{
+            		queue.add(fireWindupSFX);
+            	}
+                else if(card.getAttribute().equals("LIGHT")) 
+            	{
+            		queue.add(lightWindupSFX);
+            	}
+                else if(card.getAttribute().equals("WATER")) 
+            	{
+            		queue.add(waterWindupSFX);
+            	}
+                else if(card.getAttribute().equals("WIND")) 
+            	{
+            		queue.add(windWindupSFX);
+            	}
+                else
+            	{
+            		queue.add(darkWindupSFX);
+            	}
         	}
-            if(card.getAttribute().equals("DIVINE")) 
-        	{
-        		queue.add(divineWindupSFX);
-        	}
-            if(card.getAttribute().equals("EARTH")) 
-        	{
-        		queue.add(earthWindupSFX);
-        	}
-            if(card.getAttribute().equals("FIRE")) 
-        	{
-        		queue.add(fireWindupSFX);
-        	}
-            if(card.getAttribute().equals("LIGHT")) 
-        	{
-        		queue.add(lightWindupSFX);
-        	}
-            if(card.getAttribute().equals("WATER")) 
-        	{
-        		queue.add(waterWindupSFX);
-        	}
-            if(card.getAttribute().equals("WIND")) 
-        	{
-        		queue.add(windWindupSFX);
-        	}
-            queue.add(defaultWindupSFX);
             
-            //Attack Line animation
-            queue.add(attackAnimation);
             
             //Direct Attack animation
             if(action.attackedZone.type == ZoneTypes.HAND) 
             {
+            	queue.add(declareDirectSFX);
+            	
+            	//Attack Line animation
+                queue.add(attackAnimation);
+            	
             	if(action.attackedZone.getOwner() == getZoneOwner())
                 {
             		directImpactAnimation.setOnStart(() ->
@@ -1035,65 +1072,44 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
             //Attack against Monster animation
             if(isMonsterZone) 
             {
-            	Animation darkImpactAnimation = new ImpactDarkAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size / 2).setOnStart(() ->
-                {
-                	Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.IMPACT_DARK.get(), 1.0F, 1.0F));
-                });
-                Animation divineImpactAnimation = new ImpactDivineAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size / 2).setOnStart(() ->
-                {
-                	Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.IMPACT_DIVINE.get(), 1.0F, 1.0F));
-                });
-                Animation earthImpactAnimation = new ImpactEarthAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size / 2).setOnStart(() ->
-                {
-                	Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.IMPACT_EARTH.get(), 1.0F, 1.0F));
-                });
-                Animation fireImpactAnimation = new ImpactFireAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size / 2).setOnStart(() ->
-                {
-                	Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.IMPACT_FIRE.get(), 1.0F, 1.0F));
-                });
-                Animation lightImpactAnimation = new ImpactLightAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size / 2).setOnStart(() ->
-                {
-                	Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.IMPACT_LIGHT.get(), 1.0F, 1.0F));
-                });
-                Animation waterImpactAnimation = new ImpactWaterAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size / 2).setOnStart(() ->
-                {
-                	Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.IMPACT_WATER.get(), 1.0F, 1.0F));
-                });
-                Animation windImpactAnimation = new ImpactWindAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size / 2).setOnStart(() ->
-                {
-                	Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.IMPACT_WIND.get(), 1.0F, 1.0F));
-                });
-                Animation defaultImpactAnimation = new ImpactCardAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size / 2);
+                //Attack Line animation
+                queue.add(attackAnimation);
                 
-                
-            	if(card.getAttribute().equals("DARK")) 
-            	{
-            		queue.add(darkImpactAnimation);
-            	}
-            	else if(card.getAttribute().equals("DIVINE")) 
-            	{
-            		queue.add(divineImpactAnimation);
-            	}
-            	else if(card.getAttribute().equals("EARTH")) 
-            	{
-            		queue.add(earthImpactAnimation);
-            	}
-            	else if(card.getAttribute().equals("FIRE")) 
-            	{
-            		queue.add(fireImpactAnimation);
-            	}
-            	else if(card.getAttribute().equals("LIGHT")) 
-            	{
-            		queue.add(lightImpactAnimation);
-            	}
-            	else if(card.getAttribute().equals("WATER")) 
-            	{
-            		queue.add(waterImpactAnimation);
-            	}
-            	else if(card.getAttribute().equals("WIND")) 
-            	{
-            		queue.add(windImpactAnimation);
-            	}
+                if(!card.getAttribute().isEmpty() && card.getAttribute() != null) 
+                {
+                	if(card.getAttribute().equals("DARK")) 
+                	{
+                		queue.add(darkImpactAnimation);
+                	}
+                	else if(card.getAttribute().equals("DIVINE")) 
+                	{
+                		queue.add(divineImpactAnimation);
+                	}
+                	else if(card.getAttribute().equals("EARTH")) 
+                	{
+                		queue.add(earthImpactAnimation);
+                	}
+                	else if(card.getAttribute().equals("FIRE")) 
+                	{
+                		queue.add(fireImpactAnimation);
+                	}
+                	else if(card.getAttribute().equals("LIGHT")) 
+                	{
+                		queue.add(lightImpactAnimation);
+                	}
+                	else if(card.getAttribute().equals("WATER")) 
+                	{
+                		queue.add(waterImpactAnimation);
+                	}
+                	else if(card.getAttribute().equals("WIND")) 
+                	{
+                		queue.add(windImpactAnimation);
+                	}
+                	else 
+                	{
+                		queue.add(defaultImpactAnimation);
+                	}
+                }
             	else 
             	{
             		queue.add(defaultImpactAnimation);

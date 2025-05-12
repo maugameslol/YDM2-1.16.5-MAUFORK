@@ -7,14 +7,12 @@ import de.cas_ual_ty.ydm.card.properties.Properties;
 import de.cas_ual_ty.ydm.rarity.RarityEntry;
 import de.cas_ual_ty.ydm.rarity.RarityLayer;
 import de.cas_ual_ty.ydm.set.CardSet;
-import de.cas_ual_ty.ydm.sleeve.CardBackType;
 import de.cas_ual_ty.ydm.sleeve.SleeveProperties;
 import de.cas_ual_ty.ydm.task.Task;
 import de.cas_ual_ty.ydm.task.TaskPriority;
 import de.cas_ual_ty.ydm.task.TaskQueue;
 import de.cas_ual_ty.ydm.util.DNCList;
 import de.cas_ual_ty.ydm.util.YdmIOUtil;
-import de.cas_ual_ty.ydm.util.YdmUtil;
 
 import javax.annotation.Nullable;
 import javax.imageio.ImageIO;
@@ -35,6 +33,7 @@ import java.util.concurrent.TimeUnit;
 public class ImageHandler
 {
     // TODO: Add Sleeve stuff for URL/Database Sleeves.
+	// TODO: Find a way to only download card arts, resize them correctly and splice them with a new card border graphic
 	private static final String CARD_IN_PROGRESS = "card_loading";
     private static final String CARD_FAILED = "card_failed";
     private static final String SET_IN_PROGRESS = "set_loading";
@@ -46,54 +45,6 @@ public class ImageHandler
     public static ImageList RAW_IMAGE_LIST = new ImageList();
     public static ImageList ADJUSTED_IMAGE_LIST = new ImageList();
     public static ImageList RARITY_IMAGE_LIST = new ImageList();
-    
-    // only for dev workspace!
-    // put raw image in the raw images folder
-    // make sure all size folders (16, 32, 64... exist)
-    @Deprecated // so I get a warning
-    public static void createCustomCardImages(Properties card) throws IOException
-    {
-        YDM.log("creating custom card images!");
-        
-        File parent = new File(ClientProxy.cardImagesFolder, "custom");
-        YdmIOUtil.createDirIfNonExistant(parent);
-        
-        // size 16 to 1024
-        int size;
-        for(int i = 4; i <= 10; ++i)
-        {
-            size = YdmUtil.getPow2(i);
-            YdmIOUtil.createDirIfNonExistant(new File(parent, "" + size));
-            ImageHandler.adjustRawImage(
-                    new File(parent, ImageHandler.getAdjustedCardImageFile(card.getImageName((byte) 0), size).getName()),
-                    new File(parent, ImageHandler.getRawCardImageFile(card.getImageName((byte) 0)).getName()),
-                    size);
-        }
-    }
-    
-    // only for dev workspace!
-    // put raw image in the raw images folder
-    // make sure all size folders (16, 32, 64... exist)
-    @Deprecated // so I get a warning
-    public static void createCustomSleevesImages(CardBackType sleeve, String rawType) throws IOException
-    {
-        YDM.log("creating sleeves card images!");
-        
-        File parent = new File(ClientProxy.cardImagesFolder, "custom");
-        YdmIOUtil.createDirIfNonExistant(parent);
-        
-        // size 16 to 1024
-        int size;
-        for(int i = 4; i <= 10; ++i)
-        {
-            size = YdmUtil.getPow2(i);
-            YdmIOUtil.createDirIfNonExistant(new File(parent, "" + size));
-            ImageHandler.adjustRawImage(
-                    new File(parent, size + "/" + sleeve.getResourceName() + ".png"),
-                    new File(parent, "raw/" + sleeve.getResourceName() + "." + rawType),
-                    size);
-        }
-    }
     
     public static void prepareRarityImages(int imageSize)
     {
