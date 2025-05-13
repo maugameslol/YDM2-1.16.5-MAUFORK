@@ -3,7 +3,7 @@ package de.cas_ual_ty.ydm.duel.screen.animation;
 import de.cas_ual_ty.ydm.YDM;
 import net.minecraft.util.ResourceLocation;
 
-public class GraveyardOutAnimation extends ExpandingSymbolAnimation
+public class GraveyardOutAnimation extends ExpandOutSymbolAnimation
 {
     
     public GraveyardOutAnimation(float centerPosX, float centerPosY, int size, int endSize)

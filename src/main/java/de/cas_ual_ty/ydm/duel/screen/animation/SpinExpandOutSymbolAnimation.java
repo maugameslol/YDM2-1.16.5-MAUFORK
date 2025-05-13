@@ -8,15 +8,16 @@ import de.cas_ual_ty.ydm.YDM;
 import de.cas_ual_ty.ydm.clientutil.ClientProxy;
 import de.cas_ual_ty.ydm.clientutil.YdmBlitUtil;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.vector.Quaternion;
 
-public class ExpandingSymbolAnimation extends Animation
+public class SpinExpandOutSymbolAnimation extends Animation
 {
     public float centerPosX;
     public float centerPosY;
     public int size;
     public int endSize;
     
-    public ExpandingSymbolAnimation(float centerPosX, float centerPosY, int size, int endSize)
+    public SpinExpandOutSymbolAnimation(float centerPosX, float centerPosY, int size, int endSize)
     {
         super(ClientProxy.specialAnimationLength);
         
@@ -36,12 +37,15 @@ public class ExpandingSymbolAnimation extends Animation
         // [0, 1]
         float alpha = (float) (Math.cos(cosTime1));
         
+        float rotation = 90F + 360F * (float) relativeTickTime;
+        
         float size = (float) relativeTickTime * (endSize - this.size) + this.size;
         float halfSize = 0.5F * size;
         
         ms.pushPose();
         
         ms.translate(centerPosX, centerPosY, 0);
+        ms.mulPose(new Quaternion(0, 0, rotation, true));
         
         RenderSystem.enableBlend();
         RenderSystem.color4f(1F, 1F, 1F, alpha);

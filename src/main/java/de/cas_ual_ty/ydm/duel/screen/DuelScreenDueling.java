@@ -641,7 +641,7 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
             { 
                 Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.BANISHMENT_EXIT.get(), 1.0F, 1.0F)); 
             });;
-            Animation drawAnimation = new DummyAnimation().setOnStart(() -> 
+            Animation drawCardSFX = new DummyAnimation().setOnStart(() -> 
             { 
                 Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.CARD_DRAW.get(), 1.0F, 1.0F)); 
             });;
@@ -695,6 +695,7 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
                     	{
                     		queue.add(lowNormalSummonSFX);
                     	}
+                    	queue.add(defaultSpecialSummonAnimation);
                     }
                 }
                 //Special Summon from Extra Deck
@@ -814,7 +815,7 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
             //draw card
             if(action.destinationZone.type == ZoneTypes.HAND && action.sourceZone.type == ZoneTypes.DECK) 
             {
-            	queue.add(drawAnimation);
+            	queue.add(drawCardSFX);
             	queue.add(moveAnimation);
             	return new QueueAnimation(queue);
             }
@@ -1288,6 +1289,7 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
         {
             Animation defaultAnimation = getDefaultAnimation(action0);
             Animation endTurnAnimation = new DummyAnimation();
+            Animation refreshDummyAnimation = new DummyAnimation();
             boolean isTurn;
             if(getZoneOwner() == ZoneOwner.NONE)
             {
@@ -1318,9 +1320,15 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
             {
                 updateRightButtonStatus();
             });
+            // Hopefully this reload here does not break something
+            refreshDummyAnimation.setOnEnd(() ->
+            {
+                reload();
+            });
             
             queue.add(endTurnAnimation);
             queue.add(defaultAnimation);
+            queue.add(refreshDummyAnimation);
             return new QueueAnimation(queue);
         }
         else if(action0.actionType == ActionTypes.CHANGE_COUNTERS) 
