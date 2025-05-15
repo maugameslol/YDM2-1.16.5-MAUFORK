@@ -14,6 +14,8 @@ public class ActionTypes
 {
     public static final ActionType POPULATE = null;
     public static final ActionType MOVE_ON_TOP = null;
+    public static final ActionType NORMAL_SUMMON = null;
+    public static final ActionType SET = null;
     public static final ActionType SPECIAL_SUMMON = null;
     public static final ActionType SPECIAL_SUMMON_OVERLAY = null;
     public static final ActionType MOVE_TO_BOTTOM = null;
@@ -34,6 +36,7 @@ public class ActionTypes
     public static final ActionType END_TURN = null;
     public static final ActionType INIT_SLEEVES = null;
     public static final ActionType SELECT = null;
+    public static final ActionType ACTIVATE_EFFECT = null;
     
     @SubscribeEvent
     public static void registerActionTypes(RegistryEvent.Register<ActionType> event)
@@ -41,6 +44,8 @@ public class ActionTypes
         IForgeRegistry<ActionType> registry = event.getRegistry();
         registry.register(new ActionType(PopulateAction::new).setRegistryName(YDM.MOD_ID, "populate"));
         registry.register(new ActionType(MoveTopAction::new).setRegistryName(YDM.MOD_ID, "move_on_top"));
+        registry.register(new ActionType(MoveTopAction::new).setRegistryName(YDM.MOD_ID, "normal_summon"));
+        registry.register(new ActionType(MoveTopAction::new).setRegistryName(YDM.MOD_ID, "set"));
         registry.register(new ActionType(MoveTopAction::new).setRegistryName(YDM.MOD_ID, "special_summon"));
         registry.register(new ActionType(ListAction::new).setRegistryName(YDM.MOD_ID, "special_summon_overlay"));
         registry.register(new ActionType(MoveBottomAction::new).setRegistryName(YDM.MOD_ID, "move_to_bottom"));
@@ -61,5 +66,6 @@ public class ActionTypes
         registry.register(new ActionType(EndTurnAction::new).setRegistryName(YDM.MOD_ID, "end_turn"));
         registry.register(new ActionType(InitSleevesAction::new).setRegistryName(YDM.MOD_ID, "init_sleeves"));
         registry.register(new ActionType(SelectAction::new).setRegistryName(YDM.MOD_ID, "select"));
+        registry.register(new ActionType(ActivateEffectAction::new).setRegistryName(YDM.MOD_ID, "activate_effect"));
     }
 }

@@ -250,6 +250,13 @@
         ],
         "subtitle": "ydm.sound.subtitle.direct_attack_player2"
     },
+	"effect_activate": {
+        "category": "block",
+        "sounds": [
+            "ydm:effect_activate"
+        ],
+        "subtitle": "ydm.sound.subtitle.effect_activate"
+    },
     "gy_enter": {
         "category": "block",
         "sounds": [
@@ -424,6 +431,132 @@
         "ydm:summon_tribute_high"
     ],
     "subtitle": "ydm.sound.subtitle.summon_tribute_high"
+    },
+	"summon_fusion": {
+    "category": "block",
+    "sounds": [
+        "ydm:summon_normal"
+    ],
+    "subtitle": "ydm.sound.subtitle.summon_fusion"
+    },
+	"summon_fusion_middle": {
+    "category": "block",
+    "sounds": [
+        "ydm:summon_fusion_middle"
+    ],
+    "subtitle": "ydm.sound.subtitle.summon_fusion_middle"
+    },
+	"summon_fusion_high": {
+    "category": "block",
+    "sounds": [
+        "ydm:summon_fusion_high"
+    ],
+    "subtitle": "ydm.sound.subtitle.summon_fusion_high"
+    },
+	"summon_ritual": {
+    "category": "block",
+    "sounds": [
+        "ydm:summon_normal"
+    ],
+    "subtitle": "ydm.sound.subtitle.summon_ritual"
+    },
+	"summon_ritual_middle": {
+    "category": "block",
+    "sounds": [
+        "ydm:summon_ritual_middle"
+    ],
+    "subtitle": "ydm.sound.subtitle.summon_ritual_middle"
+    },
+	"summon_ritual_high": {
+    "category": "block",
+    "sounds": [
+        "ydm:summon_ritual_high"
+    ],
+    "subtitle": "ydm.sound.subtitle.summon_ritual_high"
+    },
+	"summon_synchro": {
+    "category": "block",
+    "sounds": [
+        "ydm:summon_normal"
+    ],
+    "subtitle": "ydm.sound.subtitle.summon_synchro"
+    },
+	"summon_synchro_middle": {
+    "category": "block",
+    "sounds": [
+        "ydm:summon_synchro_middle"
+    ],
+    "subtitle": "ydm.sound.subtitle.summon_synchro_middle"
+    },
+	"summon_synchro_high": {
+    "category": "block",
+    "sounds": [
+        "ydm:summon_synchro_high"
+    ],
+    "subtitle": "ydm.sound.subtitle.summon_synchro_high"
+    },
+	"summon_xyz": {
+    "category": "block",
+    "sounds": [
+        "ydm:summon_normal"
+    ],
+    "subtitle": "ydm.sound.subtitle.summon_xyz"
+    },
+	"summon_xyz_middle": {
+    "category": "block",
+    "sounds": [
+        "ydm:summon_xyz_middle"
+    ],
+    "subtitle": "ydm.sound.subtitle.summon_xyz_middle"
+    },
+	"summon_xyz_high": {
+    "category": "block",
+    "sounds": [
+        "ydm:summon_xyz_high"
+    ],
+    "subtitle": "ydm.sound.subtitle.summon_xyz_high"
+    },
+	"summon_pendulum": {
+    "category": "block",
+    "sounds": [
+        "ydm:summon_normal"
+    ],
+    "subtitle": "ydm.sound.subtitle.summon_pendulum"
+    },
+	"summon_pendulum_middle": {
+    "category": "block",
+    "sounds": [
+        "ydm:summon_pendulum_middle"
+    ],
+    "subtitle": "ydm.sound.subtitle.summon_pendulum_middle"
+    },
+	"summon_pendulum_high": {
+    "category": "block",
+    "sounds": [
+        "ydm:summon_pendulum_high"
+    ],
+    "subtitle": "ydm.sound.subtitle.summon_pendulum_high"
+    },
+	"summon_link": {
+    "category": "block",
+    "sounds": [
+        "ydm:summon_normal"
+    ],
+    "subtitle": "ydm.sound.subtitle.summon_link"
+    },
+	"summon_link_middle": {
+    "category": "block",
+    "sounds": [
+        "ydm:summon_link_middle"
+    ],
+    "subtitle": "ydm.sound.subtitle.summon_link_middle"
+    },
+	"summon_link_high": {
+    "category": "block",
+    "sounds": [
+        "ydm:summon_link_high"
+    ],
+    "subtitle": "ydm.sound.subtitle.summon_link_high"
     },
     "token_summon": {
     "category": "block",

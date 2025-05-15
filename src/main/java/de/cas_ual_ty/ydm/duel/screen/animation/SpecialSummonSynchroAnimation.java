@@ -3,9 +3,9 @@ package de.cas_ual_ty.ydm.duel.screen.animation;
 import de.cas_ual_ty.ydm.YDM;
 import net.minecraft.util.ResourceLocation;
 
-public class SynchroSummonAnimation extends SpinExpandOutSymbolAnimation
+public class SpecialSummonSynchroAnimation extends SpinExpandOutSymbolAnimation
 {
-	public SynchroSummonAnimation(float centerPosX, float centerPosY, int size, int endSize)
+	public SpecialSummonSynchroAnimation(float centerPosX, float centerPosY, int size, int endSize)
     {
         super(centerPosX, centerPosY, size, endSize);
     }

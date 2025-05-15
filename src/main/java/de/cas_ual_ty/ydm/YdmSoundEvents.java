@@ -25,6 +25,8 @@ public class YdmSoundEvents {
 	public static final RegistryObject<SoundEvent> CARD_SHUFFLE = registerSoundEvent("card_shuffle");
 	public static final RegistryObject<SoundEvent> CARD_MOVE = registerSoundEvent("card_move");
 	
+	public static final RegistryObject<SoundEvent> EFFECT_ACTIVATE = registerSoundEvent("effect_activate");
+	
 	// coin and dice
 	public static final RegistryObject<SoundEvent> DICE_ROLL = registerSoundEvent("dice_roll");
 	public static final RegistryObject<SoundEvent> COIN_THROW = registerSoundEvent("coin_throw");
