@@ -170,6 +170,16 @@
         ],
         "subtitle": "ydm.sound.subtitle.card_draw"
     },
+	"card_move": {
+        "category": "block",
+        "sounds": [
+            "ydm:card_move",
+            "ydm:card_move_2",
+            "ydm:card_move_3",
+            "ydm:card_move_4"
+        ],
+        "subtitle": "ydm.sound.subtitle.card_move"
+    },
     "card_shuffle": {
         "category": "block",
         "sounds": [
@@ -256,6 +266,20 @@
             "ydm:effect_activate"
         ],
         "subtitle": "ydm.sound.subtitle.effect_activate"
+    },
+	"effect_continue": {
+        "category": "block",
+        "sounds": [
+            "ydm:effect_continue"
+        ],
+        "subtitle": "ydm.sound.subtitle.effect_continue"
+    },
+	"effect_negate": {
+        "category": "block",
+        "sounds": [
+            "ydm:effect_negate"
+        ],
+        "subtitle": "ydm.sound.subtitle.effect_negatev"
     },
     "gy_enter": {
         "category": "block",

@@ -37,6 +37,8 @@ public class ActionTypes
     public static final ActionType INIT_SLEEVES = null;
     public static final ActionType SELECT = null;
     public static final ActionType ACTIVATE_EFFECT = null;
+    public static final ActionType CONTINUE_EFFECT = null;
+    public static final ActionType NEGATE_EFFECT = null;
     
     @SubscribeEvent
     public static void registerActionTypes(RegistryEvent.Register<ActionType> event)
@@ -66,6 +68,8 @@ public class ActionTypes
         registry.register(new ActionType(EndTurnAction::new).setRegistryName(YDM.MOD_ID, "end_turn"));
         registry.register(new ActionType(InitSleevesAction::new).setRegistryName(YDM.MOD_ID, "init_sleeves"));
         registry.register(new ActionType(SelectAction::new).setRegistryName(YDM.MOD_ID, "select"));
-        registry.register(new ActionType(ActivateEffectAction::new).setRegistryName(YDM.MOD_ID, "activate_effect"));
+        registry.register(new ActionType(EffectActivateAction::new).setRegistryName(YDM.MOD_ID, "activate_effect"));
+        registry.register(new ActionType(EffectContinueAction::new).setRegistryName(YDM.MOD_ID, "continue_effect"));
+        registry.register(new ActionType(EffectNegateAction::new).setRegistryName(YDM.MOD_ID, "negate_effect"));
     }
 }

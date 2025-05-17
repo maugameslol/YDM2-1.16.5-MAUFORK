@@ -3,9 +3,9 @@ package de.cas_ual_ty.ydm.duel.screen.animation;
 import de.cas_ual_ty.ydm.YDM;
 import net.minecraft.util.ResourceLocation;
 
-public class ActivateCardAnimation extends SpinExpandOutSymbolAnimation
+public class EffectContinueAnimation extends ExpandOutSymbolAnimation
 {
-	public ActivateCardAnimation(float centerPosX, float centerPosY, int size, int endSize)
+	public EffectContinueAnimation(float centerPosX, float centerPosY, int size, int endSize)
     {
         super(centerPosX, centerPosY, size, endSize);
     }
@@ -13,7 +13,7 @@ public class ActivateCardAnimation extends SpinExpandOutSymbolAnimation
     @Override
     public ResourceLocation getTexture()
     {
-        return new ResourceLocation(YDM.MOD_ID, "textures/gui/action_animations/activate_card.png");
+        return new ResourceLocation(YDM.MOD_ID, "textures/gui/action_animations/effect_continue.png");
     }
 
 }

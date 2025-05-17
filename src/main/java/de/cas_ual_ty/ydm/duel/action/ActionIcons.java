@@ -57,10 +57,11 @@ public class ActionIcons
     public static final ActionIcon SPECIAL_SUMMON_TOKEN_DEF = null;
     
     public static final ActionIcon ACTIVATE_EFFECT = null;
-    //public static final ActionIcon ACTIVATE_EFFECT_HAND = null;
-    //public static final ActionIcon ACTIVATE_EFFECT_GRAVEYARD = null;
+    public static final ActionIcon CONTINUE_EFFECT = null;
+    public static final ActionIcon NEGATE_EFFECT = null;
     
-    public static final ActionIcon FLIP_SPELL_TRAP = null;
+    public static final ActionIcon TO_SPELL_TRAP_ATK = null;
+    public static final ActionIcon BURN = null;
     
     @SubscribeEvent
     public static void registerActionIcons(RegistryEvent.Register<ActionIcon> event)
@@ -111,7 +112,10 @@ public class ActionIcons
         registry.register(ActionIcons.create("special_summon_token_def"));
         
         registry.register(ActionIcons.create("activate_effect"));
-        registry.register(ActionIcons.create("flip_spell_trap"));
+        registry.register(ActionIcons.create("continue_effect"));
+        registry.register(ActionIcons.create("negate_effect"));
+        registry.register(ActionIcons.create("to_spell_trap_atk"));
+        registry.register(ActionIcons.create("burn"));
     }
     
     public static ActionIcon create(String name)

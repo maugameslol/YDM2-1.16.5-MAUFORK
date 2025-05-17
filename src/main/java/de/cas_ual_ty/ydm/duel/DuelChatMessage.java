@@ -83,16 +83,20 @@ public class DuelChatMessage
         
         if(isAnnouncement)
         {
-            m.withStyle((style) -> style.applyFormat(TextFormatting.ITALIC));
+            IFormattableTextComponent t = new StringTextComponent("").append(playerName).append(" ").append(m);
+            t.withStyle((style) -> style.applyFormat(TextFormatting.ITALIC));
+            return t;
         }
-        
-        IFormattableTextComponent t = new StringTextComponent("<").append(playerName).append("> ").append(m);
-        
-        //        if(this.isAnnouncement)
-        //        {
-        //            t.modifyStyle((style) -> style.applyFormatting(TextFormatting.BOLD));
-        //        }
-        
-        return t;
+        else 
+        {
+        	IFormattableTextComponent t = new StringTextComponent("<").append(playerName).append("> ").append(m);
+            
+            //        if(this.isAnnouncement)
+            //        {
+            //            t.modifyStyle((style) -> style.applyFormatting(TextFormatting.BOLD));
+            //        }
+            
+            return t;
+        }
     }
 }

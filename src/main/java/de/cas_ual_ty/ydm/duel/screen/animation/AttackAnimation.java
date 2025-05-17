@@ -11,6 +11,7 @@ import net.minecraft.util.math.vector.Quaternion;
 
 public class AttackAnimation extends Animation
 {
+	//TODO: Customizable Color, Size and End Size
     public final ZoneOwner view;
     public final ZoneWidget sourceZone;
     public final ZoneWidget destinationZone;
