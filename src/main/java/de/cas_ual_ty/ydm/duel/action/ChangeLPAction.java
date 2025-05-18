@@ -74,12 +74,14 @@ public class ChangeLPAction extends Action implements IAnnouncedAction
     public IFormattableTextComponent getAnnouncement(ITextComponent playerName)
     {
         IFormattableTextComponent t = new StringTextComponent(String.valueOf(trueChange));
+        IFormattableTextComponent p = new StringTextComponent(String.valueOf(prevLP));
+        IFormattableTextComponent n = new StringTextComponent(String.valueOf(newLP));
         
         if(trueChange > 0)
         {
             t = new StringTextComponent("+").append(t);
         }
         
-        return new TranslationTextComponent(getAnnouncementLocalKey()).append(": ").append(t);
+        return new TranslationTextComponent(getAnnouncementLocalKey()).append(": ").append(p).append(" -> ").append(n).append(" (").append(t).append(")");
     }
 }

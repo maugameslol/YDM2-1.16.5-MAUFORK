@@ -3,7 +3,7 @@ package de.cas_ual_ty.ydm.duel.screen.animation;
 import de.cas_ual_ty.ydm.YDM;
 import net.minecraft.util.ResourceLocation;
 
-public class ImpactFireAnimation extends SpinExpandOutSymbolAnimation
+public class ImpactFireAnimation extends SpinningSymbolAnimation
 {
     
     public ImpactFireAnimation(float centerPosX, float centerPosY, int size, int endSize)

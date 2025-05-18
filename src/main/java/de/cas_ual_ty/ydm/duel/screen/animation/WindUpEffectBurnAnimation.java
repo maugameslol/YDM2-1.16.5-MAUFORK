@@ -3,9 +3,9 @@ package de.cas_ual_ty.ydm.duel.screen.animation;
 import de.cas_ual_ty.ydm.YDM;
 import net.minecraft.util.ResourceLocation;
 
-public class EffectBurnAnimation extends SpinExpandOutSymbolAnimation
+public class WindUpEffectBurnAnimation extends SpinningSymbolAnimation
 {
-	public EffectBurnAnimation(float centerPosX, float centerPosY, int size, int endSize)
+	public WindUpEffectBurnAnimation(float centerPosX, float centerPosY, int size, int endSize)
     {
         super(centerPosX, centerPosY, size, endSize);
     }

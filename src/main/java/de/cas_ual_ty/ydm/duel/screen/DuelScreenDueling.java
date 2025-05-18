@@ -637,6 +637,20 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
             
             Properties card = action.card.getCardHolder().getCard();
             
+            // Exit GY
+            if(action.sourceZone.type == ZoneTypes.GRAVEYARD) 
+            {
+            	queue.add(gyExitSFX);
+            	queue.add(gyOutAnimation);
+            }
+            
+            // Exit Banishment
+            if(action.sourceZone.type == ZoneTypes.BANISHED) 
+            {
+            	queue.add(banishExitSFX);
+            	queue.add(banishOutAnimation);
+            }
+            
             if(action.actionType == ActionTypes.SPECIAL_SUMMON)
             {
                 Animation defaultSpecialSummonAnimation = new SpecialSummonAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), size, size + size / 2);
@@ -682,17 +696,6 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
                 Animation linkHighSummonSFX = new DummyAnimation().setOnStart(() -> { Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.SUMMON_LINK_HIGH.get(), 1.0F, 1.0F)); });;
                 */
                 
-                if(action.sourceZone.type == ZoneTypes.GRAVEYARD) 
-                {
-                	queue.add(gyExitSFX);
-                	queue.add(gyOutAnimation);
-                }
-                if(action.sourceZone.type == ZoneTypes.BANISHED) 
-                {
-                	queue.add(banishExitSFX);
-                	queue.add(banishOutAnimation);
-                }
-                
                 queue.add(moveAnimation);
                 
                 if(action.destinationCardPosition == CardPosition.SET) 
@@ -716,18 +719,14 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
                 	queue.add(defPosAnimation);
                 }
                 
-
                 return new QueueAnimation(queue);
             }
             
-            //TODO: This is on Normal Summon ATK/DEF and Set. Should probably separate Normal Summon into its own action type.
+            // Normal Summon
             if(action.actionType == ActionTypes.NORMAL_SUMMON) 
             {
-            	Animation tributeSummonAnimation = new SummonTributeAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), size, size + size);
-                Animation tributeHighSummonAnimation = new SummonTributeAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), size, size + size * 2);
-            	
-            	Animation tributeSummonSFX = new DummyAnimation().setOnStart(() -> { Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.SUMMON_TRIBUTE_MIDDLE.get(), 1.0F, 1.0F)); });;
-                Animation tributeHighSummonSFX = new DummyAnimation().setOnStart(() -> { Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.SUMMON_TRIBUTE_HIGH.get(), 1.0F, 1.0F)); });;
+            	Animation tributeSummonAnimation = new SummonTributeAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), size, size + size).setOnStart(() -> { Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.SUMMON_TRIBUTE_MIDDLE.get(), 1.0F, 1.0F)); });;
+                Animation tributeHighSummonAnimation = new SummonTributeAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), size, size + size * 2).setOnStart(() -> { Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.SUMMON_TRIBUTE_HIGH.get(), 1.0F, 1.0F)); });;
                 
             	queue.add(moveAnimation);
             	
@@ -740,12 +739,10 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
                 	if(isMidLevel && !isHighLevel) 
                     {
                 		queue.add(tributeSummonAnimation);
-                		queue.add(tributeSummonSFX);
                     }
                 	else if(isHighLevel) 
                 	{
                 		queue.add(tributeHighSummonAnimation);
-                		queue.add(tributeHighSummonSFX);
                 	}
                 	else 
                 	{
@@ -774,11 +771,6 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
             // Enter GY
             if(action.destinationZone.type == ZoneTypes.GRAVEYARD) 
             {
-            	if(action.sourceZone.type == ZoneTypes.BANISHED) 
-                {
-                	queue.add(banishExitSFX);
-                	queue.add(banishOutAnimation);
-                }
             	queue.add(moveAnimation);
             	queue.add(gyEnterSFX);
             	queue.add(gyInAnimation);
@@ -788,11 +780,6 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
             // Enter Banishment
             if(action.destinationZone.type == ZoneTypes.BANISHED) 
             {
-            	if(action.sourceZone.type == ZoneTypes.GRAVEYARD) 
-                {
-            		queue.add(gyExitSFX);
-            		queue.add(gyOutAnimation);
-                }
             	queue.add(moveAnimation);
             	queue.add(banishEnterSFX);
             	queue.add(banishInAnimation);
@@ -858,6 +845,7 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
             
             if(action.card == action.sourceZone.getTopCardSafely())
             {
+            	// From ATK to DEF
             	if(action.sourceCardPosition == CardPosition.ATK && action.destinationCardPosition == CardPosition.DEF) 
                 {
                     queue.add(moveAnimation);
@@ -865,12 +853,14 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
                     return new QueueAnimation(queue);
                     
                 }
+            	// From DEF to ATK
                 if(action.sourceCardPosition == CardPosition.DEF && action.destinationCardPosition == CardPosition.ATK) 
                 {
                 	queue.add(moveAnimation);
                 	queue.add(atkPosAnimation);
                 	return new QueueAnimation(queue);
                 }
+                // From Set to ATK/DEF
                 if(action.sourceCardPosition == CardPosition.SET) 
                 {
                 	queue.add(moveAnimation);
@@ -935,26 +925,28 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
         {
         	//TODO: Clean this mess up somehow
             AttackAction action = (AttackAction) action0;
-            Animation darkWindupSFX = new DummyAnimation().setOnStart(() ->{ Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.ATTACK_DARK.get(), 1.0F, 1.0F)); });
-            Animation darkStrongWindupSFX = new DummyAnimation().setOnStart(() ->{ Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.ATTACK_DARK_HIGH.get(), 1.0F, 1.0F)); });
-            Animation divineWindupSFX = new DummyAnimation().setOnStart(() -> { Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.ATTACK_DIVINE.get(), 1.0F, 1.0F)); });
-            Animation divineStrongWindupSFX = new DummyAnimation().setOnStart(() -> { Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.ATTACK_DIVINE_HIGH.get(), 1.0F, 1.0F)); });
-            Animation earthWindupSFX = new DummyAnimation().setOnStart(() -> { Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.ATTACK_EARTH.get(), 1.0F, 1.0F)); });
-            Animation earthStrongWindupSFX = new DummyAnimation().setOnStart(() -> { Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.ATTACK_EARTH_HIGH.get(), 1.0F, 1.0F)); });
-            Animation fireWindupSFX = new DummyAnimation().setOnStart(() -> { Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.ATTACK_FIRE.get(), 1.0F, 1.0F)); });
-            Animation fireStrongWindupSFX = new DummyAnimation().setOnStart(() -> { Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.ATTACK_FIRE_HIGH.get(), 1.0F, 1.0F)); });
-            Animation lightWindupSFX = new DummyAnimation().setOnStart(() -> { Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.ATTACK_LIGHT.get(), 1.0F, 1.0F)); });
-            Animation lightStrongWindupSFX = new DummyAnimation().setOnStart(() -> { Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.ATTACK_LIGHT_HIGH.get(), 1.0F, 1.0F)); });
-            Animation waterWindupSFX = new DummyAnimation().setOnStart(() -> { Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.ATTACK_WATER.get(), 1.0F, 1.0F)); });
-            Animation waterStrongWindupSFX = new DummyAnimation().setOnStart(() -> { Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.ATTACK_WATER_HIGH.get(), 1.0F, 1.0F)); });
-            Animation windWindupSFX = new DummyAnimation().setOnStart(() -> { Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.ATTACK_WIND.get(), 1.0F, 1.0F)); });
-            Animation windStrongWindupSFX = new DummyAnimation().setOnStart(() -> { Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.ATTACK_WIND_HIGH.get(), 1.0F, 1.0F)); });
+            
+            Animation burnSFX = new DummyAnimation().setOnStart(() ->{ Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.BURN_DAMAGE.get(), 1.0F, 1.0F)); });
             Animation attackAnimation = new AttackAnimation(getView(), getZoneWidget(action.sourceZone), getZoneWidget(action.attackedZone));
             ZoneWidget aZ = getZoneWidget(action.attackedZone);
             ZoneWidget sZ = getZoneWidget(action.sourceZone);
             int aSize = Math.max(aZ.getWidth(), aZ.getHeight());
             int sSize = Math.max(sZ.getWidth(), sZ.getHeight());
-            Animation burnSpinAnimation = new EffectBurnAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize / 2);
+            Animation darkWindupAnimation = new WindUpDarkAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize / 2).setOnStart(() ->{ Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.ATTACK_DARK.get(), 1.0F, 1.0F)); });
+            Animation darkStrongWindupAnimation = new WindUpDarkAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize).setOnStart(() ->{ Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.ATTACK_DARK_HIGH.get(), 1.0F, 1.0F)); });
+            Animation divineWindupAnimation = new WindUpDivineAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize / 2).setOnStart(() -> { Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.ATTACK_DIVINE.get(), 1.0F, 1.0F)); });
+            Animation divineStrongWindupAnimation = new WindUpDivineAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize).setOnStart(() -> { Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.ATTACK_DIVINE_HIGH.get(), 1.0F, 1.0F)); });
+            Animation earthWindupAnimation = new WindUpEarthAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize / 2).setOnStart(() -> { Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.ATTACK_EARTH.get(), 1.0F, 1.0F)); });
+            Animation earthStrongWindupAnimation = new WindUpEarthAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize).setOnStart(() -> { Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.ATTACK_EARTH_HIGH.get(), 1.0F, 1.0F)); });
+            Animation fireWindupAnimation = new WindUpFireAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize / 2).setOnStart(() -> { Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.ATTACK_FIRE.get(), 1.0F, 1.0F)); });
+            Animation fireStrongWindupAnimation = new WindUpFireAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize).setOnStart(() -> { Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.ATTACK_FIRE_HIGH.get(), 1.0F, 1.0F)); });
+            Animation lightWindupAnimation = new WindUpLightAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize / 2).setOnStart(() -> { Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.ATTACK_LIGHT.get(), 1.0F, 1.0F)); });
+            Animation lightStrongWindupAnimation = new WindUpLightAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize).setOnStart(() -> { Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.ATTACK_LIGHT_HIGH.get(), 1.0F, 1.0F)); });
+            Animation waterWindupAnimation = new WindUpWaterAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize / 2).setOnStart(() -> { Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.ATTACK_WATER.get(), 1.0F, 1.0F)); });
+            Animation waterStrongWindupAnimation = new WindUpWaterAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize).setOnStart(() -> { Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.ATTACK_WATER_HIGH.get(), 1.0F, 1.0F)); });
+            Animation windWindupAnimation = new WindUpWindAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize / 2).setOnStart(() -> { Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.ATTACK_WIND.get(), 1.0F, 1.0F)); });
+            Animation windStrongWindupAnimation = new WindUpWindAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize).setOnStart(() -> { Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.ATTACK_WIND_HIGH.get(), 1.0F, 1.0F)); });
+            Animation burnSpinAnimation = new WindUpEffectBurnAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize / 2).setOnStart(() -> { Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.ATTACK_FIRE.get(), 1.0F, 1.0F)); });;
             Animation textDirectAttackAnimation = new TextAnimation((new StringTextComponent("DIRECT ATTACK").setStyle(Style.EMPTY.applyFormat(TextFormatting.BOLD))), sZ.getAnimationDestX(), sZ.getAnimationDestY())
             .setOnStart(() -> 
             { 
@@ -975,9 +967,8 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
             Animation waterStrongImpactAnimation = new ImpactWaterAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize, aSize + aSize).setOnStart(() -> { Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.IMPACT_WATER_HIGH.get(), 1.0F, 1.0F)); });
             Animation windImpactAnimation = new ImpactWindAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize, aSize + aSize / 2).setOnStart(() -> { Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.IMPACT_WIND.get(), 1.0F, 1.0F)); });
             Animation windStrongImpactAnimation = new ImpactWindAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize, aSize + aSize).setOnStart(() -> { Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.IMPACT_WIND_HIGH.get(), 1.0F, 1.0F)); });
-            Animation defaultImpactAnimation = new ImpactCardAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize, aSize + aSize / 2);
+            Animation defaultImpactAnimation = new ImpactCardAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize, aSize + aSize / 2).setOnStart(() -> { Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.IMPACT_FIRE.get(), 1.0F, 1.0F)); });
             Queue<Animation> queue = new LinkedList<>();
-            boolean isMonsterZone = (action.attackedZone.type == ZoneTypes.MONSTER || action.attackedZone.type == ZoneTypes.EXTRA_MONSTER_LEFT || action.attackedZone.type == ZoneTypes.EXTRA_MONSTER_RIGHT);
             
             Properties card = action.sourceZone.getTopCardSafely().cardHolder.card;
             
@@ -988,98 +979,97 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
             	{
             		if(card instanceof MonsterProperties && (((MonsterProperties) card).getAtk() >= 2500)) 
             		{
-            			queue.add(darkStrongWindupSFX);
+            			queue.add(darkStrongWindupAnimation);
             		}
             		else 
             		{
-            			queue.add(darkWindupSFX);
+            			queue.add(darkWindupAnimation);
             		}
             	}
             	else if(card.getAttribute().equals("DIVINE")) 
             	{
             		if(card instanceof MonsterProperties && (((MonsterProperties) card).getAtk() >= 2500)) 
             		{
-            			queue.add(divineStrongWindupSFX);
+            			queue.add(divineStrongWindupAnimation);
             		}
             		else 
             		{
-            			queue.add(divineWindupSFX);
+            			queue.add(divineWindupAnimation);
             		}
             	}
                 else if(card.getAttribute().equals("EARTH")) 
             	{
                 	if(card instanceof MonsterProperties && (((MonsterProperties) card).getAtk() >= 2500)) 
             		{
-            			queue.add(earthStrongWindupSFX);
+            			queue.add(earthStrongWindupAnimation);
             		}
             		else 
             		{
-            			queue.add(earthWindupSFX);
+            			queue.add(earthWindupAnimation);
             		}
             	}
                 else if(card.getAttribute().equals("FIRE")) 
             	{
                 	if(card instanceof MonsterProperties && (((MonsterProperties) card).getAtk() >= 2500)) 
             		{
-            			queue.add(fireStrongWindupSFX);
+            			queue.add(fireStrongWindupAnimation);
             		}
             		else 
             		{
-            			queue.add(fireWindupSFX);
+            			queue.add(fireWindupAnimation);
             		}
             	}
                 else if(card.getAttribute().equals("LIGHT")) 
             	{
                 	if(card instanceof MonsterProperties && (((MonsterProperties) card).getAtk() >= 2500)) 
             		{
-            			queue.add(lightStrongWindupSFX);
+            			queue.add(lightStrongWindupAnimation);
             		}
             		else 
             		{
-            			queue.add(lightWindupSFX);
+            			queue.add(lightWindupAnimation);
             		}
             	}
                 else if(card.getAttribute().equals("WATER")) 
             	{
                 	if(card instanceof MonsterProperties && (((MonsterProperties) card).getAtk() >= 2500)) 
             		{
-            			queue.add(waterStrongWindupSFX);
+            			queue.add(waterStrongWindupAnimation);
             		}
             		else 
             		{
-            			queue.add(waterWindupSFX);
+            			queue.add(waterWindupAnimation);
             		}
             	}
                 else if(card.getAttribute().equals("WIND")) 
             	{
                 	if(card instanceof MonsterProperties && (((MonsterProperties) card).getAtk() >= 2500)) 
             		{
-            			queue.add(windStrongWindupSFX);
+            			queue.add(windStrongWindupAnimation);
             		}
             		else 
             		{
-            			queue.add(windWindupSFX);
+            			queue.add(windWindupAnimation);
             		}
             	}
                 else
             	{
-            		queue.add(fireWindupSFX);
+            		queue.add(burnSpinAnimation);
             	}
         	}
             
-            //Spell/Trap Burn
-            if(action.sourceZone.type == ZoneTypes.SPELL_TRAP) 
+            // Burn
+            if(action.actionType == ActionTypes.BURN) 
             {
-            	queue.add(burnSpinAnimation);
+            	queue.add(attackAnimation);
+            	queue.add(burnSFX);
+            	queue.add(directImpactAnimation);
             }
             
             //Direct Attack animation
-            if(action.attackedZone.type == ZoneTypes.HAND) 
+            if(action.actionType == ActionTypes.ATTACK_DIRECT) 
             {
-            	if(!(action.sourceZone.type == ZoneTypes.SPELL_TRAP)) 
-            	{
-            		queue.add(textDirectAttackAnimation);
-            	}
+            	queue.add(textDirectAttackAnimation);
             	
             	//Attack Line animation
                 queue.add(attackAnimation);
@@ -1101,8 +1091,8 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
             	queue.add(directImpactAnimation);
             }
             
-            //Attack against Monster animation
-            if(isMonsterZone) 
+            // Regular attack
+            if(!(action.actionType == ActionTypes.ATTACK_DIRECT) && !(action.actionType == ActionTypes.BURN)) 
             {
                 //Attack Line animation
                 queue.add(attackAnimation);
@@ -1196,6 +1186,7 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
             		queue.add(defaultImpactAnimation);
             	}
             }
+            
             return new QueueAnimation(queue);
         }
         else if(action0 instanceof CreateTokenAction)
@@ -1328,17 +1319,37 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
             }
             if(action0.actionType == ActionTypes.CHANGE_LP) 
             {
-            	Animation countLPAnimation = new DummyAnimation()
-            	.setOnStart(() -> 
-                { 
-                	Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.LP_COUNT.get(), 1.0F, 1.0F)); 
-                })
-            	.setOnEnd(() ->
-                {
-                	action0.doAction();
+            	//TODO: Improve code here, either by changing the Change LP action or something else
+            	ChangeLPAction lpAction = (ChangeLPAction) action0;
+            	//IFormattableTextComponent t = new StringTextComponent(String.valueOf(lpAction.trueChange));
+            	//ZoneWidget w = getZoneWidget(lpAction.playField.getZoneByTypeAndPlayer(ZoneTypes.HAND, getZoneOwner()));
+            	//if(lpAction.trueChange > 0) { t = new StringTextComponent("+").append(t).setStyle(Style.EMPTY.applyFormat(TextFormatting.AQUA)); }
+            	//if(lpAction.trueChange < 0) { t = new StringTextComponent("-").append(t).setStyle(Style.EMPTY.applyFormat(TextFormatting.RED)); }
+            	
+            	//IFormattableTextComponent finalText = new StringTextComponent("").append(t).setStyle(Style.EMPTY.applyFormat(TextFormatting.BOLD));
+            	
+            	Animation lpCountDownSFX = new DummyAnimation().setOnStart(() -> { Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.LP_COUNT.get(), 1.0F, 1.0F)); });
+            	Animation lpCountUpSFX = new DummyAnimation().setOnStart(() -> { Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.LP_HEAL.get(), 1.0F, 1.0F)); });
+            	Animation lpChangeDummyAnimation = new DummyAnimation().setOnEnd(() -> 
+            	{ 
+            		action0.doAction();
                     repopulateInteractions();
                 });
-            	queue.add(countLPAnimation);
+            	
+            	//Animation textAnimation = new TextAnimation(finalText, w.getAnimationDestX(), w.getAnimationDestY()).setOnStart(() -> handleAnnouncedAction(action0));
+            	
+            	if(lpAction.trueChange > 0) 
+            	{
+            		//queue.add(textAnimation);
+            		queue.add(lpCountUpSFX);
+            	}
+            	else 
+            	{
+            		//queue.add(textAnimation);
+            		queue.add(lpCountDownSFX);
+            	}
+            	
+            	queue.add(lpChangeDummyAnimation);
             	return new QueueAnimation(queue);
             }
             if(action0.actionType == ActionTypes.COIN_FLIP) 

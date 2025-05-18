@@ -25,6 +25,7 @@ public class ActionTypes
     public static final ActionType VIEW_ZONE = null;
     public static final ActionType SHOW_CARD = null;
     public static final ActionType ATTACK = null;
+    public static final ActionType ATTACK_DIRECT = null;
     public static final ActionType LIST = null;
     public static final ActionType CHANGE_LP = null;
     public static final ActionType COIN_FLIP = null;
@@ -39,6 +40,7 @@ public class ActionTypes
     public static final ActionType ACTIVATE_EFFECT = null;
     public static final ActionType CONTINUE_EFFECT = null;
     public static final ActionType NEGATE_EFFECT = null;
+    public static final ActionType BURN = null;
     
     @SubscribeEvent
     public static void registerActionTypes(RegistryEvent.Register<ActionType> event)
@@ -57,6 +59,7 @@ public class ActionTypes
         registry.register(new ActionType(ViewZoneAction::new).setRegistryName(YDM.MOD_ID, "view_zone"));
         registry.register(new ActionType(ShowCardAction::new).setRegistryName(YDM.MOD_ID, "show_card"));
         registry.register(new ActionType(AttackAction::new).setRegistryName(YDM.MOD_ID, "attack"));
+        registry.register(new ActionType(AttackAction::new).setRegistryName(YDM.MOD_ID, "attack_direct"));
         registry.register(new ActionType(ListAction::new).setRegistryName(YDM.MOD_ID, "list"));
         registry.register(new ActionType(ChangeLPAction::new).setRegistryName(YDM.MOD_ID, "change_lp"));
         registry.register(new ActionType(CoinFlipAction::new).setRegistryName(YDM.MOD_ID, "coin_flip"));
@@ -71,5 +74,6 @@ public class ActionTypes
         registry.register(new ActionType(EffectActivateAction::new).setRegistryName(YDM.MOD_ID, "activate_effect"));
         registry.register(new ActionType(EffectContinueAction::new).setRegistryName(YDM.MOD_ID, "continue_effect"));
         registry.register(new ActionType(EffectNegateAction::new).setRegistryName(YDM.MOD_ID, "negate_effect"));
+        registry.register(new ActionType(AttackAction::new).setRegistryName(YDM.MOD_ID, "burn"));
     }
 }

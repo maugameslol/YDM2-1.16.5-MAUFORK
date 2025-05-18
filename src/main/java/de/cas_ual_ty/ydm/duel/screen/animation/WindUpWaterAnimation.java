@@ -3,9 +3,9 @@ package de.cas_ual_ty.ydm.duel.screen.animation;
 import de.cas_ual_ty.ydm.YDM;
 import net.minecraft.util.ResourceLocation;
 
-public class EffectNegateAnimation extends StaticSymbolAnimation
+public class WindUpWaterAnimation extends SpinningSymbolAnimation
 {
-	public EffectNegateAnimation(float centerPosX, float centerPosY, int size, int endSize)
+	public WindUpWaterAnimation(float centerPosX, float centerPosY, int size, int endSize)
     {
         super(centerPosX, centerPosY, size, endSize);
     }
@@ -13,7 +13,7 @@ public class EffectNegateAnimation extends StaticSymbolAnimation
     @Override
     public ResourceLocation getTexture()
     {
-        return new ResourceLocation(YDM.MOD_ID, "textures/gui/action_animations/effect_negate.png");
+        return new ResourceLocation(YDM.MOD_ID, "textures/gui/action_animations/windup_water.png");
     }
 
 }

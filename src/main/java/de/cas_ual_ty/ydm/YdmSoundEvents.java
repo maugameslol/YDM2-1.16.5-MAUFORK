@@ -69,6 +69,7 @@ public class YdmSoundEvents {
 	
 	// LP
 	public static final RegistryObject<SoundEvent> LP_COUNT = registerSoundEvent("lp_count");
+	public static final RegistryObject<SoundEvent> LP_HEAL = registerSoundEvent("lp_heal");
 	
 	// GY
 	public static final RegistryObject<SoundEvent> GY_ENTER = registerSoundEvent("gy_enter");
@@ -120,7 +121,18 @@ public class YdmSoundEvents {
 	public static final RegistryObject<SoundEvent> ATTACK_WIND_HIGH = registerSoundEvent("attack_wind_high");
 	public static final RegistryObject<SoundEvent> IMPACT_WIND = registerSoundEvent("impact_wind");
 	public static final RegistryObject<SoundEvent> IMPACT_WIND_HIGH = registerSoundEvent("impact_wind_high");
-	//TODO: Add the other Attributes
+	public static final RegistryObject<SoundEvent> BURN_DAMAGE = registerSoundEvent("burn_damage");
+	
+	// Special
+	public static final RegistryObject<SoundEvent> SPECIAL_DARK = registerSoundEvent("special_dark");
+	public static final RegistryObject<SoundEvent> SPECIAL_DIVINE = registerSoundEvent("special_divine");
+	public static final RegistryObject<SoundEvent> SPECIAL_EARTH = registerSoundEvent("special_earth");
+	public static final RegistryObject<SoundEvent> SPECIAL_FIRE = registerSoundEvent("special_fire");
+	public static final RegistryObject<SoundEvent> SPECIAL_LIGHT = registerSoundEvent("special_light");
+	public static final RegistryObject<SoundEvent> SPECIAL_WATER = registerSoundEvent("special_water");
+	public static final RegistryObject<SoundEvent> SPECIAL_WIND = registerSoundEvent("special_wind");
+	
+	// TODO: Add the other Attributes
 	
 	private static RegistryObject<SoundEvent> registerSoundEvent(String name) {
 		return SOUND_EVENTS.register(name, () -> new SoundEvent(new ResourceLocation(YDM.MOD_ID, name)));

@@ -353,6 +353,7 @@
 	"actionIcon.ydm.activate_effect": "Activate Effect",
 	"actionIcon.ydm.continue_effect": "Continue Effect",
 	"actionIcon.ydm.negate_effect": "Negate Effect",
+	"actionIcon.ydm.burn": "Inflict Burn",
 	"ydm.sound.subtitle.attack_dark": "DARK attack",
 	"ydm.sound.subtitle.attack_dark_high": "Strong DARK attack",
 	"ydm.sound.subtitle.attack_divine": "DIVINE attack",

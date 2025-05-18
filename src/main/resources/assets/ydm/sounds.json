@@ -111,6 +111,13 @@
         ],
         "subtitle": "ydm.sound.subtitle.banishment_exit"
     },
+	"burn_damage": {
+        "category": "block",
+        "sounds": [
+            "ydm:burn_damage"
+        ],
+        "subtitle": "ydm.sound.subtitle.burn_damage"
+    },
     "card_atk_position": {
         "category": "block",
         "sounds": [
@@ -399,6 +406,13 @@
             "ydm:lp_count"
         ],
         "subtitle": "ydm.sound.subtitle.lp_count"
+    },
+	"lp_heal": {
+        "category": "block",
+        "sounds": [
+            "ydm:lp_heal"
+        ],
+        "subtitle": "ydm.sound.subtitle.lp_heal"
     },
     "phase_change_player1": {
         "category": "block",

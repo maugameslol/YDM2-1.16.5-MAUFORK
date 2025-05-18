@@ -3,7 +3,7 @@ package de.cas_ual_ty.ydm.duel.screen.animation;
 import de.cas_ual_ty.ydm.YDM;
 import net.minecraft.util.ResourceLocation;
 
-public class RemoveTokenAnimation extends ExpandOutSymbolAnimation
+public class RemoveTokenAnimation extends StaticSymbolAnimation
 {
     
     public RemoveTokenAnimation(float centerPosX, float centerPosY, int size, int endSize)
