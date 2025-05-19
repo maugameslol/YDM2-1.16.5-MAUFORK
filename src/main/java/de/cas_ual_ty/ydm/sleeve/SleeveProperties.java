@@ -34,6 +34,12 @@ public class SleeveProperties {
 	public String image;
 	public String text;
 	public String[] designers;
+	public boolean isHardcoded;
+	
+	public SleeveProperties() 
+	{
+	// no idea why this is needed	
+	}
 	
 	public SleeveProperties(String name, String code, String text, String[] designers)
     {

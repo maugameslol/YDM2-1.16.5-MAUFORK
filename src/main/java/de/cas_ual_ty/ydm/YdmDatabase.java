@@ -187,7 +187,7 @@ public class YdmDatabase
         YdmDatabase.SETS_LIST.add(CardSet.DUMMY);
         YdmDatabase.SLEEVES_LIST.add(SleeveProperties.DUMMY);
         
-        //CustomCards.createAndRegisterEverything();
+        //DefaultSleeves.createAndRegisterEverything();
         
         if(!YDM.mainFolder.exists())
         {
