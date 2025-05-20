@@ -187,8 +187,6 @@ public class YdmDatabase
         YdmDatabase.SETS_LIST.add(CardSet.DUMMY);
         YdmDatabase.SLEEVES_LIST.add(SleeveProperties.DUMMY);
         
-        //DefaultSleeves.createAndRegisterEverything();
-        
         if(!YDM.mainFolder.exists())
         {
             YDM.log(YDM.mainFolder.getAbsolutePath() + " (main folder) does not exist! Aborting...");

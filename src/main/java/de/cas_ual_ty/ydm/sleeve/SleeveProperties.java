@@ -34,7 +34,6 @@ public class SleeveProperties {
 	public String image;
 	public String text;
 	public String[] designers;
-	public boolean isHardcoded;
 	
 	public SleeveProperties() 
 	{

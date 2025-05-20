@@ -195,6 +195,7 @@ public class YdmItems
             	}
             }
         }
+        
         registry.register(new SleeveItem(new Properties().tab(YDM.sleevesItemGroup).stacksTo(1)).setRegistryName(YDM.MOD_ID, "sleeve"));
         
         // TODO: Card Materials for Crafting Cards
