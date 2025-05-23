@@ -32,30 +32,37 @@ public class DeckBoxContainer extends Container
         
         itemHandler = YdmItems.BLACK_DECK_BOX.getItemHandler(this.itemStack);
         
-        final int itemsPerRow = 20; //original is 15
+        final int itemsPerRow = 15;
+        final int extraItemsPerRow = 5;
         
         // main deck
         for(int y = 0; y < DeckHolder.MAIN_DECK_SIZE / itemsPerRow; ++y)
         {
             for(int x = 0; x < itemsPerRow && x + y * itemsPerRow < DeckHolder.MAIN_DECK_SIZE; ++x)
             {
-                addSlot(new DeckBoxSlot(itemHandler, x + y * itemsPerRow + DeckHolder.MAIN_DECK_INDEX_START, 8 + x * 18, 12 + y * 18)); //original is 8 + x * 18 ,18 + y * 18));
+                addSlot(new DeckBoxSlot(itemHandler, x + y * itemsPerRow + DeckHolder.MAIN_DECK_INDEX_START, 8 + x * 18, 12 + y * 18));
             }
         }
         
         // extra deck
-        for(int x = 0; x < DeckHolder.EXTRA_DECK_SIZE; ++x)
+        for(int y = 0; y < DeckHolder.EXTRA_DECK_SIZE / extraItemsPerRow; ++y)
         {
-            addSlot(new DeckBoxSlot(itemHandler, x + DeckHolder.EXTRA_DECK_INDEX_START, 8 + x * 18, 110)); //original is 8 + x * 18, 104));
+            for(int x = 0; x < extraItemsPerRow && x + y * extraItemsPerRow < DeckHolder.EXTRA_DECK_SIZE; ++x)
+            {
+                addSlot(new DeckBoxSlot(itemHandler, x + y * extraItemsPerRow + DeckHolder.EXTRA_DECK_INDEX_START, 8 + x * 18, 92 + y * 18));
+            }
         }
         
         // side deck
-        for(int x = 0; x < DeckHolder.SIDE_DECK_SIZE; ++x)
+        for(int y = 0; y < DeckHolder.SIDE_DECK_SIZE / extraItemsPerRow; ++y)
         {
-            addSlot(new DeckBoxSlot(itemHandler, x + DeckHolder.SIDE_DECK_INDEX_START, 8 + x * 18, 136)); //original is 8 + x * 18, 136));
+            for(int x = 0; x < extraItemsPerRow && x + y * extraItemsPerRow < DeckHolder.SIDE_DECK_SIZE; ++x)
+            {
+                addSlot(new DeckBoxSlot(itemHandler, x + y * extraItemsPerRow + DeckHolder.SIDE_DECK_INDEX_START, 116 + x * 18, 92 + y * 18));
+            }
         }
         
-		addSlot(cardSleevesSlot = new Slot(new Inventory(1), 0, 8 + 12 * 18, 168 + 0 * 18) //original is 8 + 12 * 18, 168 + 0 * 18)
+		addSlot(cardSleevesSlot = new Slot(new Inventory(1), 0, 188, 160) //original is 8 + 12 * 18, 168 + 0 * 18)
         {
             @Override
             public boolean mayPlace(ItemStack stack)
@@ -77,7 +84,7 @@ public class DeckBoxContainer extends Container
         {
             for(int x = 0; x < 9; ++x)
             {
-                addSlot(new Slot(playerInventory, x + y * 9 + 9, 8 + x * 18, 168 + y * 18));
+                addSlot(new Slot(playerInventory, x + y * 9 + 9, 8 + x * 18, 160 + y * 18));
             }
         }
         
@@ -85,7 +92,7 @@ public class DeckBoxContainer extends Container
         Slot s;
         for(int x = 0; x < 9; ++x)
         {
-            s = new Slot(playerInventory, x, 8 + x * 18, 226);
+            s = new Slot(playerInventory, x, 8 + x * 18, 218);
             
             if(s.getItem() == this.itemStack)
             {

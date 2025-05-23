@@ -17,10 +17,12 @@ import net.minecraft.world.World;
 
 public class SleeveItem extends Item
 {
+	public final CardBackType sleeves;
 	//TODO: This is the Item class for the Custom Sleeves. I am trying to move them over to using the database system that sets and cards use.
-    public SleeveItem(Properties properties)
+    public SleeveItem(Properties properties, CardBackType sleeves)
     {
         super(properties);
+        this.sleeves = sleeves;
     }
     
     @Override

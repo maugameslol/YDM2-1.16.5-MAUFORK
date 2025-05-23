@@ -180,7 +180,6 @@ public class YdmItems
         
         registry.register(new DeckBoxItem(new Properties().tab(YDM.ydmItemGroup).stacksTo(1)).setRegistryName(YDM.MOD_ID, "patreon_deck_box"));
         
-        /*
         for(CardBackType sleeve : CardBackType.VALUES)
         {
             if(!sleeve.isCardBack())
@@ -195,9 +194,8 @@ public class YdmItems
             	}
             }
         }
-        */
         
-        registry.register(new SleeveItem(new Properties().tab(YDM.sleevesItemGroup).stacksTo(1)).setRegistryName(YDM.MOD_ID, "sleeve"));
+        registry.register(new SleeveItem(new Properties().tab(YDM.sleevesItemGroup).stacksTo(1), CardBackType.CARD_BACK).setRegistryName(YDM.MOD_ID, "sleeve"));
         
         // TODO: Card Materials for Crafting Cards
         // Card Borders

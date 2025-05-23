@@ -36,15 +36,15 @@ public class DeckBoxScreen extends ContainerScreen<DeckBoxContainer>
     @Override
     protected void init()
     {
-        imageWidth = 374; //original is 284
-        imageHeight = 250; //original is 250
+        imageWidth = 300; //original is 284
+        imageHeight = 242; //original is 250
         super.init();
     }
     
     @Override
     public void render(MatrixStack ms, int mouseX, int mouseY, float partialTicks)
     {
-    	leftPos = 96; //Previous version used 104. Adjust as needed, as people have been saying it gets cut off.
+    	leftPos = 104; //Previous version used 104. Adjust as needed, as people have been saying it gets cut off.
         renderBackground(ms);
         super.render(ms, mouseX, mouseY, partialTicks);
         renderTooltip(ms, mouseX, mouseY);
@@ -86,7 +86,7 @@ public class DeckBoxScreen extends ContainerScreen<DeckBoxContainer>
         }
         
         //drawString
-        font.draw(ms, new TranslationTextComponent("container.ydm.deck_box.extra").append(" " + amount + "/" + DeckHolder.EXTRA_DECK_SIZE), 8F, 101F, 0x404040); //original is 92F
+        font.draw(ms, new TranslationTextComponent("container.ydm.deck_box.extra").append(" " + amount + "/" + DeckHolder.EXTRA_DECK_SIZE), 8F, 83F, 0x404040); //original is 92F
         
         // side deck
         
@@ -102,9 +102,9 @@ public class DeckBoxScreen extends ContainerScreen<DeckBoxContainer>
         }
         
         //drawString
-        font.draw(ms, new TranslationTextComponent("container.ydm.deck_box.side").append(" " + amount + "/" + DeckHolder.SIDE_DECK_SIZE), 8F, 127F, 0x404040); //original is 124F
+        font.draw(ms, new TranslationTextComponent("container.ydm.deck_box.side").append(" " + amount + "/" + DeckHolder.SIDE_DECK_SIZE), 116F, 83F, 0x404040); //original is 124F
         
-        font.draw(ms, new TranslationTextComponent("container.ydm.deck_box.sleeves"), 224F, (float) (imageHeight - 96 + 2), 0x404040);
+        font.draw(ms, new TranslationTextComponent("container.ydm.deck_box.sleeves"), 186F, (float) (imageHeight - 96 + 2), 0x404040);
         
         font.draw(ms, inventory.getDisplayName(), 8F, (float) (imageHeight - 96 + 2), 0x404040);
     }

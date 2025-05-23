@@ -3,6 +3,7 @@ package de.cas_ual_ty.ydm.sleeve;
 import de.cas_ual_ty.ydm.YdmDatabase;
 
 public class DefaultSleeves {
+	/*
 	public static SleeveProperties CARD_BACK_PROPERTIES;
     public static SleeveProperties CARD_BACK_SLEEVE;
     
@@ -23,11 +24,11 @@ public class DefaultSleeves {
     
     public static SleeveProperties SLEEVES_GREEN_PROPERTIES;
     public static SleeveProperties SLEEVES_GREEN_SLEEVE;
-    
+    */
 	public static void createAndRegisterEverything()
     {
 		//TODO: Find a way to reuse the old CardBackType Values
-		
+		/*
 		DefaultSleeves.CARD_BACK_PROPERTIES = new SleeveProperties();
 		DefaultSleeves.CARD_BACK_PROPERTIES.isHardcoded = true;
 		DefaultSleeves.CARD_BACK_PROPERTIES.name = "Card Back";
@@ -90,6 +91,7 @@ public class DefaultSleeves {
 		DefaultSleeves.SLEEVES_GREEN_PROPERTIES.image = null;
         DefaultSleeves.SLEEVES_GREEN_SLEEVE = DefaultSleeves.createDefaultSleeve(DefaultSleeves.SLEEVES_GREEN_PROPERTIES);
         YdmDatabase.SLEEVES_LIST.add(DefaultSleeves.SLEEVES_GREEN_PROPERTIES);
+        */
     }
 	public static SleeveProperties createDefaultSleeve(SleeveProperties s)
     {

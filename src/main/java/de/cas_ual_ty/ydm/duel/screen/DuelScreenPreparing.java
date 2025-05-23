@@ -140,7 +140,7 @@ public class DuelScreenPreparing<E extends DuelContainer> extends DuelContainerS
             if(d != null && d != DeckHolder.DUMMY)
             {
                 // coordinates from #drawActiveDeckBackground
-                int xSize = 374; // original is 284
+                int xSize = 284;
                 //int ySize = 153;
                 int actualGuiLeft = (width - xSize) / 2;
                 int guiLeft = actualGuiLeft - leftPos;
@@ -153,27 +153,27 @@ public class DuelScreenPreparing<E extends DuelContainer> extends DuelContainerS
                 
                 // main deck
                 //drawString
-                font.draw(ms, new TranslationTextComponent("container.ydm.deck_box.main").append(" " + d.getMainDeckSize() + "/" + DeckHolder.MAIN_DECK_SIZE), guiLeft + 8F, guiTop + 3F, 0x404040); //original is 6F
+                font.draw(ms, new TranslationTextComponent("container.ydm.deck_box.main").append(" " + d.getMainDeckSize() + "/" + DeckHolder.MAIN_DECK_SIZE), guiLeft + 8F, guiTop + 6F, 0x404040);
                 
                 // extra deck
                 //drawString
-                font.draw(ms, new TranslationTextComponent("container.ydm.deck_box.extra").append(" " + d.getExtraDeckSize() + "/" + DeckHolder.EXTRA_DECK_SIZE), guiLeft + 8F, guiTop + 101F, 0x404040); //original is 92F
+                font.draw(ms, new TranslationTextComponent("container.ydm.deck_box.extra").append(" " + d.getExtraDeckSize() + "/" + DeckHolder.EXTRA_DECK_SIZE), guiLeft + 8F, guiTop + 92F, 0x404040);
                 
                 // side deck
                 //drawString
-                font.draw(ms, new TranslationTextComponent("container.ydm.deck_box.side").append(" " + d.getSideDeckSize() + "/" + DeckHolder.SIDE_DECK_SIZE), guiLeft + 8F, guiTop + 127F, 0x404040); //original is 124F
+                font.draw(ms, new TranslationTextComponent("container.ydm.deck_box.side").append(" " + d.getSideDeckSize() + "/" + DeckHolder.SIDE_DECK_SIZE), guiLeft + 8F, guiTop + 124F, 0x404040);
                 
                 int size = 18;
                 CardHolder c;
                 
                 //following code from DeckBoxContainer#<init>
                 
-                final int itemsPerRow = 20; //original is 15
+                final int itemsPerRow = 15;
                 
                 // main deck
                 boolean broken = false;
                 int offX = 8;
-                int offY = 12; //original is 18
+                int offY = 18;
                 for(int y = 0; y < DeckHolder.MAIN_DECK_SIZE / itemsPerRow; ++y)
                 {
                     for(int x = 0; x < itemsPerRow && x + y * itemsPerRow < DeckHolder.MAIN_DECK_SIZE; ++x)
@@ -212,7 +212,7 @@ public class DuelScreenPreparing<E extends DuelContainer> extends DuelContainerS
                 
                 // extra deck
                 offX = 8;
-                offY = 110; //original is 104 
+                offY = 104;
                 for(int x = 0; x < DeckHolder.EXTRA_DECK_SIZE; ++x)
                 {
                     if(d.getExtraDeck().size() <= x)
@@ -239,7 +239,7 @@ public class DuelScreenPreparing<E extends DuelContainer> extends DuelContainerS
                 
                 // side deck
                 offX = 8;
-                offY = 136; //original is 136
+                offY = 136;
                 for(int x = 0; x < DeckHolder.SIDE_DECK_SIZE; ++x)
                 {
                     if(d.getSideDeck().size() <= x)
@@ -277,8 +277,8 @@ public class DuelScreenPreparing<E extends DuelContainer> extends DuelContainerS
             
             if(d != null && d != DeckHolder.DUMMY)
             {
-                int xSize = 374; // original is 284
-                int ySize = 153; // original is 153
+                int xSize = 284;
+                int ySize = 153;
                 int guiLeft = (width - xSize) / 2;
                 int guiTop = topPos + 6 + 5 + font.lineHeight;
                 

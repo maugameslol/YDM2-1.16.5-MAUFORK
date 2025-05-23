@@ -2,6 +2,7 @@ package de.cas_ual_ty.ydm.deckbox;
 
 import de.cas_ual_ty.ydm.card.ItemStackCardHolder;
 import de.cas_ual_ty.ydm.sleeve.DefaultSleevesItem;
+import de.cas_ual_ty.ydm.sleeve.SleeveItem;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 
@@ -70,6 +71,10 @@ public class ItemHandlerDeckHolder extends DeckHolder
         if(sleevesStack.getItem() instanceof DefaultSleevesItem)
         {
             sleeves = ((DefaultSleevesItem) sleevesStack.getItem()).sleeves;
+        }
+        else if(sleevesStack.getItem() instanceof SleeveItem)
+        {
+            sleeves = ((SleeveItem) sleevesStack.getItem()).sleeves;
         }
     }
     

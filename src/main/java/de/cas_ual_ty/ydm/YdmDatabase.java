@@ -26,7 +26,6 @@ import java.util.zip.ZipInputStream;
 
 public class YdmDatabase
 {
-	//TODO: Sleeves in Database
     public static final DNCList<Long, Properties> PROPERTIES_LIST = new DNCList<>((p) -> p.getId(), Long::compare);
     private static int cardsVariantsCount = -1;
     
