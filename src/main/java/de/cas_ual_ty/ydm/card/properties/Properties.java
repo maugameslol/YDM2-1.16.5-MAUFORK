@@ -50,6 +50,7 @@ public class Properties
         Properties.DUMMY.isSpeed = false;
         Properties.DUMMY.isLegend = false;
         Properties.DUMMY.limit = 0;
+        Properties.DUMMY.cardColor = CardColor.BLANK;
     }
     
     public boolean isHardcoded;
@@ -66,6 +67,7 @@ public class Properties
     public String[] tags;
     public String[] keywords;
     public String[] designers;
+    public CardColor cardColor;
     
     public boolean isAnime;
     public byte limit;
@@ -98,6 +100,7 @@ public class Properties
         tags = p0.tags;
         keywords = p0.keywords;
         designers = p0.designers;
+        cardColor = p0.cardColor;
         isAnime = p0.isAnime;
         isSpeed = p0.isSpeed;
         isLegend = p0.isLegend;
@@ -206,6 +209,15 @@ public class Properties
         	{
         		attribute = null;
         	}
+        }
+        
+        if(j.has(JsonKeys.CARD_COLOR))
+        {
+    		cardColor = CardColor.fromString(j.get(JsonKeys.CARD_COLOR).getAsString());
+        }
+        else
+        {
+        	cardColor = null;
         }
         
         if(j.has(JsonKeys.DESIGNERS))
@@ -368,6 +380,7 @@ public class Properties
         j.addProperty(JsonKeys.IS_LEGEND, isLegend);
         j.addProperty(JsonKeys.LIMIT, limit);
         j.addProperty(JsonKeys.IS_LIMIT_SHARED, isLimitShared);
+        j.addProperty(JsonKeys.CARD_COLOR, cardColor.name);
         
         j.addProperty(JsonKeys.IS_RUSH, isRush);
         j.addProperty(JsonKeys.RUSH_REQUIREMENT_TEXT, rushRequirementText);
@@ -1077,6 +1090,41 @@ public class Properties
     	
     }
     
+    // --- CardColor ---
+    
+    public CardColor getDefaultCardColor() 
+    {
+    	CardColor defaultColor = null;
+    	if(getCardColor() == null) 
+    	{
+    		if(getIsSpell()) 
+        	{
+    			defaultColor = CardColor.GREEN;
+        	}
+        	else if(getIsTrap()) 
+        	{
+        		defaultColor = CardColor.MAGENTA;
+        	}
+        	else if(getIsSkill()) 
+        	{
+        		defaultColor = CardColor.BLUE;
+        	}
+        	else if(getIsInfo()) 
+        	{
+        		defaultColor = CardColor.GRAY;
+        	}
+        	else if(getIsMaterial()) 
+        	{
+        		defaultColor = CardColor.GRAY;
+        	}
+    	}
+    	else 
+    	{
+    		defaultColor = CardColor.BLANK;
+    	}
+    	return defaultColor;
+    }
+    
     // --- Getters ---
     
     public String getName()
@@ -1117,6 +1165,11 @@ public class Properties
     public String getAttribute()
     {
         return attribute;
+    }
+    
+    public CardColor getCardColor()
+    {
+        return cardColor;
     }
     
     public String[] getImages()

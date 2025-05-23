@@ -22,6 +22,7 @@ public class JsonKeys
     public static final String KEYWORDS = "keywords";
     public static final String DESIGNERS = "designers";
     public static final String CARD_COLOR = "card_color";
+    public static final String MENTIONS = "mentions";
     
     // card limitations/legality
     public static final String IS_ILLEGAL = "is_illegal";
@@ -136,12 +137,15 @@ public class JsonKeys
     public static final String LAYERS = "layers";
     
     // sleeves
-    // TODO: Make sleeves use these JSON Keys
     // Use NAME String from cards
     // Use CODE String from sets
     // Use IMAGE String from sets
     // Use DESIGNER String from cards
     // Use TEXT String from cards
+    
+    // banlist
+    // TODO: What JSON keys would banlists need
+    // Use NAME String from cards
     
     // other
     

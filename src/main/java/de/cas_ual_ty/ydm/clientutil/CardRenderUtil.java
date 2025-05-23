@@ -6,6 +6,8 @@ import de.cas_ual_ty.ydm.YDM;
 import de.cas_ual_ty.ydm.YdmDatabase;
 import de.cas_ual_ty.ydm.YdmItems;
 import de.cas_ual_ty.ydm.card.CardHolder;
+import de.cas_ual_ty.ydm.card.properties.CardColor;
+//import de.cas_ual_ty.ydm.card.properties.MonsterProperties;
 import de.cas_ual_ty.ydm.card.properties.Properties;
 import de.cas_ual_ty.ydm.duel.playfield.CardPosition;
 import de.cas_ual_ty.ydm.duel.playfield.DuelCard;
@@ -80,6 +82,33 @@ public class CardRenderUtil
         
         CardRenderUtil.bindInfoResourceLocation(card);
         YdmBlitUtil.fullBlit(ms, x, margin, imageSize, imageSize);
+        
+        
+        // TODO: card color overlay
+        // Eventually want the mod to handle the card's border color and to eventually separate the artwork and symbols
+        /*
+        CardColor cardColor = card.getCard().getCardColor();
+        
+        if(cardColor != null)
+        {
+            ClientProxy.getMinecraft().textureManager.bind(CardRenderUtil.getInfoCardColorOverlay(CardColor.fromString(card.getCard().getCardColor().name)));
+            YdmBlitUtil.fullBlit(ms, x, margin, imageSize, imageSize);
+        }
+        else if(cardColor == null) 
+        {
+        	ClientProxy.getMinecraft().textureManager.bind(CardRenderUtil.getInfoCardColorOverlay(CardColor.fromString(card.getCard().getDefaultCardColor().name)));
+            YdmBlitUtil.fullBlit(ms, x, margin, imageSize, imageSize);
+        }
+        
+        if(card.getCard() instanceof MonsterProperties && !token) 
+        {
+        	if(((MonsterProperties) card.card).getIsPendulum()) 
+        	{
+        		ClientProxy.getMinecraft().textureManager.bind(CardRenderUtil.getInfoPendulumOverlay());
+                YdmBlitUtil.fullBlit(ms, x, margin, imageSize, imageSize);
+        	}
+        }
+        */
         
         if(token)
         {
@@ -163,6 +192,16 @@ public class CardRenderUtil
     public static ResourceLocation getRarityOverlay()
     {
         return new ResourceLocation(YDM.MOD_ID, "textures/item/" + ClientProxy.activeCardInfoImageSize + "/" + "token_overlay" + ".png");
+    }
+    
+    public static ResourceLocation getInfoCardColorOverlay(CardColor cardColor)
+    {
+        return new ResourceLocation(YDM.MOD_ID, "textures/item/" + ClientProxy.activeCardInfoImageSize + "/" + cardColor.name + "_card_color_overlay.png");
+    }
+    
+    public static ResourceLocation getInfoPendulumOverlay()
+    {
+        return new ResourceLocation(YDM.MOD_ID, "textures/item/" + ClientProxy.activeCardInfoImageSize + "/" + "pendulum_overlay" + ".png");
     }
     
     public static void renderInfoCardWithRarity(MatrixStack ms, int mouseX, int mouseY, float x, float y, float width, float height, CardHolder card)

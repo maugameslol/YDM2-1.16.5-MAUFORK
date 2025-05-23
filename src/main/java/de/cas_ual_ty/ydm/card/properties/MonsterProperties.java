@@ -588,6 +588,58 @@ public class MonsterProperties extends Properties
     	list.add(new StringTextComponent("Stage" + getEvolutionStage()));
     }
     
+    // --- CardColor ---
+    
+    @Override
+    public CardColor getDefaultCardColor() 
+    {
+    	CardColor defaultColor = null;
+    	if(getCardColor() == null) 
+    	{
+    		if(getIsNormal()) 
+        	{
+    			defaultColor = CardColor.YELLOW;
+        	}
+        	else if(getIsEffect() || getIsMaximum()) 
+        	{
+        		defaultColor = CardColor.ORANGE;
+        	}
+        	else if(getIsFusion()) 
+        	{
+        		defaultColor = CardColor.PURPLE;
+        	}
+        	else if(getIsRitual()) 
+        	{
+        		defaultColor = CardColor.LIGHT_BLUE;
+        	}
+        	else if(getIsSynchro()) 
+        	{
+        		defaultColor = CardColor.WHITE;
+        	}
+        	else if(getIsXyz()) 
+        	{
+        		defaultColor = CardColor.BLACK;
+        	}
+        	else if(getIsLink()) 
+        	{
+        		defaultColor = CardColor.BLUE;
+        	}
+        	else if(getIsToken()) 
+        	{
+        		defaultColor = CardColor.LIGHT_GRAY;
+        	}
+        	else if(getIsEvolution()) 
+        	{
+        		defaultColor = CardColor.RED;
+        	}
+    	}
+    	else 
+    	{
+    		defaultColor = CardColor.BLANK;
+    	}
+    	return defaultColor;
+    }
+    
     // --- Getters ---
     
     public int getAtk()

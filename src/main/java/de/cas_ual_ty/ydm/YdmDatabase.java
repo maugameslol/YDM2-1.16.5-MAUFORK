@@ -6,6 +6,7 @@ import de.cas_ual_ty.ydm.card.properties.Properties;
 import de.cas_ual_ty.ydm.rarity.RarityEntry;
 import de.cas_ual_ty.ydm.set.CardSet;
 import de.cas_ual_ty.ydm.set.Distribution;
+import de.cas_ual_ty.ydm.sleeve.DefaultSleeves;
 import de.cas_ual_ty.ydm.sleeve.SleeveProperties;
 import de.cas_ual_ty.ydm.util.DNCList;
 import de.cas_ual_ty.ydm.util.JsonKeys;
@@ -186,6 +187,8 @@ public class YdmDatabase
         YdmDatabase.PROPERTIES_LIST.add(Properties.DUMMY);
         YdmDatabase.SETS_LIST.add(CardSet.DUMMY);
         YdmDatabase.SLEEVES_LIST.add(SleeveProperties.DUMMY);
+        
+        DefaultSleeves.createAndRegisterEverything();
         
         if(!YDM.mainFolder.exists())
         {

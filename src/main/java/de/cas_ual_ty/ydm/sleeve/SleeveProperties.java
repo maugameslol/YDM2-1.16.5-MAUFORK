@@ -34,9 +34,11 @@ public class SleeveProperties {
 	public String image;
 	public String text;
 	public String[] designers;
+	public boolean isHardcoded;
 	
 	public SleeveProperties() 
 	{
+		isHardcoded = false;
 	// no idea why this is needed	
 	}
 	
@@ -198,6 +200,6 @@ public class SleeveProperties {
 	
 	public boolean getIsHardcoded()
     {
-        return false;
+        return isHardcoded;
     }
 }
