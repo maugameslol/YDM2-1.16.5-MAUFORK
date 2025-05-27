@@ -36,15 +36,15 @@ public class DeckBoxScreen extends ContainerScreen<DeckBoxContainer>
     @Override
     protected void init()
     {
-        imageWidth = 300; //original is 284
-        imageHeight = 242; //original is 250
+        imageWidth = 374;
+        imageHeight = 272;
         super.init();
     }
     
     @Override
     public void render(MatrixStack ms, int mouseX, int mouseY, float partialTicks)
     {
-    	leftPos = 104; //Previous version used 104. Adjust as needed, as people have been saying it gets cut off.
+    	leftPos = 96; //Previous version used 104. Adjust as needed, as people have been saying it gets cut off.
         renderBackground(ms);
         super.render(ms, mouseX, mouseY, partialTicks);
         renderTooltip(ms, mouseX, mouseY);
@@ -55,6 +55,8 @@ public class DeckBoxScreen extends ContainerScreen<DeckBoxContainer>
     {
         Slot s;
         int amount;
+        
+        //TODO: Add the name of the Deck somewhere
         
         // main deck
         
@@ -70,7 +72,7 @@ public class DeckBoxScreen extends ContainerScreen<DeckBoxContainer>
         }
         
         //drawString
-        font.draw(ms, new TranslationTextComponent("container.ydm.deck_box.main").append(" " + amount + "/" + DeckHolder.MAIN_DECK_SIZE), 8F, 3F, 0x404040); //original is 6F
+        font.draw(ms, new TranslationTextComponent("container.ydm.deck_box.main").append(" " + amount + "/" + DeckHolder.MAIN_DECK_SIZE), 8F, 4F, 0x404040);
         
         // extra deck
         
@@ -86,7 +88,7 @@ public class DeckBoxScreen extends ContainerScreen<DeckBoxContainer>
         }
         
         //drawString
-        font.draw(ms, new TranslationTextComponent("container.ydm.deck_box.extra").append(" " + amount + "/" + DeckHolder.EXTRA_DECK_SIZE), 8F, 83F, 0x404040); //original is 92F
+        font.draw(ms, new TranslationTextComponent("container.ydm.deck_box.extra").append(" " + amount + "/" + DeckHolder.EXTRA_DECK_SIZE), 118F, 4F, 0x404040);
         
         // side deck
         
@@ -102,9 +104,9 @@ public class DeckBoxScreen extends ContainerScreen<DeckBoxContainer>
         }
         
         //drawString
-        font.draw(ms, new TranslationTextComponent("container.ydm.deck_box.side").append(" " + amount + "/" + DeckHolder.SIDE_DECK_SIZE), 116F, 83F, 0x404040); //original is 124F
+        font.draw(ms, new TranslationTextComponent("container.ydm.deck_box.side").append(" " + amount + "/" + DeckHolder.SIDE_DECK_SIZE), 224F, 4F, 0x404040);
         
-        font.draw(ms, new TranslationTextComponent("container.ydm.deck_box.sleeves"), 186F, (float) (imageHeight - 96 + 2), 0x404040);
+        font.draw(ms, new TranslationTextComponent("container.ydm.deck_box.sleeves"), 188F, (float) (imageHeight - 96 + 2), 0x404040);
         
         font.draw(ms, inventory.getDisplayName(), 8F, (float) (imageHeight - 96 + 2), 0x404040);
     }
@@ -114,6 +116,6 @@ public class DeckBoxScreen extends ContainerScreen<DeckBoxContainer>
     {
         ScreenUtil.white();
         minecraft.getTextureManager().bind(DeckBoxScreen.DECK_BOX_GUI_TEXTURE);
-		YdmBlitUtil.blit(ms, leftPos, topPos, imageWidth, imageHeight, 0, 0, imageWidth, imageHeight, 512, 256);
+		YdmBlitUtil.blit(ms, leftPos, topPos, imageWidth, imageHeight, 0, 0, imageWidth, imageHeight, 512, 272);
     }
 }

@@ -140,7 +140,7 @@ public class DuelScreenPreparing<E extends DuelContainer> extends DuelContainerS
             if(d != null && d != DeckHolder.DUMMY)
             {
                 // coordinates from #drawActiveDeckBackground
-                int xSize = 284;
+                int xSize = 374;
                 //int ySize = 153;
                 int actualGuiLeft = (width - xSize) / 2;
                 int guiLeft = actualGuiLeft - leftPos;
@@ -157,34 +157,36 @@ public class DuelScreenPreparing<E extends DuelContainer> extends DuelContainerS
                 
                 // extra deck
                 //drawString
-                font.draw(ms, new TranslationTextComponent("container.ydm.deck_box.extra").append(" " + d.getExtraDeckSize() + "/" + DeckHolder.EXTRA_DECK_SIZE), guiLeft + 8F, guiTop + 92F, 0x404040);
+                font.draw(ms, new TranslationTextComponent("container.ydm.deck_box.extra").append(" " + d.getExtraDeckSize() + "/" + DeckHolder.EXTRA_DECK_SIZE), guiLeft + 118F, guiTop + 6F, 0x404040);
                 
                 // side deck
                 //drawString
-                font.draw(ms, new TranslationTextComponent("container.ydm.deck_box.side").append(" " + d.getSideDeckSize() + "/" + DeckHolder.SIDE_DECK_SIZE), guiLeft + 8F, guiTop + 124F, 0x404040);
+                font.draw(ms, new TranslationTextComponent("container.ydm.deck_box.side").append(" " + d.getSideDeckSize() + "/" + DeckHolder.SIDE_DECK_SIZE), guiLeft + 224F, guiTop + 6F, 0x404040);
                 
                 int size = 18;
                 CardHolder c;
                 
                 //following code from DeckBoxContainer#<init>
                 
-                final int itemsPerRow = 15;
+                final int mainDeckItemsPerRow = 20;
+                final int extraDeckItemsPerRow = 10;
+                final int sideDeckItemsPerRow = 10;
                 
                 // main deck
                 boolean broken = false;
                 int offX = 8;
                 int offY = 18;
-                for(int y = 0; y < DeckHolder.MAIN_DECK_SIZE / itemsPerRow; ++y)
+                for(int y = 0; y < DeckHolder.MAIN_DECK_SIZE / mainDeckItemsPerRow; ++y)
                 {
-                    for(int x = 0; x < itemsPerRow && x + y * itemsPerRow < DeckHolder.MAIN_DECK_SIZE; ++x)
+                    for(int x = 0; x < mainDeckItemsPerRow && x + y * mainDeckItemsPerRow < DeckHolder.MAIN_DECK_SIZE; ++x)
                     {
-                        if(d.getMainDeck().size() <= x + y * itemsPerRow)
+                        if(d.getMainDeck().size() <= x + y * mainDeckItemsPerRow)
                         {
                             broken = true;
                             break;
                         }
                         
-                        c = d.getMainDeck().get(x + y * itemsPerRow);
+                        c = d.getMainDeck().get(x + y * mainDeckItemsPerRow);
                         
                         if(c != null && c.getCard() != null)
                         {
@@ -212,34 +214,48 @@ public class DuelScreenPreparing<E extends DuelContainer> extends DuelContainerS
                 
                 // extra deck
                 offX = 8;
-                offY = 104;
-                for(int x = 0; x < DeckHolder.EXTRA_DECK_SIZE; ++x)
+                offY = 126;
+                for(int y = 0; y < DeckHolder.EXTRA_DECK_SIZE / extraDeckItemsPerRow; ++y)
                 {
-                    if(d.getExtraDeck().size() <= x)
+                    for(int x = 0; x < extraDeckItemsPerRow && x + y * extraDeckItemsPerRow < DeckHolder.EXTRA_DECK_SIZE; ++x)
+                    {
+                        if(d.getExtraDeck().size() <= x + y * extraDeckItemsPerRow)
+                        {
+                            broken = true;
+                            break;
+                        }
+                        
+                        c = d.getExtraDeck().get(x + y * extraDeckItemsPerRow);
+                        
+                        if(c != null && c.getCard() != null)
+                        {
+                            CardRenderUtil.bindMainResourceLocation(c);
+                            YdmBlitUtil.fullBlit(ms, guiLeft + offX, guiTop + offY, 16, 16);
+                            
+                            if(mouseX >= offX && mouseX < offX + size && mouseY >= offY && mouseY < offY + size)
+                            {
+                                ScreenUtil.renderHoverRect(ms, guiLeft + offX, guiTop + offY, 16, 16);
+                                renderCardInfoForeground(ms, c, actualGuiLeft);
+                            }
+                        }
+                        
+                        offX += size;
+                    }
+                    
+                    if(broken)
                     {
                         break;
                     }
                     
-                    c = d.getExtraDeck().get(x);
-                    
-                    if(c != null && c.getCard() != null)
-                    {
-                        CardRenderUtil.bindMainResourceLocation(c);
-                        YdmBlitUtil.fullBlit(ms, guiLeft + offX, guiTop + offY, 16, 16);
-                        
-                        if(mouseX >= offX && mouseX < offX + size && mouseY >= offY && mouseY < offY + size)
-                        {
-                            ScreenUtil.renderHoverRect(ms, guiLeft + offX, guiTop + offY, 16, 16);
-                            renderCardInfoForeground(ms, c, actualGuiLeft);
-                        }
-                    }
-                    
-                    offX += size;
+                    offX = 8;
+                    offY += size;
                 }
                 
+                
                 // side deck
-                offX = 8;
-                offY = 136;
+                offX = 188;
+                offY = 126;
+                /*
                 for(int x = 0; x < DeckHolder.SIDE_DECK_SIZE; ++x)
                 {
                     if(d.getSideDeck().size() <= x)
@@ -263,6 +279,43 @@ public class DuelScreenPreparing<E extends DuelContainer> extends DuelContainerS
                     
                     offX += size;
                 }
+                */
+                
+                for(int y = 0; y < DeckHolder.SIDE_DECK_SIZE / sideDeckItemsPerRow; ++y)
+                {
+                    for(int x = 0; x < sideDeckItemsPerRow && x + y * sideDeckItemsPerRow < DeckHolder.SIDE_DECK_SIZE; ++x)
+                    {
+                        if(d.getSideDeck().size() <= x + y * sideDeckItemsPerRow)
+                        {
+                            broken = true;
+                            break;
+                        }
+                        
+                        c = d.getSideDeck().get(x + y * sideDeckItemsPerRow);
+                        
+                        if(c != null && c.getCard() != null)
+                        {
+                            CardRenderUtil.bindMainResourceLocation(c);
+                            YdmBlitUtil.fullBlit(ms, guiLeft + offX, guiTop + offY, 16, 16);
+                            
+                            if(mouseX >= offX && mouseX < offX + size && mouseY >= offY && mouseY < offY + size)
+                            {
+                                ScreenUtil.renderHoverRect(ms, guiLeft + offX, guiTop + offY, 16, 16);
+                                renderCardInfoForeground(ms, c, actualGuiLeft);
+                            }
+                        }
+                        
+                        offX += size;
+                    }
+                    
+                    if(broken)
+                    {
+                        break;
+                    }
+                    
+                    offX = 188;
+                    offY += size;
+                }
             }
         }
     }
@@ -277,14 +330,14 @@ public class DuelScreenPreparing<E extends DuelContainer> extends DuelContainerS
             
             if(d != null && d != DeckHolder.DUMMY)
             {
-                int xSize = 284;
-                int ySize = 153;
+                int xSize = 374;
+                int ySize = 196;
                 int guiLeft = (width - xSize) / 2;
                 int guiTop = topPos + 6 + 5 + font.lineHeight;
                 
                 minecraft.getTextureManager().bind(DuelContainerScreen.DECK_BACKGROUND_GUI_TEXTURE);
                 YdmBlitUtil.blit(ms, guiLeft, guiTop, xSize, ySize, 0, 0, xSize, ySize, 512, 256);
-                YdmBlitUtil.blit(ms, guiLeft, guiTop + ySize, xSize, 7, 0, 243, xSize, 7, 512, 256);
+                //YdmBlitUtil.blit(ms, guiLeft, guiTop + ySize, xSize, 7, 0, 186, xSize, 7, 512, 256);
             }
         }
     }

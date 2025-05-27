@@ -9,9 +9,11 @@ import java.util.stream.Stream;
 
 public class DeckHolder
 {
-    public static final int MAIN_DECK_SIZE = 60;  //original is 60
-    public static final int EXTRA_DECK_SIZE = 15; //original is 15
-    public static final int SIDE_DECK_SIZE = 15; //original is 15
+    public static final int MAIN_DECK_SIZE = 120;
+    public static final int EXTRA_DECK_SIZE = 30;
+    public static final int SIDE_DECK_SIZE = 30;
+    // TODO: Possibly implement another deck for extra cards to place in the Extra Zone
+    //public static final int MISC_DECK_SIZE = 15;
     public static final int TOTAL_DECK_SIZE = DeckHolder.MAIN_DECK_SIZE + DeckHolder.EXTRA_DECK_SIZE + DeckHolder.SIDE_DECK_SIZE;
     // _end index is excluded
     public static final int MAIN_DECK_INDEX_START = 0;
