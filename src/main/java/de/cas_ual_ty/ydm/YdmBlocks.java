@@ -1,5 +1,7 @@
 package de.cas_ual_ty.ydm;
 
+import de.cas_ual_ty.ydm.block.CardDecrafterBlock;
+import de.cas_ual_ty.ydm.block.CosmeticBlock;
 import de.cas_ual_ty.ydm.cardsupply.CardSupplyBlock;
 import de.cas_ual_ty.ydm.duel.block.DuelBlock;
 import net.minecraft.block.Block;
@@ -21,6 +23,10 @@ public class YdmBlocks
     public static final DuelBlock DUEL_PLAYMAT = null;
     public static final DuelBlock DUEL_TABLE = null;
     public static final CardSupplyBlock CARD_SUPPLY = null;
+    public static final CosmeticBlock CARD_CRAFTER = null;
+    public static final CardDecrafterBlock CARD_DECRAFTER = null;
+    public static final CosmeticBlock RARITY_EXCHANGER = null;
+    public static final CosmeticBlock DOMAIN_GENERATOR = null;
     
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Block> event)
@@ -33,5 +39,9 @@ public class YdmBlocks
                 Block.box(0, 13, 0, 16, 15, 16),
                 Block.box(1, 12.5, 1, 15, 15.5, 15))).setRegistryName(YDM.MOD_ID, "duel_table"));
         registry.register(new CardSupplyBlock(Block.Properties.of(Material.METAL, MaterialColor.METAL).strength(5.0F, 6.0F).sound(SoundType.METAL)).setRegistryName(YDM.MOD_ID, "card_supply"));
+        registry.register(new CosmeticBlock(Block.Properties.of(Material.METAL, MaterialColor.METAL).strength(5.0F, 6.0F).sound(SoundType.METAL)).setRegistryName(YDM.MOD_ID, "card_crafter"));
+        registry.register(new CardDecrafterBlock(Block.Properties.of(Material.METAL, MaterialColor.METAL).strength(5.0F, 6.0F).sound(SoundType.METAL), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 9.0D, 16.0D)).setRegistryName(YDM.MOD_ID, "card_decrafter"));
+        registry.register(new CosmeticBlock(Block.Properties.of(Material.METAL, MaterialColor.METAL).strength(5.0F, 6.0F).sound(SoundType.METAL)).setRegistryName(YDM.MOD_ID, "rarity_exchanger"));
+        registry.register(new CosmeticBlock(Block.Properties.of(Material.METAL, MaterialColor.METAL).strength(5.0F, 6.0F).sound(SoundType.METAL)).setRegistryName(YDM.MOD_ID, "domain_generator"));
     }
 }

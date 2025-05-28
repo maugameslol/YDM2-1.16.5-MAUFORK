@@ -37,6 +37,10 @@ public class YdmItems
     public static final Item DUEL_PLAYMAT = null;
     public static final Item DUEL_TABLE = null;
     public static final Item CARD_SUPPLY = null;
+    public static final Item CARD_CRAFTER = null;
+    public static final Item CARD_DECRAFTER = null;
+    public static final Item RARITY_EXCHANGER = null;
+    public static final Item DOMAIN_GENERATOR = null;
     
     public static final SimpleBinderItem SIMPLE_BINDER_3 = null;
     public static final SimpleBinderItem SIMPLE_BINDER_9 = null;
@@ -108,6 +112,11 @@ public class YdmItems
         registry.register(new BlockItem(YdmBlocks.DUEL_PLAYMAT, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "duel_playmat"));
         registry.register(new BlockItem(YdmBlocks.DUEL_TABLE, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "duel_table"));
         registry.register(new BlockItem(YdmBlocks.CARD_SUPPLY, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "card_supply"));
+        
+        registry.register(new BlockItem(YdmBlocks.CARD_CRAFTER, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "card_crafter"));
+        registry.register(new BlockItem(YdmBlocks.CARD_DECRAFTER, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "card_decrafter"));
+        registry.register(new BlockItem(YdmBlocks.RARITY_EXCHANGER, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "rarity_exchanger"));
+        registry.register(new BlockItem(YdmBlocks.DOMAIN_GENERATOR, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "domain_generator"));
         
         registry.register(SimpleBinderItem.makeItem(YDM.MOD_ID, YDM.ydmItemGroup, 3));
         registry.register(SimpleBinderItem.makeItem(YDM.MOD_ID, YDM.ydmItemGroup, 9));

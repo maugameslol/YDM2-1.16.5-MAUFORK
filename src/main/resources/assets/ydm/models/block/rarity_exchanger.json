@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "ydm:block/rarity_exchanger_side",
+        "down": "ydm:block/rarity_exchanger_bottom",
+        "up": "ydm:block/rarity_exchanger_top",
+        "north": "ydm:block/rarity_exchanger_side",
+        "east": "ydm:block/rarity_exchanger_side",
+        "south": "ydm:block/rarity_exchanger_side",
+        "west": "ydm:block/rarity_exchanger_side"
+    }
+}

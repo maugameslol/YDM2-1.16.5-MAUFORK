@@ -255,32 +255,6 @@ public class DuelScreenPreparing<E extends DuelContainer> extends DuelContainerS
                 // side deck
                 offX = 188;
                 offY = 126;
-                /*
-                for(int x = 0; x < DeckHolder.SIDE_DECK_SIZE; ++x)
-                {
-                    if(d.getSideDeck().size() <= x)
-                    {
-                        break;
-                    }
-                    
-                    c = d.getSideDeck().get(x);
-                    
-                    if(c != null && c.getCard() != null)
-                    {
-                        CardRenderUtil.bindMainResourceLocation(c);
-                        YdmBlitUtil.fullBlit(ms, guiLeft + offX, guiTop + offY, 16, 16);
-                        
-                        if(mouseX >= offX && mouseX < offX + size && mouseY >= offY && mouseY < offY + size)
-                        {
-                            ScreenUtil.renderHoverRect(ms, guiLeft + offX, guiTop + offY, 16, 16);
-                            renderCardInfoForeground(ms, c, actualGuiLeft);
-                        }
-                    }
-                    
-                    offX += size;
-                }
-                */
-                
                 for(int y = 0; y < DeckHolder.SIDE_DECK_SIZE / sideDeckItemsPerRow; ++y)
                 {
                     for(int x = 0; x < sideDeckItemsPerRow && x + y * sideDeckItemsPerRow < DeckHolder.SIDE_DECK_SIZE; ++x)
@@ -337,7 +311,6 @@ public class DuelScreenPreparing<E extends DuelContainer> extends DuelContainerS
                 
                 minecraft.getTextureManager().bind(DuelContainerScreen.DECK_BACKGROUND_GUI_TEXTURE);
                 YdmBlitUtil.blit(ms, guiLeft, guiTop, xSize, ySize, 0, 0, xSize, ySize, 512, 256);
-                //YdmBlitUtil.blit(ms, guiLeft, guiTop + ySize, xSize, 7, 0, 186, xSize, 7, 512, 256);
             }
         }
     }
