@@ -40,7 +40,7 @@ public class YdmBlocks
                 Block.box(1, 12.5, 1, 15, 15.5, 15))).setRegistryName(YDM.MOD_ID, "duel_table"));
         registry.register(new CardSupplyBlock(Block.Properties.of(Material.METAL, MaterialColor.METAL).strength(5.0F, 6.0F).sound(SoundType.METAL)).setRegistryName(YDM.MOD_ID, "card_supply"));
         registry.register(new CosmeticBlock(Block.Properties.of(Material.METAL, MaterialColor.METAL).strength(5.0F, 6.0F).sound(SoundType.METAL)).setRegistryName(YDM.MOD_ID, "card_crafter"));
-        registry.register(new CardDecrafterBlock(Block.Properties.of(Material.METAL, MaterialColor.METAL).strength(5.0F, 6.0F).sound(SoundType.METAL), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 9.0D, 16.0D)).setRegistryName(YDM.MOD_ID, "card_decrafter"));
+        registry.register(new CardDecrafterBlock(Block.Properties.of(Material.METAL, MaterialColor.METAL).requiresCorrectToolForDrops().strength(5.0F, 6.0F).sound(SoundType.METAL)).setRegistryName(YDM.MOD_ID, "card_decrafter"));
         registry.register(new CosmeticBlock(Block.Properties.of(Material.METAL, MaterialColor.METAL).strength(5.0F, 6.0F).sound(SoundType.METAL)).setRegistryName(YDM.MOD_ID, "rarity_exchanger"));
         registry.register(new CosmeticBlock(Block.Properties.of(Material.METAL, MaterialColor.METAL).strength(5.0F, 6.0F).sound(SoundType.METAL)).setRegistryName(YDM.MOD_ID, "domain_generator"));
     }

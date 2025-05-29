@@ -1,19 +1,8 @@
 {
   "variants": {
-    "facing=east": {
-      "model": "ydm:block/card_decrafter",
-      "y": 90
-    },
-    "facing=north": {
-      "model": "ydm:block/card_decrafter"
-    },
-    "facing=south": {
-      "model": "ydm:block/card_decrafter",
-      "y": 180
-    },
-    "facing=west": {
-      "model": "ydm:block/card_decrafter",
-      "y": 270
-    }
+	"facing=north": { "model": "ydm:block/card_decrafter" },
+	"facing=south": { "model": "ydm:block/card_decrafter", "y": 180 },
+	"facing=west": { "model": "ydm:block/card_decrafter", "y": 270 },
+    "facing=east": { "model": "ydm:block/card_decrafter", "y": 90 }
   }
 }

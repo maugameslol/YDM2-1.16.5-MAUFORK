@@ -233,6 +233,9 @@ public class ClientProxy implements ISidedProxy
         ImageHandler.prepareRarityImages(ClientProxy.activeCardInfoImageSize);
         CardRenderUtil.init(ClientProxy.maxInfoImages, ClientProxy.maxMainImages);
         
+        //not sure where this really goes
+        YdmItemBlockRenderer.register();
+        
         RenderingRegistry.registerEntityRenderingHandler(YdmEntityTypes.DUEL, DuelEntityRenderer::new);
     }
     

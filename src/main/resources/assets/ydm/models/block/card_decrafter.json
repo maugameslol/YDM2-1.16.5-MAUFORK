@@ -1,4 +1,5 @@
-{   "parent": "ydm:block/block",
+{   "parent": "block/block",
+	"render_type": "minecraft:cutout",
     "textures": {
         "particle": "ydm:block/card_decrafter_bottom",
         "bottom": "ydm:block/card_decrafter_bottom",
