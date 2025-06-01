@@ -14,6 +14,6 @@ public class ImpactDivineAnimation extends SpinningSymbolAnimation
     @Override
     public ResourceLocation getTexture()
     {
-        return new ResourceLocation(YDM.MOD_ID, "textures/gui/action_animations/impact_divine.png");
+        return new ResourceLocation(YDM.MOD_ID, "textures/gui/action_animations/divine_impact.png");
     }
 }

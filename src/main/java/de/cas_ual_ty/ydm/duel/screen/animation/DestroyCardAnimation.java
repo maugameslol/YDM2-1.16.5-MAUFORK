@@ -3,9 +3,9 @@ package de.cas_ual_ty.ydm.duel.screen.animation;
 import de.cas_ual_ty.ydm.YDM;
 import net.minecraft.util.ResourceLocation;
 
-public class WindUpFireAnimation extends SpinningSymbolAnimation
+public class DestroyCardAnimation extends SpinningSymbolAnimation
 {
-	public WindUpFireAnimation(float centerPosX, float centerPosY, int size, int endSize)
+	public DestroyCardAnimation(float centerPosX, float centerPosY, int size, int endSize)
     {
         super(centerPosX, centerPosY, size, endSize);
     }
@@ -13,7 +13,7 @@ public class WindUpFireAnimation extends SpinningSymbolAnimation
     @Override
     public ResourceLocation getTexture()
     {
-        return new ResourceLocation(YDM.MOD_ID, "textures/gui/action_animations/fire_windup.png");
+        return new ResourceLocation(YDM.MOD_ID, "textures/gui/action_animations/default_destroy_spark.png");
     }
 
 }

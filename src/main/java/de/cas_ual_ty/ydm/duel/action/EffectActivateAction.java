@@ -45,6 +45,6 @@ public class EffectActivateAction extends SingleCardAction implements IAnnounced
 	@Override
     public IFormattableTextComponent getAnnouncement(ITextComponent playerName)
     {
-        return new TranslationTextComponent(getAnnouncementLocalKey()).append(": ").append(getFieldAnnouncementZone().getCard(sourceCardIndex).cardHolder.getCard().getName());
+        return new TranslationTextComponent(getAnnouncementLocalKey()).append(" [").append(getFieldAnnouncementZone().getCard(sourceCardIndex).cardHolder.getCard().getName()).append("]");
     }
 }

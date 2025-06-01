@@ -14,6 +14,6 @@ public class ImpactWaterAnimation extends SpinningSymbolAnimation
     @Override
     public ResourceLocation getTexture()
     {
-        return new ResourceLocation(YDM.MOD_ID, "textures/gui/action_animations/impact_water.png");
+        return new ResourceLocation(YDM.MOD_ID, "textures/gui/action_animations/water_impact.png");
     }
 }

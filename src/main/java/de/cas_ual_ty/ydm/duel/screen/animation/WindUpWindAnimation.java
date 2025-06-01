@@ -13,7 +13,7 @@ public class WindUpWindAnimation extends SpinningSymbolAnimation
     @Override
     public ResourceLocation getTexture()
     {
-        return new ResourceLocation(YDM.MOD_ID, "textures/gui/action_animations/windup_wind.png");
+        return new ResourceLocation(YDM.MOD_ID, "textures/gui/action_animations/wind_windup.png");
     }
 
 }

@@ -13,7 +13,7 @@ public class WindUpEarthAnimation extends SpinningSymbolAnimation
     @Override
     public ResourceLocation getTexture()
     {
-        return new ResourceLocation(YDM.MOD_ID, "textures/gui/action_animations/windup_earth.png");
+        return new ResourceLocation(YDM.MOD_ID, "textures/gui/action_animations/earth_windup.png");
     }
 
 }

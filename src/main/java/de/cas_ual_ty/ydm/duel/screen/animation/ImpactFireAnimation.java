@@ -14,6 +14,6 @@ public class ImpactFireAnimation extends SpinningSymbolAnimation
     @Override
     public ResourceLocation getTexture()
     {
-        return new ResourceLocation(YDM.MOD_ID, "textures/gui/action_animations/impact_fire.png");
+        return new ResourceLocation(YDM.MOD_ID, "textures/gui/action_animations/fire_impact.png");
     }
 }

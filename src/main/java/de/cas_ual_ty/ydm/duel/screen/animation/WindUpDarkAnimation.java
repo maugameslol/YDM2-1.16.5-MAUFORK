@@ -13,7 +13,7 @@ public class WindUpDarkAnimation extends SpinningSymbolAnimation
     @Override
     public ResourceLocation getTexture()
     {
-        return new ResourceLocation(YDM.MOD_ID, "textures/gui/action_animations/windup_dark.png");
+        return new ResourceLocation(YDM.MOD_ID, "textures/gui/action_animations/dark_windup.png");
     }
 
 }

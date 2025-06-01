@@ -64,6 +64,6 @@ public class EffectNegateAction extends SingleZoneAction implements IAnnouncedAc
     @Override
     public IFormattableTextComponent getAnnouncement(ITextComponent playerName)
     {
-        return new TranslationTextComponent(getAnnouncementLocalKey()).append(": ").append(getFieldAnnouncementZone().getTopCardSafely().cardHolder.getCard().getName());
+        return new TranslationTextComponent(getAnnouncementLocalKey()).append(" [").append(getFieldAnnouncementZone().getTopCardSafely().cardHolder.getCard().getName()).append("]");
     }
 }

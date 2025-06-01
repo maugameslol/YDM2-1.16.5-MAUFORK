@@ -13,7 +13,7 @@ public class EffectNegateAnimation extends StaticSymbolAnimation
     @Override
     public ResourceLocation getTexture()
     {
-        return new ResourceLocation(YDM.MOD_ID, "textures/gui/action_animations/effect_negate.png");
+        return new ResourceLocation(YDM.MOD_ID, "textures/gui/action_animations/negate_effect.png");
     }
 
 }

@@ -63,6 +63,12 @@ public class ActionIcons
     public static final ActionIcon TO_SPELL_TRAP_ATK = null;
     public static final ActionIcon BURN = null;
     
+    public static final ActionIcon NORMAL_SUMMON_DEF = null;
+    public static final ActionIcon DESTROY_BANISH_ATK = null;
+    public static final ActionIcon DESTROY_BANISH_FD = null;
+    public static final ActionIcon DESTROY_GRAVEYARD = null;
+    public static final ActionIcon DESTROY_TOP_OF_DECK_ATK = null;
+    
     @SubscribeEvent
     public static void registerActionIcons(RegistryEvent.Register<ActionIcon> event)
     {
@@ -116,6 +122,12 @@ public class ActionIcons
         registry.register(ActionIcons.create("negate_effect"));
         registry.register(ActionIcons.create("to_spell_trap_atk"));
         registry.register(ActionIcons.create("burn"));
+        
+        registry.register(ActionIcons.create("normal_summon_def"));
+        registry.register(ActionIcons.create("destroy_banish_atk"));
+        registry.register(ActionIcons.create("destroy_banish_fd"));
+        registry.register(ActionIcons.create("destroy_graveyard"));
+        registry.register(ActionIcons.create("destroy_top_of_deck_atk"));
     }
     
     public static ActionIcon create(String name)

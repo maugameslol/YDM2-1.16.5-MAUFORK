@@ -14,6 +14,6 @@ public class ImpactWindAnimation extends SpinningSymbolAnimation
     @Override
     public ResourceLocation getTexture()
     {
-        return new ResourceLocation(YDM.MOD_ID, "textures/gui/action_animations/impact_wind.png");
+        return new ResourceLocation(YDM.MOD_ID, "textures/gui/action_animations/wind_impact.png");
     }
 }
