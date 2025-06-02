@@ -62,12 +62,20 @@ public class ActionIcons
     
     public static final ActionIcon TO_SPELL_TRAP_ATK = null;
     public static final ActionIcon BURN = null;
+    public static final ActionIcon BURN_SELF = null;
     
     public static final ActionIcon NORMAL_SUMMON_DEF = null;
-    public static final ActionIcon DESTROY_BANISH_ATK = null;
-    public static final ActionIcon DESTROY_BANISH_FD = null;
-    public static final ActionIcon DESTROY_GRAVEYARD = null;
-    public static final ActionIcon DESTROY_TOP_OF_DECK_ATK = null;
+    public static final ActionIcon DESTROY_TO_BANISH_ATK = null;
+    public static final ActionIcon DESTROY_TO_BANISH_FD = null;
+    public static final ActionIcon DESTROY_TO_BOTTOM_OF_DECK_FD = null;
+    public static final ActionIcon DESTROY_TO_EXTRA_ATK = null;
+    public static final ActionIcon DESTROY_TO_EXTRA_FD = null;
+    public static final ActionIcon DESTROY_TO_GRAVEYARD = null;
+    public static final ActionIcon DESTROY_TO_HAND = null;
+    public static final ActionIcon DESTROY_TO_TOP_OF_DECK_ATK = null;
+    public static final ActionIcon DESTROY_TO_TOP_OF_DECK_FD = null;
+    public static final ActionIcon DESTROY_TOKEN_ATK = null;
+    public static final ActionIcon DESTROY_TOKEN_DEF = null;
     
     @SubscribeEvent
     public static void registerActionIcons(RegistryEvent.Register<ActionIcon> event)
@@ -122,12 +130,20 @@ public class ActionIcons
         registry.register(ActionIcons.create("negate_effect"));
         registry.register(ActionIcons.create("to_spell_trap_atk"));
         registry.register(ActionIcons.create("burn"));
+        registry.register(ActionIcons.create("burn_self"));
         
         registry.register(ActionIcons.create("normal_summon_def"));
-        registry.register(ActionIcons.create("destroy_banish_atk"));
-        registry.register(ActionIcons.create("destroy_banish_fd"));
-        registry.register(ActionIcons.create("destroy_graveyard"));
-        registry.register(ActionIcons.create("destroy_top_of_deck_atk"));
+        registry.register(ActionIcons.create("destroy_to_banish_atk"));
+        registry.register(ActionIcons.create("destroy_to_banish_fd"));
+        registry.register(ActionIcons.create("destroy_to_bottom_of_deck_fd"));
+        registry.register(ActionIcons.create("destroy_to_extra_atk"));
+        registry.register(ActionIcons.create("destroy_to_extra_fd"));
+        registry.register(ActionIcons.create("destroy_to_graveyard"));
+        registry.register(ActionIcons.create("destroy_to_hand"));
+        registry.register(ActionIcons.create("destroy_to_top_of_deck_atk"));
+        registry.register(ActionIcons.create("destroy_to_top_of_deck_fd"));
+        registry.register(ActionIcons.create("destroy_token_atk"));
+        registry.register(ActionIcons.create("destroy_token_def"));
     }
     
     public static ActionIcon create(String name)

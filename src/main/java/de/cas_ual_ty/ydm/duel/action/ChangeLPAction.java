@@ -82,6 +82,6 @@ public class ChangeLPAction extends Action implements IAnnouncedAction
             t = new StringTextComponent("+").append(t);
         }
         
-        return new TranslationTextComponent(getAnnouncementLocalKey()).append(": ").append(p).append(" -> ").append(n).append(" (").append(t).append(")");
+        return new TranslationTextComponent(getAnnouncementLocalKey()).append(" ").append(p).append(" -> ").append(n).append(" (").append(t).append(")");
     }
 }

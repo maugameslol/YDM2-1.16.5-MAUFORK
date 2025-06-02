@@ -41,6 +41,7 @@ public class ActionTypes
     public static final ActionType CONTINUE_EFFECT = null;
     public static final ActionType NEGATE_EFFECT = null;
     public static final ActionType BURN = null;
+    public static final ActionType DESTROY_TOKEN = null;
     
     @SubscribeEvent
     public static void registerActionTypes(RegistryEvent.Register<ActionType> event)
@@ -75,5 +76,6 @@ public class ActionTypes
         registry.register(new ActionType(EffectContinueAction::new).setRegistryName(YDM.MOD_ID, "continue_effect"));
         registry.register(new ActionType(EffectNegateAction::new).setRegistryName(YDM.MOD_ID, "negate_effect"));
         registry.register(new ActionType(AttackAction::new).setRegistryName(YDM.MOD_ID, "burn"));
+        registry.register(new ActionType(RemoveTokenAction::new).setRegistryName(YDM.MOD_ID, "destroy_token"));
     }
 }
