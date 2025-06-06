@@ -20,7 +20,6 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
-
 import java.util.LinkedList;
 import java.util.List;
 
@@ -78,6 +77,10 @@ public class CardRenderUtil
             x = (maxWidth - imageSize) / 2 + margin;
         }
         
+        int legalityIconSize = 16;
+    	int legalityIconLeft = x + 7;
+    	int legalityIconTop = margin;
+        
         // card texture
         
         CardRenderUtil.bindInfoResourceLocation(card);
@@ -115,6 +118,41 @@ public class CardRenderUtil
             ClientProxy.getMinecraft().textureManager.bind(CardRenderUtil.getInfoTokenOverlay());
             YdmBlitUtil.fullBlit(ms, x, margin, imageSize, imageSize);
         }
+        
+        if(card.getCard().getLimit() >= 0 && !card.getCard().getIsIllegal()) 
+        {
+        	boolean sharedLimit = card.getCard().getIsLimitShared();
+        	
+        	if(card.getCard().getLimit() == 0) 
+        	{
+        		ClientProxy.getMinecraft().textureManager.bind(CardRenderUtil.getForbiddenIcon());
+                YdmBlitUtil.fullBlit(ms, legalityIconLeft, legalityIconTop, legalityIconSize, legalityIconSize);
+        	}
+        	else if(card.getCard().getLimit() == 3 && !sharedLimit) {}
+        	else 
+        	{
+        		if(sharedLimit) 
+        		{
+        			ClientProxy.getMinecraft().textureManager.bind(CardRenderUtil.getSharedLimitIcon());
+                    YdmBlitUtil.fullBlit(ms, legalityIconLeft, legalityIconTop, legalityIconSize, legalityIconSize);
+        		}
+        		else 
+        		{
+        			ClientProxy.getMinecraft().textureManager.bind(CardRenderUtil.getLimitIcon());
+                    YdmBlitUtil.fullBlit(ms, legalityIconLeft, legalityIconTop, legalityIconSize, legalityIconSize);
+        		}
+        		
+                List<ITextComponent> limitNumber = new LinkedList<>();
+                card.getCard().addLimitNumber(limitNumber);
+                
+                ScreenUtil.drawSplitString(ms, ClientProxy.getMinecraft().font, limitNumber, legalityIconLeft + 5, legalityIconTop + 4, legalityIconSize, 0xFFAA00);
+        	}
+        }
+        if(card.getCard().getIsIllegal()) 
+    	{
+    		ClientProxy.getMinecraft().textureManager.bind(CardRenderUtil.getIllegalIcon());
+            YdmBlitUtil.fullBlit(ms, legalityIconLeft, legalityIconTop, legalityIconSize, legalityIconSize);
+    	}
         
         // need to multiply x2 because we are scaling the text to x0.5
         maxWidth *= 2;
@@ -202,6 +240,31 @@ public class CardRenderUtil
     public static ResourceLocation getInfoPendulumOverlay()
     {
         return new ResourceLocation(YDM.MOD_ID, "textures/item/" + ClientProxy.activeCardInfoImageSize + "/" + "pendulum_overlay" + ".png");
+    }
+    
+    public static ResourceLocation getLimitIcon()
+    {
+        return new ResourceLocation(YDM.MOD_ID, "textures/gui/card_overlays" + "/" + "limit_icon" + ".png");
+    }
+    
+    public static ResourceLocation getSharedLimitIcon()
+    {
+        return new ResourceLocation(YDM.MOD_ID, "textures/gui/card_overlays" + "/" + "limit_icon" + ".png");
+    }
+    
+    public static ResourceLocation getForbiddenIcon()
+    {
+        return new ResourceLocation(YDM.MOD_ID, "textures/gui/card_overlays" + "/" + "forbidden_icon" + ".png");
+    }
+    
+    public static ResourceLocation getIllegalIcon()
+    {
+        return new ResourceLocation(YDM.MOD_ID, "textures/gui/card_overlays" + "/" + "illegal_icon" + ".png");
+    }
+    
+    public static ResourceLocation getLegendIcon()
+    {
+        return new ResourceLocation(YDM.MOD_ID, "textures/gui/card_overlays" + "/" + "legend_icon" + ".png");
     }
     
     public static void renderInfoCardWithRarity(MatrixStack ms, int mouseX, int mouseY, float x, float y, float width, float height, CardHolder card)

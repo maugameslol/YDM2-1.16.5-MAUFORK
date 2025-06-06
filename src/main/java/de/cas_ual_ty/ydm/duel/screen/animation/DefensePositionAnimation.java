@@ -1,9 +1,11 @@
 package de.cas_ual_ty.ydm.duel.screen.animation;
 
 import de.cas_ual_ty.ydm.YDM;
+import de.cas_ual_ty.ydm.YdmSoundEvents;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 
-public class DefensePositionAnimation extends StaticSymbolAnimation
+public class DefensePositionAnimation extends StaticSymbolFadeOutAnimation
 {
     
     public DefensePositionAnimation(float centerPosX, float centerPosY, int size, int endSize)
@@ -15,5 +17,11 @@ public class DefensePositionAnimation extends StaticSymbolAnimation
     public ResourceLocation getTexture()
     {
         return new ResourceLocation(YDM.MOD_ID, "textures/gui/action_animations/defense_position.png");
+    }
+    
+    @Override
+    public SoundEvent getSoundEvent() 
+    {
+    	return YdmSoundEvents.CARD_DEF_POSITION.get();
     }
 }

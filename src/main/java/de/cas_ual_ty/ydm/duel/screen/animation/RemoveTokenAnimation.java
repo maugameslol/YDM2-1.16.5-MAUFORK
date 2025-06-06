@@ -1,9 +1,11 @@
 package de.cas_ual_ty.ydm.duel.screen.animation;
 
 import de.cas_ual_ty.ydm.YDM;
+import de.cas_ual_ty.ydm.YdmSoundEvents;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 
-public class RemoveTokenAnimation extends StaticSymbolAnimation
+public class RemoveTokenAnimation extends StaticSymbolFadeOutAnimation
 {
     
     public RemoveTokenAnimation(float centerPosX, float centerPosY, int size, int endSize)
@@ -16,4 +18,11 @@ public class RemoveTokenAnimation extends StaticSymbolAnimation
     {
         return new ResourceLocation(YDM.MOD_ID, "textures/gui/action_animations/remove_token.png");
     }
+    
+    @Override
+    public SoundEvent getSoundEvent() 
+    {
+    	return YdmSoundEvents.TOKEN_REMOVE.get();
+    }
+    
 }

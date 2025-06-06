@@ -1,7 +1,11 @@
 package de.cas_ual_ty.ydm.duel.screen.animation;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.audio.SimpleSound;
 import net.minecraft.client.gui.IRenderable;
+import net.minecraft.util.SoundEvent;
 
 public abstract class Animation implements IRenderable
 {
@@ -41,6 +45,11 @@ public abstract class Animation implements IRenderable
             onStart.run();
         }
         
+        if(tickTime == 0 && getSoundEvent() != null) 
+        {
+    		Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(getSoundEvent(), 1.0F, 0.25F));
+    	}
+        
         ++tickTime;
         
         if(tickTime == maxTickTime && onEnd != null)
@@ -64,5 +73,10 @@ public abstract class Animation implements IRenderable
     public boolean worksInParallel()
     {
         return true;
+    }
+    
+    public SoundEvent getSoundEvent() 
+    {
+    	return null;
     }
 }

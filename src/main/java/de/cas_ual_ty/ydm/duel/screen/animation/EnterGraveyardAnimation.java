@@ -5,10 +5,10 @@ import de.cas_ual_ty.ydm.YdmSoundEvents;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 
-public class AttackPositionAnimation extends StaticSymbolFadeOutAnimation
+public class EnterGraveyardAnimation extends SpinningSymbolAnimation
 {
     
-    public AttackPositionAnimation(float centerPosX, float centerPosY, int size, int endSize)
+    public EnterGraveyardAnimation(float centerPosX, float centerPosY, int size, int endSize)
     {
     	super(centerPosX, centerPosY, size, endSize);
     }
@@ -16,12 +16,12 @@ public class AttackPositionAnimation extends StaticSymbolFadeOutAnimation
     @Override
     public ResourceLocation getTexture()
     {
-        return new ResourceLocation(YDM.MOD_ID, "textures/gui/action_animations/attack_position.png");
+        return new ResourceLocation(YDM.MOD_ID, "textures/gui/action_animations/graveyard_fire.png");
     }
     
     @Override
     public SoundEvent getSoundEvent()
     {
-    	return YdmSoundEvents.CARD_ATK_POSITION.get();
+    	return YdmSoundEvents.GY_ENTER.get();
     }
 }

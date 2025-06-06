@@ -131,7 +131,6 @@ public class ActionIcons
         registry.register(ActionIcons.create("to_spell_trap_atk"));
         registry.register(ActionIcons.create("burn"));
         registry.register(ActionIcons.create("burn_self"));
-        
         registry.register(ActionIcons.create("normal_summon_def"));
         registry.register(ActionIcons.create("destroy_to_banish_atk"));
         registry.register(ActionIcons.create("destroy_to_banish_fd"));

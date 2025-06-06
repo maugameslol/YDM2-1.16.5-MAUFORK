@@ -5,9 +5,9 @@ import de.cas_ual_ty.ydm.YdmSoundEvents;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 
-public class EffectNegateAnimation extends StaticSymbolFadeOutAnimation
+public class TributeSummonHeavyAnimation extends SpinningSymbolAnimation
 {
-	public EffectNegateAnimation(float centerPosX, float centerPosY, int size, int endSize)
+	public TributeSummonHeavyAnimation(float centerPosX, float centerPosY, int size, int endSize)
     {
         super(centerPosX, centerPosY, size, endSize);
     }
@@ -15,12 +15,12 @@ public class EffectNegateAnimation extends StaticSymbolFadeOutAnimation
     @Override
     public ResourceLocation getTexture()
     {
-        return new ResourceLocation(YDM.MOD_ID, "textures/gui/action_animations/negate_effect.png");
+        return new ResourceLocation(YDM.MOD_ID, "textures/gui/action_animations/tribute_summon.png");
     }
     
     @Override
-    public SoundEvent getSoundEvent() 
+    public SoundEvent getSoundEvent()
     {
-    	return YdmSoundEvents.EFFECT_NEGATE.get();
+    	return YdmSoundEvents.SUMMON_TRIBUTE_HIGH.get();
     }
 }

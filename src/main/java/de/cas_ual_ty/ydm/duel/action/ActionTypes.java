@@ -18,8 +18,11 @@ public class ActionTypes
     public static final ActionType SET = null;
     public static final ActionType SPECIAL_SUMMON = null;
     public static final ActionType SPECIAL_SUMMON_OVERLAY = null;
+    public static final ActionType OVERLAY = null;
+    public static final ActionType UNDERLAY = null;
     public static final ActionType MOVE_TO_BOTTOM = null;
     public static final ActionType CHANGE_POSITION = null;
+    public static final ActionType FORCE_CHANGE_POSITION = null;
     public static final ActionType SHUFFLE_ZONE = null;
     public static final ActionType SHOW_ZONE = null;
     public static final ActionType VIEW_ZONE = null;
@@ -53,8 +56,11 @@ public class ActionTypes
         registry.register(new ActionType(MoveTopAction::new).setRegistryName(YDM.MOD_ID, "set"));
         registry.register(new ActionType(MoveTopAction::new).setRegistryName(YDM.MOD_ID, "special_summon"));
         registry.register(new ActionType(ListAction::new).setRegistryName(YDM.MOD_ID, "special_summon_overlay"));
+        registry.register(new ActionType(ListAction::new).setRegistryName(YDM.MOD_ID, "overlay"));
+        registry.register(new ActionType(MoveBottomAction::new).setRegistryName(YDM.MOD_ID, "underlay"));
         registry.register(new ActionType(MoveBottomAction::new).setRegistryName(YDM.MOD_ID, "move_to_bottom"));
         registry.register(new ActionType(ChangePositionAction::new).setRegistryName(YDM.MOD_ID, "change_position"));
+        registry.register(new ActionType(ChangePositionAction::new).setRegistryName(YDM.MOD_ID, "force_change_position"));
         registry.register(new ActionType(ShuffleAction::new).setRegistryName(YDM.MOD_ID, "shuffle_zone"));
         registry.register(new ActionType(ShowZoneAction::new).setRegistryName(YDM.MOD_ID, "show_zone"));
         registry.register(new ActionType(ViewZoneAction::new).setRegistryName(YDM.MOD_ID, "view_zone"));

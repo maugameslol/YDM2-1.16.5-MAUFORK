@@ -1125,6 +1125,13 @@ public class Properties
     	return defaultColor;
     }
     
+    // Get Limit Amount
+    
+    public void addLimitNumber(List<ITextComponent> list)
+    {
+    	list.add(new StringTextComponent("" + getLimit() + ""));
+    }
+    
     // --- Getters ---
     
     public String getName()

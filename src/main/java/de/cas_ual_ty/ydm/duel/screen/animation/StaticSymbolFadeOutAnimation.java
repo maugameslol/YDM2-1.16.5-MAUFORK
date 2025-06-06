@@ -8,15 +8,17 @@ import de.cas_ual_ty.ydm.YDM;
 import de.cas_ual_ty.ydm.clientutil.ClientProxy;
 import de.cas_ual_ty.ydm.clientutil.YdmBlitUtil;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 
-public class StaticSymbolAnimation extends Animation
+public class StaticSymbolFadeOutAnimation extends Animation
 {
     public float centerPosX;
     public float centerPosY;
     public int size;
     public int endSize;
+	public SoundEvent sound;
     
-    public StaticSymbolAnimation(float centerPosX, float centerPosY, int size, int endSize)
+    public StaticSymbolFadeOutAnimation(float centerPosX, float centerPosY, int size, int endSize)
     {
         super(ClientProxy.specialAnimationLength);
         
@@ -54,6 +56,7 @@ public class StaticSymbolAnimation extends Animation
         
         ms.popPose();
     }
+    
     
     public ResourceLocation getTexture()
     {
