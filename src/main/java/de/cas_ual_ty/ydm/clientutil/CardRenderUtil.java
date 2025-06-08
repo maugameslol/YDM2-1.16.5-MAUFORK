@@ -119,33 +119,41 @@ public class CardRenderUtil
             YdmBlitUtil.fullBlit(ms, x, margin, imageSize, imageSize);
         }
         
+        if(card.getCard().getLimit() < 0) 
+        {
+        	ClientProxy.getMinecraft().textureManager.bind(CardRenderUtil.getInfiniteLimitIcon());
+            YdmBlitUtil.fullBlit(ms, legalityIconLeft, legalityIconTop, legalityIconSize, legalityIconSize);
+        }
         if(card.getCard().getLimit() >= 0 && !card.getCard().getIsIllegal()) 
         {
         	boolean sharedLimit = card.getCard().getIsLimitShared();
+        	boolean isUnlimited = card.getCard().getLimit() == 3 && !sharedLimit;
         	
         	if(card.getCard().getLimit() == 0) 
         	{
         		ClientProxy.getMinecraft().textureManager.bind(CardRenderUtil.getForbiddenIcon());
                 YdmBlitUtil.fullBlit(ms, legalityIconLeft, legalityIconTop, legalityIconSize, legalityIconSize);
         	}
-        	else if(card.getCard().getLimit() == 3 && !sharedLimit) {}
         	else 
         	{
-        		if(sharedLimit) 
+        		if(!isUnlimited) 
         		{
-        			ClientProxy.getMinecraft().textureManager.bind(CardRenderUtil.getSharedLimitIcon());
-                    YdmBlitUtil.fullBlit(ms, legalityIconLeft, legalityIconTop, legalityIconSize, legalityIconSize);
+        			if(sharedLimit) 
+            		{
+            			ClientProxy.getMinecraft().textureManager.bind(CardRenderUtil.getSharedLimitIcon());
+                        YdmBlitUtil.fullBlit(ms, legalityIconLeft, legalityIconTop, legalityIconSize, legalityIconSize);
+            		}
+            		else 
+            		{
+            			ClientProxy.getMinecraft().textureManager.bind(CardRenderUtil.getLimitIcon());
+                        YdmBlitUtil.fullBlit(ms, legalityIconLeft, legalityIconTop, legalityIconSize, legalityIconSize);
+            		}
+            		
+                    List<ITextComponent> limitNumber = new LinkedList<>();
+                    card.getCard().addLimitNumber(limitNumber);
+                    
+                    ScreenUtil.drawSplitString(ms, ClientProxy.getMinecraft().font, limitNumber, legalityIconLeft + 5, legalityIconTop + 4, legalityIconSize, 0xFFAA00);
         		}
-        		else 
-        		{
-        			ClientProxy.getMinecraft().textureManager.bind(CardRenderUtil.getLimitIcon());
-                    YdmBlitUtil.fullBlit(ms, legalityIconLeft, legalityIconTop, legalityIconSize, legalityIconSize);
-        		}
-        		
-                List<ITextComponent> limitNumber = new LinkedList<>();
-                card.getCard().addLimitNumber(limitNumber);
-                
-                ScreenUtil.drawSplitString(ms, ClientProxy.getMinecraft().font, limitNumber, legalityIconLeft + 5, legalityIconTop + 4, legalityIconSize, 0xFFAA00);
         	}
         }
         if(card.getCard().getIsIllegal()) 
@@ -219,52 +227,57 @@ public class CardRenderUtil
     
     public static ResourceLocation getInfoTokenOverlay()
     {
-        return new ResourceLocation(YDM.MOD_ID, "textures/item/" + ClientProxy.activeCardInfoImageSize + "/" + "token_overlay" + ".png");
+        return new ResourceLocation(YDM.MOD_ID, "textures/gui/card_overlays/" + ClientProxy.activeCardInfoImageSize + "/" + "token_overlay" + ".png");
     }
     
     public static ResourceLocation getMainTokenOverlay()
     {
-        return new ResourceLocation(YDM.MOD_ID, "textures/item/" + ClientProxy.activeCardMainImageSize + "/" + "token_overlay" + ".png");
+        return new ResourceLocation(YDM.MOD_ID, "textures/gui/card_overlays/" + ClientProxy.activeCardMainImageSize + "/" + "token_overlay" + ".png");
     }
     
     public static ResourceLocation getRarityOverlay()
     {
-        return new ResourceLocation(YDM.MOD_ID, "textures/item/" + ClientProxy.activeCardInfoImageSize + "/" + "token_overlay" + ".png");
+        return new ResourceLocation(YDM.MOD_ID, "textures/gui/card_overlays/" + ClientProxy.activeCardInfoImageSize + "/" + "token_overlay" + ".png");
     }
     
     public static ResourceLocation getInfoCardColorOverlay(CardColor cardColor)
     {
-        return new ResourceLocation(YDM.MOD_ID, "textures/item/" + ClientProxy.activeCardInfoImageSize + "/" + cardColor.name + "_card_color_overlay.png");
+        return new ResourceLocation(YDM.MOD_ID, "textures/gui/card_overlays/" + ClientProxy.activeCardInfoImageSize + "/" + cardColor.name + "_card_color_overlay.png");
     }
     
     public static ResourceLocation getInfoPendulumOverlay()
     {
-        return new ResourceLocation(YDM.MOD_ID, "textures/item/" + ClientProxy.activeCardInfoImageSize + "/" + "pendulum_overlay" + ".png");
+        return new ResourceLocation(YDM.MOD_ID, "textures/gui/card_overlays/" + ClientProxy.activeCardInfoImageSize + "/" + "pendulum_overlay" + ".png");
     }
     
     public static ResourceLocation getLimitIcon()
     {
-        return new ResourceLocation(YDM.MOD_ID, "textures/gui/card_overlays" + "/" + "limit_icon" + ".png");
+        return new ResourceLocation(YDM.MOD_ID, "textures/gui/card_overlays/" + "limit_icon" + ".png");
     }
     
     public static ResourceLocation getSharedLimitIcon()
     {
-        return new ResourceLocation(YDM.MOD_ID, "textures/gui/card_overlays" + "/" + "limit_icon" + ".png");
+        return new ResourceLocation(YDM.MOD_ID, "textures/gui/card_overlays/" + "limit_icon" + ".png");
     }
     
     public static ResourceLocation getForbiddenIcon()
     {
-        return new ResourceLocation(YDM.MOD_ID, "textures/gui/card_overlays" + "/" + "forbidden_icon" + ".png");
+        return new ResourceLocation(YDM.MOD_ID, "textures/gui/card_overlays/" + "forbidden_icon" + ".png");
     }
     
     public static ResourceLocation getIllegalIcon()
     {
-        return new ResourceLocation(YDM.MOD_ID, "textures/gui/card_overlays" + "/" + "illegal_icon" + ".png");
+        return new ResourceLocation(YDM.MOD_ID, "textures/gui/card_overlays/" + "illegal_icon" + ".png");
     }
     
     public static ResourceLocation getLegendIcon()
     {
-        return new ResourceLocation(YDM.MOD_ID, "textures/gui/card_overlays" + "/" + "legend_icon" + ".png");
+        return new ResourceLocation(YDM.MOD_ID, "textures/gui/card_overlays/" + "legend_icon" + ".png");
+    }
+    
+    public static ResourceLocation getInfiniteLimitIcon()
+    {
+        return new ResourceLocation(YDM.MOD_ID, "textures/gui/card_overlays/" + "infinite_limit_icon" + ".png");
     }
     
     public static void renderInfoCardWithRarity(MatrixStack ms, int mouseX, int mouseY, float x, float y, float width, float height, CardHolder card)
