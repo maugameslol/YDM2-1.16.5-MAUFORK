@@ -11,8 +11,7 @@ import java.util.List;
 public class PlayField
 {
     public static final int MIN_LP = 0;
-    public static final int MAX_LP = 999999;
-    // Old Max 99999 -> 999999
+    public static final int MAX_LP = 99999;
     
     public final DuelManager duelManager;
     public final PlayFieldType playFieldType;

@@ -190,10 +190,10 @@
     "card_shuffle": {
         "category": "block",
         "sounds": [
-            "ydm:card_draw",
-            "ydm:card_draw_2",
-            "ydm:card_draw_3",
-            "ydm:card_draw_4"
+            "ydm:card_move",
+            "ydm:card_move_2",
+            "ydm:card_move_3",
+            "ydm:card_move_4"
         ],
         "subtitle": "subtitles.ydm.card_shuffle"
     },

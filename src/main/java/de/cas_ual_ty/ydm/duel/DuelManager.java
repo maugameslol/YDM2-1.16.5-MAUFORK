@@ -714,6 +714,14 @@ public class DuelManager
                 player1Deck.getExtraDeckNonNull().map((card) -> new DuelCard(card, false, CardPosition.FD, ZoneOwner.PLAYER1)).collect(Collectors.toList())));
         doAction(new PopulateAction(ActionTypes.POPULATE, playField.player2ExtraDeck.index,
                 player2Deck.getExtraDeckNonNull().map((card) -> new DuelCard(card, false, CardPosition.FD, ZoneOwner.PLAYER2)).collect(Collectors.toList())));
+        
+        // send side decks
+        /*
+         doAction(new PopulateAction(ActionTypes.POPULATE, playField.player1SideDeck.index,
+                player1Deck.getSideDeckNonNull().map((card) -> new DuelCard(card, false, CardPosition.FD, ZoneOwner.PLAYER1)).collect(Collectors.toList())));
+        doAction(new PopulateAction(ActionTypes.POPULATE, playField.player2SideDeck.index,
+                player2Deck.getSideDeckNonNull().map((card) -> new DuelCard(card, false, CardPosition.FD, ZoneOwner.PLAYER2)).collect(Collectors.toList())));
+         */
     }
     
     public List<ZoneInteraction> getActionsFor(ZoneOwner player, Zone interactor, @Nullable DuelCard interactorCard, Zone interactee)
