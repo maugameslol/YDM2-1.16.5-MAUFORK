@@ -5,9 +5,9 @@ import de.cas_ual_ty.ydm.YdmSoundEvents;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 
-public class SpecialSummonAnimation extends SpinningSymbolAnimation
+public class XyzSummonAnimation extends SpinningSymbolAnimation
 {
-	public SpecialSummonAnimation(float centerPosX, float centerPosY, int size, int endSize)
+    public XyzSummonAnimation(float centerPosX, float centerPosY, int size, int endSize)
     {
         super(centerPosX, centerPosY, size, endSize);
     }
@@ -15,12 +15,12 @@ public class SpecialSummonAnimation extends SpinningSymbolAnimation
     @Override
     public ResourceLocation getTexture()
     {
-        return new ResourceLocation(YDM.MOD_ID, "textures/gui/action_animations/special_summon.png");
+        return new ResourceLocation(YDM.MOD_ID, "textures/gui/action_animations/special_summon_overlay.png");
     }
     
     @Override
     public SoundEvent getSoundEvent()
     {
-    	return YdmSoundEvents.SUMMON_NORMAL.get();
+    	return YdmSoundEvents.SUMMON_XYZ.get();
     }
 }

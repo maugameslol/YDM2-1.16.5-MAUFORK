@@ -1,11 +1,13 @@
 package de.cas_ual_ty.ydm.duel.screen.animation;
 
 import de.cas_ual_ty.ydm.YDM;
+import de.cas_ual_ty.ydm.YdmSoundEvents;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 
-public class SpecialSummonSynchroAnimation extends SpinningSymbolAnimation
+public class SynchroSummonAnimation extends SpinningSymbolAnimation
 {
-	public SpecialSummonSynchroAnimation(float centerPosX, float centerPosY, int size, int endSize)
+	public SynchroSummonAnimation(float centerPosX, float centerPosY, int size, int endSize)
     {
         super(centerPosX, centerPosY, size, endSize);
     }
@@ -15,5 +17,10 @@ public class SpecialSummonSynchroAnimation extends SpinningSymbolAnimation
     {
         return new ResourceLocation(YDM.MOD_ID, "textures/gui/action_animations/special_summon_synchro.png");
     }
-
+    
+    @Override
+    public SoundEvent getSoundEvent()
+    {
+    	return YdmSoundEvents.SUMMON_SYNCHRO.get();
+    }
 }

@@ -2,6 +2,7 @@ package de.cas_ual_ty.ydm.duel.screen.animation;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 
+import de.cas_ual_ty.ydm.YdmSoundEvents;
 import de.cas_ual_ty.ydm.clientutil.CardRenderUtil;
 import de.cas_ual_ty.ydm.clientutil.ClientProxy;
 import de.cas_ual_ty.ydm.clientutil.YdmBlitUtil;
@@ -10,6 +11,7 @@ import de.cas_ual_ty.ydm.duel.playfield.DuelCard;
 import de.cas_ual_ty.ydm.duel.playfield.ZoneOwner;
 import de.cas_ual_ty.ydm.duel.screen.widget.ZoneWidget;
 import de.cas_ual_ty.ydm.sleeve.CardBackType;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.vector.Quaternion;
 
 public class MoveAnimation extends Animation
@@ -153,5 +155,11 @@ public class MoveAnimation extends Animation
                 return 270;
             }
         }
+    }
+    
+    @Override
+    public SoundEvent getSoundEvent() 
+    {
+    	return YdmSoundEvents.CARD_MOVE.get();
     }
 }

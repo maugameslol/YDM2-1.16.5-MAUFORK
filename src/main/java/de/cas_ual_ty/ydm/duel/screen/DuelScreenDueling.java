@@ -613,6 +613,20 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
                         action.finish();
                         repopulateInteractions();
                     });
+            Animation drawCardAnimation = new DrawCardAnimation(
+                    getView(),
+                    action.card,
+                    getZoneWidget(action.sourceZone),
+                    getZoneWidget(action.destinationZone),
+                    sourcePosition,
+                    destinationPosition)
+                    .setOnStart(action::removeCardFromZone)
+                    .setOnEnd(() ->
+                    {
+                        action.addCard();
+                        action.finish();
+                        repopulateInteractions();
+                    });
             Animation atkPosAnimation = new AttackPositionAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), dSize, dSize + dSize / 2);
             Animation defPosAnimation = new DefensePositionAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), dSize, dSize + dSize / 2);
             Animation gyOutAnimation = new ExitGraveyardAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize / 2);
@@ -625,6 +639,7 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
             Animation normalSetAnimation = new SetMonsterAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), dSize, dSize + dSize / 2);
             Animation setBackrowAnimation = new SetSpellTrapAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), dSize, dSize + dSize / 2);
             Animation specialSetAnimation = new SpecialSetMonsterAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), dSize, dSize + dSize / 2);
+            //Animation finishDummyAnimation = new DummyAnimation().setOnEnd(() -> { repopulateInteractions(); });
             
             Queue<Animation> queue = new LinkedList<>();
             
@@ -645,26 +660,26 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
             if(action.actionType == ActionTypes.SPECIAL_SUMMON)
             {
                 Animation specialSummonRingAnimation = new SpecialSummonAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), dSize, dSize + dSize / 2);
-                Animation specialSummonRingMidAnimation = new SpecialSummonAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), dSize, dSize + dSize);
-                Animation specialSummonRingHeavyAnimation = new SpecialSummonAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), dSize, dSize + dSize * 2);
-                //Animation fusionSummonAnimation = new SpecialSummonFusionAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), size, size + size / 2);
-                //Animation fusionMidSummonAnimation = new SpecialSummonFusionAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), size, size + size);
-                //Animation fusionHighSummonAnimation = new SpecialSummonFusionAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), size, size + size * 2);
-                //Animation ritualSummonAnimation = new SpecialSummonRitualAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), size, size + size / 2);
-                //Animation ritualMidSummonAnimation = new SpecialSummonRitualAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), size, size + size);
-                //Animation ritualHighSummonAnimation = new SpecialSummonRitualAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), size, size + size * 2);
-                //Animation synchroSummonAnimation = new SpecialSummonSynchroAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), size, size + size / 2);
-                //Animation synchroMidSummonAnimation = new SpecialSummonSynchroAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), size, size + size);
-                //Animation synchroHighSummonAnimation = new SpecialSummonSynchroAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), size, size + size * 2);
-                Animation xyzRingAnimation = new SpecialSummonOverlayAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), dSize, dSize + dSize / 2);
-                Animation xyzRingMidAnimation = new SpecialSummonOverlayAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), dSize, dSize + dSize);
-                Animation xyzRingHeavyAnimation = new SpecialSummonOverlayAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), dSize, dSize + dSize * 2);
-                //Animation pendulumSummonAnimation = new SpecialSummonPendulumAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), size, size + size / 2);
-                //Animation pendulumMidSummonAnimation = new SpecialSummonPendulumAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), size, size + size);
-                //Animation pendulumHighSummonAnimation = new SpecialSummonPendulumAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), size, size + size * 2);
-                Animation linkSummonAnimation = new SpecialSummonLinkAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), dSize, dSize + dSize / 2);
-                Animation linkMidSummonAnimation = new SpecialSummonLinkAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), dSize, dSize + dSize);
-                Animation linkHighSummonAnimation = new SpecialSummonLinkAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), dSize, dSize + dSize * 2);
+                Animation specialSummonRingMidAnimation = new SpecialSummonMiddleAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), dSize, dSize + dSize);
+                Animation specialSummonRingHeavyAnimation = new SpecialSummonHeavyAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), dSize, dSize + dSize * 2);
+                Animation fusionSummonRingAnimation = new FusionSummonAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), dSize, dSize + dSize / 2);
+                Animation fusionSummonRingMidAnimation = new FusionSummonMiddleAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), dSize, dSize + dSize);
+                Animation fusionSummonRingHeavyAnimation = new FusionSummonHeavyAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), dSize, dSize + dSize * 2);
+                Animation ritualSummonRingAnimation = new RitualSummonAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), dSize, dSize + dSize / 2);
+                Animation ritualSummonRingMidAnimation = new RitualSummonMiddleAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), dSize, dSize + dSize);
+                Animation ritualSummonRingHeavyAnimation = new RitualSummonHeavyAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), dSize, dSize + dSize * 2);
+                Animation synchroSummonRingAnimation = new SynchroSummonAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), dSize, dSize + dSize / 2);
+                Animation synchroSummonRingMidAnimation = new SynchroSummonMiddleAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), dSize, dSize + dSize);
+                Animation synchroSummonRingHeavyAnimation = new SynchroSummonHeavyAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), dSize, dSize + dSize * 2);
+                Animation xyzSummonRingAnimation = new XyzSummonAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), dSize, dSize + dSize / 2);
+                Animation xyzSummonRingMidAnimation = new XyzSummonMiddleAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), dSize, dSize + dSize);
+                Animation xyzSummonRingHeavyAnimation = new XyzSummonHeavyAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), dSize, dSize + dSize * 2);
+                Animation pendulumSummonRingAnimation = new PendulumSummonAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), dSize, dSize + dSize / 2);
+                Animation pendulumSummonRingMidAnimation = new PendulumSummonMiddleAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), dSize, dSize + dSize);
+                Animation pendulumSummonRingHeavyAnimation = new PendulumSummonHeavyAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), dSize, dSize + dSize * 2);
+                Animation linkSummonRingAnimation = new LinkSummonAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), dSize, dSize + dSize / 2);
+                Animation linkSummonRingMidAnimation = new LinkSummonMiddleAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), dSize, dSize + dSize);
+                Animation linkSummonRingHeavyAnimation = new LinkSummonHeavyAnimation(dZ.getAnimationDestX(), dZ.getAnimationDestY(), dSize, dSize + dSize * 2);
                 
                 queue.add(moveAnimation);
                 
@@ -674,6 +689,12 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
             		boolean isHeavyWeight;
             		isMidWeight = ((MonsterProperties) card).getAtk() >= 2000;
             		isHeavyWeight = ((MonsterProperties) card).getAtk() >= 2500;
+            		boolean isFusion = ((MonsterProperties) card).getIsFusion();
+            		boolean isRitual = ((MonsterProperties) card).getIsRitual();
+            		boolean isSynchro = ((MonsterProperties) card).getIsSynchro();
+            		//boolean isXyz = ((MonsterProperties) card).getIsXyz();
+            		boolean isPendulum = ((MonsterProperties) card).getIsPendulum();
+            		//boolean isLink = ((MonsterProperties) card).getIsLink();
             		
             		if(card instanceof DefMonsterProperties) 
             		{
@@ -693,47 +714,102 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
                 	{
                     	if(isMidWeight && !isHeavyWeight) 
                         {
-                    		queue.add(specialSummonRingMidAnimation);
-                    		
+                    		if(isFusion) 
+                    		{
+                    			queue.add(fusionSummonRingMidAnimation);
+                    		}
+                    		else if(isRitual) 
+                    		{
+                    			queue.add(ritualSummonRingMidAnimation);
+                    		}
+                    		else if(isSynchro) 
+                    		{
+                    			queue.add(synchroSummonRingMidAnimation);
+                    		}
+                    		else if(isPendulum) 
+                    		{
+                    			queue.add(pendulumSummonRingMidAnimation);
+                    		}
+                    		else 
+                    		{
+                    			queue.add(specialSummonRingMidAnimation);
+                    		}
                         }
                     	else if(isHeavyWeight) 
                     	{
-                    		queue.add(specialSummonRingHeavyAnimation);
+                    		if(isFusion) 
+                    		{
+                    			queue.add(fusionSummonRingHeavyAnimation);
+                    		}
+                    		else if(isRitual) 
+                    		{
+                    			queue.add(ritualSummonRingHeavyAnimation);
+                    		}
+                    		else if(isSynchro) 
+                    		{
+                    			queue.add(synchroSummonRingHeavyAnimation);
+                    		}
+                    		else if(isPendulum) 
+                    		{
+                    			queue.add(pendulumSummonRingHeavyAnimation);
+                    		}
+                    		else 
+                    		{
+                    			queue.add(specialSummonRingHeavyAnimation);
+                    		}
                     	}
                     	else 
                     	{
-                    		queue.add(specialSummonRingAnimation);
-                    		
+                    		if(isFusion) 
+                    		{
+                    			queue.add(fusionSummonRingAnimation);
+                    		}
+                    		else if(isRitual) 
+                    		{
+                    			queue.add(ritualSummonRingAnimation);
+                    		}
+                    		else if(isSynchro) 
+                    		{
+                    			queue.add(synchroSummonRingAnimation);
+                    		}
+                    		else if(isPendulum) 
+                    		{
+                    			queue.add(pendulumSummonRingAnimation);
+                    		}
+                    		else 
+                    		{
+                    			queue.add(specialSummonRingAnimation);
+                    		}
                     	}
                 	}
                 	else if(card instanceof XyzMonsterProperties) 
                 	{
                 		if(isMidWeight && !isHeavyWeight) 
                         {
-                    		queue.add(xyzRingMidAnimation);
+                    		queue.add(xyzSummonRingMidAnimation);
                         }
                 		else if(isHeavyWeight) 
                         {
-                			queue.add(xyzRingHeavyAnimation);
+                			queue.add(xyzSummonRingHeavyAnimation);
                         }
                     	else 
                     	{
-                    		queue.add(xyzRingAnimation);
+                    		queue.add(xyzSummonRingAnimation);
                     	}
                 	}
                 	else if(card instanceof LinkMonsterProperties) 
                 	{
                 		if(isMidWeight && !isHeavyWeight) 
                         {
-                    		queue.add(linkMidSummonAnimation);
+                    		queue.add(linkSummonRingMidAnimation);
                         }
                 		else if(isHeavyWeight) 
                         {
-                			queue.add(linkHighSummonAnimation);
+                			queue.add(linkSummonRingHeavyAnimation);
                         }
                     	else 
                     	{
-                    		queue.add(linkSummonAnimation);
+                    		queue.add(linkSummonRingAnimation);
                     	}
                 	}
                 }
@@ -884,8 +960,8 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
             //draw card
             if(action.destinationZone.type == ZoneTypes.HAND && action.sourceZone.type == ZoneTypes.DECK) 
             {
-            	//queue.add(drawCardSFX); TODO: Draw Sound Effect Animation
-            	queue.add(moveAnimation);
+            	// hope this doesn't break something somehow
+            	queue.add(drawCardAnimation);
             	return new QueueAnimation(queue);
             }
             
@@ -989,12 +1065,13 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
                 
                 ParallelListAnimation listAnimation = new ParallelListAnimation(animations);
                 
-                if(action.actionType == ActionTypes.SPECIAL_SUMMON_OVERLAY)
+                if(action.actionType == ActionTypes.SPECIAL_SUMMON_OVERLAY || action.actionType == ActionTypes.OVERLAY)
                 {
                     Queue<Animation> queue = new LinkedList<>();
                     queue.add(listAnimation);
                     
                     MoveTopAction moveAction = (MoveTopAction) action.actions.get(action.actions.size() - 1);
+                    Properties card = moveAction.card.getCardHolder().getCard();
                     
                     ZoneWidget w = getZoneWidget(moveAction.destinationZone);
                     
@@ -1002,33 +1079,69 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
                     Animation atkPosAnimation = new AttackPositionAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size / 2);
                     Animation defPosAnimation = new DefensePositionAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size / 2);
                     
-                    queue.add(new SpecialSummonOverlayAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size / 2));
+                    Animation specialSummonRingAnimation = new SpecialSummonAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size / 2);
+                    Animation specialSummonRingMidAnimation = new SpecialSummonMiddleAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size);
+                    Animation specialSummonRingHeavyAnimation = new SpecialSummonHeavyAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size * 2);
+                    Animation xyzSummonRingAnimation = new XyzSummonAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size / 2);
+                    Animation xyzSummonRingMidAnimation = new XyzSummonMiddleAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size);
+                    Animation xyzSummonRingHeavyAnimation = new XyzSummonHeavyAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size * 2);
                     
-                    if(moveAction.destinationCardPosition == CardPosition.ATK) 
+                    if(card instanceof MonsterProperties) 
                     {
-                    	queue.add(atkPosAnimation);
+                    	boolean isMidWeight;
+                		boolean isHeavyWeight;
+                		isMidWeight = ((MonsterProperties) card).getAtk() >= 2000;
+                		isHeavyWeight = ((MonsterProperties) card).getAtk() >= 2500;
+                		
+                		if(card instanceof DefMonsterProperties) 
+                		{
+                			if((((DefMonsterProperties) card).getAtk() < ((DefMonsterProperties)card).getDef())) 
+                			{
+                				isMidWeight = ((DefMonsterProperties) card).getDef() >= 2000;
+                        		isHeavyWeight = ((DefMonsterProperties) card).getDef() >= 2500;
+                			}
+                			else 
+                			{
+                				isMidWeight = ((DefMonsterProperties) card).getAtk() >= 2000;
+                        		isHeavyWeight = ((DefMonsterProperties) card).getAtk() >= 2500;
+                			}
+                		}
+                		
+                		if(card instanceof XyzMonsterProperties) 
+                    	{
+                    		if(isMidWeight && !isHeavyWeight) 
+                            {
+                        		queue.add(xyzSummonRingMidAnimation);
+                            }
+                    		else if(isHeavyWeight) 
+                            {
+                    			queue.add(xyzSummonRingHeavyAnimation);
+                            }
+                        	else 
+                        	{
+                        		queue.add(xyzSummonRingAnimation);
+                        	}
+                    	}
+                		else
+                		{
+                			if(isMidWeight && !isHeavyWeight) 
+                            {
+                				queue.add(specialSummonRingMidAnimation);
+                            }
+                        	else if(isHeavyWeight) 
+                        	{
+                        		queue.add(specialSummonRingHeavyAnimation);
+                        	}
+                        	else 
+                        	{
+                        		queue.add(specialSummonRingAnimation);
+                        	}
+                		}
                     }
-                	if(moveAction.destinationCardPosition == CardPosition.DEF) 
+                    else 
                     {
-                    	queue.add(defPosAnimation);
+                    	queue.add(specialSummonRingAnimation);
                     }
-                    
-                    return new QueueAnimation(queue);
-                }
-                else if(action.actionType == ActionTypes.OVERLAY)
-                {
-                    Queue<Animation> queue = new LinkedList<>();
-                    queue.add(listAnimation);
-                    
-                    MoveTopAction moveAction = (MoveTopAction) action.actions.get(action.actions.size() - 1);
-                    
-                    ZoneWidget w = getZoneWidget(moveAction.destinationZone);
-                    
-                    int size = Math.max(w.getWidth(), w.getHeight());
-                    Animation atkPosAnimation = new AttackPositionAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size / 2);
-                    Animation defPosAnimation = new DefensePositionAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size / 2);
-                    
-                    queue.add(new SpecialSummonOverlayAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size / 2));
                     
                     if(moveAction.destinationCardPosition == CardPosition.ATK) 
                     {
@@ -1053,11 +1166,13 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
             AttackAction action = (AttackAction) action0;
             
             Animation burnSFX = new DummyAnimation();
-            Animation attackAnimation = new AttackAnimation(getView(), getZoneWidget(action.sourceZone), getZoneWidget(action.attackedZone));
+            Animation attackAnimation = new AttackLineAnimation(getView(), getZoneWidget(action.sourceZone), getZoneWidget(action.attackedZone));
+            
             ZoneWidget aZ = getZoneWidget(action.attackedZone);
             ZoneWidget sZ = getZoneWidget(action.sourceZone);
             int aSize = Math.max(aZ.getWidth(), aZ.getHeight());
             int sSize = Math.max(sZ.getWidth(), sZ.getHeight());
+            Animation defaultAttackProjectileAnimation = new AttackProjectileAnimation(getView(), getZoneWidget(action.sourceZone), getZoneWidget(action.attackedZone), sSize / 2, sSize + sSize / 2);
             Animation darkWindupAnimation = new WindUpDarkAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize / 2);
             Animation darkMidWindupAnimation = new WindUpDarkAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize);
             Animation darkStrongWindupAnimation = new WindUpDarkAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize * 2);
@@ -1079,9 +1194,9 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
             Animation directImpactMidAnimation = new DamagePlayerAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize / 4, aSize);
             Animation directImpactHeavyAnimation = new DamagePlayerAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize / 4, aSize + aSize / 2);
             Animation directImpactDummySFX = new DummyAnimation();
-            Animation darkImpactAnimation = new ImpactDarkAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize / 2, aSize + aSize / 2);
-            Animation darkMidImpactAnimation = new ImpactDarkAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize / 2, aSize + aSize);
-            Animation darkStrongImpactAnimation = new ImpactDarkAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize / 2, aSize + aSize * 2);
+            Animation darkImpactAnimation = new DarkImpactAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize / 2, aSize + aSize / 2);
+            Animation darkMidImpactAnimation = new DarkImpactAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize / 2, aSize + aSize);
+            Animation darkStrongImpactAnimation = new DarkImpactStrongAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize / 2, aSize + aSize * 2);
             Animation divineImpactAnimation = new ImpactDivineAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize, aSize + aSize / 2);
             Animation divineStrongImpactAnimation = new ImpactDivineAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize, aSize + aSize);
             Animation earthImpactAnimation = new ImpactEarthAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize, aSize + aSize / 2);
@@ -1100,6 +1215,9 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
             Properties card = action.sourceZone.getTopCardSafely().cardHolder.card;
             CardPosition cardPosition = action.sourceZone.getTopCardSafely().getCardPosition();
             boolean isFaceUpCard = action.sourceZone.getTopCardSafely().getCardPosition().isFaceUp;
+            
+            //Attack Line animation
+            queue.add(attackAnimation);
             
             //Wind-up animation
             if(!card.getAttribute().isEmpty() && card.getAttribute() != null && isFaceUpCard) 
@@ -1227,7 +1345,7 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
             // Burn
             if(action.actionType == ActionTypes.BURN) 
             {
-            	queue.add(attackAnimation);
+            	queue.add(defaultAttackProjectileAnimation);
             	queue.add(burnSFX);
             	queue.add(directImpactAnimation);
             }
@@ -1235,8 +1353,7 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
             //Direct Attack animation
             if(action.actionType == ActionTypes.ATTACK_DIRECT) 
             {
-            	//Attack Line animation
-                queue.add(attackAnimation);
+                queue.add(defaultAttackProjectileAnimation);
             	
             	if(action.attackedZone.getOwner() == getZoneOwner())
                 {
@@ -1304,9 +1421,6 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
             // Regular attack
             if(!(action.actionType == ActionTypes.ATTACK_DIRECT) && !(action.actionType == ActionTypes.BURN)) 
             {
-                //Attack Line animation
-                queue.add(attackAnimation);
-                
                 if(!card.getAttribute().isEmpty() && card.getAttribute() != null && isFaceUpCard) 
                 {
                 	boolean isMidAttack;
@@ -1434,7 +1548,7 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
             int size = Math.max(w.getWidth(), w.getHeight());
             Animation atkPosAnimation = new AttackPositionAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size / 2);
             Animation defPosAnimation = new DefensePositionAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size / 2);
-            Animation summonTokenAnimation = new SpecialSummonTokenAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size / 2).setOnStart(() ->
+            Animation summonTokenAnimation = new TokenSummonAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size / 2).setOnStart(() ->
             {
                 action.doAction();
                 repopulateInteractions();

@@ -8,7 +8,6 @@ import de.cas_ual_ty.ydm.YDM;
 import de.cas_ual_ty.ydm.clientutil.ClientProxy;
 import de.cas_ual_ty.ydm.clientutil.YdmBlitUtil;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
 
 public class StaticSymbolFadeOutAnimation extends Animation
 {
@@ -16,7 +15,6 @@ public class StaticSymbolFadeOutAnimation extends Animation
     public float centerPosY;
     public int size;
     public int endSize;
-	public SoundEvent sound;
     
     public StaticSymbolFadeOutAnimation(float centerPosX, float centerPosY, int size, int endSize)
     {

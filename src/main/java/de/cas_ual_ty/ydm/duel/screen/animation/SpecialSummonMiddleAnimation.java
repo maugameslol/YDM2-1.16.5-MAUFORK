@@ -5,9 +5,9 @@ import de.cas_ual_ty.ydm.YdmSoundEvents;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 
-public class SpecialSummonAnimation extends SpinningSymbolAnimation
+public class SpecialSummonMiddleAnimation extends SpinningSymbolAnimation
 {
-	public SpecialSummonAnimation(float centerPosX, float centerPosY, int size, int endSize)
+	public SpecialSummonMiddleAnimation(float centerPosX, float centerPosY, int size, int endSize)
     {
         super(centerPosX, centerPosY, size, endSize);
     }
@@ -21,6 +21,6 @@ public class SpecialSummonAnimation extends SpinningSymbolAnimation
     @Override
     public SoundEvent getSoundEvent()
     {
-    	return YdmSoundEvents.SUMMON_NORMAL.get();
+    	return YdmSoundEvents.SUMMON_NORMAL_MIDDLE.get();
     }
 }

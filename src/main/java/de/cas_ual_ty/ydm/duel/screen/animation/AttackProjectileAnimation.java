@@ -1,18 +1,20 @@
 package de.cas_ual_ty.ydm.duel.screen.animation;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
+
+import de.cas_ual_ty.ydm.YDM;
 import de.cas_ual_ty.ydm.clientutil.ClientProxy;
-import de.cas_ual_ty.ydm.clientutil.ScreenUtil;
+import de.cas_ual_ty.ydm.clientutil.YdmBlitUtil;
 import de.cas_ual_ty.ydm.duel.playfield.CardPosition;
 import de.cas_ual_ty.ydm.duel.playfield.ZoneOwner;
 import de.cas_ual_ty.ydm.duel.screen.widget.ZoneWidget;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Quaternion;
 
-public class AttackAnimation extends Animation
+public class AttackProjectileAnimation extends Animation
 {
-	//TODO: Customizable Color, Size and End Size
-    public final ZoneOwner view;
+	public final ZoneOwner view;
     public final ZoneWidget sourceZone;
     public final ZoneWidget destinationZone;
     
@@ -20,8 +22,10 @@ public class AttackAnimation extends Animation
     public int sourceY;
     public int destX;
     public int destY;
+    public int size;
+    public int endSize;
     
-    public AttackAnimation(ZoneOwner view, ZoneWidget sourceZone, ZoneWidget destinationZone)
+    public AttackProjectileAnimation(ZoneOwner view, ZoneWidget sourceZone, ZoneWidget destinationZone, int size, int endSize)
     {
         super(ClientProxy.attackAnimationLength);
         
@@ -33,14 +37,14 @@ public class AttackAnimation extends Animation
         sourceY = this.sourceZone.getAnimationSourceY();
         destX = this.destinationZone.getAnimationDestX();
         destY = this.destinationZone.getAnimationDestY();
+        this.size = size;
+        this.endSize = endSize;
     }
     
     @Override
     public void render(MatrixStack ms, int mouseX, int mouseY, float partialTicks)
     {
-        int halfTime = maxTickTime / 2;
-        
-        double relativeTickTime = (double) ((tickTime % halfTime) + partialTicks) / halfTime;
+    	double relativeTickTime = (tickTime + partialTicks) / maxTickTime;
         
         // [1pi, 2pi]
         double cosTime1 = Math.PI * relativeTickTime + Math.PI;
@@ -50,9 +54,12 @@ public class AttackAnimation extends Animation
         float deltaX = destX - sourceX;
         float deltaY = destY - sourceY;
         
-        float maxSize = MathHelper.sqrt(deltaX * deltaX + deltaY * deltaY);
+        //float maxSize = MathHelper.sqrt(deltaX * deltaX + deltaY * deltaY);
         
         float rotation;
+        
+        float size = (float) relativeTickTime * (endSize - this.size) + this.size;
+        float halfSize = 0.5F * size;
         
         if(deltaX != 0)
         {
@@ -75,28 +82,21 @@ public class AttackAnimation extends Animation
             rotation += Math.PI;
         }
         
-        float posX;
-        float posY;
+        float posX = sourceX;
+        float posY = sourceY;
         
-        if(tickTime < halfTime)
-        {
-            posX = sourceX;
-            posY = sourceY;
-        }
-        else
-        {
-            posX = destX;
-            posY = destY;
-            rotation += Math.PI;
-            relativePositionRotation = 1 - relativePositionRotation;
-        }
+        posX += (destX - sourceX) * relativePositionRotation;
+        posY += (destY - sourceY) * relativePositionRotation;
+        rotation += Math.PI;
+        relativePositionRotation = 1 - relativePositionRotation;
         
         ms.pushPose();
         
         ms.translate(posX, posY, 0);
         ms.mulPose(new Quaternion(0, 0, rotation, false));
         
-        ScreenUtil.drawRect(ms, -2, 0, 4, maxSize * relativePositionRotation, 1F, 0, 0, 0.5F);
+        ClientProxy.getMinecraft().textureManager.bind(getTexture());
+        YdmBlitUtil.fullBlit(ms, -halfSize, -halfSize * relativePositionRotation, size, size);
         
         ms.popPose();
     }
@@ -125,5 +125,10 @@ public class AttackAnimation extends Animation
                 return 270;
             }
         }
+    }
+    
+	public ResourceLocation getTexture()
+    {
+        return new ResourceLocation(YDM.MOD_ID, "textures/gui/action_animations/default_attack_projectile.png");
     }
 }
