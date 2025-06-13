@@ -1,12 +1,14 @@
 package de.cas_ual_ty.ydm.duel.screen.animation;
 
 import de.cas_ual_ty.ydm.YDM;
+import de.cas_ual_ty.ydm.YdmSoundEvents;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 
-public class ImpactFireAnimation extends SpinningSymbolAnimation
+public class FireImpactAnimation extends SpinningSymbolAnimation
 {
     
-    public ImpactFireAnimation(float centerPosX, float centerPosY, int size, int endSize)
+    public FireImpactAnimation(float centerPosX, float centerPosY, int size, int endSize)
     {
     	super(centerPosX, centerPosY, size, endSize);
     }
@@ -15,5 +17,11 @@ public class ImpactFireAnimation extends SpinningSymbolAnimation
     public ResourceLocation getTexture()
     {
         return new ResourceLocation(YDM.MOD_ID, "textures/gui/action_animations/fire_impact.png");
+    }
+    
+    @Override
+    public SoundEvent getSoundEvent()
+    {
+    	return YdmSoundEvents.IMPACT_FIRE.get();
     }
 }

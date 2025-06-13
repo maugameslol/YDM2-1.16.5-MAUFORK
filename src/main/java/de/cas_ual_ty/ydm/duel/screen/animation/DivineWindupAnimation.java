@@ -1,11 +1,13 @@
 package de.cas_ual_ty.ydm.duel.screen.animation;
 
 import de.cas_ual_ty.ydm.YDM;
+import de.cas_ual_ty.ydm.YdmSoundEvents;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 
-public class WindUpDivineAnimation extends SpinningSymbolAnimation
+public class DivineWindupAnimation extends SpinningSymbolAnimation
 {
-	public WindUpDivineAnimation(float centerPosX, float centerPosY, int size, int endSize)
+	public DivineWindupAnimation(float centerPosX, float centerPosY, int size, int endSize)
     {
         super(centerPosX, centerPosY, size, endSize);
     }
@@ -15,5 +17,10 @@ public class WindUpDivineAnimation extends SpinningSymbolAnimation
     {
         return new ResourceLocation(YDM.MOD_ID, "textures/gui/action_animations/divine_windup.png");
     }
-
+    
+    @Override
+    public SoundEvent getSoundEvent()
+    {
+    	return YdmSoundEvents.ATTACK_DIVINE.get();
+    }
 }

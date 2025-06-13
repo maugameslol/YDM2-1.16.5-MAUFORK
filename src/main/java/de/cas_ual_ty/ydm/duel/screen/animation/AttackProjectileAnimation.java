@@ -9,7 +9,6 @@ import de.cas_ual_ty.ydm.duel.playfield.CardPosition;
 import de.cas_ual_ty.ydm.duel.playfield.ZoneOwner;
 import de.cas_ual_ty.ydm.duel.screen.widget.ZoneWidget;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Quaternion;
 
 public class AttackProjectileAnimation extends Animation

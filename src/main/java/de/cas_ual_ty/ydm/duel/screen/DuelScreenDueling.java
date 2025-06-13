@@ -1165,92 +1165,100 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
         	//TODO: Clean this mess up somehow
             AttackAction action = (AttackAction) action0;
             
-            Animation burnSFX = new DummyAnimation();
             Animation attackAnimation = new AttackLineAnimation(getView(), getZoneWidget(action.sourceZone), getZoneWidget(action.attackedZone));
             
             ZoneWidget aZ = getZoneWidget(action.attackedZone);
             ZoneWidget sZ = getZoneWidget(action.sourceZone);
             int aSize = Math.max(aZ.getWidth(), aZ.getHeight());
             int sSize = Math.max(sZ.getWidth(), sZ.getHeight());
+            
+            Animation darkWindupAnimation = new DarkWindupAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize / 2);
+            Animation darkMidWindupAnimation = new DarkWindupStrongAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize);
+            Animation darkStrongWindupAnimation = new DarkWindupStrongAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize * 2);
+            Animation darkProjectileAnimation = new DarkAttackProjectileAnimation(getView(), getZoneWidget(action.sourceZone), getZoneWidget(action.attackedZone), sSize / 2, sSize + sSize / 2);
+            
+            Animation divineWindupAnimation = new DivineWindupAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize / 2);
+            Animation divineMidWindupAnimation = new DivineWindupStrongAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize);
+            Animation divineStrongWindupAnimation = new DivineWindupStrongAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize);
+            Animation divineProjectileAnimation = new DivineAttackProjectileAnimation(getView(), getZoneWidget(action.sourceZone), getZoneWidget(action.attackedZone), sSize / 2, sSize + sSize / 2);
+            
+            Animation earthWindupAnimation = new EarthWindupAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize / 2);
+            Animation earthMidWindupAnimation = new EarthWindupStrongAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize);
+            Animation earthStrongWindupAnimation = new EarthWindupStrongAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize);
+            Animation earthProjectileAnimation = new EarthAttackProjectileAnimation(getView(), getZoneWidget(action.sourceZone), getZoneWidget(action.attackedZone), sSize / 2, sSize + sSize / 2);
+            
+            Animation fireWindupAnimation = new FireWindupAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize / 2);
+            Animation fireMidWindupAnimation = new FireWindupStrongAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize);
+            Animation fireStrongWindupAnimation = new FireWindupAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize);
+            Animation fireProjectileAnimation = new FireAttackProjectileAnimation(getView(), getZoneWidget(action.sourceZone), getZoneWidget(action.attackedZone), sSize / 2, sSize + sSize / 2);
+            
+            Animation lightWindupAnimation = new LightWindUpAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize / 2);
+            Animation lightMidWindupAnimation = new LightWindupStrongAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize);
+            Animation lightStrongWindupAnimation = new LightWindupStrongAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize);
+            Animation lightProjectileAnimation = new LightAttackProjectileAnimation(getView(), getZoneWidget(action.sourceZone), getZoneWidget(action.attackedZone), sSize / 2, sSize + sSize / 2);
+            
+            Animation waterWindupAnimation = new WaterWindupAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize / 2);
+            Animation waterMidWindupAnimation = new WaterWindupStrongAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize);
+            Animation waterStrongWindupAnimation = new WaterWindupStrongAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize);
+            Animation waterProjectileAnimation = new WaterAttackProjectileAnimation(getView(), getZoneWidget(action.sourceZone), getZoneWidget(action.attackedZone), sSize / 2, sSize + sSize / 2);
+            
+            Animation windWindupAnimation = new WindWindupAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize / 2);
+            Animation windMidWindupAnimation = new WindWindupStrongAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize);
+            Animation windStrongWindupAnimation = new WindWindupStrongAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize);
+            Animation windProjectileAnimation = new WindAttackProjectileAnimation(getView(), getZoneWidget(action.sourceZone), getZoneWidget(action.attackedZone), sSize / 2, sSize + sSize / 2);
+            
+            Animation defaultWindupAnimation = new DefaultWindupAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize / 2);
+            Animation defaultMidWindupAnimation = new DefaultStrongWindupAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize);
+            Animation defaultStrongWindupAnimation = new DefaultStrongWindupAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize * 2);
             Animation defaultAttackProjectileAnimation = new AttackProjectileAnimation(getView(), getZoneWidget(action.sourceZone), getZoneWidget(action.attackedZone), sSize / 2, sSize + sSize / 2);
-            Animation darkWindupAnimation = new WindUpDarkAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize / 2);
-            Animation darkMidWindupAnimation = new WindUpDarkAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize);
-            Animation darkStrongWindupAnimation = new WindUpDarkAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize * 2);
-            Animation divineWindupAnimation = new WindUpDivineAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize / 2);
-            Animation divineStrongWindupAnimation = new WindUpDivineAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize);
-            Animation earthWindupAnimation = new WindUpEarthAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize / 2);
-            Animation earthStrongWindupAnimation = new WindUpEarthAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize);
-            Animation fireWindupAnimation = new WindUpFireAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize / 2);
-            Animation fireStrongWindupAnimation = new WindUpFireAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize);
-            Animation lightWindupAnimation = new WindUpLightAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize / 2);
-            Animation lightStrongWindupAnimation = new WindUpLightAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize);
-            Animation waterWindupAnimation = new WindUpWaterAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize / 2);
-            Animation waterStrongWindupAnimation = new WindUpWaterAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize);
-            Animation windWindupAnimation = new WindUpWindAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize / 2);
-            Animation windStrongWindupAnimation = new WindUpWindAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize);
-            Animation defaultWindupAnimation = new WindUpDefaultAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY(), sSize, sSize + sSize / 2);
-            Animation textDirectAttackAnimation = new TextAnimation((new StringTextComponent("DIRECT ATTACK").setStyle(Style.EMPTY.applyFormat(TextFormatting.BOLD))), sZ.getAnimationDestX(), sZ.getAnimationDestY());
-            Animation directImpactAnimation = new DamagePlayerAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize / 4, aSize / 2);
-            Animation directImpactMidAnimation = new DamagePlayerAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize / 4, aSize);
-            Animation directImpactHeavyAnimation = new DamagePlayerAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize / 4, aSize + aSize / 2);
-            Animation directImpactDummySFX = new DummyAnimation();
-            Animation darkImpactAnimation = new DarkImpactAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize / 2, aSize + aSize / 2);
-            Animation darkMidImpactAnimation = new DarkImpactAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize / 2, aSize + aSize);
-            Animation darkStrongImpactAnimation = new DarkImpactStrongAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize / 2, aSize + aSize * 2);
-            Animation divineImpactAnimation = new ImpactDivineAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize, aSize + aSize / 2);
-            Animation divineStrongImpactAnimation = new ImpactDivineAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize, aSize + aSize);
-            Animation earthImpactAnimation = new ImpactEarthAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize, aSize + aSize / 2);
-            Animation earthStrongImpactAnimation = new ImpactEarthAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize, aSize + aSize);
-            Animation fireImpactAnimation = new ImpactFireAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize, aSize + aSize / 2);
-            Animation fireStrongImpactAnimation = new ImpactFireAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize, aSize + aSize);
-            Animation lightImpactAnimation = new ImpactLightAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize, aSize + aSize / 2);
-            Animation lightStrongImpactAnimation = new ImpactLightAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize, aSize + aSize);
-            Animation waterImpactAnimation = new ImpactWaterAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize, aSize + aSize / 2);
-            Animation waterStrongImpactAnimation = new ImpactWaterAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize, aSize + aSize);
-            Animation windImpactAnimation = new ImpactWindAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize, aSize + aSize / 2);
-            Animation windStrongImpactAnimation = new ImpactWindAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize, aSize + aSize);
-            Animation defaultImpactAnimation = new ImpactDefaultAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize, aSize + aSize / 2);
+            
+            Animation textDirectAttackAnimation = new DirectAttackTextAnimation(sZ.getAnimationDestX(), sZ.getAnimationDestY());
+            
             Queue<Animation> queue = new LinkedList<>();
             
             Properties card = action.sourceZone.getTopCardSafely().cardHolder.card;
             CardPosition cardPosition = action.sourceZone.getTopCardSafely().getCardPosition();
+            
             boolean isFaceUpCard = action.sourceZone.getTopCardSafely().getCardPosition().isFaceUp;
-            
-            //Attack Line animation
-            queue.add(attackAnimation);
-            
-            //Wind-up animation
-            if(!card.getAttribute().isEmpty() && card.getAttribute() != null && isFaceUpCard) 
+            boolean isMidAttack;
+        	boolean isStrongAttack;
+        	
+        	isMidAttack = false;
+        	isStrongAttack = false;
+        	
+        	if(card instanceof MonsterProperties) 
         	{
-            	boolean isMidAttack;
-            	boolean isStrongAttack;
-            	isMidAttack = false;
-            	isStrongAttack = false;
-            	
-            	if(card instanceof MonsterProperties) 
-            	{
-            		if(card instanceof DefMonsterProperties && cardPosition == CardPosition.DEF) 
-            		{
-            			isMidAttack = ((DefMonsterProperties) card).getDef() >= 2000;
-            			isStrongAttack = ((DefMonsterProperties) card).getDef() >= 2500;
-            		}
-            		else if(cardPosition == CardPosition.ATK) 
-            		{
-            			isMidAttack = ((MonsterProperties) card).getAtk() >= 2000;
-            			isStrongAttack = ((MonsterProperties) card).getAtk() >= 2500;
-            		}
-            		else 
-            		{
-            			isMidAttack = ((MonsterProperties) card).getAtk() >= 2000;
-            			isStrongAttack = ((MonsterProperties) card).getAtk() >= 2500;
-            		}
-            	}
-            	
-            	if(action.actionType == ActionTypes.ATTACK_DIRECT) 
+        		if(card instanceof DefMonsterProperties && cardPosition == CardPosition.DEF) 
+        		{
+        			isMidAttack = ((DefMonsterProperties) card).getDef() >= 2000;
+        			isStrongAttack = ((DefMonsterProperties) card).getDef() >= 2500;
+        		}
+        		else if(cardPosition == CardPosition.ATK) 
+        		{
+        			isMidAttack = ((MonsterProperties) card).getAtk() >= 2000;
+        			isStrongAttack = ((MonsterProperties) card).getAtk() >= 2500;
+        		}
+        		else 
+        		{
+        			isMidAttack = ((MonsterProperties) card).getAtk() >= 2000;
+        			isStrongAttack = ((MonsterProperties) card).getAtk() >= 2500;
+        		}
+        	}
+        	
+        	if(action.actionType != ActionTypes.BURN) 
+        	{
+        		//Attack Line animation
+                queue.add(attackAnimation);
+                
+                if(action.actionType == ActionTypes.ATTACK_DIRECT) 
             	{
             		queue.add(textDirectAttackAnimation);
             	}
-            	
+        	}
+        	
+            //Wind-up animation
+            if(!card.getAttribute().isEmpty() && card.getAttribute() != null && isFaceUpCard) 
+        	{
             	if(card.getAttribute().equals("DARK")) 
             	{
             		if(isMidAttack && !isStrongAttack) 
@@ -1265,10 +1273,15 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
             		{
             			queue.add(darkWindupAnimation);
             		}
+            		queue.add(darkProjectileAnimation);
             	}
             	else if(card.getAttribute().equals("DIVINE")) 
             	{
-            		if(card instanceof MonsterProperties && (((MonsterProperties) card).getAtk() >= 2500)) 
+            		if(isMidAttack && !isStrongAttack) 
+            		{
+            			queue.add(divineMidWindupAnimation);
+            		}
+            		else if(isStrongAttack) 
             		{
             			queue.add(divineStrongWindupAnimation);
             		}
@@ -1276,10 +1289,15 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
             		{
             			queue.add(divineWindupAnimation);
             		}
+            		queue.add(divineProjectileAnimation);
             	}
                 else if(card.getAttribute().equals("EARTH")) 
             	{
-                	if(card instanceof MonsterProperties && (((MonsterProperties) card).getAtk() >= 2500)) 
+                	if(isMidAttack && !isStrongAttack) 
+            		{
+            			queue.add(earthMidWindupAnimation);
+            		}
+            		else if(isStrongAttack) 
             		{
             			queue.add(earthStrongWindupAnimation);
             		}
@@ -1287,10 +1305,15 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
             		{
             			queue.add(earthWindupAnimation);
             		}
+            		queue.add(earthProjectileAnimation);
             	}
                 else if(card.getAttribute().equals("FIRE")) 
             	{
-                	if(card instanceof MonsterProperties && (((MonsterProperties) card).getAtk() >= 2500)) 
+                	if(isMidAttack && !isStrongAttack) 
+            		{
+            			queue.add(fireMidWindupAnimation);
+            		}
+            		else if(isStrongAttack) 
             		{
             			queue.add(fireStrongWindupAnimation);
             		}
@@ -1298,10 +1321,15 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
             		{
             			queue.add(fireWindupAnimation);
             		}
+            		queue.add(fireProjectileAnimation);
             	}
                 else if(card.getAttribute().equals("LIGHT")) 
             	{
-                	if(card instanceof MonsterProperties && (((MonsterProperties) card).getAtk() >= 2500)) 
+                	if(isMidAttack && !isStrongAttack) 
+            		{
+            			queue.add(lightMidWindupAnimation);
+            		}
+            		else if(isStrongAttack) 
             		{
             			queue.add(lightStrongWindupAnimation);
             		}
@@ -1309,10 +1337,15 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
             		{
             			queue.add(lightWindupAnimation);
             		}
+            		queue.add(lightProjectileAnimation);
             	}
                 else if(card.getAttribute().equals("WATER")) 
             	{
-                	if(card instanceof MonsterProperties && (((MonsterProperties) card).getAtk() >= 2500)) 
+                	if(isMidAttack && !isStrongAttack) 
+            		{
+            			queue.add(waterMidWindupAnimation);
+            		}
+            		else if(isStrongAttack) 
             		{
             			queue.add(waterStrongWindupAnimation);
             		}
@@ -1320,10 +1353,15 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
             		{
             			queue.add(waterWindupAnimation);
             		}
+            		queue.add(waterProjectileAnimation);
             	}
                 else if(card.getAttribute().equals("WIND")) 
             	{
-                	if(card instanceof MonsterProperties && (((MonsterProperties) card).getAtk() >= 2500)) 
+                	if(isMidAttack && !isStrongAttack) 
+            		{
+            			queue.add(windMidWindupAnimation);
+            		}
+            		else if(isStrongAttack) 
             		{
             			queue.add(windStrongWindupAnimation);
             		}
@@ -1331,73 +1369,63 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
             		{
             			queue.add(windWindupAnimation);
             		}
+            		queue.add(windProjectileAnimation);
             	}
                 else
             	{
-                	if(action.actionType == ActionTypes.ATTACK_DIRECT) 
-                	{
-                		queue.add(textDirectAttackAnimation);
-                	}
-            		queue.add(defaultWindupAnimation);
-            	}
-        	}
-            
-            // Burn
-            if(action.actionType == ActionTypes.BURN) 
-            {
-            	queue.add(defaultAttackProjectileAnimation);
-            	queue.add(burnSFX);
-            	queue.add(directImpactAnimation);
-            }
-            
-            //Direct Attack animation
-            if(action.actionType == ActionTypes.ATTACK_DIRECT) 
-            {
-                queue.add(defaultAttackProjectileAnimation);
-            	
-            	if(action.attackedZone.getOwner() == getZoneOwner())
-                {
-            		directImpactDummySFX.setOnStart(() ->
-                    {
-                    	Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.DIRECT_ATTACK_PLAYER1.get(), 1.0F, 0.25F));
-                    });;
-                }
-                else
-                {
-                	directImpactDummySFX.setOnStart(() ->
-                    {
-                    	Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.DIRECT_ATTACK_PLAYER2.get(), 1.0F, 0.25F));
-                    });;
-                }
-            	
-            	queue.add(directImpactDummySFX);
-            	
-            	if(card instanceof MonsterProperties && isFaceUpCard) 
-            	{
-            		boolean isMidAttack;
-                	boolean isStrongAttack;
-                	isMidAttack = false;
-                	isStrongAttack = false;
-                	
                 	if(card instanceof MonsterProperties) 
                 	{
-                		if(card instanceof DefMonsterProperties && cardPosition == CardPosition.DEF) 
+                		if(isMidAttack && !isStrongAttack) 
                 		{
-                			isMidAttack = ((DefMonsterProperties) card).getDef() >= 2000;
-                			isStrongAttack = ((DefMonsterProperties) card).getDef() >= 2500;
+                			queue.add(defaultMidWindupAnimation);
                 		}
-                		else if(cardPosition == CardPosition.ATK) 
+                		else if(isStrongAttack) 
                 		{
-                			isMidAttack = ((MonsterProperties) card).getAtk() >= 2000;
-                			isStrongAttack = ((MonsterProperties) card).getAtk() >= 2500;
+                			queue.add(defaultStrongWindupAnimation);
                 		}
                 		else 
                 		{
-                			isMidAttack = ((MonsterProperties) card).getAtk() >= 2000;
-                			isStrongAttack = ((MonsterProperties) card).getAtk() >= 2500;
+                			queue.add(defaultWindupAnimation);
                 		}
+                		queue.add(defaultAttackProjectileAnimation);
                 	}
-                	
+                	else 
+                	{
+                		queue.add(defaultWindupAnimation);
+                		queue.add(defaultAttackProjectileAnimation);
+                	}
+            	}
+        	}
+            
+            // Burn Impact animation
+            if(action.actionType == ActionTypes.BURN) 
+            {
+            	Animation directBurnImpactAnimation = new BurnPlayerAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize / 4, aSize / 2);
+            	queue.add(directBurnImpactAnimation);
+            }
+            
+            //Direct Impact animation
+            if(action.actionType == ActionTypes.ATTACK_DIRECT) 
+            {
+            	Animation directImpactMidAnimation = new DamagePlayerAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize / 4, aSize);
+                Animation directImpactHeavyAnimation = new DamagePlayerAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize / 4, aSize + aSize / 2);
+                Animation directImpactAnimation = new DamagePlayerAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize / 4, aSize / 2);
+                
+                
+                /*
+                boolean isOpponent;
+            	if(action.attackedZone.getOwner() == getZoneOwner())
+                {
+            		isOpponent = true;
+                }
+                else
+                {
+                	isOpponent = false;
+                }
+                */
+                
+            	if(card instanceof MonsterProperties && isFaceUpCard) 
+            	{
             		if(isMidAttack && !isStrongAttack) 
             		{
             			queue.add(directImpactHeavyAnimation);
@@ -1418,35 +1446,43 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
             	
             }
             
-            // Regular attack
+            // Monster to Monster Impact Animation
             if(!(action.actionType == ActionTypes.ATTACK_DIRECT) && !(action.actionType == ActionTypes.BURN)) 
             {
+            	Animation darkImpactAnimation = new DarkImpactAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize / 2, aSize + aSize / 2);
+                Animation darkMidImpactAnimation = new DarkImpactStrongAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize / 2, aSize + aSize);
+                Animation darkStrongImpactAnimation = new DarkImpactStrongAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize / 2, aSize + aSize * 2);
+                
+                Animation divineImpactAnimation = new DivineImpactAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize, aSize + aSize / 2);
+                Animation divineMidImpactAnimation = new DivineImpactStrongAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize, aSize + aSize);
+                Animation divineStrongImpactAnimation = new DivineImpactStrongAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize, aSize + aSize * 2);
+                
+                Animation earthImpactAnimation = new EarthImpactAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize, aSize + aSize / 2);
+                Animation earthMidImpactAnimation = new EarthImpactStrongAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize, aSize + aSize);
+                Animation earthStrongImpactAnimation = new EarthImpactStrongAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize, aSize + aSize * 2);
+                
+                Animation fireImpactAnimation = new FireImpactAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize, aSize + aSize / 2);
+                Animation fireMidImpactAnimation = new FireImpactStrongAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize, aSize + aSize);
+                Animation fireStrongImpactAnimation = new FireImpactStrongAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize, aSize + aSize * 2);
+
+                Animation lightImpactAnimation = new LightImpactAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize, aSize + aSize / 2);
+                Animation lightMidImpactAnimation = new LightImpactStrongAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize, aSize + aSize);
+                Animation lightStrongImpactAnimation = new LightImpactStrongAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize, aSize + aSize * 2);
+                
+                Animation waterImpactAnimation = new WaterImpactAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize, aSize + aSize / 2);
+                Animation waterMidImpactAnimation = new WaterImpactStrongAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize, aSize + aSize);
+                Animation waterStrongImpactAnimation = new WaterImpactStrongAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize, aSize + aSize * 2);
+                
+                Animation windImpactAnimation = new WindImpactAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize, aSize + aSize / 2);
+                Animation windMidImpactAnimation = new WindImpactStrongAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize, aSize + aSize);
+                Animation windStrongImpactAnimation = new WindImpactStrongAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize, aSize + aSize * 2);
+                
+                Animation defaultImpactAnimation = new DefaultImpactAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize, aSize + aSize / 2);
+                Animation defaultMidImpactAnimation = new DefaultImpactStrongAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize, aSize + aSize);
+                Animation defaultStrongImpactAnimation = new DefaultImpactStrongAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize, aSize + aSize * 2);
+                
                 if(!card.getAttribute().isEmpty() && card.getAttribute() != null && isFaceUpCard) 
                 {
-                	boolean isMidAttack;
-                	boolean isStrongAttack;
-                	isMidAttack = false;
-                	isStrongAttack = false;
-                	
-                	if(card instanceof MonsterProperties) 
-                	{
-                		if(card instanceof DefMonsterProperties && cardPosition == CardPosition.DEF) 
-                		{
-                			isMidAttack = ((DefMonsterProperties) card).getDef() >= 2000;
-                			isStrongAttack = ((DefMonsterProperties) card).getDef() >= 2500;
-                		}
-                		else if(cardPosition == CardPosition.ATK) 
-                		{
-                			isMidAttack = ((MonsterProperties) card).getAtk() >= 2000;
-                			isStrongAttack = ((MonsterProperties) card).getAtk() >= 2500;
-                		}
-                		else 
-                		{
-                			isMidAttack = ((MonsterProperties) card).getAtk() >= 2000;
-                			isStrongAttack = ((MonsterProperties) card).getAtk() >= 2500;
-                		}
-                	}
-                	
                 	if(card.getAttribute().equals("DARK")) 
                 	{
                 		if(isMidAttack && !isStrongAttack) 
@@ -1464,7 +1500,11 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
                 	}
                 	else if(card.getAttribute().equals("DIVINE")) 
                 	{
-                		if(card instanceof MonsterProperties && (((MonsterProperties) card).getAtk() >= 2500)) 
+                		if(isMidAttack && !isStrongAttack) 
+                		{
+                			queue.add(divineMidImpactAnimation);
+                		}
+                		else if(isStrongAttack) 
                 		{
                 			queue.add(divineStrongImpactAnimation);
                 		}
@@ -1475,7 +1515,11 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
                 	}
                 	else if(card.getAttribute().equals("EARTH")) 
                 	{
-                		if(card instanceof MonsterProperties && (((MonsterProperties) card).getAtk() >= 2500)) 
+                		if(isMidAttack && !isStrongAttack) 
+                		{
+                			queue.add(earthMidImpactAnimation);
+                		}
+                		else if(isStrongAttack) 
                 		{
                 			queue.add(earthStrongImpactAnimation);
                 		}
@@ -1486,7 +1530,11 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
                 	}
                 	else if(card.getAttribute().equals("FIRE")) 
                 	{
-                		if(card instanceof MonsterProperties && (((MonsterProperties) card).getAtk() >= 2500)) 
+                		if(isMidAttack && !isStrongAttack) 
+                		{
+                			queue.add(fireMidImpactAnimation);
+                		}
+                		else if(isStrongAttack) 
                 		{
                 			queue.add(fireStrongImpactAnimation);
                 		}
@@ -1497,7 +1545,11 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
                 	}
                 	else if(card.getAttribute().equals("LIGHT")) 
                 	{
-                		if(card instanceof MonsterProperties && (((MonsterProperties) card).getAtk() >= 2500)) 
+                		if(isMidAttack && !isStrongAttack) 
+                		{
+                			queue.add(lightMidImpactAnimation);
+                		}
+                		else if(isStrongAttack) 
                 		{
                 			queue.add(lightStrongImpactAnimation);
                 		}
@@ -1508,7 +1560,11 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
                 	}
                 	else if(card.getAttribute().equals("WATER")) 
                 	{
-                		if(card instanceof MonsterProperties && (((MonsterProperties) card).getAtk() >= 2500)) 
+                		if(isMidAttack && !isStrongAttack) 
+                		{
+                			queue.add(waterMidImpactAnimation);
+                		}
+                		else if(isStrongAttack) 
                 		{
                 			queue.add(waterStrongImpactAnimation);
                 		}
@@ -1519,7 +1575,11 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
                 	}
                 	else if(card.getAttribute().equals("WIND")) 
                 	{
-                		if(card instanceof MonsterProperties && (((MonsterProperties) card).getAtk() >= 2500)) 
+                		if(isMidAttack && !isStrongAttack) 
+                		{
+                			queue.add(windMidImpactAnimation);
+                		}
+                		else if(isStrongAttack) 
                 		{
                 			queue.add(windStrongImpactAnimation);
                 		}
@@ -1530,7 +1590,25 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
                 	}
                 	else 
                 	{
-                		queue.add(defaultImpactAnimation);
+                		if(card instanceof MonsterProperties) 
+                		{
+                			if(isMidAttack && !isStrongAttack) 
+                    		{
+                    			queue.add(defaultMidImpactAnimation);
+                    		}
+                    		else if(isStrongAttack) 
+                    		{
+                    			queue.add(defaultStrongImpactAnimation);
+                    		}
+                    		else 
+                    		{
+                    			queue.add(defaultImpactAnimation);
+                    		}
+                		}
+                		else 
+                		{
+                			queue.add(defaultImpactAnimation);
+                		}
                 	}
                 }
             	else 

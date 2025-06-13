@@ -1,0 +1,68 @@
+package de.cas_ual_ty.ydm.duel.screen.animation;
+
+import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.systems.RenderSystem;
+
+import de.cas_ual_ty.ydm.YdmSoundEvents;
+import de.cas_ual_ty.ydm.clientutil.ClientProxy;
+import de.cas_ual_ty.ydm.clientutil.ScreenUtil;
+import net.minecraft.client.gui.AbstractGui;
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
+
+public class DirectAttackTextAnimation extends Animation
+{
+    public float centerPosX;
+    public float centerPosY;
+    
+    public DirectAttackTextAnimation(float centerPosX, float centerPosY)
+    {
+        super(ClientProxy.announcementAnimationLength);
+        
+        this.centerPosX = centerPosX;
+        this.centerPosY = centerPosY;
+    }
+    
+    @Override
+    public void render(MatrixStack ms, int mouseX, int mouseY, float partialTicks)
+    {
+        FontRenderer f = ClientProxy.getMinecraft().font;
+        
+        double relativeTickTime = (tickTime + partialTicks) / maxTickTime;
+        
+        // [0, 1/2pi]
+        double cosTime1 = 0.5D * Math.PI * relativeTickTime;
+        // [0, 1]
+        float alpha = (float) (Math.cos(cosTime1));
+        
+        ITextComponent text = new TranslationTextComponent("action.ydm.attack_direct").setStyle(Style.EMPTY.applyFormat(TextFormatting.BOLD));
+        
+        ms.pushPose();
+        
+        ms.translate(centerPosX, centerPosY - f.lineHeight / 2, 0);
+        
+        RenderSystem.enableBlend();
+        RenderSystem.color4f(1F, 1F, 1F, alpha);
+        RenderSystem.defaultBlendFunc();
+        RenderSystem.enableDepthTest();
+        
+        int j = 16777215; //See TextWidget
+        AbstractGui.drawCenteredString(ms, f, text, 0, 0, j | MathHelper.ceil(alpha * 255.0F) << 24);
+        
+        RenderSystem.disableBlend();
+        ScreenUtil.white();
+        
+        ms.popPose();
+    }
+    
+    @Override
+    public SoundEvent getSoundEvent()
+    {
+    	return YdmSoundEvents.DIRECT_ATTACK_DECLARE.get();
+    }
+}

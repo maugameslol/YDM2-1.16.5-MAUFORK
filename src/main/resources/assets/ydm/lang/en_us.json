@@ -318,6 +318,7 @@
 	"action.ydm.activate_effect": "activates the effect of",
 	"action.ydm.continue_effect": "applies the continuous effect of",
 	"action.ydm.negate_effect": "negates the effect of",
+	"action.ydm.attack_direct": "DIRECT ATTACK",
     "actionIcon.ydm.to_top_of_deck_fd": "To Top of Deck",
     "actionIcon.ydm.to_bottom_of_deck_fd": "To Bottom of Deck",
     "actionIcon.ydm.to_top_of_deck_atk": "To Top of Deck Face Up",

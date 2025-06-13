@@ -1,12 +1,14 @@
 package de.cas_ual_ty.ydm.duel.screen.animation;
 
 import de.cas_ual_ty.ydm.YDM;
+import de.cas_ual_ty.ydm.YdmSoundEvents;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 
-public class ImpactDivineAnimation extends SpinningSymbolAnimation
+public class DivineImpactAnimation extends SpinningSymbolAnimation
 {
     
-    public ImpactDivineAnimation(float centerPosX, float centerPosY, int size, int endSize)
+    public DivineImpactAnimation(float centerPosX, float centerPosY, int size, int endSize)
     {
     	super(centerPosX, centerPosY, size, endSize);
     }
@@ -15,5 +17,11 @@ public class ImpactDivineAnimation extends SpinningSymbolAnimation
     public ResourceLocation getTexture()
     {
         return new ResourceLocation(YDM.MOD_ID, "textures/gui/action_animations/divine_impact.png");
+    }
+    
+    @Override
+    public SoundEvent getSoundEvent()
+    {
+    	return YdmSoundEvents.IMPACT_DIVINE.get();
     }
 }
