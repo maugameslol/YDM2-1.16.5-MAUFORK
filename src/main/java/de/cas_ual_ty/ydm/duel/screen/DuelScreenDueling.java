@@ -7,11 +7,9 @@ import de.cas_ual_ty.ydm.YdmSoundEvents;
 import de.cas_ual_ty.ydm.card.properties.DefMonsterProperties;
 import de.cas_ual_ty.ydm.card.properties.LevelMonsterProperties;
 import de.cas_ual_ty.ydm.card.properties.LinkMonsterProperties;
-//import de.cas_ual_ty.ydm.card.properties.LinkMonsterProperties;
 import de.cas_ual_ty.ydm.card.properties.MonsterProperties;
 import de.cas_ual_ty.ydm.card.properties.Properties;
 import de.cas_ual_ty.ydm.card.properties.XyzMonsterProperties;
-//import de.cas_ual_ty.ydm.card.properties.XyzMonsterProperties;
 import de.cas_ual_ty.ydm.clientutil.CardRenderUtil;
 import de.cas_ual_ty.ydm.clientutil.ScreenUtil;
 import de.cas_ual_ty.ydm.clientutil.widget.*;
@@ -1407,14 +1405,9 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
             //Direct Impact animation
             if(action.actionType == ActionTypes.ATTACK_DIRECT) 
             {
-            	Animation directImpactMidAnimation = new DamagePlayerAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize / 4, aSize);
-                Animation directImpactHeavyAnimation = new DamagePlayerAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize / 4, aSize + aSize / 2);
-                Animation directImpactAnimation = new DamagePlayerAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize / 4, aSize / 2);
-                
-                
-                /*
-                boolean isOpponent;
-            	if(action.attackedZone.getOwner() == getZoneOwner())
+            	boolean isOpponent;
+            	isOpponent = false;
+            	if(action.attackedZone.getOwner() != getZoneOwner())
                 {
             		isOpponent = true;
                 }
@@ -1422,7 +1415,10 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
                 {
                 	isOpponent = false;
                 }
-                */
+            	
+            	Animation directImpactMidAnimation = new DamagePlayerAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize / 4, aSize, isOpponent);
+                Animation directImpactHeavyAnimation = new DamagePlayerAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize / 4, aSize + aSize / 2, isOpponent);
+                Animation directImpactAnimation = new DamagePlayerAnimation(aZ.getAnimationDestX(), aZ.getAnimationDestY(), aSize / 4, aSize / 2, isOpponent);
                 
             	if(card instanceof MonsterProperties && isFaceUpCard) 
             	{
@@ -1677,7 +1673,6 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
             IAnnouncedAction action = (IAnnouncedAction) action0;
             Queue<Animation> queue = new LinkedList<>();
             
-            
             if(action.announceOnField())
             {
                 ZoneWidget w = getZoneWidget(action.getFieldAnnouncementZone());
@@ -1689,14 +1684,10 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
                 	queue.add(shuffleAnimation);
                 	return new QueueAnimation(queue);
                 }
-                if(action0.actionType == ActionTypes.ACTIVATE_EFFECT) 
+                else if(action0.actionType == ActionTypes.ACTIVATE_EFFECT) 
                 {
                 	int size = Math.max(w.getWidth(), w.getHeight());
                 	Animation effectAnimation = new EffectActivateAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size / 2)
-                			.setOnStart(() -> 
-                			{ 
-                				Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.EFFECT_ACTIVATE.get(), 1.0F, 0.25F)); 
-                			})
                         	.setOnEnd(() ->
                             {
                             	action0.doAction();
@@ -1705,14 +1696,10 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
                         	queue.add(effectAnimation);
                         	return new QueueAnimation(queue);
                 }
-                if(action0.actionType == ActionTypes.CONTINUE_EFFECT) 
+                else if(action0.actionType == ActionTypes.CONTINUE_EFFECT) 
                 {
                 	int size = Math.max(w.getWidth(), w.getHeight());
                 	Animation effectAnimation = new EffectContinueAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size / 2)
-                			.setOnStart(() -> 
-                			{ 
-                				Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.EFFECT_CONTINUE.get(), 1.0F, 0.25F)); 
-                			})
                         	.setOnEnd(() ->
                             {
                             	action0.doAction();
@@ -1721,16 +1708,12 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
                         	queue.add(effectAnimation);
                         	return new QueueAnimation(queue);
                 }
-                if(action0.actionType == ActionTypes.NEGATE_EFFECT) 
+                else if(action0.actionType == ActionTypes.NEGATE_EFFECT) 
                 {
                 	EffectNegateAction negateAction = (EffectNegateAction) action0;
                 	ZoneWidget nZ = getZoneWidget(negateAction.negatedZone);
                 	int size = Math.max(nZ.getWidth(), nZ.getHeight());
                 	Animation negateEffectAnimation = new EffectNegateAnimation(nZ.getAnimationDestX(), nZ.getAnimationDestY(), size + size, size)
-                			.setOnStart(() -> 
-                			{ 
-                				Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.EFFECT_NEGATE.get(), 1.0F, 0.25F)); 
-                			})
                         	.setOnEnd(() ->
                             {
                             	action0.doAction();
@@ -1744,7 +1727,7 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
                 	return textAnimation;
                 } 
             }
-            if(action0.actionType == ActionTypes.CHANGE_LP) 
+            else if(action0.actionType == ActionTypes.CHANGE_LP) 
             {
             	//TODO: Improve code here, either by changing the Change LP action or something else
             	//ChangeLPAction lpAction = (ChangeLPAction) action0;
@@ -1761,7 +1744,7 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
             	
             	return new QueueAnimation(queue);
             }
-            if(action0.actionType == ActionTypes.COIN_FLIP) 
+            else if(action0.actionType == ActionTypes.COIN_FLIP) 
             {
             	//TODO: Make a proper coin toss, and separate animations for the result. Likely will include changing the coin toss action code.
             	Animation coinThrowAnimation = new DummyAnimation()
@@ -1777,7 +1760,7 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
             	queue.add(coinThrowAnimation);
             	return new QueueAnimation(queue);
             }
-            if(action0.actionType == ActionTypes.DICE_ROLL) 
+            else if(action0.actionType == ActionTypes.DICE_ROLL) 
             {
             	//TODO: Make a proper dice roll, and separate animations for the results. Likely will include changing the dice roll action code.
             	Animation diceRollAnimation = new DummyAnimation()
@@ -1793,12 +1776,18 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
             	queue.add(diceRollAnimation);
             	return new QueueAnimation(queue);
             }
+            else 
+            {
+            	return getDefaultAnimation(action0);
+            }
         }
         else if(action0.actionType == ActionTypes.CHANGE_PHASE)
         {
-            Animation defaultAnimation = getDefaultAnimation(action0);
-            Animation phaseChangeAnimation = new DummyAnimation();
+        	// TODO: Improve this. I can't seem to find a good place for this Animation to play from, and I am not satisfied with the way the texture I made for it looks.
+            //DuelPhase phase = getPlayField().getPhase();
+            //DuelPhase nextPhase = DuelPhase.getFromIndex((byte) (phase.getIndex() + 1));
             boolean isTurn;
+            
             if(getZoneOwner() == ZoneOwner.NONE)
             {
                 isTurn = getPlayField().isPlayerTurn(ZoneOwner.PLAYER1);
@@ -1808,37 +1797,33 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
                 isTurn = getPlayField().isPlayerTurn(getZoneOwner());
             }
             isTurn = getZoneOwner() != ZoneOwner.NONE && getPlayField().isPlayerTurn(getZoneOwner());
-            Queue<Animation> queue = new LinkedList<>();
             
-            if(isTurn) 
+            /*
+            ZoneWidget playerHand = getZoneWidget(getPlayField().getZoneByTypeAndPlayer(ZoneTypes.HAND, getZoneOwner()));
+            
+            int size = Math.max(playerHand.getWidth(), playerHand.getHeight());
+            
+            Animation phaseChangeAnimation = new PhaseChangeAnimation(new TranslationTextComponent("container." + YDM.MOD_ID + ".duel." + nextPhase.local), isTurn, playerHand.getAnimationDestX(), playerHand.getAnimationDestY(), size, size)
+            .setOnEnd(() ->
             {
-            	phaseChangeAnimation.setOnStart(() ->
-                {
-                	Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.PHASE_CHANGE_PLAYER1.get(), 1.0F, 0.25F));
-                });
-            }
-            else 
-            {
-            	phaseChangeAnimation.setOnStart(() ->
-                {
-                	Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.PHASE_CHANGE_PLAYER2.get(), 1.0F, 0.25F));
-                });
-            }
-            defaultAnimation.setOnEnd(() ->
-            {
+            	action0.doAction();
                 updateRightButtonStatus();
             });
+            */
+            Animation phaseChangeAnimation = new DummyPhaseChangeAnimation(isTurn)
+                    .setOnEnd(() ->
+                    {
+                    	action0.doAction();
+                        updateRightButtonStatus();
+                    });
             
-            queue.add(phaseChangeAnimation);
-            queue.add(defaultAnimation);
-            return new QueueAnimation(queue);
+            return phaseChangeAnimation;
         }
         else if(action0.actionType == ActionTypes.END_TURN)
         {
-            Animation defaultAnimation = getDefaultAnimation(action0);
-            Animation endTurnAnimation = new DummyAnimation();
-            Animation refreshDummyAnimation = new DummyAnimation().setOnEnd(() -> { reload(); });;
-            boolean isTurn;
+        	// TODO: improve this
+        	//ITextComponent turnChangeText = new TranslationTextComponent("action." + YDM.MOD_ID + ".turn_change");
+        	boolean isTurn;
             if(getZoneOwner() == ZoneOwner.NONE)
             {
                 isTurn = getPlayField().isPlayerTurn(ZoneOwner.PLAYER1);
@@ -1848,36 +1833,41 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
                 isTurn = getPlayField().isPlayerTurn(getZoneOwner());
             }
             isTurn = getZoneOwner() != ZoneOwner.NONE && getPlayField().isPlayerTurn(getZoneOwner());
-            Queue<Animation> queue = new LinkedList<>();
             
-            if(isTurn) 
-            {
-            	endTurnAnimation.setOnStart(() ->
-                {
-                	Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.TURN_SWITCH_PLAYER1.get(), 1.0F, 0.25F));
-                });
-            }
-            else 
-            {
-            	endTurnAnimation.setOnStart(() ->
-                {
-                	Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.TURN_SWITCH_PLAYER2.get(), 1.0F, 0.25F));
-                });
-            }
+            /*
+            ZoneWidget playerHand = getZoneWidget(getPlayField().getZoneByTypeAndPlayer(ZoneTypes.MONSTER, getZoneOwner()));
             
-            defaultAnimation.setOnEnd(() ->
-            {
-                updateRightButtonStatus();
-            });
+            int size = Math.max(playerHand.getWidth(), playerHand.getHeight());
             
-            queue.add(endTurnAnimation);
-            queue.add(defaultAnimation);
+            Animation changeTurnAnimation = new TurnChangeAnimation(turnChangeText, isTurn, playerHand.getAnimationDestX(), playerHand.getAnimationDestY(), size, size)
+            .setOnStart(() -> 
+            { 
+            	action0.doAction();
+            	updateRightButtonStatus();
+            })
+            .setOnEnd(() -> 
+    		{ 
+    			reload(); 
+    		});
+    		*/
+            
+            Animation changeTurnAnimation = new DummyTurnChangeAnimation(isTurn)
+                    .setOnStart(() -> 
+                    { 
+                    	action0.doAction();
+                    	updateRightButtonStatus();
+                    })
+                    .setOnEnd(() -> 
+            		{ 
+            			reload(); 
+            		});
+            
             // Hopefully this reload here does not break something
-            queue.add(refreshDummyAnimation);
-            return new QueueAnimation(queue);
+            return changeTurnAnimation;
         }
         else if(action0.actionType == ActionTypes.CHANGE_COUNTERS) 
         {
+        	// TODO: Improve this. This may need custom counter textures
         	Animation defaultAnimation = getDefaultAnimation(action0);
         	Animation changeCountersSFX = new DummyAnimation().setOnStart(() -> { Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(YdmSoundEvents.COUNTER_PLACE.get(), 1.0F, 0.25F)); });
         	Queue<Animation> queue = new LinkedList<>();

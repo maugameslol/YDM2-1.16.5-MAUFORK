@@ -697,6 +697,8 @@ public class DuelManager
         sendInfoMessageToAll(new TranslationTextComponent("container.ydm.duel.info_start"));
         populatePlayField();
         setDuelStateAndUpdate(DuelState.DUELING);
+        // TODO: I want to put an animation here for starting the duel.
+        //doAction(new StartDuelAction(ActionTypes.START_DUEL, null));
     }
     
     protected void populatePlayField()
