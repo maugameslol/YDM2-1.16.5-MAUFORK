@@ -13,7 +13,9 @@ Currently implemented:
 - Backport of the Rarity System from YDM 1.19.2
 - Slight adjustments to card info display, with symbols for certain stats
 - Card Tooltip adjustments to display more info, may improve on in future
-- Simple Banlist/Limitation indicators, will be improved in future.
+- Simple Banlist/Limitation indicators, will be improved in future. Recent change overlays a symbol over the card.
+- New Activate/Continue/Negate Effect actions that announces the card's name. This will be improved/adjusted in the future.
+- New Deck size limits. (120 Main/30 Extra/30 Side). This will be improved in the future as the screen does seem a bit crammed, and can cut off at certain display sizes and GUI scales.
 
 Short-term Plans:
 - Sleeves use database (being worked on currently)
@@ -45,7 +47,6 @@ Long-term Goals:
 - Dynamic Duel Music that checks card stats and player life
 - In-Duel display of important card stats such as level and combat stats
 - Ability to change a card's combat stats in duel to show buffs/debuffs
-- Activate Effect action with announcement showing the card's name
 - Logging more Duel actions
 - Making the Duel Chat functional
 - 1.20+ port
