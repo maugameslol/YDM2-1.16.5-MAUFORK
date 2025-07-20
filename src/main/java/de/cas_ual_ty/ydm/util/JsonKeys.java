@@ -23,6 +23,7 @@ public class JsonKeys
     public static final String DESIGNERS = "designers";
     public static final String CARD_COLOR = "card_color";
     public static final String MENTIONS = "mentions";
+    //public static final String MATERIALS = "materials";
     
     // card limitations/legality
     public static final String IS_ILLEGAL = "is_illegal";
@@ -41,6 +42,8 @@ public class JsonKeys
     //public static final String LP = "lp";
     //public static final String MANA = "mana";
     //public static final String THEME = "theme";
+    //public static final String LP_DAMAGE = "lp_damage";
+    //public static final String LP_HEALING = "lp_healing";
 
     // type = "Spell"
     public static final String SPELL_TYPE = "spell_type";
@@ -146,6 +149,10 @@ public class JsonKeys
     // banlist
     // TODO: What JSON keys would banlists need
     // Use NAME String from cards
+    public static final String START_DATE = "start_date";
+    public static final String END_DATE = "end_date";
+    public static final String OCG_RELEASE_DATE = "ocg_release_date";
+    public static final String TCG_RELEASE_DATE = "tcg_release_date";
     
     // other
     

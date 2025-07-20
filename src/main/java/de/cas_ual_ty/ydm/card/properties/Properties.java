@@ -10,6 +10,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
 
 import java.util.List;
 
@@ -68,6 +69,7 @@ public class Properties
     public String[] keywords;
     public String[] designers;
     public CardColor cardColor;
+    public String[] mentions;
     
     public boolean isAnime;
     public byte limit;
@@ -101,6 +103,7 @@ public class Properties
         keywords = p0.keywords;
         designers = p0.designers;
         cardColor = p0.cardColor;
+        mentions = p0.mentions;
         isAnime = p0.isAnime;
         isSpeed = p0.isSpeed;
         isLegend = p0.isLegend;
@@ -357,6 +360,20 @@ public class Properties
         	keywords = null;
         }
         
+        if(j.has(JsonKeys.MENTIONS))
+        {
+        	JsonArray mentions = j.get(JsonKeys.MENTIONS).getAsJsonArray();
+            this.mentions = new String[mentions.size()];
+            for(int i = 0; i < this.mentions.length; ++i)
+            {
+                this.mentions[i] = mentions.get(i).getAsString();
+            }
+        }
+        else
+        {
+        	mentions = null;
+        }
+        
         JsonArray images = j.get(JsonKeys.IMAGES).getAsJsonArray();
         this.images = new String[images.size()];
         for(int i = 0; i < this.images.length; ++i)
@@ -414,6 +431,13 @@ public class Properties
         	designers.add(designer);
         }
         j.add(JsonKeys.DESIGNERS, designers);
+        
+        JsonArray mentions = new JsonArray();
+        for(String mention : this.mentions)
+        {
+        	mentions.add(mention);
+        }
+        j.add(JsonKeys.MENTIONS, mentions);
         
         JsonArray images = new JsonArray();
         for(String image : this.images)
@@ -618,12 +642,14 @@ public class Properties
     					s.append(new StringTextComponent(" • " + archetypes[i]));
     				}
     			}
-    			s.append(" Archetypes");
+    			s.append(" ");
+    			s.append(new TranslationTextComponent("cardProperty." + YDM.MOD_ID + ".archetypes"));
     		}
     		else 
     		{
     			for(String archetype : archetypes)
-    			s.append(archetype + " Archetype");
+    			s.append(archetype + " ");
+    			s.append(new TranslationTextComponent("cardProperty." + YDM.MOD_ID + ".archetype"));
     		}
     		list.add(s);
     	}
@@ -865,15 +891,17 @@ public class Properties
     
     // -- Tooltip Formatting --
     
-    public void addTooltipInformation(List<ITextComponent> list)
+    public void addShiftTooltipInformation(List<ITextComponent> list)
     {
-    	addTooltipTypeBox(list);
+    	addTooltipArchetypes(list);
+    	addTooltipMentions(list);
     	addTooltipHeader(list);
-    	addTooltipArchetype(list);
+    	addTooltipTypeBox(list);
+    	addTooltipBattleStats(list);
     	addTooltipCardTags(list);
-    	addTooltipLegality(list);
         addKeywords(list);
         addTooltipDesigners(list);
+        addTooltipLegality(list);
     }
     
     public void addTooltipTypeBox(List<ITextComponent> list)
@@ -905,13 +933,15 @@ public class Properties
     	}
     }
     
-    public void addTooltipArchetype(List<ITextComponent> list)
+    public void addTooltipArchetypes(List<ITextComponent> list)
     {
     	if(getArchetypes() != null)  
     	{
-    		IFormattableTextComponent s = new StringTextComponent("Archetype: ");
+    		IFormattableTextComponent s = new StringTextComponent("");
     		if(getArchetypes().length > 1) 
     		{
+    			s.append(new TranslationTextComponent("cardProperty." + YDM.MOD_ID + ".archetypes"));
+    			s.append(": ");
     			for(int i = 0; i < archetypes.length; ++i) 
     			{
     				if (i == 0) {
@@ -924,6 +954,8 @@ public class Properties
     		}
     		else 
     		{
+    			s.append(new TranslationTextComponent("cardProperty." + YDM.MOD_ID + ".archetype"));
+    			s.append(": ");
     			for(String archetype : archetypes)
     			s.append(archetype);
     		}
@@ -1065,7 +1097,36 @@ public class Properties
     	}
     }
     
-    // TODO: Zone Tooltip
+    public void addTooltipMentions(List<ITextComponent> list)
+    {
+    	if(getMentions() != null)  
+    	{
+    		IFormattableTextComponent s = new StringTextComponent("Mentions: ");
+    		if(getMentions().length > 1) 
+    		{
+    			for(int i = 0; i < mentions.length; ++i) 
+    			{
+    				if (i == 0) {
+    					s.append(new StringTextComponent(mentions[i]));
+    				}
+    				if(i > 0) {
+    					s.append(new StringTextComponent(" • " + mentions[i]));
+    				}
+    			}
+    		}
+    		else 
+    		{
+    			for(String mention : mentions)
+    			s.append(mention);
+    		}
+    		list.add(s);
+    	}
+    }
+    
+    public void addTooltipBattleStats(List<ITextComponent> list) 
+    {
+    	
+    }
     
     // --- CardColor ---
     
@@ -1108,6 +1169,8 @@ public class Properties
     {
     	list.add(new StringTextComponent("" + getLimit() + ""));
     }
+    
+    // TODO: DuelScreenDueling Zone Tooltip
     
     // --- Getters ---
     
@@ -1179,6 +1242,11 @@ public class Properties
     public String[] getDesigners()
     {
         return designers;
+    }
+    
+    public String[] getMentions()
+    {
+        return mentions;
     }
     
     public boolean getIsAnime()

@@ -33,13 +33,18 @@ public class CardItem extends Item
     {
         CardHolder holder = getCardHolder(itemStack);
         tooltip.clear();
-        holder.addInformation(tooltip);
         if(Screen.hasShiftDown()) 
+    	{
+        	holder.addTooltipName(tooltip);
+    		holder.addShiftInfo(tooltip);
+    	}
+        
+        else 
         {
-        	holder.addShiftInfo(tooltip);
+        	holder.addInformation(tooltip);
+        	tooltip.add(StringTextComponent.EMPTY);
+        	tooltip.add(new TranslationTextComponent("info." + YDM.MOD_ID + ".hold_shift_for_details").withStyle(Style.EMPTY.applyFormat(TextFormatting.GRAY)));
         }
-        else
-        tooltip.add(new TranslationTextComponent("info.ydm.hold_shift_for_details").withStyle(Style.EMPTY.applyFormat(TextFormatting.GRAY)));
     }
     
     @Override

@@ -1,0 +1,21 @@
+{
+    "type": "minecraft:crafting_shapeless",
+	"ingredients": [
+        {
+            "item": "ydm:card_back"
+        },
+        {
+            "item": "minecraft:item_frame"
+        },
+        {
+            "tag": "minecraft:wool"
+        },
+		{
+            "tag": "minecraft:wool"
+        }
+    ],
+    "result": {
+        "item": "ydm:duel_playmat",
+        "count": 1
+    }
+}

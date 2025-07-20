@@ -95,28 +95,30 @@ public class DefMonsterProperties extends MonsterProperties
     @Override
     public void addTooltipMonsterStats(List<ITextComponent> list)
     {
-    	IFormattableTextComponent statLine = new StringTextComponent("");
-    	IFormattableTextComponent atkSymbol = new StringTextComponent("🗡").setStyle(Style.EMPTY.applyFormat(TextFormatting.RED));
-    	IFormattableTextComponent defSymbol = new StringTextComponent("🛡").setStyle(Style.EMPTY.applyFormat(TextFormatting.BLUE));
-    	statLine.append(atkSymbol);	
+    	IFormattableTextComponent statLineA = new StringTextComponent("").setStyle(Style.EMPTY.applyFormat(TextFormatting.RED));
+    	IFormattableTextComponent statLineD = new StringTextComponent("").setStyle(Style.EMPTY.applyFormat(TextFormatting.BLUE));
+    	IFormattableTextComponent atkSymbol = new StringTextComponent("🗡 ");
+    	IFormattableTextComponent defSymbol = new StringTextComponent("🛡 ");
+    	statLineA.append(atkSymbol);	
     	if(getAtk() >= 0)
             {
-    			statLine.append(getAtk() + "ATK / ");
+    			statLineA.append(getAtk() + " ATK");
             }
         else
             {
-        		statLine.append("?ATK / ");
+        		statLineA.append("? ATK");
             }
-    	statLine.append(defSymbol);
+    	statLineD.append(defSymbol);
     	if(getDef() >= 0)
         {
-    		statLine.append(getDef() + "DEF");
+    		statLineD.append(getDef() + " DEF");
         }
         else
         {
-        	statLine.append("?DEF");
+        	statLineD.append("? DEF");
         }
-    	list.add(statLine);
+    	list.add(statLineA);
+    	list.add(statLineD);
     }
     
     // --- Getters ---

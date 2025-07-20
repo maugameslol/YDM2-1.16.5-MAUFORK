@@ -1,6 +1,8 @@
 package de.cas_ual_ty.ydm.card.properties;
 
 import com.google.gson.JsonObject;
+
+import de.cas_ual_ty.ydm.YDM;
 import de.cas_ual_ty.ydm.util.JsonKeys;
 import net.minecraft.util.text.*;
 
@@ -523,11 +525,7 @@ public class MonsterProperties extends Properties
     public void addTooltipHeader(List<ITextComponent> list)
     {
     	super.addTooltipHeader(list);
-    	addTooltipMonsterStats(list);
-    	if(getIsMaximumCenter())
-        {
-    		addTooltipMaximum(list);
-        }
+    	
         if(getIsPendulum())
         {
         	addTooltipPendulum(list);
@@ -538,47 +536,55 @@ public class MonsterProperties extends Properties
         }
     }
     
+    @Override
+    public void addTooltipBattleStats(List<ITextComponent> list) 
+    {
+    	if(getIsMaximumCenter())
+        {
+    		addTooltipMaximumAtk(list);
+        }
+    	addTooltipMonsterStats(list);
+    }
+    
     public void addTooltipMonsterStats(List<ITextComponent> list)
     {
-    	IFormattableTextComponent statLine = new StringTextComponent("");
-    	IFormattableTextComponent atkSymbol = new StringTextComponent("🗡").setStyle(Style.EMPTY.applyFormat(TextFormatting.RED));
+    	IFormattableTextComponent statLine = new StringTextComponent("").setStyle(Style.EMPTY.applyFormat(TextFormatting.RED));
+    	IFormattableTextComponent atkSymbol = new StringTextComponent("🗡 ");
     	statLine.append(atkSymbol);
     	if(getAtk() >= 0)
             {
-    			statLine.append(getAtk() + "ATK");
+    			statLine.append(getAtk() + " ATK");
             }
         else
             {
-        		statLine.append("?ATK");
+        		statLine.append("? ATK");
             }
     	list.add(statLine);
     }
     
     public void addTooltipPendulum(List<ITextComponent> list)
     {
-    	IFormattableTextComponent s = new StringTextComponent("");
-    	IFormattableTextComponent pScaleTextL = new StringTextComponent("PScale");
-    	IFormattableTextComponent pScaleTextR = new StringTextComponent("PScale");
-        IFormattableTextComponent leftScale = new StringTextComponent("" + getPendulumScaleLeftBlue());
-        IFormattableTextComponent leftArrow = new StringTextComponent("◀").setStyle(Style.EMPTY.applyFormat(TextFormatting.BLUE));
-        IFormattableTextComponent rightArrow = new StringTextComponent("▶").setStyle(Style.EMPTY.applyFormat(TextFormatting.RED));
-        IFormattableTextComponent rightScale = new StringTextComponent("" + getPendulumScaleRightRed());
-        s.append(pScaleTextL.append(leftScale).append(" ").append(leftArrow).append(" / ").append(rightArrow).append(" ").append(pScaleTextR).append(rightScale));
-    	list.add(s);
+    	IFormattableTextComponent pScaleL = new StringTextComponent("◀ " + getPendulumScaleLeftBlue() + " ").setStyle(Style.EMPTY.applyFormat(TextFormatting.BLUE));
+    	IFormattableTextComponent pScaleR = new StringTextComponent("▶ " + getPendulumScaleRightRed() + " ").setStyle(Style.EMPTY.applyFormat(TextFormatting.RED));
+        pScaleL.append(new TranslationTextComponent("cardProperty." + YDM.MOD_ID + ".pscale"));
+        pScaleR.append(new TranslationTextComponent("cardProperty." + YDM.MOD_ID + ".pscale"));
+        
+    	list.add(pScaleL);
+    	list.add(pScaleR);
     }
     
-    public void addTooltipMaximum(List<ITextComponent> list)
+    public void addTooltipMaximumAtk(List<ITextComponent> list)
     {
-    	IFormattableTextComponent s = new StringTextComponent("");
-        IFormattableTextComponent maximumAtkSymbol = new StringTextComponent("🗡").setStyle(Style.EMPTY.applyFormat(TextFormatting.GOLD));
+    	IFormattableTextComponent s = new StringTextComponent("").setStyle(Style.EMPTY.applyFormat(TextFormatting.GOLD));
+        IFormattableTextComponent maximumAtkSymbol = new StringTextComponent("🗡 ");
         s.append(maximumAtkSymbol);
     	if(getMaximumAtk() >= 0)
             {
-    			s.append(getMaximumAtk() + "MAXATK");
+    			s.append(getMaximumAtk() + " MAXIMUM ATK");
             }
             else
             {
-            	s.append("?MAXATK");
+            	s.append("? MAXIMUM ATK");
             }
     	list.add(s);
     }

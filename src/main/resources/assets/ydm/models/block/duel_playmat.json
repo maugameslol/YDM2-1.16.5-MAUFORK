@@ -2,7 +2,8 @@
 	"credit": "Made with Blockbench",
 	"textures": {
 		"1": "ydm:block/duel_playmat",
-		"particle": "ydm:block/duel_playmat"
+		"bottom": "ydm:block/duel_playmat_bottom",
+		"particle": "ydm:block/duel_playmat_bottom"
 	},
 	"elements": [
 		{
@@ -11,12 +12,12 @@
 			"to": [14, 1, 14],
 			"rotation": {"angle": 0, "axis": "y", "origin": [8.5, 9.75, 10.5]},
 			"faces": {
-				"north": {"uv": [0, 0, 16, 0.5], "rotation": 180, "texture": "#1"},
-				"east": {"uv": [15.5, 0, 16, 16], "rotation": 90, "texture": "#1"},
-				"south": {"uv": [0, 16, 16, 15.5], "texture": "#1"},
-				"west": {"uv": [0, 0, 0.5, 16], "rotation": 270, "texture": "#1"},
+				"north": {"uv": [0, 0, 16, 0.5], "rotation": 180, "texture": "#bottom"},
+				"east": {"uv": [15.5, 0, 16, 16], "rotation": 90, "texture": "#bottom"},
+				"south": {"uv": [0, 16, 16, 15.5], "texture": "#bottom"},
+				"west": {"uv": [0, 0, 0.5, 16], "rotation": 270, "texture": "#bottom"},
 				"up": {"uv": [0, 0, 16, 16], "texture": "#1"},
-				"down": {"uv": [0, 0, 16, 16], "texture": "#1"}
+				"down": {"uv": [0, 0, 16, 16], "texture": "#bottom"}
 			}
 		}
 	],

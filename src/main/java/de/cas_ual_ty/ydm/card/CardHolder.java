@@ -50,19 +50,22 @@ public class CardHolder implements Comparable<CardHolder>
         readFromJson(json);
     }
     
+    public void addTooltipName(List<ITextComponent> tooltip) 
+    {
+    	getCard().addName(tooltip);
+    }
+    
     public void addInformation(List<ITextComponent> tooltip)
     {
-        //tooltip.add(new StringTextComponent(getCard().getName()));
     	getCard().addName(tooltip);
         tooltip.add(new StringTextComponent(getCode()));
         tooltip.add(new StringTextComponent(getRarity()));
         tooltip.add(new StringTextComponent("Image Variant " + (1 + getImageIndex())));
-        //getCard().addTooltipInformation(tooltip);
     }
     
     public void addShiftInfo(List<ITextComponent> tooltip)
     {
-    	getCard().addTooltipInformation(tooltip);
+    	getCard().addShiftTooltipInformation(tooltip);
     }
     
     //TODO: Show simple info in Duels. I'm not sure if this should be here or in DuelCard

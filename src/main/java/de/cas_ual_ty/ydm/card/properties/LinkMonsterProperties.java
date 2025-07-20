@@ -119,19 +119,21 @@ public class LinkMonsterProperties extends MonsterProperties
     @Override
     public void addTooltipMonsterStats(List<ITextComponent> list)
     {
-    	IFormattableTextComponent atkSymbol = new StringTextComponent("🗡").setStyle(Style.EMPTY.applyFormat(TextFormatting.RED));
-    	IFormattableTextComponent s = new StringTextComponent("");
-    	s.append(atkSymbol);
+    	IFormattableTextComponent atkSymbol = new StringTextComponent("🗡 ");
+    	IFormattableTextComponent statLineA = new StringTextComponent("").setStyle(Style.EMPTY.applyFormat(TextFormatting.RED));
+    	IFormattableTextComponent statLineL = new StringTextComponent("").setStyle(Style.EMPTY.applyFormat(TextFormatting.BLUE));
+    	statLineA.append(atkSymbol);
     	if(getAtk() >= 0)
         {
-    		s.append(getAtk() + "ATK");
+    		statLineA.append(getAtk() + " ATK");
         }
         else
         {
-            s.append("?ATK");
+            statLineA.append("? ATK");
         }
-    	s.append(" / LINK-" + getLinkRating());
-    	list.add(s);
+    	statLineL.append("LINK-" + getLinkRating());
+    	list.add(statLineA);
+    	list.add(statLineL);
     }
     
     // --- Getters ---
