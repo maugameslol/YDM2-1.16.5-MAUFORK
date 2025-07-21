@@ -1,0 +1,15 @@
+{
+    "type": "minecraft:crafting_shapeless",
+	"ingredients": [
+        {
+            "tag": "forge:dyes/brown"
+        },
+        {
+            "tag": "ydm:dyeable_duel_playmats"
+        }
+    ],
+    "result": {
+        "item": "ydm:brown_duel_playmat",
+        "count": 1
+    }
+}

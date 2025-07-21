@@ -1,0 +1,22 @@
+{
+  "replace": false,
+  "values": [
+    "ydm:duel_playmat",
+	"ydm:black_duel_playmat",
+	"ydm:blue_duel_playmat",
+	"ydm:brown_duel_playmat",
+	"ydm:cyan_duel_playmat",
+	"ydm:gray_duel_playmat",
+	"ydm:green_duel_playmat",
+	"ydm:light_blue_duel_playmat",
+	"ydm:light_gray_duel_playmat",
+	"ydm:lime_duel_playmat",
+	"ydm:magenta_duel_playmat",
+	"ydm:orange_duel_playmat",
+	"ydm:pink_duel_playmat",
+	"ydm:purple_duel_playmat",
+	"ydm:red_duel_playmat",
+	"ydm:white_duel_playmat",
+	"ydm:yellow_duel_playmat"
+  ]
+}

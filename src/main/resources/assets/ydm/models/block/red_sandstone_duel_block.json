@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "block/red_sandstone_top",
+        "down": "block/red_sandstone_top",
+        "up": "ydm:block/red_sandstone_duel_playmat",
+        "north": "ydm:block/red_sandstone_duel_block_side",
+        "east": "ydm:block/red_sandstone_duel_block_side",
+        "south": "ydm:block/red_sandstone_duel_block_side",
+        "west": "ydm:block/red_sandstone_duel_block_side"
+    }
+}

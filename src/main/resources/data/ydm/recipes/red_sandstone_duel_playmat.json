@@ -1,0 +1,21 @@
+{
+    "type": "minecraft:crafting_shapeless",
+	"ingredients": [
+        {
+            "item": "ydm:card_back"
+        },
+        {
+            "item": "minecraft:item_frame"
+        },
+        {
+            "item": "minecraft:red_sandstone"
+        },
+		{
+            "item": "minecraft:red_sandstone"
+        }
+    ],
+    "result": {
+        "item": "ydm:red_sandstone_duel_playmat",
+        "count": 1
+    }
+}

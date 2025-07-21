@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "ydm:block/red_sandstone_duel_block" },
+        "facing=south": { "model": "ydm:block/red_sandstone_duel_block", "y": 180 },
+        "facing=west":  { "model": "ydm:block/red_sandstone_duel_block", "y": 270 },
+        "facing=east":  { "model": "ydm:block/red_sandstone_duel_block", "y": 90 }
+    }
+}

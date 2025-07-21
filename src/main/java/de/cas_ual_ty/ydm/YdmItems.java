@@ -34,8 +34,12 @@ public class YdmItems
     public static final CardSetItem SET = null;
     public static final OpenedCardSetItem OPENED_SET = null;
     public static final CardBinderItem CARD_BINDER = null;
+    
     public static final Item DUEL_PLAYMAT = null;
+    
     public static final Item SANDSTONE_DUEL_PLAYMAT = null;
+    public static final Item RED_SANDSTONE_DUEL_PLAYMAT = null;
+    
     public static final Item BLACK_DUEL_PLAYMAT = null;
     public static final Item BLUE_DUEL_PLAYMAT = null;
     public static final Item BROWN_DUEL_PLAYMAT = null;
@@ -52,7 +56,13 @@ public class YdmItems
     public static final Item RED_DUEL_PLAYMAT = null;
     public static final Item WHITE_DUEL_PLAYMAT = null;
     public static final Item YELLOW_DUEL_PLAYMAT = null;
+    
     public static final Item DUEL_TABLE = null;
+    
+    public static final Item DUEL_BLOCK = null;
+    public static final Item SANDSTONE_DUEL_BLOCK = null;
+    public static final Item RED_SANDSTONE_DUEL_BLOCK = null;
+    
     public static final Item CARD_SUPPLY = null;
     public static final Item CARD_CRAFTER = null;
     public static final Item CARD_DECRAFTER = null;
@@ -127,7 +137,10 @@ public class YdmItems
         registry.register(new OpenedCardSetItem(new Properties().stacksTo(1)).setRegistryName(YDM.MOD_ID, "opened_set"));
         registry.register(new CardBinderItem(new Properties().tab(YDM.ydmItemGroup).stacksTo(1)).setRegistryName(YDM.MOD_ID, "card_binder"));
         registry.register(new BlockItem(YdmBlocks.DUEL_PLAYMAT, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "duel_playmat"));
+        
         registry.register(new BlockItem(YdmBlocks.SANDSTONE_DUEL_PLAYMAT, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "sandstone_duel_playmat"));
+        registry.register(new BlockItem(YdmBlocks.RED_SANDSTONE_DUEL_PLAYMAT, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "red_sandstone_duel_playmat"));
+        
         registry.register(new BlockItem(YdmBlocks.BLACK_DUEL_PLAYMAT, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "black_duel_playmat"));
         registry.register(new BlockItem(YdmBlocks.BLUE_DUEL_PLAYMAT, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "blue_duel_playmat"));
         registry.register(new BlockItem(YdmBlocks.BROWN_DUEL_PLAYMAT, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "brown_duel_playmat"));
@@ -144,9 +157,14 @@ public class YdmItems
         registry.register(new BlockItem(YdmBlocks.RED_DUEL_PLAYMAT, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "red_duel_playmat"));
         registry.register(new BlockItem(YdmBlocks.WHITE_DUEL_PLAYMAT, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "white_duel_playmat"));
         registry.register(new BlockItem(YdmBlocks.YELLOW_DUEL_PLAYMAT, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "yellow_duel_playmat"));
-        registry.register(new BlockItem(YdmBlocks.DUEL_TABLE, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "duel_table"));
-        registry.register(new BlockItem(YdmBlocks.CARD_SUPPLY, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "card_supply"));
         
+        registry.register(new BlockItem(YdmBlocks.DUEL_TABLE, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "duel_table"));
+        
+        registry.register(new BlockItem(YdmBlocks.DUEL_BLOCK, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "duel_block"));
+        registry.register(new BlockItem(YdmBlocks.SANDSTONE_DUEL_BLOCK, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "sandstone_duel_block"));
+        registry.register(new BlockItem(YdmBlocks.RED_SANDSTONE_DUEL_BLOCK, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "red_sandstone_duel_block"));
+        
+        registry.register(new BlockItem(YdmBlocks.CARD_SUPPLY, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "card_supply"));
         registry.register(new BlockItem(YdmBlocks.CARD_CRAFTER, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "card_crafter"));
         registry.register(new BlockItem(YdmBlocks.CARD_DECRAFTER, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "card_decrafter"));
         //registry.register(new BlockItem(YdmBlocks.RARITY_EXCHANGER, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "rarity_exchanger"));
