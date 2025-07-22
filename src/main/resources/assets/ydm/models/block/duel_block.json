@@ -3,7 +3,7 @@
     "textures": {
         "particle": "block/white_concrete",
         "down": "block/white_concrete",
-        "up": "ydm:block/white_duel_playmat",
+        "up": "ydm:block/duel_playmat",
         "north": "ydm:block/duel_block_side_red",
         "east": "ydm:block/duel_block_side_2",
         "south": "ydm:block/duel_block_side_blue",
