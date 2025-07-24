@@ -1,6 +1,8 @@
 package de.cas_ual_ty.ydm.card;
 
 import com.google.gson.JsonObject;
+
+import de.cas_ual_ty.ydm.YDM;
 import de.cas_ual_ty.ydm.YdmDatabase;
 import de.cas_ual_ty.ydm.card.properties.Properties;
 import de.cas_ual_ty.ydm.rarity.Rarities;
@@ -9,6 +11,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 
 import java.util.List;
 
@@ -58,9 +61,10 @@ public class CardHolder implements Comparable<CardHolder>
     public void addInformation(List<ITextComponent> tooltip)
     {
     	getCard().addName(tooltip);
-        tooltip.add(new StringTextComponent(getCode()));
-        tooltip.add(new StringTextComponent(getRarity()));
-        tooltip.add(new StringTextComponent("Image Variant " + (1 + getImageIndex())));
+        tooltip.add(new StringTextComponent(getCode()).append(" - " + getRarity()));
+        //tooltip.add(new StringTextComponent(getRarity()));
+        tooltip.add(new TranslationTextComponent("cardProperty." + YDM.MOD_ID + ".artwork").append(" " + (1 + getImageIndex())));
+        //tooltip.add(new StringTextComponent("Image Variant " + (1 + getImageIndex())));
     }
     
     public void addShiftInfo(List<ITextComponent> tooltip)

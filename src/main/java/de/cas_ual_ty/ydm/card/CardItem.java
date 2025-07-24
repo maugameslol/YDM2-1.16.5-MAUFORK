@@ -38,7 +38,6 @@ public class CardItem extends Item
         	holder.addTooltipName(tooltip);
     		holder.addShiftInfo(tooltip);
     	}
-        
         else 
         {
         	holder.addInformation(tooltip);
