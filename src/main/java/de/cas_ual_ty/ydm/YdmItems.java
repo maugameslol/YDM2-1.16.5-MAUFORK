@@ -40,6 +40,18 @@ public class YdmItems
     public static final Item SANDSTONE_DUEL_PLAYMAT = null;
     public static final Item RED_SANDSTONE_DUEL_PLAYMAT = null;
     
+    public static final Item OAK_WOOD_DUEL_PLAYMAT = null;
+    public static final Item SPRUCE_WOOD_DUEL_PLAYMAT = null;
+    public static final Item BIRCH_WOOD_DUEL_PLAYMAT = null;
+    public static final Item JUNGLE_WOOD_DUEL_PLAYMAT = null;
+    public static final Item ACACIA_WOOD_DUEL_PLAYMAT = null;
+    public static final Item DARK_OAK_WOOD_DUEL_PLAYMAT = null;
+    //public static final Item MANGROVE_WOOD_DUEL_PLAYMAT = null;
+    //public static final Item CHERRY_WOOD_DUEL_PLAYMAT = null;
+    //public static final Item PALE_OAK_WOOD_DUEL_PLAYMAT = null;
+    public static final Item CRIMSON_HYPHAE_DUEL_PLAYMAT = null;
+    public static final Item WARPED_HYPHAE_DUEL_PLAYMAT = null;
+    
     public static final Item BLACK_DUEL_PLAYMAT = null;
     public static final Item BLUE_DUEL_PLAYMAT = null;
     public static final Item BROWN_DUEL_PLAYMAT = null;
@@ -66,8 +78,8 @@ public class YdmItems
     public static final Item CARD_SUPPLY = null;
     public static final Item CARD_CRAFTER = null;
     public static final Item CARD_DECRAFTER = null;
-    //public static final Item RARITY_EXCHANGER = null;
-    //public static final Item DOMAIN_GENERATOR = null;
+    public static final Item RARITY_EXCHANGER = null;
+    public static final Item DOMAIN_GENERATOR = null;
     
     public static final SimpleBinderItem SIMPLE_BINDER_3 = null;
     public static final SimpleBinderItem SIMPLE_BINDER_9 = null;
@@ -260,6 +272,16 @@ public class YdmItems
         registry.register(new BlockItem(YdmBlocks.SANDSTONE_DUEL_PLAYMAT, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "sandstone_duel_playmat"));
         registry.register(new BlockItem(YdmBlocks.RED_SANDSTONE_DUEL_PLAYMAT, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "red_sandstone_duel_playmat"));
         
+        registry.register(new BlockItem(YdmBlocks.OAK_WOOD_DUEL_PLAYMAT, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "oak_wood_duel_playmat"));
+        registry.register(new BlockItem(YdmBlocks.SPRUCE_WOOD_DUEL_PLAYMAT, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "spruce_wood_duel_playmat"));
+        registry.register(new BlockItem(YdmBlocks.BIRCH_WOOD_DUEL_PLAYMAT, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "birch_wood_duel_playmat"));
+        registry.register(new BlockItem(YdmBlocks.JUNGLE_WOOD_DUEL_PLAYMAT, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "jungle_wood_duel_playmat"));
+        registry.register(new BlockItem(YdmBlocks.ACACIA_WOOD_DUEL_PLAYMAT, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "acacia_wood_duel_playmat"));
+        registry.register(new BlockItem(YdmBlocks.DARK_OAK_WOOD_DUEL_PLAYMAT, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "dark_oak_wood_duel_playmat"));
+        
+        registry.register(new BlockItem(YdmBlocks.WARPED_HYPHAE_DUEL_PLAYMAT, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "warped_hyphae_duel_playmat"));
+        registry.register(new BlockItem(YdmBlocks.CRIMSON_HYPHAE_DUEL_PLAYMAT, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "crimson_hyphae_duel_playmat"));
+        
         registry.register(new BlockItem(YdmBlocks.BLACK_DUEL_PLAYMAT, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "black_duel_playmat"));
         registry.register(new BlockItem(YdmBlocks.BLUE_DUEL_PLAYMAT, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "blue_duel_playmat"));
         registry.register(new BlockItem(YdmBlocks.BROWN_DUEL_PLAYMAT, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "brown_duel_playmat"));
@@ -286,8 +308,8 @@ public class YdmItems
         registry.register(new BlockItem(YdmBlocks.CARD_SUPPLY, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "card_supply"));
         registry.register(new BlockItem(YdmBlocks.CARD_CRAFTER, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "card_crafter"));
         registry.register(new BlockItem(YdmBlocks.CARD_DECRAFTER, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "card_decrafter"));
-        //registry.register(new BlockItem(YdmBlocks.RARITY_EXCHANGER, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "rarity_exchanger"));
-        //registry.register(new BlockItem(YdmBlocks.DOMAIN_GENERATOR, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "domain_generator"));
+        registry.register(new BlockItem(YdmBlocks.RARITY_EXCHANGER, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "rarity_exchanger"));
+        registry.register(new BlockItem(YdmBlocks.DOMAIN_GENERATOR, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "domain_generator"));
         
         registry.register(SimpleBinderItem.makeItem(YDM.MOD_ID, YDM.ydmItemGroup, 3));
         registry.register(SimpleBinderItem.makeItem(YDM.MOD_ID, YDM.ydmItemGroup, 9));
