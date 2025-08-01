@@ -40,17 +40,20 @@ public class YdmItems
     public static final Item SANDSTONE_DUEL_PLAYMAT = null;
     public static final Item RED_SANDSTONE_DUEL_PLAYMAT = null;
     
-    public static final Item OAK_WOOD_DUEL_PLAYMAT = null;
-    public static final Item SPRUCE_WOOD_DUEL_PLAYMAT = null;
-    public static final Item BIRCH_WOOD_DUEL_PLAYMAT = null;
-    public static final Item JUNGLE_WOOD_DUEL_PLAYMAT = null;
-    public static final Item ACACIA_WOOD_DUEL_PLAYMAT = null;
-    public static final Item DARK_OAK_WOOD_DUEL_PLAYMAT = null;
-    //public static final Item MANGROVE_WOOD_DUEL_PLAYMAT = null;
-    //public static final Item CHERRY_WOOD_DUEL_PLAYMAT = null;
-    //public static final Item PALE_OAK_WOOD_DUEL_PLAYMAT = null;
-    public static final Item CRIMSON_HYPHAE_DUEL_PLAYMAT = null;
-    public static final Item WARPED_HYPHAE_DUEL_PLAYMAT = null;
+    public static final Item OAK_DUEL_PLAYMAT = null;
+    public static final Item SPRUCE_DUEL_PLAYMAT = null;
+    public static final Item BIRCH_DUEL_PLAYMAT = null;
+    public static final Item JUNGLE_DUEL_PLAYMAT = null;
+    public static final Item ACACIA_DUEL_PLAYMAT = null;
+    public static final Item DARK_OAK_DUEL_PLAYMAT = null;
+   
+    public static final Item CRIMSON_DUEL_PLAYMAT = null;
+    public static final Item WARPED_DUEL_PLAYMAT = null;
+    
+    public static final Item MANGROVE_DUEL_PLAYMAT = null;
+    public static final Item CHERRY_DUEL_PLAYMAT = null;
+    public static final Item PALE_OAK_DUEL_PLAYMAT = null;
+    public static final Item BAMBOO_DUEL_PLAYMAT = null;
     
     public static final Item BLACK_DUEL_PLAYMAT = null;
     public static final Item BLUE_DUEL_PLAYMAT = null;
@@ -272,15 +275,20 @@ public class YdmItems
         registry.register(new BlockItem(YdmBlocks.SANDSTONE_DUEL_PLAYMAT, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "sandstone_duel_playmat"));
         registry.register(new BlockItem(YdmBlocks.RED_SANDSTONE_DUEL_PLAYMAT, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "red_sandstone_duel_playmat"));
         
-        registry.register(new BlockItem(YdmBlocks.OAK_WOOD_DUEL_PLAYMAT, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "oak_wood_duel_playmat"));
-        registry.register(new BlockItem(YdmBlocks.SPRUCE_WOOD_DUEL_PLAYMAT, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "spruce_wood_duel_playmat"));
-        registry.register(new BlockItem(YdmBlocks.BIRCH_WOOD_DUEL_PLAYMAT, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "birch_wood_duel_playmat"));
-        registry.register(new BlockItem(YdmBlocks.JUNGLE_WOOD_DUEL_PLAYMAT, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "jungle_wood_duel_playmat"));
-        registry.register(new BlockItem(YdmBlocks.ACACIA_WOOD_DUEL_PLAYMAT, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "acacia_wood_duel_playmat"));
-        registry.register(new BlockItem(YdmBlocks.DARK_OAK_WOOD_DUEL_PLAYMAT, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "dark_oak_wood_duel_playmat"));
+        registry.register(new BlockItem(YdmBlocks.OAK_DUEL_PLAYMAT, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "oak_duel_playmat"));
+        registry.register(new BlockItem(YdmBlocks.SPRUCE_DUEL_PLAYMAT, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "spruce_duel_playmat"));
+        registry.register(new BlockItem(YdmBlocks.BIRCH_DUEL_PLAYMAT, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "birch_duel_playmat"));
+        registry.register(new BlockItem(YdmBlocks.JUNGLE_DUEL_PLAYMAT, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "jungle_duel_playmat"));
+        registry.register(new BlockItem(YdmBlocks.ACACIA_DUEL_PLAYMAT, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "acacia_duel_playmat"));
+        registry.register(new BlockItem(YdmBlocks.DARK_OAK_DUEL_PLAYMAT, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "dark_oak_duel_playmat"));
         
-        registry.register(new BlockItem(YdmBlocks.WARPED_HYPHAE_DUEL_PLAYMAT, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "warped_hyphae_duel_playmat"));
-        registry.register(new BlockItem(YdmBlocks.CRIMSON_HYPHAE_DUEL_PLAYMAT, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "crimson_hyphae_duel_playmat"));
+        registry.register(new BlockItem(YdmBlocks.WARPED_DUEL_PLAYMAT, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "warped_duel_playmat"));
+        registry.register(new BlockItem(YdmBlocks.CRIMSON_DUEL_PLAYMAT, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "crimson_duel_playmat"));
+        
+        registry.register(new BlockItem(YdmBlocks.MANGROVE_DUEL_PLAYMAT, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "mangrove_duel_playmat"));
+        registry.register(new BlockItem(YdmBlocks.CHERRY_DUEL_PLAYMAT, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "cherry_duel_playmat"));
+        registry.register(new BlockItem(YdmBlocks.PALE_OAK_DUEL_PLAYMAT, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "pale_oak_duel_playmat"));
+        registry.register(new BlockItem(YdmBlocks.BAMBOO_DUEL_PLAYMAT, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "bamboo_duel_playmat"));
         
         registry.register(new BlockItem(YdmBlocks.BLACK_DUEL_PLAYMAT, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "black_duel_playmat"));
         registry.register(new BlockItem(YdmBlocks.BLUE_DUEL_PLAYMAT, new Properties().tab(YDM.ydmItemGroup)).setRegistryName(YDM.MOD_ID, "blue_duel_playmat"));

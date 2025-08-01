@@ -1,9 +1,9 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"1": "ydm:block/spruce_wood_duel_playmat",
-		"bottom": "block/spruce_log",
-		"particle": "block/spruce_log"
+		"1": "ydm:block/crimson_duel_playmat",
+		"bottom": "block/crimson_stem",
+		"particle": "block/crimson_stem"
 	},
 	"elements": [
 		{

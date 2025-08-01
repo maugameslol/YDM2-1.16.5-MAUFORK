@@ -1,7 +1,7 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"1": "ydm:block/warped_hyphae_duel_playmat",
+		"1": "ydm:block/warped_duel_playmat",
 		"bottom": "block/warped_stem",
 		"particle": "block/warped_stem"
 	},

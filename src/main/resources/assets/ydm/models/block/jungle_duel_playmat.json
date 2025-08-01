@@ -1,7 +1,7 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"1": "ydm:block/jungle_wood_duel_playmat",
+		"1": "ydm:block/jungle_duel_playmat",
 		"bottom": "block/jungle_log",
 		"particle": "block/jungle_log"
 	},

@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "ydm:dark_oak_wood_duel_playmat"
+          "name": "ydm:warped_duel_playmat"
         }
       ],
       "conditions": [

@@ -1,9 +1,9 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"1": "ydm:block/crimson_hyphae_duel_playmat",
-		"bottom": "block/crimson_stem",
-		"particle": "block/crimson_stem"
+		"1": "ydm:block/acacia_duel_playmat",
+		"bottom": "block/acacia_log",
+		"particle": "block/acacia_log"
 	},
 	"elements": [
 		{

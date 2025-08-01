@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "ydm:oak_wood_duel_playmat"
+          "name": "ydm:acacia_duel_playmat"
         }
       ],
       "conditions": [

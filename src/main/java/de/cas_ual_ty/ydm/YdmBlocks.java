@@ -26,18 +26,20 @@ public class YdmBlocks
     public static final DuelBlock SANDSTONE_DUEL_PLAYMAT = null;
     public static final DuelBlock RED_SANDSTONE_DUEL_PLAYMAT = null;
     
-    public static final DuelBlock OAK_WOOD_DUEL_PLAYMAT = null;
-    public static final DuelBlock SPRUCE_WOOD_DUEL_PLAYMAT = null;
-    public static final DuelBlock BIRCH_WOOD_DUEL_PLAYMAT = null;
-    public static final DuelBlock JUNGLE_WOOD_DUEL_PLAYMAT = null;
-    public static final DuelBlock ACACIA_WOOD_DUEL_PLAYMAT = null;
-    public static final DuelBlock DARK_OAK_WOOD_DUEL_PLAYMAT = null;
-    //public static final DuelBlock MANGROVE_WOOD_DUEL_PLAYMAT = null;
-    //public static final DuelBlock CHERRY_WOOD_DUEL_PLAYMAT = null;
-    //public static final DuelBlock PALE_OAK_WOOD_DUEL_PLAYMAT = null;
+    public static final DuelBlock OAK_DUEL_PLAYMAT = null;
+    public static final DuelBlock SPRUCE_DUEL_PLAYMAT = null;
+    public static final DuelBlock BIRCH_DUEL_PLAYMAT = null;
+    public static final DuelBlock JUNGLE_DUEL_PLAYMAT = null;
+    public static final DuelBlock ACACIA_DUEL_PLAYMAT = null;
+    public static final DuelBlock DARK_OAK_DUEL_PLAYMAT = null;
     
-    public static final DuelBlock CRIMSON_HYPHAE_DUEL_PLAYMAT = null;
-    public static final DuelBlock WARPED_HYPHAE_DUEL_PLAYMAT = null;
+    public static final DuelBlock CRIMSON_DUEL_PLAYMAT = null;
+    public static final DuelBlock WARPED_DUEL_PLAYMAT = null;
+    
+    public static final DuelBlock MANGROVE_DUEL_PLAYMAT = null;
+    public static final DuelBlock CHERRY_DUEL_PLAYMAT = null;
+    public static final DuelBlock PALE_OAK_DUEL_PLAYMAT = null;
+    public static final DuelBlock BAMBOO_DUEL_PLAYMAT = null;
     
     public static final DuelBlock BLACK_DUEL_PLAYMAT = null;
     public static final DuelBlock BLUE_DUEL_PLAYMAT = null;
@@ -77,15 +79,20 @@ public class YdmBlocks
         registry.register(new DuelBlock(Block.Properties.of(Material.STONE, MaterialColor.SAND).requiresCorrectToolForDrops().harvestTool(ToolType.PICKAXE).strength(5.0F, 6.0F).sound(SoundType.STONE), Block.box(2D, 0, 2D, 14D, 1D, 14D)).setRegistryName(YDM.MOD_ID, "sandstone_duel_playmat"));
         registry.register(new DuelBlock(Block.Properties.of(Material.STONE, MaterialColor.COLOR_ORANGE).requiresCorrectToolForDrops().harvestTool(ToolType.PICKAXE).strength(5.0F, 6.0F).sound(SoundType.STONE), Block.box(2D, 0, 2D, 14D, 1D, 14D)).setRegistryName(YDM.MOD_ID, "red_sandstone_duel_playmat"));
         
-        registry.register(new DuelBlock(Block.Properties.of(Material.WOOD, MaterialColor.WOOD).harvestTool(ToolType.AXE).strength(5.0F, 6.0F).sound(SoundType.WOOD), Block.box(2D, 0, 2D, 14D, 1D, 14D)).setRegistryName(YDM.MOD_ID, "oak_wood_duel_playmat"));
-        registry.register(new DuelBlock(Block.Properties.of(Material.WOOD, MaterialColor.PODZOL).harvestTool(ToolType.AXE).strength(5.0F, 6.0F).sound(SoundType.WOOD), Block.box(2D, 0, 2D, 14D, 1D, 14D)).setRegistryName(YDM.MOD_ID, "spruce_wood_duel_playmat"));
-        registry.register(new DuelBlock(Block.Properties.of(Material.WOOD, MaterialColor.SAND).harvestTool(ToolType.AXE).strength(5.0F, 6.0F).sound(SoundType.WOOD), Block.box(2D, 0, 2D, 14D, 1D, 14D)).setRegistryName(YDM.MOD_ID, "birch_wood_duel_playmat"));
-        registry.register(new DuelBlock(Block.Properties.of(Material.WOOD, MaterialColor.DIRT).harvestTool(ToolType.AXE).strength(5.0F, 6.0F).sound(SoundType.WOOD), Block.box(2D, 0, 2D, 14D, 1D, 14D)).setRegistryName(YDM.MOD_ID, "jungle_wood_duel_playmat"));
-        registry.register(new DuelBlock(Block.Properties.of(Material.WOOD, MaterialColor.COLOR_ORANGE).harvestTool(ToolType.AXE).strength(5.0F, 6.0F).sound(SoundType.WOOD), Block.box(2D, 0, 2D, 14D, 1D, 14D)).setRegistryName(YDM.MOD_ID, "acacia_wood_duel_playmat"));
-        registry.register(new DuelBlock(Block.Properties.of(Material.WOOD, MaterialColor.COLOR_BROWN).harvestTool(ToolType.AXE).strength(5.0F, 6.0F).sound(SoundType.WOOD), Block.box(2D, 0, 2D, 14D, 1D, 14D)).setRegistryName(YDM.MOD_ID, "dark_oak_wood_duel_playmat"));
+        registry.register(new DuelBlock(Block.Properties.of(Material.WOOD, MaterialColor.WOOD).harvestTool(ToolType.AXE).strength(5.0F, 6.0F).sound(SoundType.WOOD), Block.box(2D, 0, 2D, 14D, 1D, 14D)).setRegistryName(YDM.MOD_ID, "oak_duel_playmat"));
+        registry.register(new DuelBlock(Block.Properties.of(Material.WOOD, MaterialColor.PODZOL).harvestTool(ToolType.AXE).strength(5.0F, 6.0F).sound(SoundType.WOOD), Block.box(2D, 0, 2D, 14D, 1D, 14D)).setRegistryName(YDM.MOD_ID, "spruce_duel_playmat"));
+        registry.register(new DuelBlock(Block.Properties.of(Material.WOOD, MaterialColor.SAND).harvestTool(ToolType.AXE).strength(5.0F, 6.0F).sound(SoundType.WOOD), Block.box(2D, 0, 2D, 14D, 1D, 14D)).setRegistryName(YDM.MOD_ID, "birch_duel_playmat"));
+        registry.register(new DuelBlock(Block.Properties.of(Material.WOOD, MaterialColor.DIRT).harvestTool(ToolType.AXE).strength(5.0F, 6.0F).sound(SoundType.WOOD), Block.box(2D, 0, 2D, 14D, 1D, 14D)).setRegistryName(YDM.MOD_ID, "jungle_duel_playmat"));
+        registry.register(new DuelBlock(Block.Properties.of(Material.WOOD, MaterialColor.COLOR_ORANGE).harvestTool(ToolType.AXE).strength(5.0F, 6.0F).sound(SoundType.WOOD), Block.box(2D, 0, 2D, 14D, 1D, 14D)).setRegistryName(YDM.MOD_ID, "acacia_duel_playmat"));
+        registry.register(new DuelBlock(Block.Properties.of(Material.WOOD, MaterialColor.COLOR_BROWN).harvestTool(ToolType.AXE).strength(5.0F, 6.0F).sound(SoundType.WOOD), Block.box(2D, 0, 2D, 14D, 1D, 14D)).setRegistryName(YDM.MOD_ID, "dark_oak_duel_playmat"));
         
-        registry.register(new DuelBlock(Block.Properties.of(Material.NETHER_WOOD, MaterialColor.WARPED_HYPHAE).harvestTool(ToolType.AXE).strength(5.0F, 6.0F).sound(SoundType.STEM), Block.box(2D, 0, 2D, 14D, 1D, 14D)).setRegistryName(YDM.MOD_ID, "warped_hyphae_duel_playmat"));
-        registry.register(new DuelBlock(Block.Properties.of(Material.NETHER_WOOD, MaterialColor.CRIMSON_HYPHAE).harvestTool(ToolType.AXE).strength(5.0F, 6.0F).sound(SoundType.STEM), Block.box(2D, 0, 2D, 14D, 1D, 14D)).setRegistryName(YDM.MOD_ID, "crimson_hyphae_duel_playmat"));
+        registry.register(new DuelBlock(Block.Properties.of(Material.NETHER_WOOD, MaterialColor.WARPED_HYPHAE).harvestTool(ToolType.AXE).strength(5.0F, 6.0F).sound(SoundType.STEM), Block.box(2D, 0, 2D, 14D, 1D, 14D)).setRegistryName(YDM.MOD_ID, "warped_duel_playmat"));
+        registry.register(new DuelBlock(Block.Properties.of(Material.NETHER_WOOD, MaterialColor.CRIMSON_HYPHAE).harvestTool(ToolType.AXE).strength(5.0F, 6.0F).sound(SoundType.STEM), Block.box(2D, 0, 2D, 14D, 1D, 14D)).setRegistryName(YDM.MOD_ID, "crimson_duel_playmat"));
+        
+        registry.register(new DuelBlock(Block.Properties.of(Material.WOOD, MaterialColor.COLOR_RED).harvestTool(ToolType.AXE).strength(5.0F, 6.0F).sound(SoundType.WOOD), Block.box(2D, 0, 2D, 14D, 1D, 14D)).setRegistryName(YDM.MOD_ID, "mangrove_duel_playmat"));
+        registry.register(new DuelBlock(Block.Properties.of(Material.WOOD, MaterialColor.COLOR_PINK).harvestTool(ToolType.AXE).strength(5.0F, 6.0F).sound(SoundType.WOOD), Block.box(2D, 0, 2D, 14D, 1D, 14D)).setRegistryName(YDM.MOD_ID, "cherry_duel_playmat"));
+        registry.register(new DuelBlock(Block.Properties.of(Material.WOOD, MaterialColor.SNOW).harvestTool(ToolType.AXE).strength(5.0F, 6.0F).sound(SoundType.WOOD), Block.box(2D, 0, 2D, 14D, 1D, 14D)).setRegistryName(YDM.MOD_ID, "pale_oak_duel_playmat"));
+        registry.register(new DuelBlock(Block.Properties.of(Material.WOOD, MaterialColor.SAND).harvestTool(ToolType.AXE).strength(5.0F, 6.0F).sound(SoundType.WOOD), Block.box(2D, 0, 2D, 14D, 1D, 14D)).setRegistryName(YDM.MOD_ID, "bamboo_duel_playmat"));
         
         registry.register(new DuelBlock(Block.Properties.of(Material.METAL, MaterialColor.COLOR_BLACK).harvestTool(ToolType.HOE).strength(5.0F, 6.0F).sound(SoundType.WOOL), Block.box(2D, 0, 2D, 14D, 1D, 14D)).setRegistryName(YDM.MOD_ID, "black_duel_playmat"));
         registry.register(new DuelBlock(Block.Properties.of(Material.METAL, MaterialColor.COLOR_BLUE).harvestTool(ToolType.HOE).strength(5.0F, 6.0F).sound(SoundType.WOOL), Block.box(2D, 0, 2D, 14D, 1D, 14D)).setRegistryName(YDM.MOD_ID, "blue_duel_playmat"));

@@ -1,9 +1,9 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"1": "ydm:block/oak_wood_duel_playmat",
-		"bottom": "block/oak_log",
-		"particle": "block/oak_log"
+		"1": "ydm:block/dark_oak_duel_playmat",
+		"bottom": "block/dark_oak_log",
+		"particle": "block/dark_oak_log"
 	},
 	"elements": [
 		{

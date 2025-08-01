@@ -1,8 +1,0 @@
-{
-    "variants": {
-        "facing=north": { "model": "ydm:block/acacia_wood_duel_playmat" },
-        "facing=south": { "model": "ydm:block/acacia_wood_duel_playmat", "y": 180 },
-        "facing=west":  { "model": "ydm:block/acacia_wood_duel_playmat", "y": 270 },
-        "facing=east":  { "model": "ydm:block/acacia_wood_duel_playmat", "y": 90 }
-    }
-}
