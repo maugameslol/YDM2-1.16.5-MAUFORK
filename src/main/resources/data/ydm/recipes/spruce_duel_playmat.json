@@ -8,14 +8,14 @@
             "item": "minecraft:item_frame"
         },
         {
-            "item": "minecraft:red_sandstone"
+            "item": "minecraft:spruce_log"
         },
 		{
-            "item": "minecraft:red_sandstone"
+            "item": "minecraft:spruce_log"
         }
     ],
     "result": {
-        "item": "ydm:red_sandstone_duel_playmat",
+        "item": "ydm:spruce_duel_playmat",
         "count": 4
     }
 }

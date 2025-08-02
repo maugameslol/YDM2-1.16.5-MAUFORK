@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shaped",
+	"pattern": [
+        "P  ",
+        "RR ",
+		"RR "
+    ],
+	"key": {
+        "R": {
+            "item": "minecraft:red_sandstone"
+        },
+        "P": {
+            "item": "ydm:red_sandstone_duel_playmat"
+        }
+    },
+    "result": {
+        "item": "ydm:red_sandstone_duel_block",
+        "count": 1
+    }
+}

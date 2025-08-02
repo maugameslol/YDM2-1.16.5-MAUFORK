@@ -8,14 +8,14 @@
             "item": "minecraft:item_frame"
         },
         {
-            "tag": "minecraft:wool"
+            "item": "minecraft:dried_kelp"
         },
 		{
-            "tag": "minecraft:wool"
+            "item": "minecraft:dried_kelp"
         }
     ],
     "result": {
         "item": "ydm:duel_playmat",
-        "count": 1
+        "count": 4
     }
 }

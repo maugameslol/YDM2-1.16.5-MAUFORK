@@ -1,0 +1,15 @@
+{
+    "type": "minecraft:crafting_shapeless",
+	"ingredients": [
+        {
+            "tag": "forge:dyes/red"
+        },
+        {
+            "tag": "ydm:wooden_duel_playmats"
+        }
+    ],
+    "result": {
+        "item": "ydm:mangrove_duel_playmat",
+        "count": 1
+    }
+}

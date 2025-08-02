@@ -8,14 +8,14 @@
             "item": "minecraft:item_frame"
         },
         {
-            "item": "minecraft:red_sandstone"
+            "item": "minecraft:dark_oak_log"
         },
 		{
-            "item": "minecraft:red_sandstone"
+            "item": "minecraft:dark_oak_log"
         }
     ],
     "result": {
-        "item": "ydm:red_sandstone_duel_playmat",
+        "item": "ydm:dark_oak_duel_playmat",
         "count": 4
     }
 }

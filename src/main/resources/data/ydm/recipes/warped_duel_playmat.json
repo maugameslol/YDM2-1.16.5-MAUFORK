@@ -8,14 +8,14 @@
             "item": "minecraft:item_frame"
         },
         {
-            "item": "minecraft:red_sandstone"
+            "item": "minecraft:warped_stem"
         },
 		{
-            "item": "minecraft:red_sandstone"
+            "item": "minecraft:warped_stem"
         }
     ],
     "result": {
-        "item": "ydm:red_sandstone_duel_playmat",
+        "item": "ydm:warped_duel_playmat",
         "count": 4
     }
 }
