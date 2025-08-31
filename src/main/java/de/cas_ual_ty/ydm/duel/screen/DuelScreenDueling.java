@@ -1686,15 +1686,30 @@ public class DuelScreenDueling<E extends DuelContainer> extends DuelContainerScr
                 }
                 else if(action0.actionType == ActionTypes.ACTIVATE_EFFECT) 
                 {
-                	int size = Math.max(w.getWidth(), w.getHeight());
-                	Animation effectAnimation = new EffectActivateAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size / 2)
-                        	.setOnEnd(() ->
-                            {
-                            	action0.doAction();
-                                repopulateInteractions();
-                            });
-                        	queue.add(effectAnimation);
-                        	return new QueueAnimation(queue);
+                	if(action.getFieldAnnouncementZone().type == ZoneTypes.HAND) 
+                	{
+                		int size = Math.max(w.getWidth() / 2, w.getHeight() / 2);
+                		Animation effectAnimation = new EffectActivateAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size / 2)
+                            	.setOnEnd(() ->
+                                {
+                                	action0.doAction();
+                                    repopulateInteractions();
+                                });
+                		queue.add(effectAnimation);
+                		return new QueueAnimation(queue);
+                	}
+                	else 
+                	{
+                		int size = Math.max(w.getWidth(), w.getHeight());
+                		Animation effectAnimation = new EffectActivateAnimation(w.getAnimationDestX(), w.getAnimationDestY(), size, size + size / 2)
+                            	.setOnEnd(() ->
+                                {
+                                	action0.doAction();
+                                    repopulateInteractions();
+                                });
+                		queue.add(effectAnimation);
+                		return new QueueAnimation(queue);
+                	}
                 }
                 else if(action0.actionType == ActionTypes.CONTINUE_EFFECT) 
                 {

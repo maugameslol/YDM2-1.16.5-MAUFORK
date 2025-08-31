@@ -34,6 +34,7 @@ public class JsonKeys
     public static final String IS_LEGEND = "is_legend";
     public static final String LIMIT = "limit";
     public static final String IS_LIMIT_SHARED = "is_limit_shared";
+    public static final String LEGAL_FORMATS = "legal_formats";
     
     // under consideration for further card design
     //public static final String DURABILITY = "durability";

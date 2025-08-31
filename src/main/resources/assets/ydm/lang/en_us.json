@@ -1,6 +1,8 @@
 {
     "generic.ydm.left_arrow": "◀",
     "generic.ydm.right_arrow": "▶",
+	"generic.ydm.checkmark": "✔",
+	"generic.ydm.crossout": "✘",
     "itemGroup.ydm": "YDM: Ygo Dueling Mod",
     "itemGroup.ydm.cards": "YDM Cards",
     "itemGroup.ydm.sets": "YDM Sets",

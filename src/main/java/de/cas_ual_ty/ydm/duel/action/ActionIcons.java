@@ -77,6 +77,8 @@ public class ActionIcons
     public static final ActionIcon DESTROY_TOKEN_ATK = null;
     public static final ActionIcon DESTROY_TOKEN_DEF = null;
     
+    public static final ActionIcon SWAP_STACK = null;
+    
     @SubscribeEvent
     public static void registerActionIcons(RegistryEvent.Register<ActionIcon> event)
     {
@@ -143,6 +145,8 @@ public class ActionIcons
         registry.register(ActionIcons.create("destroy_to_top_of_deck_fd"));
         registry.register(ActionIcons.create("destroy_token_atk"));
         registry.register(ActionIcons.create("destroy_token_def"));
+        
+        registry.register(ActionIcons.create("swap_stack"));
     }
     
     public static ActionIcon create(String name)

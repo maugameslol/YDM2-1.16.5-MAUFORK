@@ -61,8 +61,8 @@ public class CardHolder implements Comparable<CardHolder>
     public void addInformation(List<ITextComponent> tooltip)
     {
     	getCard().addName(tooltip);
-        tooltip.add(new StringTextComponent(getCode()).append(" - " + getRarity()));
-        //tooltip.add(new StringTextComponent(getRarity()));
+        tooltip.add(new StringTextComponent(getCode()));
+        tooltip.add(new StringTextComponent(getRarity()));
         tooltip.add(new TranslationTextComponent("cardProperty." + YDM.MOD_ID + ".artwork").append(" " + (1 + getImageIndex())));
         //tooltip.add(new StringTextComponent("Image Variant " + (1 + getImageIndex())));
     }

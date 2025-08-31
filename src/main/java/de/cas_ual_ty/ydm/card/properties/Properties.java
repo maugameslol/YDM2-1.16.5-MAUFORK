@@ -966,81 +966,71 @@ public class Properties
     public void addTooltipLegality(List<ITextComponent> list)
     {
     	IFormattableTextComponent id = new StringTextComponent("[" + getId() + "]");
-    	IFormattableTextComponent legality = new StringTextComponent("");
-    	IFormattableTextComponent format = new StringTextComponent("");
+    	
+    	list.add(id);
     	
     	if(getIsIllegal())
         {
-    		format.append(new StringTextComponent(" "));
-    		format.append(new StringTextComponent("Illegal").setStyle(Style.EMPTY.applyFormat(TextFormatting.RED)));
+    		list.add(new StringTextComponent("Illegal").setStyle(Style.EMPTY.applyFormat(TextFormatting.RED)));
         }
     	
     	if(getIsCustom())
         {
-    		format.append(new StringTextComponent(" "));
-    		format.append(new StringTextComponent("Custom").setStyle(Style.EMPTY.applyFormat(TextFormatting.LIGHT_PURPLE)));
+    		list.add(new StringTextComponent("Custom").setStyle(Style.EMPTY.applyFormat(TextFormatting.LIGHT_PURPLE)));
         }
     	
     	if(getIsAnime())
         {
-    		format.append(new StringTextComponent(" "));
-    		format.append(new StringTextComponent("Anime/Manga").setStyle(Style.EMPTY.applyFormat(TextFormatting.RED)));
+    		list.add(new StringTextComponent("Anime/Manga").setStyle(Style.EMPTY.applyFormat(TextFormatting.RED)));
         }
     	
     	if(getIsRush())
         {
-    		format.append(new StringTextComponent(" "));
-    		format.append(new StringTextComponent("RUSH").setStyle(Style.EMPTY.applyFormat(TextFormatting.GOLD)));
+    		list.add(new StringTextComponent("RUSH").setStyle(Style.EMPTY.applyFormat(TextFormatting.GOLD)));
         }
     	
     	if(getIsSpeed())
         {
-    		format.append(new StringTextComponent(" "));
-    		format.append(new StringTextComponent("SPEED").setStyle(Style.EMPTY.applyFormat(TextFormatting.BLUE)));
+    		list.add(new StringTextComponent("SPEED").setStyle(Style.EMPTY.applyFormat(TextFormatting.BLUE)));
         }
     	
     	if (getIsLegend()) 
 		{
-    		legality.append(new StringTextComponent(" "));
-			legality.append(new StringTextComponent("(LEGEND)").setStyle(Style.EMPTY.applyFormat(TextFormatting.GOLD)));
+    		list.add(new StringTextComponent("LEGEND").setStyle(Style.EMPTY.applyFormat(TextFormatting.GOLD)));
 		}
     	
     	if(getLimit() >= 0)
         {
-    		legality.append(new StringTextComponent(" "));
     		if(getIsLimitShared() && getLimit() > 0) 
     		{
-    			legality.append(new StringTextComponent("(Limited " + getLimit() + ")").setStyle(Style.EMPTY.applyFormat(TextFormatting.RED)));
+    			list.add(new StringTextComponent("Limited " + getLimit()).setStyle(Style.EMPTY.applyFormat(TextFormatting.RED)));
     		}
     		else 
     		{
     			if(getLimit() == 0) 
     			{
-    				legality.append(new StringTextComponent("(Forbidden)").setStyle(Style.EMPTY.applyFormat(TextFormatting.RED)));
+    				list.add(new StringTextComponent("Forbidden").setStyle(Style.EMPTY.applyFormat(TextFormatting.RED)));
     			}
     			if(getLimit() == 1) 
     	    	{
-    				legality.append(new StringTextComponent("(Limited)").setStyle(Style.EMPTY.applyFormat(TextFormatting.RED)));
+    				list.add(new StringTextComponent("Limited").setStyle(Style.EMPTY.applyFormat(TextFormatting.RED)));
     	    	}
     			if(getLimit() == 2) {
-    				legality.append(new StringTextComponent("(Semi-Limited)").setStyle(Style.EMPTY.applyFormat(TextFormatting.RED)));
+    				list.add(new StringTextComponent("Semi-Limited").setStyle(Style.EMPTY.applyFormat(TextFormatting.RED)));
     	    	}
     	    	if(getLimit() == 3) {
-    	    		//legality.append(new StringTextComponent("(Unlimited)"));
+    	    		//list.add(new StringTextComponent("Unlimited"));
     	    	}
     	    	if(getLimit() > 3) 
     			{
-    	    		legality.append(new StringTextComponent("(At " + getLimit() + ")").setStyle(Style.EMPTY.applyFormat(TextFormatting.LIGHT_PURPLE)));
+    	    		list.add(new StringTextComponent("At " + getLimit()).setStyle(Style.EMPTY.applyFormat(TextFormatting.LIGHT_PURPLE)));
     			}
     		}
         }
     	else 
 		{
-    		legality.append(new StringTextComponent(" "));
-    		legality.append(new StringTextComponent("(Infinite)").setStyle(Style.EMPTY.applyFormat(TextFormatting.LIGHT_PURPLE)));
+    		list.add(new StringTextComponent("Infinite").setStyle(Style.EMPTY.applyFormat(TextFormatting.LIGHT_PURPLE)));
 		}
-    	id.append(format.append(legality));
-    	list.add(id);
     }
     
     public void addTooltipCardTags(List<ITextComponent> list)

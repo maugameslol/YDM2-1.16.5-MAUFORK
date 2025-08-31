@@ -65,7 +65,8 @@ public class XyzMonsterProperties extends DefMonsterProperties
     @Override
     public void addTooltipAttribute(List<ITextComponent> list)
     {
-    	list.add(new StringTextComponent(getAttribute() + " / R" + getRank() + "☆"));
+    	list.add(new StringTextComponent(getAttribute()));
+    	list.add(new StringTextComponent("R" + getRank() + "☆"));
     }
     
     // --- Getters ---

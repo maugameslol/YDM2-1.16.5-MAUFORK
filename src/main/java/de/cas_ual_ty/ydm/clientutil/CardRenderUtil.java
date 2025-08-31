@@ -315,6 +315,43 @@ public class CardRenderUtil
         }
     }
     
+    public static void renderInfoCardWithRarityAndInfo(MatrixStack ms, int mouseX, int mouseY, float x, float y, float width, float height, CardHolder card)
+    {
+    	// TODO: Make UI that includes a close up of the card + its info.
+    	
+        Minecraft mc = ClientProxy.getMinecraft();
+        
+        // bind the texture depending on faceup or facedown
+        CardRenderUtil.bindInfoResourceLocation(card);
+        YdmBlitUtil.fullBlit(ms, x - width / 2, y - height / 2, width, height);
+        
+        RarityEntry rarity = YdmDatabase.getRarity(card.getRarity());
+        
+        if(rarity != null)
+        {
+            for(RarityLayer layer : rarity.layers)
+            {
+                if(layer.type == RarityLayerType.INVERTED)
+                {
+                }
+                
+                Runnable mask = () ->
+                {
+                	mc.getTextureManager().bind(MASK_RL); //RenderSystem.setShaderTexture(0, MASK_RL);
+                    YdmBlitUtil.fullBlit(ms, mouseX - width / 2, mouseY - height / 2, width, height);
+                };
+                
+                Runnable renderer = () ->
+                {
+                	mc.getTextureManager().bind(layer.getInfoImageResourceLocation()); //RenderSystem.setShaderTexture(0, layer.getInfoImageResourceLocation());
+                    YdmBlitUtil.fullBlit(ms, x - width / 2, y - height / 2, width, height);
+                };
+                
+                YdmBlitUtil.advancedMaskedBlit(ms, x, y, width, height, mask, renderer, layer.type.invertedRendering);
+            }
+        }
+    }
+    
     public static void renderDuelCardAdvanced(MatrixStack ms, CardBackType back, int mouseX, int mouseY, float x, float y, float width, float height, DuelCard card, YdmBlitUtil.FullBlitMethod blitMethod, boolean forceFaceUp)
     {
         CardPosition position = card.getCardPosition();

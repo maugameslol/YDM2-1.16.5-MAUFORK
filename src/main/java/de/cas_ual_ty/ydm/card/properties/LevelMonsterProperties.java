@@ -166,11 +166,13 @@ public class LevelMonsterProperties extends DefMonsterProperties
     	IFormattableTextComponent tunerSymbol = new StringTextComponent("Ⓣ").setStyle(Style.EMPTY.applyFormat(TextFormatting.GREEN));
     	if(getIsTuner())
         {
-    		list.add(new StringTextComponent(getAttribute() + " / L" + getLevel() + "★ ").append(tunerSymbol));
+    		list.add(new StringTextComponent(getAttribute()));
+    		list.add(new StringTextComponent("L" + getLevel() + "★" + " ").append(tunerSymbol));
         }
     	else 
     	{
-    		list.add(new StringTextComponent(getAttribute() + " / L" + getLevel() + "★"));
+    		list.add(new StringTextComponent(getAttribute()));
+    		list.add(new StringTextComponent("L" + getLevel() + "★"));
     	}
     }
     
