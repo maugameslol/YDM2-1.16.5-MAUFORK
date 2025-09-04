@@ -95,6 +95,6 @@ public class DefaultSleeves {
     }
 	public static SleeveProperties createDefaultSleeve(SleeveProperties s)
     {
-        return new SleeveProperties(s.name, s.code, s.text, null);
+        return new SleeveProperties(s.name, s.code, s.sleeveType, s.text, null);
     }
 }

@@ -90,6 +90,7 @@ public class YDM
     public static File raritiesFolder;
     public static File sleevesFolder; //TODO: Make database sleeves
     public static File bindersFolder;
+    public static File banlistsFolder;
     
     public static SimpleChannel channel;
     
@@ -224,6 +225,7 @@ public class YDM
         YDM.distributionsFolder = new File(YDM.mainFolder, "distributions");
         YDM.raritiesFolder = new File(YDM.mainFolder, "rarities");
         YDM.sleevesFolder = new File(YDM.mainFolder, "sleeves");
+        YDM.banlistsFolder = new File(YDM.mainFolder, "banlists");
         
         YDM.bindersFolder = new File("ydm_binders");
         YdmIOUtil.createDirIfNonExistant(YDM.bindersFolder);

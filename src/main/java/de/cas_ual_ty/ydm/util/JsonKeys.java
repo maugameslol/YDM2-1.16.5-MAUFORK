@@ -23,6 +23,8 @@ public class JsonKeys
     public static final String DESIGNERS = "designers";
     public static final String CARD_COLOR = "card_color";
     public static final String MENTIONS = "mentions";
+    public static final String OCG_RELEASE_DATE = "ocg_release_date";
+    public static final String TCG_RELEASE_DATE = "tcg_release_date";
     //public static final String MATERIALS = "materials";
     
     // card limitations/legality
@@ -146,14 +148,15 @@ public class JsonKeys
     // Use IMAGE String from sets
     // Use DESIGNER String from cards
     // Use TEXT String from cards
+    public static final String SLEEVE_TYPE = "sleeve_type";
     
     // banlist
     // TODO: What JSON keys would banlists need
     // Use NAME String from cards
+    // Use CODE String from sets
+    public static final String IS_DEFAULT_LIST = "is_default_list";
     public static final String START_DATE = "start_date";
     public static final String END_DATE = "end_date";
-    public static final String OCG_RELEASE_DATE = "ocg_release_date";
-    public static final String TCG_RELEASE_DATE = "tcg_release_date";
     
     // other
     

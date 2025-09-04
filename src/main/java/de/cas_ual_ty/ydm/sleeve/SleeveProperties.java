@@ -15,7 +15,7 @@ import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextFormatting;
 
 public class SleeveProperties {
-	public static final SleeveProperties DUMMY = new SleeveProperties("Dummy", "DUMMY", "This is a replacement sleeve!", null) {
+	public static final SleeveProperties DUMMY = new SleeveProperties("Dummy", "DUMMY", null,  "This is a replacement sleeve!", null) {
         @Override
         public String getImageName()
         {
@@ -31,6 +31,7 @@ public class SleeveProperties {
     
 	public String name;
 	public String code;
+	public String sleeveType;
 	public String image;
 	public String text;
 	public String[] designers;
@@ -42,10 +43,11 @@ public class SleeveProperties {
 	// no idea why this is needed	
 	}
 	
-	public SleeveProperties(String name, String code, String text, String[] designers)
+	public SleeveProperties(String name, String code, String sleeveType, String text, String[] designers)
     {
         this.name = name;
         this.code = code;
+        this.sleeveType = sleeveType;
         this.text = text;
         this.designers = designers;
     }
@@ -59,6 +61,14 @@ public class SleeveProperties {
     {
 		name = j.get(JsonKeys.NAME).getAsString();
 		code = j.get(JsonKeys.CODE).getAsString();
+		if(!j.has(JsonKeys.SLEEVE_TYPE)) 
+		{
+			sleeveType = null;
+		}
+		else 
+		{
+			sleeveType = j.get(JsonKeys.SLEEVE_TYPE).getAsString();
+		}
 		
 		if(!j.has(JsonKeys.IMAGE))
         {
@@ -95,7 +105,15 @@ public class SleeveProperties {
 	
 	public void addItemInformation(List<ITextComponent> tooltip)
     {
-        tooltip.add(new StringTextComponent(name + " Sleeves"));
+		if(sleeveType != null) 
+		{
+			tooltip.add(new StringTextComponent(name + " " + sleeveType));
+		}
+		else 
+		{
+			tooltip.add(new StringTextComponent(name + " Sleeves"));
+		}
+        
         if(designers != null)  
     	{
     		IFormattableTextComponent s = new StringTextComponent("Designed by: ").setStyle(Style.EMPTY.applyFormat(TextFormatting.LIGHT_PURPLE));
@@ -122,7 +140,15 @@ public class SleeveProperties {
     
     public void addInformation(List<ITextComponent> tooltip)
     {
-        tooltip.add(new StringTextComponent(name + " Sleeves"));
+        if(sleeveType != null) 
+		{
+			tooltip.add(new StringTextComponent(name + " " + sleeveType));
+		}
+		else 
+		{
+			tooltip.add(new StringTextComponent(name + " Sleeves"));
+		}
+        
         if(text != null && !text.isEmpty()) {
         	tooltip.add(StringTextComponent.EMPTY);
         	tooltip.add(new StringTextComponent(text));
@@ -163,6 +189,7 @@ public class SleeveProperties {
     {
         return code.toLowerCase();
     }
+	
 	public String getImageURL()
     {
         return image;

@@ -240,6 +240,18 @@ public class YdmDatabase
             YDM.log(YDM.sleevesFolder.getAbsolutePath() + " (sleeves folder) does not exist! Skipping...");
         }
         
+        // TODO: Banlists
+        /*
+        if(YDM.banlistsFolder.exists())
+        {
+            YdmDatabase.readBanlists(YDM.banlistsFolder);
+        }
+        else
+        {
+            YDM.log(YDM.banlistsFolder.getAbsolutePath() + " (banlists folder) does not exist! Skipping...");
+        }
+        */
+        
         YdmDatabase.postDBInit();
     }
     
