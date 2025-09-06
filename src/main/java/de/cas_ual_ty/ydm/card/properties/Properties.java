@@ -51,7 +51,7 @@ public class Properties
         Properties.DUMMY.isSpeed = false;
         Properties.DUMMY.isLegend = false;
         Properties.DUMMY.limit = 0;
-        Properties.DUMMY.cardColor = CardColor.BLANK;
+        Properties.DUMMY.cardColor = CardColor.LIGHT_GRAY;
     }
     
     public boolean isHardcoded;
@@ -1148,7 +1148,7 @@ public class Properties
     	}
     	else 
     	{
-    		defaultColor = CardColor.BLANK;
+    		defaultColor = CardColor.LIGHT_GRAY;
     	}
     	return defaultColor;
     }
