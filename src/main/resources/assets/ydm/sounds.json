@@ -1,4 +1,53 @@
 {
+	"ace_card_dark": {
+        "category": "block",
+        "sounds": [
+            "ydm:ace_card_dark"
+        ],
+        "subtitle": "subtitles.ydm.ace_card_dark"
+    },
+	"ace_card_divine": {
+        "category": "block",
+        "sounds": [
+            "ydm:ace_card_divine"
+        ],
+        "subtitle": "subtitles.ydm.ace_card_divine"
+    },
+	"ace_card_earth": {
+        "category": "block",
+        "sounds": [
+            "ydm:ace_card_earth"
+        ],
+        "subtitle": "subtitles.ydm.ace_card_earth"
+    },
+	"ace_card_fire": {
+        "category": "block",
+        "sounds": [
+            "ydm:ace_card_fire"
+        ],
+        "subtitle": "subtitles.ydm.ace_card_fire"
+    },
+	"ace_card_light": {
+        "category": "block",
+        "sounds": [
+            "ydm:ace_card_light"
+        ],
+        "subtitle": "subtitles.ydm.ace_card_light"
+    },
+	"ace_card_water": {
+        "category": "block",
+        "sounds": [
+            "ydm:ace_card_water"
+        ],
+        "subtitle": "subtitles.ydm.ace_card_water"
+    },
+	"ace_card_wind": {
+        "category": "block",
+        "sounds": [
+            "ydm:ace_card_wind"
+        ],
+        "subtitle": "subtitles.ydm.ace_card_wind"
+    },
 	"attack_dark": {
         "category": "block",
         "sounds": [

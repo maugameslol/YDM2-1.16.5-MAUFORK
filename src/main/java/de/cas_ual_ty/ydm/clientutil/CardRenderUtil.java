@@ -7,6 +7,7 @@ import de.cas_ual_ty.ydm.YdmDatabase;
 import de.cas_ual_ty.ydm.YdmItems;
 import de.cas_ual_ty.ydm.card.CardHolder;
 import de.cas_ual_ty.ydm.card.properties.CardColor;
+import de.cas_ual_ty.ydm.card.properties.MonsterProperties;
 //import de.cas_ual_ty.ydm.card.properties.MonsterProperties;
 import de.cas_ual_ty.ydm.card.properties.Properties;
 import de.cas_ual_ty.ydm.duel.playfield.CardPosition;
@@ -89,29 +90,60 @@ public class CardRenderUtil
         
         // TODO: card color overlay
         // Eventually want the mod to handle the card's border color and to eventually separate the artwork and symbols
-        /*
+        
         CardColor cardColor = card.getCard().getCardColor();
         
         if(cardColor != null)
         {
-            ClientProxy.getMinecraft().textureManager.bind(CardRenderUtil.getInfoCardColorOverlay(CardColor.fromString(card.getCard().getCardColor().name)));
-            YdmBlitUtil.fullBlit(ms, x, margin, imageSize, imageSize);
+        	if(card.getCard() instanceof MonsterProperties && !token) 
+            {
+            	if(((MonsterProperties) card.card).getIsPendulum()) 
+            	{
+            		ClientProxy.getMinecraft().textureManager.bind(CardRenderUtil.getInfoCardPendulumColorOverlay(CardColor.fromString(card.getCard().getCardColor().name)));
+                    YdmBlitUtil.fullBlit(ms, x, margin, imageSize, imageSize);
+            	}
+            	else 
+            	{
+            		ClientProxy.getMinecraft().textureManager.bind(CardRenderUtil.getInfoCardColorOverlay(CardColor.fromString(card.getCard().getCardColor().name)));
+                    YdmBlitUtil.fullBlit(ms, x, margin, imageSize, imageSize);
+            	}
+            }
+        	else 
+        	{
+        		ClientProxy.getMinecraft().textureManager.bind(CardRenderUtil.getInfoCardColorOverlay(CardColor.fromString(card.getCard().getCardColor().name)));
+                YdmBlitUtil.fullBlit(ms, x, margin, imageSize, imageSize);
+        	}
         }
         else if(cardColor == null) 
         {
-        	ClientProxy.getMinecraft().textureManager.bind(CardRenderUtil.getInfoCardColorOverlay(CardColor.fromString(card.getCard().getDefaultCardColor().name)));
-            YdmBlitUtil.fullBlit(ms, x, margin, imageSize, imageSize);
+        	if(card.getCard() instanceof MonsterProperties && !token) 
+            {
+            	if(((MonsterProperties) card.card).getIsPendulum()) 
+            	{
+            		ClientProxy.getMinecraft().textureManager.bind(CardRenderUtil.getInfoCardPendulumColorOverlay(CardColor.fromString(card.getCard().getDefaultCardColor().name)));
+                    YdmBlitUtil.fullBlit(ms, x, margin, imageSize, imageSize);
+            	}
+            	else 
+            	{
+            		ClientProxy.getMinecraft().textureManager.bind(CardRenderUtil.getInfoCardColorOverlay(CardColor.fromString(card.getCard().getDefaultCardColor().name)));
+                    YdmBlitUtil.fullBlit(ms, x, margin, imageSize, imageSize);
+            	}
+            }
+        	else 
+        	{
+        		ClientProxy.getMinecraft().textureManager.bind(CardRenderUtil.getInfoCardColorOverlay(CardColor.fromString(card.getCard().getDefaultCardColor().name)));
+                YdmBlitUtil.fullBlit(ms, x, margin, imageSize, imageSize);
+        	}
         }
         
         if(card.getCard() instanceof MonsterProperties && !token) 
         {
         	if(((MonsterProperties) card.card).getIsPendulum()) 
         	{
-        		ClientProxy.getMinecraft().textureManager.bind(CardRenderUtil.getInfoPendulumOverlay());
+        		ClientProxy.getMinecraft().textureManager.bind(CardRenderUtil.getInfoPendulumBottomOverlay());
                 YdmBlitUtil.fullBlit(ms, x, margin, imageSize, imageSize);
         	}
         }
-        */
         
         if(token)
         {
@@ -242,12 +274,18 @@ public class CardRenderUtil
     
     public static ResourceLocation getInfoCardColorOverlay(CardColor cardColor)
     {
-        return new ResourceLocation(YDM.MOD_ID, "textures/gui/card_overlays/" + ClientProxy.activeCardInfoImageSize + "/" + cardColor.name + "_card_color_overlay.png");
+        return new ResourceLocation(YDM.MOD_ID, "textures/gui/card_overlays/" + ClientProxy.activeCardInfoImageSize + "/" + "card_overlay_" + cardColor.name + ".png");
     }
     
-    public static ResourceLocation getInfoPendulumOverlay()
+    public static ResourceLocation getInfoCardPendulumColorOverlay(CardColor cardColor)
     {
-        return new ResourceLocation(YDM.MOD_ID, "textures/gui/card_overlays/" + ClientProxy.activeCardInfoImageSize + "/" + "pendulum_overlay" + ".png");
+        return new ResourceLocation(YDM.MOD_ID, "textures/gui/card_overlays/" + ClientProxy.activeCardInfoImageSize + "/" + "pendulum_overlay_" + cardColor.name + ".png");
+    }
+    
+    public static ResourceLocation getInfoPendulumBottomOverlay()
+    {
+    	// TODO: Change this to accept different colored halves
+        return new ResourceLocation(YDM.MOD_ID, "textures/gui/card_overlays/" + ClientProxy.activeCardInfoImageSize + "/" + "pendulum_bottom_overlay_" + "spell_green" + ".png");
     }
     
     public static ResourceLocation getLimitIcon()

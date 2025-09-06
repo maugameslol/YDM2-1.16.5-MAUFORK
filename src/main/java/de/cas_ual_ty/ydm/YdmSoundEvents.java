@@ -123,14 +123,14 @@ public class YdmSoundEvents {
 	public static final RegistryObject<SoundEvent> IMPACT_WIND_HIGH = registerSoundEvent("impact_wind_high");
 	public static final RegistryObject<SoundEvent> BURN_DAMAGE = registerSoundEvent("burn_damage");
 	
-	// Special
-	public static final RegistryObject<SoundEvent> SPECIAL_DARK = registerSoundEvent("special_dark");
-	public static final RegistryObject<SoundEvent> SPECIAL_DIVINE = registerSoundEvent("special_divine");
-	public static final RegistryObject<SoundEvent> SPECIAL_EARTH = registerSoundEvent("special_earth");
-	public static final RegistryObject<SoundEvent> SPECIAL_FIRE = registerSoundEvent("special_fire");
-	public static final RegistryObject<SoundEvent> SPECIAL_LIGHT = registerSoundEvent("special_light");
-	public static final RegistryObject<SoundEvent> SPECIAL_WATER = registerSoundEvent("special_water");
-	public static final RegistryObject<SoundEvent> SPECIAL_WIND = registerSoundEvent("special_wind");
+	// Ace Card
+	public static final RegistryObject<SoundEvent> ACE_CARD_DARK = registerSoundEvent("ace_card_dark");
+	public static final RegistryObject<SoundEvent> ACE_CARD_DIVINE = registerSoundEvent("ace_card_divine");
+	public static final RegistryObject<SoundEvent> ACE_CARD_EARTH = registerSoundEvent("ace_card_earth");
+	public static final RegistryObject<SoundEvent> ACE_CARD_FIRE = registerSoundEvent("ace_card_fire");
+	public static final RegistryObject<SoundEvent> ACE_CARD_LIGHT = registerSoundEvent("ace_card_light");
+	public static final RegistryObject<SoundEvent> ACE_CARD_WATER = registerSoundEvent("ace_card_water");
+	public static final RegistryObject<SoundEvent> ACE_CARD_WIND = registerSoundEvent("ace_card_wind");
 	
 	// TODO: Add the other Attributes
 	

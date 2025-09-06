@@ -1127,15 +1127,15 @@ public class Properties
     	{
     		if(getIsSpell()) 
         	{
-    			defaultColor = CardColor.GREEN;
+    			defaultColor = CardColor.SPELL_GREEN;
         	}
         	else if(getIsTrap()) 
         	{
-        		defaultColor = CardColor.MAGENTA;
+        		defaultColor = CardColor.TRAP_MAGENTA;
         	}
         	else if(getIsSkill()) 
         	{
-        		defaultColor = CardColor.BLUE;
+        		defaultColor = CardColor.SKILL_BLUE;
         	}
         	else if(getIsInfo()) 
         	{

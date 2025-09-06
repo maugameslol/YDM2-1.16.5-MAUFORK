@@ -13,6 +13,7 @@ import de.cas_ual_ty.ydm.task.TaskPriority;
 import de.cas_ual_ty.ydm.task.TaskQueue;
 import de.cas_ual_ty.ydm.util.DNCList;
 import de.cas_ual_ty.ydm.util.YdmIOUtil;
+import de.cas_ual_ty.ydm.util.YdmUtil;
 
 import javax.annotation.Nullable;
 import javax.imageio.ImageIO;
@@ -45,6 +46,30 @@ public class ImageHandler
     public static ImageList RAW_IMAGE_LIST = new ImageList();
     public static ImageList ADJUSTED_IMAGE_LIST = new ImageList();
     public static ImageList RARITY_IMAGE_LIST = new ImageList();
+    
+    // only for dev workspace!
+    // put raw image in the raw images folder
+    // make sure all size folders (16, 32, 64... exist)
+    @Deprecated // so I get a warning
+    public static void createCustomCardSizedImages(String image, String rawType) throws IOException
+    {
+        YDM.log("creating card sized images!");
+        
+        File parent = new File(ClientProxy.cardImagesFolder, "custom");
+        YdmIOUtil.createDirIfNonExistant(parent);
+        
+        // size 16 to 1024
+        int size;
+        for(int i = 4; i <= 10; ++i)
+        {
+            size = YdmUtil.getPow2(i);
+            YdmIOUtil.createDirIfNonExistant(new File(parent, "" + size));
+            ImageHandler.adjustRawImage(
+                    new File(parent, size + "/" + image + ".png"),
+                    new File(parent, "raw/" + image + "." + rawType),
+                    size);
+        }
+    }
     
     public static void prepareRarityImages(int imageSize)
     {

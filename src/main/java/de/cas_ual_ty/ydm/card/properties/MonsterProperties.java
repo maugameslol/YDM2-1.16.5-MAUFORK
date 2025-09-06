@@ -604,35 +604,35 @@ public class MonsterProperties extends Properties
     	{
     		if(getIsNormal()) 
         	{
-    			defaultColor = CardColor.YELLOW;
+    			defaultColor = CardColor.NORMAL_YELLOW;
         	}
         	else if(getIsEffect() || getIsMaximum()) 
         	{
-        		defaultColor = CardColor.ORANGE;
+        		defaultColor = CardColor.EFFECT_ORANGE;
         	}
         	else if(getIsFusion()) 
         	{
-        		defaultColor = CardColor.PURPLE;
+        		defaultColor = CardColor.FUSION_PURPLE;
         	}
         	else if(getIsRitual()) 
         	{
-        		defaultColor = CardColor.LIGHT_BLUE;
+        		defaultColor = CardColor.RITUAL_BLUE;
         	}
         	else if(getIsSynchro()) 
         	{
-        		defaultColor = CardColor.WHITE;
+        		defaultColor = CardColor.SYNCHRO_WHITE;
         	}
         	else if(getIsXyz()) 
         	{
-        		defaultColor = CardColor.BLACK;
+        		defaultColor = CardColor.XYZ_BLACK;
         	}
         	else if(getIsLink()) 
         	{
-        		defaultColor = CardColor.BLUE;
+        		defaultColor = CardColor.LINK_BLUE;
         	}
         	else if(getIsToken()) 
         	{
-        		defaultColor = CardColor.LIGHT_GRAY;
+        		defaultColor = CardColor.TOKEN_GRAY;
         	}
         	else if(getIsEvolution()) 
         	{
@@ -641,7 +641,7 @@ public class MonsterProperties extends Properties
     	}
     	else 
     	{
-    		defaultColor = CardColor.BLANK;
+    		defaultColor = CardColor.LIGHT_GRAY;
     	}
     	return defaultColor;
     }
