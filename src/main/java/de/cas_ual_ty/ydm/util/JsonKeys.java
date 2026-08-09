@@ -25,6 +25,7 @@ public class JsonKeys
     public static final String MENTIONS = "mentions";
     public static final String OCG_RELEASE_DATE = "ocg_release_date";
     public static final String TCG_RELEASE_DATE = "tcg_release_date";
+    public static final String DECK_COST = "deck_cost";
     //public static final String MATERIALS = "materials";
     
     // card limitations/legality

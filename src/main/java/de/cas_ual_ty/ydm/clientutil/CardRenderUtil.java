@@ -90,7 +90,7 @@ public class CardRenderUtil
         
         // TODO: card color overlay
         // Eventually want the mod to handle the card's border color and to eventually separate the artwork and symbols
-        
+        /*
         CardColor cardColor = card.getCard().getCardColor();
         
         if(cardColor != null)
@@ -144,12 +144,17 @@ public class CardRenderUtil
                 YdmBlitUtil.fullBlit(ms, x, margin, imageSize, imageSize);
         	}
         }
+        */
+        
+        // token created by Duel Action
         
         if(token)
         {
             ClientProxy.getMinecraft().textureManager.bind(CardRenderUtil.getInfoTokenOverlay());
             YdmBlitUtil.fullBlit(ms, x, margin, imageSize, imageSize);
         }
+        
+        // card limitations
         
         if(card.getCard().getLimit() < 0) 
         {
